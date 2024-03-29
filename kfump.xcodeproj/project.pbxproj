@@ -14,6 +14,17 @@
 		553E55C42BB48EFF00AFBD7A /* kfumpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55C32BB48EFF00AFBD7A /* kfumpTests.swift */; };
 		553E55CE2BB48EFF00AFBD7A /* kfumpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55CD2BB48EFF00AFBD7A /* kfumpUITests.swift */; };
 		553E55D02BB48EFF00AFBD7A /* kfumpUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55CF2BB48EFF00AFBD7A /* kfumpUITestsLaunchTests.swift */; };
+		553E55EE2BB491ED00AFBD7A /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55E22BB491ED00AFBD7A /* CustomScrollView.swift */; };
+		553E55EF2BB491ED00AFBD7A /* LoadMoreModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55E32BB491ED00AFBD7A /* LoadMoreModifier.swift */; };
+		553E55F12BB491ED00AFBD7A /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55E52BB491ED00AFBD7A /* SharedData.swift */; };
+		553E55F22BB491ED00AFBD7A /* StaticComponentForSharedPreferrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55E62BB491ED00AFBD7A /* StaticComponentForSharedPreferrence.swift */; };
+		553E55F32BB491ED00AFBD7A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55E72BB491ED00AFBD7A /* Utils.swift */; };
+		553E55F52BB491FD00AFBD7A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 553E55F42BB491FD00AFBD7A /* Localizable.strings */; };
+		553E55FB2BB49AC200AFBD7A /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55FA2BB49AC200AFBD7A /* Helper.swift */; };
+		553E55FE2BB4A1FA00AFBD7A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55FD2BB4A1F900AFBD7A /* CustomTextField.swift */; };
+		554B75492BB5B96D00D40BE2 /* CustomSecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B75482BB5B96D00D40BE2 /* CustomSecureTextField.swift */; };
+		554B754C2BB5C9F200D40BE2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B754B2BB5C9F200D40BE2 /* LoginView.swift */; };
+		554B754F2BB5CA4800D40BE2 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B754E2BB5CA4800D40BE2 /* RegistrationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +55,17 @@
 		553E55C92BB48EFF00AFBD7A /* kfumpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kfumpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		553E55CD2BB48EFF00AFBD7A /* kfumpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kfumpUITests.swift; sourceTree = "<group>"; };
 		553E55CF2BB48EFF00AFBD7A /* kfumpUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kfumpUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		553E55E22BB491ED00AFBD7A /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		553E55E32BB491ED00AFBD7A /* LoadMoreModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreModifier.swift; sourceTree = "<group>"; };
+		553E55E52BB491ED00AFBD7A /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
+		553E55E62BB491ED00AFBD7A /* StaticComponentForSharedPreferrence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticComponentForSharedPreferrence.swift; sourceTree = "<group>"; };
+		553E55E72BB491ED00AFBD7A /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		553E55F42BB491FD00AFBD7A /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		553E55FA2BB49AC200AFBD7A /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		553E55FD2BB4A1F900AFBD7A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		554B75482BB5B96D00D40BE2 /* CustomSecureTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureTextField.swift; sourceTree = "<group>"; };
+		554B754B2BB5C9F200D40BE2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		554B754E2BB5CA4800D40BE2 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +116,10 @@
 		553E55B12BB48EFB00AFBD7A /* kfump */ = {
 			isa = PBXGroup;
 			children = (
+				554B754A2BB5C9D200D40BE2 /* Login */,
+				553E55FC2BB4A1CE00AFBD7A /* custom */,
+				553E55F42BB491FD00AFBD7A /* Localizable.strings */,
+				553E55E82BB491ED00AFBD7A /* Utils */,
 				553E55B22BB48EFB00AFBD7A /* kfumpApp.swift */,
 				553E55B42BB48EFB00AFBD7A /* ContentView.swift */,
 				553E55B62BB48EFE00AFBD7A /* Assets.xcassets */,
@@ -125,6 +151,45 @@
 				553E55CF2BB48EFF00AFBD7A /* kfumpUITestsLaunchTests.swift */,
 			);
 			path = kfumpUITests;
+			sourceTree = "<group>";
+		};
+		553E55E82BB491ED00AFBD7A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				553E55E22BB491ED00AFBD7A /* CustomScrollView.swift */,
+				553E55E32BB491ED00AFBD7A /* LoadMoreModifier.swift */,
+				553E55E52BB491ED00AFBD7A /* SharedData.swift */,
+				553E55E62BB491ED00AFBD7A /* StaticComponentForSharedPreferrence.swift */,
+				553E55E72BB491ED00AFBD7A /* Utils.swift */,
+				553E55FA2BB49AC200AFBD7A /* Helper.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		553E55FC2BB4A1CE00AFBD7A /* custom */ = {
+			isa = PBXGroup;
+			children = (
+				553E55FD2BB4A1F900AFBD7A /* CustomTextField.swift */,
+				554B75482BB5B96D00D40BE2 /* CustomSecureTextField.swift */,
+			);
+			path = custom;
+			sourceTree = "<group>";
+		};
+		554B754A2BB5C9D200D40BE2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				554B754D2BB5C9F900D40BE2 /* view */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		554B754D2BB5C9F900D40BE2 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				554B754B2BB5C9F200D40BE2 /* LoginView.swift */,
+				554B754E2BB5CA4800D40BE2 /* RegistrationView.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +280,9 @@
 				Base,
 			);
 			mainGroup = 553E55A62BB48EFB00AFBD7A;
+			packageReferences = (
+				553E55F92BB4999500AFBD7A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = 553E55B02BB48EFB00AFBD7A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				553E55BA2BB48EFE00AFBD7A /* Preview Assets.xcassets in Resources */,
+				553E55F52BB491FD00AFBD7A /* Localizable.strings in Resources */,
 				553E55B72BB48EFE00AFBD7A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,8 +326,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553E55FB2BB49AC200AFBD7A /* Helper.swift in Sources */,
+				553E55EF2BB491ED00AFBD7A /* LoadMoreModifier.swift in Sources */,
+				553E55FE2BB4A1FA00AFBD7A /* CustomTextField.swift in Sources */,
+				554B754F2BB5CA4800D40BE2 /* RegistrationView.swift in Sources */,
 				553E55B52BB48EFB00AFBD7A /* ContentView.swift in Sources */,
+				553E55F32BB491ED00AFBD7A /* Utils.swift in Sources */,
+				553E55F22BB491ED00AFBD7A /* StaticComponentForSharedPreferrence.swift in Sources */,
+				553E55F12BB491ED00AFBD7A /* SharedData.swift in Sources */,
+				554B75492BB5B96D00D40BE2 /* CustomSecureTextField.swift in Sources */,
+				554B754C2BB5C9F200D40BE2 /* LoginView.swift in Sources */,
 				553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */,
+				553E55EE2BB491ED00AFBD7A /* CustomScrollView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +509,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,6 +539,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,6 +669,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		553E55F92BB4999500AFBD7A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 553E55A72BB48EFB00AFBD7A /* Project object */;
 }
