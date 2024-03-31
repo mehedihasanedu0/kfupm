@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct SearchView: View {
+    
+    var fieldName: String
+    @Binding var value: String
+    var isButtonPress: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            TextField(fieldName, text: self.$value,
+                      prompt: Text(fieldName))
+            .padding(20)
+            .cornerRadius(20.0)
+            .overlay {
+                RoundedRectangle(cornerRadius: 7)
+                    .stroke(.gray, lineWidth: 0.3)
+            }
+      
+        }
+        
+        
+        
     }
 }
 
+
 #Preview {
-    SearchView()
+    SearchView(fieldName: "Search Courses", value: .constant(""))
 }

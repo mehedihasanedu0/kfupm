@@ -11,6 +11,12 @@ struct ExploreView: View {
     
     @State var searchValue: String = ""
     
+    var courses: [Course] = Course.sampleData // Replace with your data source
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         
         NavigationStack {
@@ -32,7 +38,19 @@ struct ExploreView: View {
                                 
                         }
                         Spacer()
-                    }.padding(.top,30)
+                    }
+                    .padding(.top,30)
+                    
+                    
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(courses, id: \.id) { course in
+                                SingleCourseView(course: course)
+                            }
+                        }.padding(.top,15)
+                    }
+                    
+                    
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
