@@ -13,6 +13,8 @@ struct LoginView: View {
     @State var password: String = ""
     @State var isLoginButtonPress: Bool = false
     @State var isNavigateToRegistrationView: Bool = false
+    @State var isNavigateToHomeScreen: Bool = false
+    @State var isNavigateToOTPVerificationView: Bool = false
     
     
     var body: some View {
@@ -24,7 +26,7 @@ struct LoginView: View {
                     HStack {
                         
                         Button(action: {
-                            self.isNavigateToRegistrationView = true
+                            self.isNavigateToHomeScreen = true
                         }) {
                             Text("Sign Up Later")
                                 .padding(.vertical,10)
@@ -65,7 +67,7 @@ struct LoginView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            
+                            self.isNavigateToOTPVerificationView = true
                         }) {
                             Text("Forget Password")
                                 .padding(.vertical,10)
@@ -75,6 +77,7 @@ struct LoginView: View {
                         }
                         
                     }
+                    .navigationDestination(isPresented: $isNavigateToOTPVerificationView, destination: { OTPView().navigationBarBackButtonHidden(true) })
                     
                     
                     Button(action: {
@@ -163,6 +166,7 @@ struct LoginView: View {
                     
                 }
                 .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
                 .padding(20)
                 
                 
