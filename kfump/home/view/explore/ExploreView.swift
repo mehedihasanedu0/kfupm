@@ -13,7 +13,9 @@ struct ExploreView: View {
     @State var presentSheet :Bool = false
     @State var detentHeight: CGFloat = 0
     
-    var courses: [Course] = Course.sampleData // Replace with your data source
+    @StateObject var homeviewModel = HomeViewModel()
+    
+//    var courses: [Course] = Course.sampleData // Replace with your data source
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -37,13 +39,22 @@ struct ExploreView: View {
                     
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(courses, id: \.id) { course in
+                            ForEach(homeviewModel.courseList, id: \.id) { course in
                                 SingleCourseView(course: course)
+                                    .padding(.bottom,2)
                             }
                         }.padding(.top,15)
                     }
+                    .onAppear() {
+                        homeviewModel.getCourseList()
+                    }
+                    .padding(.bottom,10)
                     
                     
+                }
+                
+                if homeviewModel.isLoading {
+                    CustomProgressView()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -92,6 +103,6 @@ struct ExploreView: View {
     
 }
 
-#Preview {
-    ExploreView()
-}
+//#Preview {
+//    ExploreView()
+//}

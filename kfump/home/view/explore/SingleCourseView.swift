@@ -16,18 +16,22 @@ struct SingleCourseView: View {
         ZStack {
             VStack {
                 
-                Image("nature")
-                    .resizable()
+//                Image("nature")
+//                    .resizable()
+//                    .frame(height: 130)
+                
+                WebImageView(imageUrl: course.coverImage ?? "")
+                    .aspectRatio(18/13, contentMode: .fill)
                     .frame(height: 130)
                 
                 HStack {
                     
-                    Image("nature")
-                        .resizable()
+                    WebImageView(imageUrl: course.createdBy?.image ?? "")
                         .frame(width: 30,height: 30)
                         .cornerRadius(15)
                     
-                    Text(course.instructorName)
+                    
+                    Text(course.createdBy?.fullName ?? "")
                         .font(.custom(FONT_NAME, size: 11))
                     
                     Spacer()
@@ -36,7 +40,7 @@ struct SingleCourseView: View {
                 .padding(.leading,10)
                 .padding(.top,2)
                 
-                Text(course.title)
+                Text(course.title ?? "")
                     .font(.custom(FONT_NAME, size: 11))
                     .bold()
                     .padding(.top,5)
