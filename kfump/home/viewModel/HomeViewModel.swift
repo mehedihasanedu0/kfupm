@@ -20,7 +20,7 @@ class HomeViewModel : ObservableObject {
     @Published var dialogMessage = ""
     @Published var isSucess = false
     
-    @Published var courseList = [Course]()
+    @Published var courseList : [Course] = Course.dummyData
     
     init(homeRepositoryService: HomeRepositoryService = HomeRepositoryService()) {
         self.homeRepositoryService = homeRepositoryService
@@ -45,6 +45,7 @@ class HomeViewModel : ObservableObject {
                     self.error = error
                     self.showingDialogAlert = true
                     self.dialogMessage = error.localizedDescription
+                    self.courseList = []
                 }
             }, receiveValue: { [weak self] inviteeResponse in
                 self?.courseList = inviteeResponse.items

@@ -15,12 +15,12 @@ class HomeRepositoryService {
         self.networkClient = networkClient
     }
     
-    func getCourses() -> AnyPublisher<CourseListResponse, Error> {
+    func getCourses() -> AnyPublisher<CourseListResponseModel, Error> {
         let url = URL(string: BASE_URL + "/course/browse-course-list/?page=1&limit=25")
         return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
     }
     
-    func getProfileDetails() -> AnyPublisher<CourseListResponse, Error> {
+    func getProfileDetails() -> AnyPublisher<CourseListResponseModel, Error> {
         let url = URL(string: BASE_URL + profileEndPoint)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
     }

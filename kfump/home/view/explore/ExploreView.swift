@@ -37,11 +37,12 @@ struct ExploreView: View {
                     filterViewLabel
                     
                     
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(homeviewModel.courseList, id: \.id) { course in
                                 SingleCourseView(course: course)
                                     .padding(.bottom,2)
+                                    .redactShimmer(condition: homeviewModel.isLoading)
                             }
                         }.padding(.top,15)
                     }
@@ -53,9 +54,9 @@ struct ExploreView: View {
                     
                 }
                 
-                if homeviewModel.isLoading {
-                    CustomProgressView()
-                }
+//                if homeviewModel.isLoading {
+//                    CustomProgressView()
+//                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal,20)
