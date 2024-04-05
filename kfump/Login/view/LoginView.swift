@@ -30,7 +30,7 @@ struct LoginView: View {
                         }) {
                             Text("Sign Up Later")
                                 .padding(.vertical,10)
-                                .font(.custom(FONT_NAME, size: 14))
+                                .font(.custom(FONT_SEMIBOLD, size: 14))
                                 .foregroundColor(hexToColor(hex: "#007D40"))
                             
                         }
@@ -71,7 +71,7 @@ struct LoginView: View {
                         }) {
                             Text("Forget Password")
                                 .padding(.vertical,10)
-                                .font(.custom(FONT_NAME, size: 14))
+                                .font(.custom(FONT_REGULAR, size: 14))
                                 .foregroundColor(hexToColor(hex: "#7C7C7C"))
                             
                         }
@@ -91,7 +91,7 @@ struct LoginView: View {
                     }) {
                         Text("Login")
                             .padding(.vertical,10)
-                            .font(.custom(FONT_NAME, size: 16))
+                            .font(.custom(FONT_BOLD, size: 16))
                             .bold()
                             .frame(maxWidth: .infinity)
                             .padding(.vertical,20)
@@ -129,7 +129,7 @@ struct LoginView: View {
                     }) {
                         Text("Continue with KFU ID")
                             .padding(.vertical,10)
-                            .font(.custom(FONT_NAME, size: 16))
+                            .font(.custom(FONT_BOLD, size: 16))
                             .foregroundColor(.black)
                             .bold()
                             .frame(maxWidth: .infinity)
@@ -148,14 +148,14 @@ struct LoginView: View {
                     
                     HStack {
                         Text("Don’t have an account?")
-                            .font(.custom(FONT_NAME, size: 14))
+                            .font(.custom(FONT_REGULAR, size: 14))
                         
                         Button(action: {
                             self.isNavigateToRegistrationView = true
                             
                         }) {
                             Text("Registration")
-                                .font(.custom(FONT_NAME, size: 14))
+                                .font(.custom(FONT_REGULAR, size: 14))
                                 .bold()
                                 .foregroundColor(hexToColor(hex: "#007D40"))
                             

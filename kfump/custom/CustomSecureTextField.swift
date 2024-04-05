@@ -47,7 +47,7 @@ struct CustomSecureTextField: View {
             if password == "" && isButtonPress {
                 HStack {
                     Text(emptyErrorMessage)
-                        .font(.custom(FONT_NAME, size: 10))
+                        .font(.custom(FONT_MEDIUM, size: 10))
                         .foregroundColor(.red)
                     
                     Spacer()

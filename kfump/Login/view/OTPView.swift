@@ -62,7 +62,7 @@ struct OTPView: View {
             }) {
                 Text("Confirm OTP")
                     .padding(.vertical,10)
-                    .font(.custom(FONT_NAME, size: 16))
+                    .font(.custom(FONT_BOLD, size: 16))
                     .bold()
                     .frame(maxWidth: .infinity)
                     .padding(.vertical,20)

@@ -12,6 +12,7 @@ struct ExploreView: View {
     @State var searchValue: String = ""
     @State var presentSheet :Bool = false
     @State var detentHeight: CGFloat = 0
+    @State private var filterItemIds: [Int] = []
     
     @StateObject var homeviewModel = HomeViewModel()
     
@@ -69,11 +70,11 @@ struct ExploreView: View {
         HStack {
             HStack {
                 Text("Browse")
-                    .font(.custom(FONT_NAME, size: 22))
+                    .font(.custom(FONT_BOLD, size: 22))
                     .bold()
                 Text("Course")
                     .fontWeight(.ultraLight)
-                    .font(.custom(FONT_NAME, size: 22))
+                    .font(.custom(FONT_LIGHT, size: 22))
                     .foregroundColor(hexToColor(hex: "#D0B756"))
                 
             }
@@ -85,12 +86,12 @@ struct ExploreView: View {
     
     var filterViewLabel: some View {
         
-        FilterView(onFilterTapped: {
+        FilterView(totalResult: 120,filterValue: filterItemIds.count, onFilterTapped: {
             self.presentSheet.toggle()
         })
         .padding(.top, 20)
         .sheet(isPresented: self.$presentSheet) {
-            FilterMenuView(presentSheet: $presentSheet)
+            FilterMenuView(presentSheet: $presentSheet, filterItemIds: $filterItemIds)
                 .readHeight()
                 .onPreferenceChange(HeightPreferenceKey.self) { height in
                     if let height {

@@ -32,7 +32,7 @@ struct SingleCourseView: View {
                     
                     
                     Text(course.createdBy?.fullName ?? "")
-                        .font(.custom(FONT_NAME, size: 11))
+                        .font(.custom(FONT_REGULAR, size: 11))
                     
                     Spacer()
                     
@@ -41,29 +41,30 @@ struct SingleCourseView: View {
                 .padding(.top,2)
                 
                 Text(course.title ?? "")
-                    .font(.custom(FONT_NAME, size: 11))
-                    .bold()
-                    .padding(.top,5)
-                    .frame(maxWidth: .infinity)
-                    .padding(.horizontal,6)
+                    .font(.custom(FONT_SEMIBOLD, size: 11))
+                    .padding(.top,1)
+                    .lineLimit(3)
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                    .multilineTextAlignment(.leading)
+                    .padding(.horizontal,10)
+                    .frame(height: 50)
                 
-                Spacer()
                 
                 HStack {
                     
                     Text("View more")
-                        .font(.custom(FONT_NAME, size: 10))
+                        .font(.custom(FONT_SEMIBOLD, size: 10))
                     
                     Image("ic_view_more")
                         .resizable()
-                        .frame(width: 17,height: 20)
+                        .frame(width: 17,height: 15)
                         .cornerRadius(15)
                     
                     Spacer()
                     
                 }
                 .padding(.leading,10)
-                .padding(.bottom,8)
+                .padding(.bottom,10)
                 
                 
             }

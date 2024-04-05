@@ -27,6 +27,7 @@
 		553E55F52BB491FD00AFBD7A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 553E55F42BB491FD00AFBD7A /* Localizable.strings */; };
 		553E55FB2BB49AC200AFBD7A /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55FA2BB49AC200AFBD7A /* Helper.swift */; };
 		553E55FE2BB4A1FA00AFBD7A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55FD2BB4A1F900AFBD7A /* CustomTextField.swift */; };
+		553EEFA62BBDE2AC004D3E8B /* Kfump_Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5574F7DF2BBDE1CF00583DF5 /* Kfump_Info.plist */; };
 		554B75492BB5B96D00D40BE2 /* CustomSecureTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B75482BB5B96D00D40BE2 /* CustomSecureTextField.swift */; };
 		554B754C2BB5C9F200D40BE2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B754B2BB5C9F200D40BE2 /* LoginView.swift */; };
 		554B754F2BB5CA4800D40BE2 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554B754E2BB5CA4800D40BE2 /* RegistrationView.swift */; };
@@ -75,6 +76,9 @@
 		5586B4382BBDC35600FBAFDC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5586B4132BBDC35600FBAFDC /* OpenSans-Regular.ttf */; };
 		5586B4392BBDC35600FBAFDC /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5586B4142BBDC35600FBAFDC /* OpenSans-SemiBold.ttf */; };
 		5586B43A2BBDC35600FBAFDC /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5586B4152BBDC35600FBAFDC /* OpenSans-SemiBoldItalic.ttf */; };
+		558B9E392BBF16E300EA5B84 /* FilterCourseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E382BBF16E300EA5B84 /* FilterCourseItem.swift */; };
+		558B9E3B2BBF18F500EA5B84 /* FilterAvailableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E3A2BBF18F500EA5B84 /* FilterAvailableItem.swift */; };
+		558B9E3E2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E3D2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift */; };
 		559744622BBAF15000122058 /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744612BBAF15000122058 /* OTPView.swift */; };
 		559744652BBB02A800122058 /* OtpModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744642BBB02A800122058 /* OtpModifer.swift */; };
 		5597446A2BBB370200122058 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744692BBB370200122058 /* NetworkClient.swift */; };
@@ -136,6 +140,7 @@
 		554B75482BB5B96D00D40BE2 /* CustomSecureTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSecureTextField.swift; sourceTree = "<group>"; };
 		554B754B2BB5C9F200D40BE2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		554B754E2BB5CA4800D40BE2 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		5574F7DF2BBDE1CF00583DF5 /* Kfump_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Kfump_Info.plist; sourceTree = "<group>"; };
 		5576C8232BB681B4007392C8 /* Homescreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homescreen.swift; sourceTree = "<group>"; };
 		5576C8262BB68210007392C8 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		5576C8282BB68223007392C8 /* MyCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourses.swift; sourceTree = "<group>"; };
@@ -181,6 +186,9 @@
 		5586B4132BBDC35600FBAFDC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		5586B4142BBDC35600FBAFDC /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		5586B4152BBDC35600FBAFDC /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		558B9E382BBF16E300EA5B84 /* FilterCourseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCourseItem.swift; sourceTree = "<group>"; };
+		558B9E3A2BBF18F500EA5B84 /* FilterAvailableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAvailableItem.swift; sourceTree = "<group>"; };
+		558B9E3D2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFilterItemSelectView.swift; sourceTree = "<group>"; };
 		559744612BBAF15000122058 /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		559744642BBB02A800122058 /* OtpModifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpModifer.swift; sourceTree = "<group>"; };
 		559744692BBB370200122058 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
@@ -252,6 +260,7 @@
 		553E55A62BB48EFB00AFBD7A = {
 			isa = PBXGroup;
 			children = (
+				5574F7DF2BBDE1CF00583DF5 /* Kfump_Info.plist */,
 				553E55B12BB48EFB00AFBD7A /* kfump */,
 				553E55C22BB48EFF00AFBD7A /* kfumpTests */,
 				553E55CC2BB48EFF00AFBD7A /* kfumpUITests */,
@@ -386,11 +395,10 @@
 		5576C8302BB690AC007392C8 /* explore */ = {
 			isa = PBXGroup;
 			children = (
+				558B9E3C2BBF1B1D00EA5B84 /* filter */,
 				55D1FA5A2BB6D925004D5F7F /* model */,
 				5576C8262BB68210007392C8 /* ExploreView.swift */,
 				5576C8312BB6911D007392C8 /* SingleCourseView.swift */,
-				5533366E2BB9CC0B00D5F6E5 /* FilterView.swift */,
-				553336702BB9D3A200D5F6E5 /* FilterMenuView.swift */,
 			);
 			path = explore;
 			sourceTree = "<group>";
@@ -447,6 +455,16 @@
 			path = OpenSans;
 			sourceTree = "<group>";
 		};
+		558B9E3C2BBF1B1D00EA5B84 /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				553336702BB9D3A200D5F6E5 /* FilterMenuView.swift */,
+				5533366E2BB9CC0B00D5F6E5 /* FilterView.swift */,
+				558B9E3D2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift */,
+			);
+			path = filter;
+			sourceTree = "<group>";
+		};
 		559744632BBB028000122058 /* otp */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +487,8 @@
 			isa = PBXGroup;
 			children = (
 				55D1FA5B2BB6D936004D5F7F /* Course.swift */,
+				558B9E382BBF16E300EA5B84 /* FilterCourseItem.swift */,
+				558B9E3A2BBF18F500EA5B84 /* FilterAvailableItem.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -603,6 +623,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 553E55A62BB48EFB00AFBD7A;
 			packageReferences = (
@@ -624,6 +645,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				553EEFA62BBDE2AC004D3E8B /* Kfump_Info.plist in Resources */,
 				5586B4232BBDC35600FBAFDC /* OpenSans_SemiCondensed-Bold.ttf in Resources */,
 				5586B41F2BBDC35600FBAFDC /* OpenSans_Condensed-MediumItalic.ttf in Resources */,
 				5586B41D2BBDC35600FBAFDC /* OpenSans_Condensed-LightItalic.ttf in Resources */,
@@ -695,6 +717,7 @@
 				5533366A2BB9C0AF00D5F6E5 /* MoreItems.swift in Sources */,
 				5533366D2BB9C45800D5F6E5 /* SingleItemView.swift in Sources */,
 				5586B3EF2BBDBA1B00FBAFDC /* Shimmer.swift in Sources */,
+				558B9E392BBF16E300EA5B84 /* FilterCourseItem.swift in Sources */,
 				553E55EF2BB491ED00AFBD7A /* LoadMoreModifier.swift in Sources */,
 				5597446E2BBB380700122058 /* Websocket.swift in Sources */,
 				559744622BBAF15000122058 /* OTPView.swift in Sources */,
@@ -704,6 +727,7 @@
 				5597446A2BBB370200122058 /* NetworkClient.swift in Sources */,
 				554B754F2BB5CA4800D40BE2 /* RegistrationView.swift in Sources */,
 				553E55B52BB48EFB00AFBD7A /* ContentView.swift in Sources */,
+				558B9E3B2BBF18F500EA5B84 /* FilterAvailableItem.swift in Sources */,
 				553E55F32BB491ED00AFBD7A /* Utils.swift in Sources */,
 				55DB16352BBC8C420022BDA7 /* CustomImage.swift in Sources */,
 				55DB16292BBC78C40022BDA7 /* HomeRepositoryService.swift in Sources */,
@@ -725,6 +749,7 @@
 				554B754C2BB5C9F200D40BE2 /* LoginView.swift in Sources */,
 				553336712BB9D3A200D5F6E5 /* FilterMenuView.swift in Sources */,
 				553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */,
+				558B9E3E2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift in Sources */,
 				55DB16262BBC77F90022BDA7 /* HomeViewModel.swift in Sources */,
 				553E55EE2BB491ED00AFBD7A /* CustomScrollView.swift in Sources */,
 			);
@@ -815,6 +840,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -872,6 +898,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -893,6 +920,7 @@
 				DEVELOPMENT_TEAM = 2BZH4MLXPZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -923,6 +951,7 @@
 				DEVELOPMENT_TEAM = 2BZH4MLXPZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

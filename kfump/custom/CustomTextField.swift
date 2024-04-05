@@ -28,7 +28,7 @@ struct CustomTextField: View {
             if value == "" && isButtonPress {
                 HStack {
                     Text(emptyErrorMessage)
-                        .font(.custom(FONT_NAME, size: 10))
+                        .font(.custom(FONT_REGULAR, size: 10))
                         .foregroundColor(.red)
                     
                     Spacer()

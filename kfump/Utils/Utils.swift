@@ -11,8 +11,6 @@ import Foundation
 class Utils {
     
     
-
-    
     
     static func formatDatePickerDateToSeverDate(dateString: Date) -> String {
         let formatter = ISO8601DateFormatter()

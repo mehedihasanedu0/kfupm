@@ -28,7 +28,7 @@ struct RegistrationView: View {
                     }) {
                         Text("Sign Up Later")
                             .padding(.vertical,10)
-                            .font(.custom(FONT_NAME, size: 14))
+                            .font(.custom(FONT_SEMIBOLD, size: 14))
                             .foregroundColor(hexToColor(hex: "#007D40"))
                         
                     }
@@ -36,7 +36,7 @@ struct RegistrationView: View {
                 }
                 
                 Text("Sign UP")
-                    .font(.custom("Open Sans", size: 32))
+                    .font(.custom(FONT_BOLD, size: 32))
                     .padding(.top,20)
                     .fontWeight(.thin)
                     .multilineTextAlignment(.center)
@@ -86,7 +86,7 @@ struct RegistrationView: View {
                 }) {
                     Text("Registration")
                         .padding(.vertical,10)
-                        .font(.custom(FONT_NAME, size: 16))
+                        .font(.custom(FONT_BOLD, size: 16))
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding(.vertical,20)
@@ -103,14 +103,14 @@ struct RegistrationView: View {
                 
                 HStack {
                     Text("Already have an account?")
-                        .font(.custom(FONT_NAME, size: 14))
+                        .font(.custom(FONT_REGULAR, size: 14))
                     
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                         
                     }) {
                         Text("Log in")
-                            .font(.custom(FONT_NAME, size: 14))
+                            .font(.custom(FONT_REGULAR, size: 14))
                             .bold()
                             .foregroundColor(hexToColor(hex: "#007D40"))
                         

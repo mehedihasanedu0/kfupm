@@ -10,7 +10,7 @@ import SwiftUI
 struct FilterView: View {
     
     var totalResult : Int = 100
-    var filterValue : Int = 4
+    var filterValue : Int = 0
     
     var onFilterTapped: () -> Void
     
@@ -21,11 +21,11 @@ struct FilterView: View {
                     
                     HStack {
                         Text("\(totalResult)")
-                            .font(.custom(FONT_NAME, size: 22))
+                            .font(.custom(FONT_BOLD, size: 22))
                             .bold()
                         Text("Result")
                             .fontWeight(.ultraLight)
-                            .font(.custom(FONT_NAME, size: 22))
+                            .font(.custom(FONT_LIGHT, size: 22))
                             .foregroundColor(hexToColor(hex: "#D0B756"))
                             
                     }
@@ -40,7 +40,8 @@ struct FilterView: View {
                             
                             Text(filterValue == 0 ? "Filter" : "Filter (\(filterValue))")
                                 .fontWeight(.ultraLight)
-                                .font(.custom(FONT_NAME, size: 14))
+                                .font(.custom(FONT_REGULAR, size: 14))
+                                .foregroundColor(filterValue == 0 ? .black : .white)
                                 
                         }
                         .padding(10)

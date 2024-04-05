@@ -10,7 +10,13 @@ import SwiftUI
 
 
 
-let FONT_NAME = "Open Sans"
+let FONT_LIGHT = "OpenSans-Light"
+let FONT_MEDIUM = "OpenSans-Medium"
+let FONT_REGULAR = "OpenSans-Regular"
+let FONT_SEMIBOLD = "OpenSans-SemiBold"
+let FONT_BOLD = "OpenSans-Bold"
+
+
 
 
 func hexToColor(hex: String) -> Color {
@@ -27,3 +33,16 @@ func hexToColor(hex: String) -> Color {
 
     return Color(red: red, green: green, blue: blue)
 }
+
+
+var sampleDataCategoryFilter : [FilterCourseItem] = [
+    FilterCourseItem(id: 1, title: "Graphic Design", isSelect: false),
+    FilterCourseItem(id: 2, title: "Web development", isSelect: false),
+    FilterCourseItem(id: 3, title: "Amazone AWS Cloud Services", isSelect: false),
+    FilterCourseItem(id: 4, title: "Google Ad Training", isSelect: false)
+]
+
+var sampleDataAvailableFilter : [FilterAvailableItem] = [
+    FilterAvailableItem(id: 1, title: "Upcoming", isSelect: false),
+    FilterAvailableItem(id: 2, title: "Available now", isSelect: false)
+]
