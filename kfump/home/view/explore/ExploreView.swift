@@ -36,23 +36,34 @@ struct ExploreView: View {
                         ZStack {
                             
                             SearchView(fieldName: "Search courses", value: $searchValue, onCloseTapped: {
+                                print("searchValue =>  \(searchValue)")
                                 searchValue = ""
                             },isCloseButtonVisible: isCloseButtonVisible)
                             .padding(.top)
+                            .onTapGesture {
+                                print("onTapGesture => ")
+                                showSearchView = true
+                                isCloseButtonVisible = true
+                            }
                             .onChange(of: searchValue) { newValue in
                                 homeviewModel.getCourseListBySearchKey(searchKey: newValue)
                             }
-                            
-                            
-                            Button {
-                                print("Search courses")
-                                showSearchView = true
+                            .onSubmit {
+                                showSearchView = false
                                 isCloseButtonVisible = true
-                            } label: {
-                                Rectangle()
-                                    .foregroundColor(.clear)
-                                    .frame(height: 50)
+                                self.hideKeyboard()
                             }
+                            
+//                            
+//                            Button {
+//                                print("Search courses")
+//                                showSearchView = true
+//                                isCloseButtonVisible = true
+//                            } label: {
+//                                Rectangle()
+//                                    .foregroundColor(.clear)
+//                                    .frame(height: 50)
+//                            }
                             
                             
                         }
@@ -155,6 +166,7 @@ struct ExploreView: View {
                             showSearchView = false
                             isCloseButtonVisible = false
                             searchValue = course.title ?? " "
+                            self.hideKeyboard()
                         }
                 }
             }
