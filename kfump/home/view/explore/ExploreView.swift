@@ -12,6 +12,8 @@ struct ExploreView: View {
     @State var searchValue: String = ""
     @State var presentSheet :Bool = false
     @State var detentHeight: CGFloat = 0
+    @State var showSearchView: Bool = false
+    @State var isCloseButtonVisible: Bool = true
     @State private var filterItemIds: [Int] = []
     
     @StateObject var homeviewModel = HomeViewModel()
@@ -29,28 +31,67 @@ struct ExploreView: View {
             ZStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     
-                    SearchView(fieldName: "Search courses", value: $searchValue)
-                        .padding(.top)
                     
-                    
-                    //                    browseCourseLabel
-                    
-                    filterViewLabel
-                    
-                    
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(homeviewModel.courseList, id: \.id) { course in
-                                SingleCourseView(course: course)
-                                    .padding(.bottom,2)
-                                    .redactShimmer(condition: homeviewModel.isLoading)
+                    VStack {
+                        ZStack {
+                            
+                            SearchView(fieldName: "Search courses", value: $searchValue, onCloseTapped: {
+                                searchValue = ""
+                            },isCloseButtonVisible: isCloseButtonVisible)
+                            .padding(.top)
+                            .onChange(of: searchValue) { newValue in
+                                homeviewModel.getCourseListBySearchKey(searchKey: newValue)
                             }
-                        }.padding(.top,15)
+                            
+                            
+                            Button {
+                                print("Search courses")
+                                showSearchView = true
+                                isCloseButtonVisible = true
+                            } label: {
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(height: 50)
+                            }
+                            
+                            
+                        }
+                        
                     }
-                    .onAppear() {
-                        homeviewModel.getCourseList()
+                    
+                    
+
+                    
+                   
+                    if showSearchView {
+                        searchViewLabel
                     }
-                    .padding(.bottom,10)
+
+                    
+                    if !showSearchView {
+                        
+                        
+                        if homeviewModel.courseListBySearchKey.count != 0 {
+                            filterViewLabel
+                        } else {
+                            browseCourseLabel
+                        }
+                        
+                    
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVGrid(columns: columns, spacing: 20) {
+                                ForEach(homeviewModel.courseList, id: \.id) { course in
+                                    SingleCourseView(course: course)
+                                        .padding(.bottom,2)
+                                        .redactShimmer(condition: homeviewModel.isLoading)
+                                }
+                            }.padding(.top,15)
+                        }
+                        .onAppear() {
+                            homeviewModel.getCourseList()
+                        }
+                        .padding(.bottom,10)
+                    }
                     
                     
                 }
@@ -101,6 +142,24 @@ struct ExploreView: View {
                 .presentationDetents([.height(self.detentHeight)])
         }
     
+    }    
+    
+    
+    var searchViewLabel: some View {
+        VStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                ForEach(homeviewModel.courseListBySearchKey, id: \.id) { course in
+                    SingleSearchItem(course: course)
+                        .padding(.bottom,2)
+                        .onTapGesture {
+                            showSearchView = false
+                            isCloseButtonVisible = false
+                            searchValue = course.title ?? " "
+                        }
+                }
+            }
+        }
+        
     }
     
 }

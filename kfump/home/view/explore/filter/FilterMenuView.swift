@@ -9,10 +9,12 @@ import SwiftUI
 
 struct FilterMenuView: View {
     
+    @StateObject var filterViewModel = FilterViewModel()
     @Binding var presentSheet :Bool
-    @State private var filtersCategory = sampleDataCategoryFilter
-    @State private var filtersAvailability = sampleDataAvailableFilter
+    @State private var filtersCategory = [Category]()
+    @State private var filtersAvailability = [Availability]()
     @Binding var filterItemIds: [Int]
+    @State var isSelectItem: Bool = false
     
     var body: some View {
         
@@ -43,8 +45,10 @@ struct FilterMenuView: View {
                     .bold()
                     .frame(maxWidth: .infinity,alignment: .leading)
                 
+
+                
                 ForEach(Array(filtersCategory.enumerated()), id: \.element.id) { index, filterItem in
-                    SingleFilterItemSelectView(isItemSelect: $filtersCategory[index].isSelect,itemName: filterItem.title, onFilterItemSelect: {
+                    SingleFilterItemSelectView(isItemSelect: $filtersCategory[index].isSelect,itemName: filterItem.categoryName, onFilterItemSelect: {
                         filtersCategory[index].isSelect.toggle()
                         print("onFilterItemSelect")
                     })
@@ -60,12 +64,15 @@ struct FilterMenuView: View {
                     .bold()
                     .frame(maxWidth: .infinity,alignment: .leading)
                 
+                
+
                 ForEach(Array(filtersAvailability.enumerated()), id: \.element.id) { index, filterItem in
-                    SingleFilterItemSelectView(isItemSelect: $filtersAvailability[index].isSelect,itemName: filterItem.title, onFilterItemSelect: {
+                    SingleFilterItemSelectView(isItemSelect: $filtersAvailability[index].isSelect,itemName: filtersAvailability[index].availabilityType, onFilterItemSelect: {
                         filtersAvailability[index].isSelect.toggle()
                         print("onFilterItemSelect")
                     })
                 }
+
                 
                 
                 Divider()
@@ -132,12 +139,23 @@ struct FilterMenuView: View {
                 
                 Spacer()
             }
+            
+            if filterViewModel.isLoading {
+                CustomProgressView()
+            }
+            
+        }
+        .onAppear {
+            filterViewModel.getFilterCategoryList() { category in
+                self.filtersCategory = category
+            }
+            filterViewModel.getFilterAvailableList() { availability in
+                self.filtersAvailability = availability
+            }
         }
         .padding()
         
     }
 }
 
-#Preview {
-    FilterMenuView(presentSheet: .constant(false), filterItemIds: .constant([Int]()))
-}
+//

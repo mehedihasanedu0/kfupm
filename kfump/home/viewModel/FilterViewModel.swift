@@ -1,15 +1,15 @@
 //
-//  HomeViewModel.swift
+//  FilterViewModel.swift
 //  kfump
 //
-//  Created by Mehedi Hasan on 2/4/24.
+//  Created by Mehedi Hasan on 6/4/24.
 //
 
 import Foundation
 import Combine
 import SwiftUI
 
-class HomeViewModel : ObservableObject {
+class FilterViewModel : ObservableObject {
     
     private let homeRepositoryService: HomeRepositoryService
     private var cancellables = Set<AnyCancellable>()
@@ -21,8 +21,10 @@ class HomeViewModel : ObservableObject {
     @Published var dialogMessage = ""
     @Published var isSucess = false
     
-    @Published var courseList : [Course] = Course.dummyData
-    @Published var courseListBySearchKey = [Course]()
+//    @Published var filterCategoryList = [Category]()
+//    @Published var filterAvailabilityList = [Availability]()
+    
+
     
     init(homeRepositoryService: HomeRepositoryService = HomeRepositoryService()) {
         self.homeRepositoryService = homeRepositoryService
@@ -32,9 +34,9 @@ class HomeViewModel : ObservableObject {
         cancellables.removeAll()
     }
     
-    func getCourseList() {
+    func getFilterCategoryList(completion: @escaping ([Category]) -> Void) {
         isLoading = true
-        homeRepositoryService.getCourses()
+        homeRepositoryService.getFilterCategory()
             .handleEvents(receiveCompletion: { [weak self] value in
                 self?.isLoading = false
             })
@@ -47,23 +49,23 @@ class HomeViewModel : ObservableObject {
                     self.error = error
                     self.showingDialogAlert = true
                     self.dialogMessage = error.localizedDescription
-                    self.courseList = []
                 }
-            }, receiveValue: { [weak self] inviteeResponse in
-                self?.courseList = inviteeResponse.items
+            }, receiveValue: { [weak self] category in
                 self?.isLoading = true
+                completion(category.data)
             })
             .store(in: &cancellables)
         
         
-    }    
+    }
     
+
     
-    func getCourseListBySearchKey(searchKey: String) {
-        isLoadingBySearchKey = true
-        homeRepositoryService.getCoursesBySearchKey(searchKey: searchKey)
+    func getFilterAvailableList(completion: @escaping ([Availability]) -> Void) {
+        isLoading = true
+        homeRepositoryService.getFilterAvailability()
             .handleEvents(receiveCompletion: { [weak self] value in
-                self?.isLoadingBySearchKey = false
+                self?.isLoading = false
             })
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -74,43 +76,14 @@ class HomeViewModel : ObservableObject {
                     self.error = error
                     self.showingDialogAlert = true
                     self.dialogMessage = error.localizedDescription
-                    self.courseListBySearchKey = []
                 }
-            }, receiveValue: { [weak self] courseResponse in
-                self?.courseListBySearchKey = courseResponse.items
-                self?.isLoadingBySearchKey = true
+            }, receiveValue: { [weak self] availability in
+                self?.isLoading = true
+                completion(availability.data)
             })
             .store(in: &cancellables)
         
         
-    }    
-    
-    
-    
-    
-    
-//    func getCourseList(completion: @escaping (Bool) -> Void) {
-//        isLoading = true
-//        homeRepositoryService.getCourses()
-//            .handleEvents(receiveCompletion: { [weak self] value in
-//                self?.isLoading = false
-//            })
-//            .sink(receiveCompletion: { completion in
-//                switch completion {
-//                case .finished:
-//                    break
-//                case .failure(let error):
-//                    self.error = error
-//                    self.showingDialogAlert = true
-//                    self.dialogMessage = error.localizedDescription
-//                }
-//            }, receiveValue: { [weak self] inviteeResponse in
-//                self?.courseList = inviteeResponse.items
-//                self?.isLoading = true
-//            })
-//            .store(in: &cancellables)
-//        
-//        
-//    }
-    
+    }
+
 }
