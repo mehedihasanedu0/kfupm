@@ -18,7 +18,6 @@ let FONT_BOLD = "OpenSans-Bold"
 
 
 
-
 func hexToColor(hex: String) -> Color {
     var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
     hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
@@ -46,3 +45,8 @@ var sampleDataAvailableFilter : [FilterAvailableItem] = [
     FilterAvailableItem(id: 1, title: "Upcoming", isSelect: false),
     FilterAvailableItem(id: 2, title: "Available now", isSelect: false)
 ]
+
+
+func generateBoundaryString() -> String {
+    return "Boundary-\(NSUUID().uuidString)"
+}

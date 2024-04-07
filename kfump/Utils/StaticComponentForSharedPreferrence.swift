@@ -11,6 +11,7 @@ import Foundation
 
 let ORDER_FOOD_D = "Sign Up Later"
 let IS_LOGIN_D = "LOGIN"
+let TOKEN_D = "TOKEN"
 let IS_LOGIN_OUT_D = "Log Out"
 let ORDER_FOOD_ITEMS_D = "orderedFoodItems"
 let ORDER_FOOD_IMAGE_D = "orderedFoodImage"

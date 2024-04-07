@@ -13,7 +13,7 @@ import Combine
 class NetworkClient {
     static let shared = NetworkClient()
     @AppStorage("x-api-token") private var token = ""
-    var accessToken: String = (UserDefaults.standard.string(forKey: "accessToken") ?? accessTokenInfo)
+    var accessToken: String = (UserDefaults.standard.object(forKey: TOKEN_D) as? String ?? "")
     
     private func APIURLRequest(url: URL, method: String, headers: [String: String]?, body: Data?, headerDetails: APIRequestHeaders = .APIRequestWithNoHeader) -> URLRequest {
         var request = URLRequest(url: url)

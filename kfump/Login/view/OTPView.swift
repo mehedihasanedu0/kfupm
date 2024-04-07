@@ -12,6 +12,8 @@ struct OTPView: View {
     @State private var otp: [String] = Array(repeating: "", count: 6)
     @FocusState private var focusedField: Int?
     
+    var emailAddress : String
+    
     enum FocusPin {
         case  pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix
     }
@@ -24,64 +26,100 @@ struct OTPView: View {
     @State var pinFive: String = ""
     @State var pinSix: String = ""
     
+    @State private var showToast = false
+    
+    @State var isNavigateToHomeScreen: Bool = false
+    @StateObject var authonicationViewModel = AuthenicationViewModel()
+    
     var body: some View {
         
-        VStack {
+        
+        ZStack {
             
-            Text("Enter OTP")
-                .font(.custom("Open Sans", size: 32))
-                .padding(.top,70)
-                .fontWeight(.thin)
-                .multilineTextAlignment(.center)
-            
-            Divider()
-                .frame(width: 56,height: 2)
-                .background(hexToColor(hex: "#D0B756"))
-            
-            
-            Text("In publishing and graphic design, Lorem ipsum is a placeholder text commonly")
-                .font(.custom("Open Sans", size: 16))
-                .padding(.top,20)
-                .foregroundColor(hexToColor(hex: "#7A7A7A"))
-                .multilineTextAlignment(.center)
-            
-            
-            
-            otpContainerView
-                .padding(.top,60)
-                .padding(.bottom,20)
-            
-            
-            Button(action: {
-                //isLoginButtonPress = true
-                //                print("userName \(userName)")
-                //                print("password \(password)")
-                //
-                //
+            VStack {
                 
-            }) {
-                Text("Confirm OTP")
-                    .padding(.vertical,10)
-                    .font(.custom(FONT_BOLD, size: 16))
-                    .bold()
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical,20)
-                    .foregroundColor(.white)
+                Text("Enter OTP")
+                    .font(.custom("Open Sans", size: 32))
+                    .padding(.top,70)
+                    .fontWeight(.thin)
+                    .multilineTextAlignment(.center)
+                
+                Divider()
+                    .frame(width: 56,height: 2)
+                    .background(hexToColor(hex: "#D0B756"))
+                
+                
+                Text("In publishing and graphic design, Lorem ipsum is a placeholder text commonly")
+                    .font(.custom("Open Sans", size: 16))
+                    .padding(.top,20)
+                    .foregroundColor(hexToColor(hex: "#7A7A7A"))
+                    .multilineTextAlignment(.center)
+                
+                
+                
+                otpContainerView
+                    .padding(.top,60)
+                    .padding(.bottom,20)
+                
+                
+                Button(action: {
+                    
+                    print("otp => \(otp)")
+                    
+                    let otp1 = pinOne + pinTwo + pinThree + pinFour + pinFive + pinSix
+                    print("otp => \(otp1)")
+                    
+                    if otp.count != 6 {
+                        return
+                    }
+                    
+                    let vm = OtpModel(emailOrPhone: emailAddress,
+                                      otpCode: otp1)
+                    
+                    authonicationViewModel.otpVerify(body: vm) { result in
+                        showToast.toggle()
+ 
+                        if result {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                isNavigateToHomeScreen = true
+                            }
+                        }
+                    }
+
+                }) {
+                    Text("Confirm OTP")
+                        .padding(.vertical,10)
+                        .font(.custom(FONT_BOLD, size: 16))
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical,20)
+                        .foregroundColor(.white)
+                    
+                }
+                
+                .background(hexToColor(hex: "#007D40"))
+                .frame(height: 56)
+                .cornerRadius(10.0)
+                .padding(.top,20)
+                
+                
+                Spacer()
+                
+                
                 
             }
+            .padding(20)
+            .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
             
-            .background(hexToColor(hex: "#007D40"))
-            .frame(height: 56)
-            .cornerRadius(10.0)
-            .padding(.top,20)
-            
-            
-            Spacer()
-            
-            
-            
+            if authonicationViewModel.isLoading {
+                CustomProgressView()
+            }
+            ToastView(isPresented: $showToast, duration: 2.0) {
+                CustomTost(message: authonicationViewModel.dialogMessage)
+            }
         }
-        .padding(20)
+        
+        
     }
     
     func dismissKeyboard() {
@@ -181,6 +219,8 @@ struct OTPView: View {
                 .onChange(of:pinSix){newVal in
                     if (newVal.count == 0) {
                         pinFocusState = .pinFive
+                    } else {
+                        hideKeyboard()
                     }
                 }
                 .focused($pinFocusState, equals: .pinSix)
@@ -198,5 +238,5 @@ struct OTPView: View {
 }
 
 #Preview {
-    OTPView()
+    OTPView(emailAddress: "")
 }

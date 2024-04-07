@@ -11,18 +11,20 @@ import Combine
 class HomeRepositoryService {
     
     private let networkClient: NetworkClient
+    var isLogin = false
     init(networkClient: NetworkClient = NetworkClient.shared) {
         self.networkClient = networkClient
+        isLogin = shared.object(forKey: IS_LOGIN_D) as? Bool ?? false
     }
     
     func getCourses() -> AnyPublisher<CourseListResponseModel, Error> {
         let url = URL(string: BASE_URL + "/course/browse-course-list/?page=1&limit=100")
-        return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
-    }    
+        return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
+    }
     
     func getCoursesBySearchKey(searchKey: String) -> AnyPublisher<CourseListResponseModel, Error> {
         let url = URL(string: BASE_URL + "/course/browse-course-list/?search=\(searchKey)&page=1&limit=100")
-        return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
+        return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
         
     }
     
