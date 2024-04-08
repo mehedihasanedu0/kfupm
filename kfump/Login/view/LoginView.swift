@@ -75,7 +75,7 @@ struct LoginView: View {
                         HStack {
                             Spacer()
                             Button(action: {
-                                self.isNavigateToOTPVerificationView = true
+                                //self.isNavigateToOTPVerificationView = true
                             }) {
                                 Text(LocalizationSystem.shared.localizedStringForKey(key: FORGET_PASSWORD_KEY, comment: ""))
                                     .padding(.vertical,10)

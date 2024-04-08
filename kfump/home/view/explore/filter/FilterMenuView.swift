@@ -84,6 +84,15 @@ struct FilterMenuView: View {
                         
                         filterItemIds.removeAll()
                         
+                        for index in filtersCategory.indices {
+                            filtersCategory[index].isSelect = false
+                        }
+                        
+                        for index in filtersAvailability.indices {
+                            filtersAvailability[index].isSelect = false
+                        }
+                        
+                        
                     }) {
                         Text(LocalizationSystem.shared.localizedStringForKey(key: CLEAR_ALL_KEY, comment: ""))
                             .font(.custom(FONT_REGULAR, size: 14))

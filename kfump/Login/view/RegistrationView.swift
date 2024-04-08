@@ -22,6 +22,7 @@ struct RegistrationView: View {
     
     @StateObject var authonicationViewModel = AuthenicationViewModel()
     @State var isNavigateToOTPView: Bool = false
+    @State var isNavigateToHomeScreen: Bool = false
     @State private var isEnglishSelected = true
     
     
@@ -34,7 +35,7 @@ struct RegistrationView: View {
                     
                     HStack {
                         Button(action: {
-                            
+                            self.isNavigateToHomeScreen = true
                         }) {
                             Text(LocalizationSystem.shared.localizedStringForKey(key: SIGN_UP_LATER_KEY, comment: ""))
                                 .padding(.vertical,10)
@@ -142,6 +143,7 @@ struct RegistrationView: View {
                 }
                 .padding(20)
                 .navigationDestination(isPresented: $isNavigateToOTPView, destination: { OTPView(emailAddress: email).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
                 
 
                 
