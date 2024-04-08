@@ -17,6 +17,8 @@ struct LoginView: View {
     @State var isNavigateToOTPVerificationView: Bool = false
     @StateObject var authonicationViewModel = AuthenicationViewModel()
     
+    @State private var isEnglishSelected = true
+    
     @State private var showToast = false
     
     
@@ -32,7 +34,7 @@ struct LoginView: View {
                             Button(action: {
                                 self.isNavigateToHomeScreen = true
                             }) {
-                                Text("Sign Up Later")
+                                Text(LocalizationSystem.shared.localizedStringForKey(key: SIGN_UP_LATER_KEY, comment: ""))
                                     .padding(.vertical,10)
                                     .font(.custom(FONT_SEMIBOLD, size: 14))
                                     .foregroundColor(hexToColor(hex: "#007D40"))
@@ -41,9 +43,11 @@ struct LoginView: View {
                             
                             
                             Spacer()
+                            
+                            localizationView
                         }
                         
-                        Text("Welcome to \nContinuing Education \nPrograms")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: WELCOME_TO_CONTINUE_EDUCATION_PROGRAM_KEY, comment: ""))
                             .font(.custom("Open Sans", size: 32))
                             .padding(.top,20)
                             .fontWeight(.thin)
@@ -53,16 +57,16 @@ struct LoginView: View {
                             .frame(width: 56,height: 2)
                             .background(hexToColor(hex: "#D0B756"))
                         
-                        CustomTextField(fieldName: "Email/Phone",
+                        CustomTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: EMAIL_OR_PHONE_KEY, comment: ""),
                                         value: $userName,
-                                        emptyErrorMessage: "User Name Can't be empty",
+                                        emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
                                         isButtonPress: isLoginButtonPress)
                         .padding(.top,40)
                         
                         
-                        CustomSecureTextField(fieldName: "Password",
+                        CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_KEY, comment: ""),
                                               password: $password,
-                                              emptyErrorMessage: "Password can't be empty",
+                                              emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
                                               isButtonPress: isLoginButtonPress)
                         .padding(.top,15)
                         
@@ -73,7 +77,7 @@ struct LoginView: View {
                             Button(action: {
                                 self.isNavigateToOTPVerificationView = true
                             }) {
-                                Text("Forget Password")
+                                Text(LocalizationSystem.shared.localizedStringForKey(key: FORGET_PASSWORD_KEY, comment: ""))
                                     .padding(.vertical,10)
                                     .font(.custom(FONT_REGULAR, size: 14))
                                     .foregroundColor(hexToColor(hex: "#7C7C7C"))
@@ -112,7 +116,7 @@ struct LoginView: View {
                             
                             
                         }) {
-                            Text("Login")
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: LOGIN_KEY, comment: ""))
                                 .padding(.vertical,10)
                                 .font(.custom(FONT_BOLD, size: 16))
                                 .bold()
@@ -150,7 +154,7 @@ struct LoginView: View {
                             print("password \(password)")
                             
                         }) {
-                            Text("Continue with KFU ID")
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: CONTINUE_WITH_KFU_ID_KEY, comment: ""))
                                 .padding(.vertical,10)
                                 .font(.custom(FONT_BOLD, size: 16))
                                 .foregroundColor(.black)
@@ -170,14 +174,14 @@ struct LoginView: View {
                         .padding(.top,20)
                         
                         HStack {
-                            Text("Don’t have an account?")
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: DONT_HAVE_AN_ACCOUNT_KEY, comment: ""))
                                 .font(.custom(FONT_REGULAR, size: 14))
                             
                             Button(action: {
                                 self.isNavigateToRegistrationView = true
                                 
                             }) {
-                                Text("Registration")
+                                Text(LocalizationSystem.shared.localizedStringForKey(key: REGISTRATION_KEY, comment: ""))
                                     .font(.custom(FONT_REGULAR, size: 14))
                                     .bold()
                                     .foregroundColor(hexToColor(hex: "#007D40"))
@@ -201,11 +205,72 @@ struct LoginView: View {
                     }
                     
                 }
+                .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
+                .onAppear {
+                    print("isEnglishSelected => \(isEnglishSelected)")
+                    print("LocalizationSystem.shared.getLanguage() => \(LocalizationSystem.shared.getLanguage())")
+                    isEnglishSelected =  (LocalizationSystem.shared.getLanguage() == "en")
+                    print("isEnglishSelected => \(isEnglishSelected)")
+                }
                 
                 
             }
         }
         
+    }
+    
+    
+    var localizationView: some View {
+        
+        MyEqualWidthHStack {
+            Button(action: {
+                isEnglishSelected = true
+                if LocalizationSystem.shared.getLanguage() == "ar" {
+                    changeLanguage(code: "en")
+                    isRTL = false
+                }
+                
+            }) {
+                Text("EN")
+                    .frame(maxWidth: .infinity)
+                    .fontWeight(isEnglishSelected ? .bold : .regular)
+                    .padding(.vertical,10)
+                    .padding(.horizontal,22)
+                    .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                    .foregroundColor(isEnglishSelected ? .white : .black)
+                    .cornerRadius(25)
+                
+            }
+            
+            Button(action: {
+                isEnglishSelected = false
+                
+                if LocalizationSystem.shared.getLanguage() == "en" {
+                    changeLanguage(code: "ar")
+                    isRTL = true
+                }
+                
+                
+            }) {
+                Text("AR")
+                    .frame(maxWidth: .infinity)
+                    .fontWeight(!isEnglishSelected ? .bold : .regular)
+                    .padding(.vertical,10)
+                    .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                    .foregroundColor(!isEnglishSelected ? .white : .black)
+                    .cornerRadius(25)
+                    
+            }
+            
+        }
+        .frame(width: 150, height: 50)
+        .background(hexToColor(hex: "#E4F4EA"))
+        .cornerRadius(25)
+    }
+    
+    
+    func changeLanguage(code : String) {
+        SetLanguage.shared.setLanguage(code: code)
     }
 }
 

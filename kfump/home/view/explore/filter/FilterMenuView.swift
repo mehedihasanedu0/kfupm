@@ -21,7 +21,7 @@ struct FilterMenuView: View {
         ZStack {
             VStack {
                 HStack {
-                    Text("Filter By")
+                    Text(LocalizationSystem.shared.localizedStringForKey(key: FILTER_BY_KEY, comment: ""))
                         .font(.custom(FONT_BOLD, size: 20))
                         .bold()
                     
@@ -40,7 +40,7 @@ struct FilterMenuView: View {
                     .padding(.vertical)
                 
                 
-                Text("course Category")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: COURSE_CATEGORY_KEY, comment: ""))
                     .font(.custom(FONT_BOLD, size: 14))
                     .bold()
                     .frame(maxWidth: .infinity,alignment: .leading)
@@ -59,7 +59,7 @@ struct FilterMenuView: View {
                     .padding(.vertical)
                 
                 
-                Text("Availability")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: AVAILABILITY_KEY, comment: ""))
                     .font(.custom(FONT_BOLD, size: 14))
                     .bold()
                     .frame(maxWidth: .infinity,alignment: .leading)
@@ -85,7 +85,7 @@ struct FilterMenuView: View {
                         filterItemIds.removeAll()
                         
                     }) {
-                        Text("Clear All")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: CLEAR_ALL_KEY, comment: ""))
                             .font(.custom(FONT_REGULAR, size: 14))
                             .bold()
                             .foregroundColor(.black)
@@ -120,7 +120,7 @@ struct FilterMenuView: View {
                         
                         
                     }) {
-                        Text("Apply")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: APPLY_KEY, comment: ""))
                             .font(.custom(FONT_REGULAR, size: 14))
                             .bold()
                             .foregroundColor(.white)
@@ -145,6 +145,7 @@ struct FilterMenuView: View {
             }
             
         }
+        .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .onAppear {
             filterViewModel.getFilterCategoryList() { category in
                 self.filtersCategory = category

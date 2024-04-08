@@ -39,7 +39,7 @@ struct OTPView: View {
             
             VStack {
                 
-                Text("Enter OTP")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: ENTER_OTP_KEY, comment: ""))
                     .font(.custom("Open Sans", size: 32))
                     .padding(.top,70)
                     .fontWeight(.thin)
@@ -106,7 +106,7 @@ struct OTPView: View {
                     }
 
                 }) {
-                    Text("Confirm OTP")
+                    Text(LocalizationSystem.shared.localizedStringForKey(key: CONFIRM_OTP_KEY, comment: ""))
                         .padding(.vertical,10)
                         .font(.custom(FONT_BOLD, size: 16))
                         .bold()
@@ -137,6 +137,7 @@ struct OTPView: View {
                 CustomTost(message: authonicationViewModel.dialogMessage)
             }
         }
+        .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         
         
     }

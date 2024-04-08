@@ -35,7 +35,7 @@ struct ExploreView: View {
                     VStack {
                         ZStack {
                             
-                            SearchView(fieldName: "Search courses", value: $searchValue, onCloseTapped: {
+                            SearchView(fieldName: LocalizationSystem.shared.localizedStringForKey(key: SEARCH_COURSES_KEY, comment: ""), value: $searchValue, onCloseTapped: {
                                 print("searchValue =>  \(searchValue)")
                                 searchValue = ""
                             },isCloseButtonVisible: isCloseButtonVisible)
@@ -111,6 +111,7 @@ struct ExploreView: View {
 //                    CustomProgressView()
 //                }
             }
+            .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal,20)
             
@@ -121,10 +122,10 @@ struct ExploreView: View {
     var browseCourseLabel: some View {
         HStack {
             HStack {
-                Text("Browse")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: BROWSE_KEY, comment: ""))
                     .font(.custom(FONT_BOLD, size: 22))
                     .bold()
-                Text("Course")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: COURSE_KEY, comment: ""))
                     .fontWeight(.ultraLight)
                     .font(.custom(FONT_LIGHT, size: 22))
                     .foregroundColor(hexToColor(hex: "#D0B756"))

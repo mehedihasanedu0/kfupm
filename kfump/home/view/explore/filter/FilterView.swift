@@ -23,7 +23,7 @@ struct FilterView: View {
                         Text("\(totalResult)")
                             .font(.custom(FONT_BOLD, size: 22))
                             .bold()
-                        Text("Result")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: RESULT_KEY, comment: ""))
                             .fontWeight(.ultraLight)
                             .font(.custom(FONT_LIGHT, size: 22))
                             .foregroundColor(hexToColor(hex: "#D0B756"))
@@ -38,7 +38,8 @@ struct FilterView: View {
                                 .resizable()
                                 .frame(width: 20,height: 20)
                             
-                            Text(filterValue == 0 ? "Filter" : "Filter (\(filterValue))")
+                            Text(filterValue == 0 ? LocalizationSystem.shared.localizedStringForKey(key: FILTER_KEY, comment: "") :
+                                    "\(LocalizationSystem.shared.localizedStringForKey(key: FILTER_KEY, comment: "")) (\(filterValue))")
                                 .fontWeight(.ultraLight)
                                 .font(.custom(FONT_REGULAR, size: 14))
                                 .foregroundColor(filterValue == 0 ? .black : .white)

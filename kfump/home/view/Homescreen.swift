@@ -19,7 +19,7 @@ struct Homescreen: View {
                 ExploreView()
                     .tabItem {
                         selection == 0 ? Image("tab_explore_blue") : Image("tab_explore")
-                        Text("Explore")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: EXPLORE_KEY, comment: ""))
                     }
                     .tag(0)
                     .id(0)
@@ -27,21 +27,21 @@ struct Homescreen: View {
                 MyCourses()
                     .tabItem {
                         selection == 1 ? Image("tab_mycourse") : Image("tab_mycourse")
-                        Text("My Courses").font(.custom("SST Arabic Roman", size: 14))
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: My_COURSES_KEY, comment: "")).font(.custom("SST Arabic Roman", size: 14))
                     }
                     .tag(1).id(1)
                 
                 ProfileView().tabItem {
                     selection == 2 ? Image("tab_profile") : Image("tab_profile")
                     Image("chat")
-                    Text("Profile").font(.custom("SST Arabic Roman", size: 14))
+                    Text(LocalizationSystem.shared.localizedStringForKey(key: PROFILE_KEY, comment: "")).font(.custom("SST Arabic Roman", size: 14))
                 }
                 .tag(2)
                 .id(2)
                 
                 MoreView().tabItem {
                     selection == 3 ? Image("tab_more") : Image("tab_more")
-                    Text("More").font(.custom("SST Arabic Roman", size: 14))
+                    Text(LocalizationSystem.shared.localizedStringForKey(key: MORE_KEY, comment: "")).font(.custom("SST Arabic Roman", size: 14))
                 }
                 .tag(3).id(3)
                 
@@ -51,6 +51,7 @@ struct Homescreen: View {
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarColorScheme(.none, for: .tabBar)
         }
+        .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .accentColor(hexToColor(hex: "#007D40"))
         
     }

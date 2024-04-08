@@ -21,7 +21,7 @@ struct SingleItemView: View {
                         .resizable()
                         .frame(width: 50,height: 50)
                     
-                    Text(moreItems.nameEn)
+                    Text(LocalizationSystem.shared.getLanguage() == "en" ? moreItems.nameEn : moreItems.nameAr)
                         .padding(.leading,10)
                     
                     Spacer()

@@ -1,0 +1,57 @@
+
+// Tabbar Menu
+"Explore" = "Explore";
+"My Courses" = "My Courses";
+"Profile" = "Profile";
+"More" = "More";
+
+
+
+//Login
+"Sign Up Later" = "Sign Up Later";
+"Welcome to\nContinuing \nEducation Programs" = "Welcome to\nContinuing \nEducation Programs";
+"Email/Phone" = "Email/Phone";
+"Password" = "Password";
+"Forget Password" = "Forget Password";
+"Login" = "Login";
+"Continue with KFU ID" = "Continue with KFU ID";
+"Don’t have an account? " = "Don’t have an account? ";
+"Registration" = "Registration";
+
+//Registration
+"Sign UP" = "Sign UP";
+"Full Name *" = "Full Name *";
+"Email *" = "Email *";
+"Phone Number *" = "Phone Number *";
+"Confirm Password" = "Confirm Password";
+"Already have an account? " = "Already have an account? ";
+"Log in" = "Log in";
+
+//OTP Code
+"Enter OTP" = "Enter OTP";
+"Confirm OTP" = "Confirm OTP";
+
+//Home
+
+"Search courses" = "Search courses";
+"Browse" = "Browse";
+"Course" = "Course";
+
+
+// Filter
+"Filter" = "Filter";
+"Results" = "Results";
+"Filter By" = "Filter By";
+"course Category" = "course Category";
+"Availability" = "Availability";
+"Apply" = "Apply";
+"Clear All" = "Clear All";
+
+// VALIDATION
+"User Name Can't be empty" = "User Name Can't be empty";
+"Password can't be empty" = "Password can't be empty";
+"Full Name Can't be empty" = "Full Name Can't be empty";
+"Email Can't be empty" = "Email Can't be empty";
+"Phone number Can't be empty" = "Phone number Can't be empty";
+"Password can't be empty" = "Password can't be empty";
+"Confirm Password can't be empty" = "Confirm Password can't be empty";

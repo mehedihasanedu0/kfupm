@@ -16,7 +16,7 @@ let FONT_REGULAR = "OpenSans-Regular"
 let FONT_SEMIBOLD = "OpenSans-SemiBold"
 let FONT_BOLD = "OpenSans-Bold"
 
-
+var isRTL = LocalizationSystem.shared.getLanguage() == "ar"
 
 func hexToColor(hex: String) -> Color {
     var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)

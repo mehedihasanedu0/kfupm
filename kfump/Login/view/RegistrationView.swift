@@ -22,6 +22,7 @@ struct RegistrationView: View {
     
     @StateObject var authonicationViewModel = AuthenicationViewModel()
     @State var isNavigateToOTPView: Bool = false
+    @State private var isEnglishSelected = true
     
     
     var body: some View {
@@ -35,16 +36,18 @@ struct RegistrationView: View {
                         Button(action: {
                             
                         }) {
-                            Text("Sign Up Later")
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: SIGN_UP_LATER_KEY, comment: ""))
                                 .padding(.vertical,10)
                                 .font(.custom(FONT_SEMIBOLD, size: 14))
                                 .foregroundColor(hexToColor(hex: "#007D40"))
                             
                         }
                         Spacer()
+                        
+                        localizationView
                     }
                     
-                    Text("Sign UP")
+                    Text(LocalizationSystem.shared.localizedStringForKey(key: SIGN_UP_KEY, comment: ""))
                         .font(.custom(FONT_BOLD, size: 32))
                         .padding(.top,20)
                         .fontWeight(.thin)
@@ -54,36 +57,36 @@ struct RegistrationView: View {
                         .frame(width: 56,height: 2)
                         .background(hexToColor(hex: "#D0B756"))
                     
-                    CustomTextField(fieldName: "Full Name *",
+                    CustomTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: FULL_NAME_KEY, comment: ""),
                                     value: $fullName,
-                                    emptyErrorMessage: "Full Name Can't be empty",
+                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: FULL_NAME_CANT_BE_EMPTY_KEY, comment: ""),
                                     isButtonPress: isRegistrationButtonPress)
                     .padding(.top,40)
                     
-                    CustomTextField(fieldName: "Email *",
+                    CustomTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: EMAIL_KEY, comment: ""),
                                     value: $email,
-                                    emptyErrorMessage: "Email Can't be empty",
+                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: EMAIL_CANT_BE_EMPTY_KEY, comment: ""),
                                     isButtonPress: isRegistrationButtonPress)
                     .keyboardType(.emailAddress)
                     .padding(.top,15)
                     
-                    CustomTextField(fieldName: "Phone Number *",
+                    CustomTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PHONE_NUMBER_KEY, comment: ""),
                                     value: $phoneNumber,
-                                    emptyErrorMessage: "Email Can't be empty",
+                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PHONE_NUMBER_CANT_BE_EMPTY_KEY, comment: ""),
                                     isButtonPress: isRegistrationButtonPress)
                     .keyboardType(.phonePad)
                     .padding(.top,15)
                     
                     
-                    CustomSecureTextField(fieldName: "Password",
+                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_KEY, comment: ""),
                                           password: $password,
-                                          emptyErrorMessage: "Password can't be empty",
+                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
                                           isButtonPress: isRegistrationButtonPress)
                     .padding(.top,15)
                     
-                    CustomSecureTextField(fieldName: "Confirm Password",
+                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: CONFIRM_PASSWORD_KEY, comment: ""),
                                           password: $confirmPassword,
-                                          emptyErrorMessage: "Confirm Password can't be empty",
+                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: CONFIRM_PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
                                           isButtonPress: isRegistrationButtonPress)
                     .padding(.top,15)
                     
@@ -101,7 +104,7 @@ struct RegistrationView: View {
                     
                         
                     }) {
-                        Text("Registration")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: REGISTRATION_KEY, comment: ""))
                             .padding(.vertical,10)
                             .font(.custom(FONT_BOLD, size: 16))
                             .bold()
@@ -119,14 +122,14 @@ struct RegistrationView: View {
                    
                     
                     HStack {
-                        Text("Already have an account?")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: ALREADY_HAVE_AN_ACCOUNT_KEY, comment: ""))
                             .font(.custom(FONT_REGULAR, size: 14))
                         
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
                             
                         }) {
-                            Text("Log in")
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: REGISTER_LOGIN_KEY, comment: ""))
                                 .font(.custom(FONT_REGULAR, size: 14))
                                 .bold()
                                 .foregroundColor(hexToColor(hex: "#007D40"))
@@ -149,10 +152,66 @@ struct RegistrationView: View {
                 ToastView(isPresented: $showToast, duration: 2.0) {
                     CustomTost(message: authonicationViewModel.dialogMessage)
                 }
-            }
+            }.environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
+                .onAppear {
+                    isEnglishSelected =  (LocalizationSystem.shared.getLanguage() == "en")
+                }
             
             
         }
+    }
+    
+    var localizationView: some View {
+        
+        MyEqualWidthHStack {
+            Button(action: {
+                isEnglishSelected = true
+                if LocalizationSystem.shared.getLanguage() == "ar" {
+                    changeLanguage(code: "en")
+                    isRTL = false
+                }
+                
+            }) {
+                Text("EN")
+                    .frame(maxWidth: .infinity)
+                    .fontWeight(isEnglishSelected ? .bold : .regular)
+                    .padding(.vertical,10)
+                    .padding(.horizontal,22)
+                    .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                    .foregroundColor(isEnglishSelected ? .white : .black)
+                    .cornerRadius(25)
+                
+            }
+            
+            Button(action: {
+                isEnglishSelected = false
+                
+                if LocalizationSystem.shared.getLanguage() == "en" {
+                    changeLanguage(code: "ar")
+                    isRTL = true
+                }
+                
+                
+            }) {
+                Text("AR")
+                    .frame(maxWidth: .infinity)
+                    .fontWeight(!isEnglishSelected ? .bold : .regular)
+                    .padding(.vertical,10)
+                    .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                    .foregroundColor(!isEnglishSelected ? .white : .black)
+                    .cornerRadius(25)
+                    
+            }
+            
+        }
+        .frame(width: 150, height: 50)
+        .background(hexToColor(hex: "#E4F4EA"))
+        .cornerRadius(25)
+    }
+    
+    
+    func changeLanguage(code : String) {
+        SetLanguage.shared.setLanguage(code: code)
     }
     
     func registration() {
