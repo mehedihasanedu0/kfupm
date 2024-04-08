@@ -25,8 +25,11 @@ class NetworkClient {
             request.addValue("clientKey", forHTTPHeaderField: "client-secret")
             request.addValue("password", forHTTPHeaderField: "grant-type")
             
-            let token = (headerDetails == .APIRequestWithToken) ? "Bearer \(accessToken)" : "Bearer mehedi"
-            request.setValue(token, forHTTPHeaderField: "Authorization")
+            if accessToken != "" {
+                let token = (headerDetails == .APIRequestWithToken) ? "Bearer \(accessToken)" : "Bearer mehedi"
+                request.setValue(token, forHTTPHeaderField: "Authorization")
+            }
+
            
             print("url \(url)")
             print("token \(token)")

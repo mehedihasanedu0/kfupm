@@ -15,7 +15,7 @@ struct OTPView: View {
     var emailAddress : String
     
     enum FocusPin {
-        case  pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix
+        case  pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven
     }
     
     @FocusState private var pinFocusState : FocusPin?
@@ -25,6 +25,7 @@ struct OTPView: View {
     @State var pinFour: String = ""
     @State var pinFive: String = ""
     @State var pinSix: String = ""
+    @State var pinSeven: String = ""
     
     @State private var showToast = false
     
@@ -56,17 +57,35 @@ struct OTPView: View {
                     .multilineTextAlignment(.center)
                 
                 
-                
-                otpContainerView
-                    .padding(.top,60)
-                    .padding(.bottom,20)
+                ZStack {
+                    
+                    otpContainerView
+                        .padding(.top,60)
+                        .padding(.bottom,20)
+                        .onAppear {
+                            pinFocusState = .pinOne
+                        }
+                    
+                    
+                    Button {
+                        print("Otp Container View")
+                    } label: {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(height: 60)
+                    }
+                    .padding(.top,40)
+                    .allowsHitTesting(true)
+                    
+                }
+               
                 
                 
                 Button(action: {
                     
                     print("otp => \(otp)")
                     
-                    let otp1 = pinOne + pinTwo + pinThree + pinFour + pinFive + pinSix
+                    let otp1 = pinOne + pinTwo + pinThree + pinFour + pinFive + pinSix + pinSeven
                     print("otp => \(otp1)")
                     
                     if otp.count != 6 {
@@ -128,7 +147,7 @@ struct OTPView: View {
     
     var otpContainerView: some View {
         
-        HStack(spacing:15, content: {
+        HStack(spacing:10, content: {
 
             TextField("", text: $pinOne)
                 .modifier(OtpModifer(pin:$pinOne))
@@ -217,13 +236,30 @@ struct OTPView: View {
             TextField("", text:$pinSix)
                 .modifier(OtpModifer(pin:$pinSix))
                 .onChange(of:pinSix){newVal in
+                    if (newVal.count == 1) {
+                        pinFocusState = .pinSeven
+                    } else {
+                        if (newVal.count == 0) {
+                            pinFocusState = .pinFive
+                        }
+                    }
+                }
+                .focused($pinFocusState, equals: .pinSix)   
+            
+            Divider()
+                .frame(width: 1,height: 36)
+                .foregroundColor(hexToColor(hex: "#E0E0DC"))
+            
+            TextField("", text:$pinSeven)
+                .modifier(OtpModifer(pin:$pinSeven))
+                .onChange(of:pinSeven){newVal in
                     if (newVal.count == 0) {
-                        pinFocusState = .pinFive
+                        pinFocusState = .pinSix
                     } else {
                         hideKeyboard()
                     }
                 }
-                .focused($pinFocusState, equals: .pinSix)
+                .focused($pinFocusState, equals: .pinSeven)
 
 
         })
@@ -237,6 +273,6 @@ struct OTPView: View {
     
 }
 
-#Preview {
-    OTPView(emailAddress: "")
-}
+//#Preview {
+//    OTPView(emailAddress: "")
+//}

@@ -14,20 +14,21 @@ struct kfumpApp: App {
             let loginStatus = UserDefaults.standard.bool(forKey: IS_LOGIN_D)
             
             if loginStatus {
-//                Homescreen()
-//                    .environmentObject(SharedData())
-//                    .environment(\.colorScheme, .light)
-//                    .onAppear {
-//                        UIView.appearance().overrideUserInterfaceStyle = .light
-//                    }
+                Homescreen()
+                    .environmentObject(SharedData())
+                    .environment(\.colorScheme, .light)
+                    .onAppear {
+                        UIView.appearance().overrideUserInterfaceStyle = .light
+                    }
                 
             } else {
                 LoginView()
+//                OTPView(emailAddress: "")
 //                SplashScreen()
-//                    .environment(\.colorScheme, .light)
-//                    .onAppear {
-//                        UIView.appearance().overrideUserInterfaceStyle = .light
-//                    }
+                    .environment(\.colorScheme, .light)
+                    .onAppear {
+                        UIView.appearance().overrideUserInterfaceStyle = .light
+                    }
             }
         }
     }

@@ -21,9 +21,10 @@ class AuthenticationService {
         return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
     }
     
-    func signIn(searchKey: String) -> AnyPublisher<CourseListResponseModel, Error> {
+    func signIn(body: SignInModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
         let url = URL(string: BASE_URL + "/user/login/")
-        return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
         
     }
     

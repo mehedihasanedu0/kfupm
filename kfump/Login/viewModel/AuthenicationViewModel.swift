@@ -52,8 +52,12 @@ class AuthenicationViewModel : ObservableObject {
                 }
             }, receiveValue: { [weak self] user in
                 self?.isLoading = true
-                self?.dialogMessage = user.message ?? ""
-                completion(true)
+                if user.details != nil && ((user.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = (user.details?[0].path == "Password") ? ("\(user.details?[0].path ?? "") : " + (user.details?[0].message ?? "")) : (user.details?[0].message ?? "")
+                } else {
+                    self?.dialogMessage = user.message ?? ""
+                }
+                completion(user.success ?? false)
             })
             .store(in: &cancellables)
         
@@ -79,10 +83,56 @@ class AuthenicationViewModel : ObservableObject {
                 }
             }, receiveValue: { [weak self] user in
                 self?.isLoading = true
-                self?.dialogMessage = user.message ?? ""
-                shared.set(user.token, forKey: TOKEN_D)
-                shared.set(true, forKey: IS_LOGIN_D)
-                completion(true)
+                if user.details != nil && ((user.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = user.details?[0].message ?? ""
+                } else {
+                    self?.dialogMessage = user.message ?? ""
+                }
+                
+                if user.success ?? false {
+                    shared.set(user.token, forKey: TOKEN_D)
+                    shared.set(true, forKey: IS_LOGIN_D)
+                    shared.synchronize()
+                }
+                completion(user.success ?? false)
+            })
+            .store(in: &cancellables)
+        
+        
+    }        
+    
+    func signIn(body: SignInModel, completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        authenticationService.signIn(body: body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] user in
+                
+                self?.isLoading = true
+                if user.details != nil && ((user.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = user.details?[0].message ?? ""
+                } else {
+                    self?.dialogMessage = user.message ?? ""
+                }
+                
+                if user.success ?? false {
+                    shared.set(user.access_token, forKey: TOKEN_D)
+                    shared.set(true, forKey: IS_LOGIN_D)
+                    shared.synchronize()
+                }
+                
+                completion(user.success ?? false)
             })
             .store(in: &cancellables)
         

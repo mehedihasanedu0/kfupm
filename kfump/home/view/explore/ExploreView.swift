@@ -94,7 +94,7 @@ struct ExploreView: View {
                                 ForEach(homeviewModel.courseList, id: \.id) { course in
                                     SingleCourseView(course: course)
                                         .padding(.bottom,2)
-                                        .redactShimmer(condition: homeviewModel.isLoading)
+                                        .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.courseList.count == 11)
                                 }
                             }.padding(.top,15)
                         }

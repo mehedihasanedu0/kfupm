@@ -13,14 +13,12 @@ struct CommonSuccessResponseModel: Codable {
     var timestamp: String?
     var message: String?
     var token: String?
-//    var data: UserData?
+    var access_token: String?
+    var details: [Details]?
 }
-//
-//struct UserData: Codable {
-//    var full_name: String
-//    var email: String
-//    var password: String
-//    var confirm_password: String
-//    var role: String
-//    var phone_number: String
-//}
+
+struct Details: Codable {
+    var path: String
+    var message: String
+}
+

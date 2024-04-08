@@ -15,6 +15,7 @@ class HomeViewModel : ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var isLoading = false
+    @Published var isGetCourseActualData = false
     @Published var isLoadingBySearchKey = false
     @Published var error: Error?
     @Published var showingDialogAlert = false
