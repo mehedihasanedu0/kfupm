@@ -33,6 +33,21 @@ func hexToColor(hex: String) -> Color {
     return Color(red: red, green: green, blue: blue)
 }
 
+func hexToColor(hex: String) -> UIColor {
+    var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+    hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+    var rgb: UInt64 = 0
+
+    Scanner(string: hexSanitized).scanHexInt64(&rgb)
+
+    let red = Double((rgb & 0xFF0000) >> 16) / 255.0
+    let green = Double((rgb & 0x00FF00) >> 8) / 255.0
+    let blue = Double(rgb & 0x0000FF) / 255.0
+
+    return UIColor(red: red, green: green, blue: blue, alpha: 1)
+}
+
 
 var sampleDataCategoryFilter : [FilterCourseItem] = [
     FilterCourseItem(id: 1, title: "Graphic Design", isSelect: false),
@@ -50,3 +65,22 @@ var sampleDataAvailableFilter : [FilterAvailableItem] = [
 func generateBoundaryString() -> String {
     return "Boundary-\(NSUUID().uuidString)"
 }
+
+
+struct ProfileItem: Identifiable {
+    var id: Int
+    var nameAr: String
+    var nameEn: String
+    var image: String
+}
+
+
+var profileItemList : [ProfileItem] = [
+    ProfileItem(id: 1, nameAr: "ملفي", nameEn: "My Profile", image: "ic_profile"),
+    ProfileItem(id: 2, nameAr: "إعادة تعيين كلمة المرور", nameEn: "Reset Password", image: "ic_reset_password"),
+    ProfileItem(id: 3, nameAr: "تاريخ الدفع", nameEn: "Payment History", image: "ic_payment_history"),
+    ProfileItem(id: 4, nameAr: "لغة", nameEn: "Language", image: "ic_language"),
+    ProfileItem(id: 5, nameAr: "تسجيل خروج", nameEn: "Log out", image: "ic_logout"),
+    ProfileItem(id: 6, nameAr: "حساب مغلق", nameEn: "Close Account", image: "ic_close_account")
+]
+ 
