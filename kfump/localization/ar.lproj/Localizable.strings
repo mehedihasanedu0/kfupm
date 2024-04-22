@@ -53,3 +53,30 @@
 "Phone number Can't be empty" = "رقم الهاتف لا يمكن أن يكون فارغا";
 "Password can't be empty" = "لا يمكن أن تكون كلمة المرور فارغة";
 "Confirm Password can't be empty" = "تأكيد كلمة المرور لا يمكن أن يكون فارغاً";
+
+"Current Password can't be empty" = "لا يمكن أن تكون كلمة المرور الحالية فارغة";
+"New Password can't be empty" = "لا يمكن أن تكون كلمة المرور الجديدة فارغة";
+
+
+
+
+//MARK: - ALERT
+"Confirmation" = "تأكيد";
+"No" = "لا";
+"Yes" = "نعم";
+
+//MARK: - CLOSE ACCOUNT
+"Close Account" = "حساب مغلق";
+"Close Your Account" = "أغلق حسابك";
+
+//MARK: - RESET PASSWORD
+"Reset Password" = "إعادة تعيين كلمة المرور";
+"Current Password" = "كلمة السر الحالية";
+"New Password" = "كلمة المرور الجديدة";
+"Confirm Password" = "تأكيد كلمة المرور";
+"Update Password" = "تطوير كلمة السر";
+
+
+//MARK: - CLOSE ACCOUNT
+"My Profile" = "ملفي";
+"Update Details" = "تحديث التفاصيل";

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @AppStorage(IS_LOGIN_D) var isLogin: Bool?
+    
     @State private var isEnglishSelected = true
     @State private var isNavigateToResetPasswordView = false
     @State private var isNavigateToMyProfileView = false
@@ -50,7 +52,10 @@ struct ProfileView: View {
                             }
                         }
                         .onTapGesture {
-                            handleAction(for: item)
+                            if isLogin ?? false {
+                                handleAction(for: item)
+                            }
+                            
                         }
                         .padding()
                         .background(Color.white)
@@ -79,8 +84,9 @@ struct ProfileView: View {
             }
             .frame(maxWidth: .infinity)
             .background(hexToColor(hex: "#F9F9F7"))
-            .navigationDestination(isPresented: $isNavigateToResetPasswordView, destination: { ResetPasswordView().navigationBarBackButtonHidden(true) })
-            .navigationDestination(isPresented: $isNavigateToMyProfileView, destination: { MyProfileView().navigationBarBackButtonHidden(true) })     .navigationDestination(isPresented: $isNavigateToCloseAccountView, destination: { CloseAccountView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToResetPasswordView, destination: { ChangePasswordView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToMyProfileView, destination: { MyProfileView().navigationBarBackButtonHidden(true) })     
+            .navigationDestination(isPresented: $isNavigateToCloseAccountView, destination: { CloseAccountView().navigationBarBackButtonHidden(true) })
             
             
             

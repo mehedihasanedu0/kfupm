@@ -14,6 +14,10 @@ import SwiftUI
 
 class AuthenicationViewModel : ObservableObject {
     
+    @AppStorage(IS_LOGIN_D) var isLogin: Bool = false
+    @AppStorage(USER_UUID_D) var userUUID: String = ""
+    @AppStorage(TOKEN_D) var userToken: String = ""
+    
     private let authenticationService: AuthenticationService
     private var cancellables = Set<AnyCancellable>()
     
@@ -127,9 +131,9 @@ class AuthenicationViewModel : ObservableObject {
                 }
                 
                 if user.success ?? false {
-                    shared.set(user.access_token, forKey: TOKEN_D)
-                    shared.set(true, forKey: IS_LOGIN_D)
-                    shared.synchronize()
+                    self?.userToken = user.access_token ?? ""
+                    self?.isLogin = true
+                    self?.userUUID =  user.data?.uuid ?? ""
                 }
                 
                 completion(user.success ?? false)

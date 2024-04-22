@@ -52,7 +52,7 @@ struct CloseAccountView: View {
                     
                     
                 }) {
-                    Text(LocalizationSystem.shared.localizedStringForKey(key: LOGIN_KEY, comment: ""))
+                    Text(LocalizationSystem.shared.localizedStringForKey(key: CLOSE_YOUR_ACCOUNT_KEY, comment: ""))
                         .padding(.vertical,10)
                         .font(.custom(FONT_BOLD, size: 16))
                         .bold()
@@ -102,7 +102,7 @@ struct CloseAccountView: View {
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .onAppear {
         }
-        .navigationBarItems(leading: CustomTitleBarItems(title: "Close Account"))
+        .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: CLOSE_ACCOUNT_KEY, comment: "")))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
     }
 }

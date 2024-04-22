@@ -15,10 +15,16 @@ struct CommonSuccessResponseModel: Codable {
     var token: String?
     var access_token: String?
     var details: [Details]?
+    var data: CommonData?
 }
 
 struct Details: Codable {
     var path: String
     var message: String
+    var uuid: String
+}
+
+struct CommonData: Codable {
+    var uuid: String
 }
 

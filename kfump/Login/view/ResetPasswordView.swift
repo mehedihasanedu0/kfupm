@@ -91,7 +91,7 @@ struct ResetPasswordView: View {
                         
                         
                     }) {
-                        Text(LocalizationSystem.shared.localizedStringForKey(key: LOGIN_KEY, comment: ""))
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: RESET_PASSWORD_KEY, comment: ""))
                             .padding(.vertical,10)
                             .font(.custom(FONT_BOLD, size: 16))
                             .bold()
@@ -128,7 +128,7 @@ struct ResetPasswordView: View {
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .onAppear {
             }
-            .navigationBarItems(leading: CustomTitleBarItems(title: "Rest Password"))
+            .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: RESET_PASSWORD_KEY, comment: "")))
 
 
         }

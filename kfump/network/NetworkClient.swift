@@ -12,8 +12,8 @@ import Combine
 
 class NetworkClient {
     static let shared = NetworkClient()
-    @AppStorage("x-api-token") private var token = ""
-    var accessToken: String = (UserDefaults.standard.object(forKey: TOKEN_D) as? String ?? "")
+    @AppStorage(IS_LOGIN_D) var isLogin: Bool = false
+    @AppStorage(TOKEN_D) var accessToken: String?
     
     private func APIURLRequest(url: URL, method: String, headers: [String: String]?, body: Data?, headerDetails: APIRequestHeaders = .APIRequestWithNoHeader) -> URLRequest {
         var request = URLRequest(url: url)
@@ -25,14 +25,15 @@ class NetworkClient {
             request.addValue("clientKey", forHTTPHeaderField: "client-secret")
             request.addValue("password", forHTTPHeaderField: "grant-type")
             
+            
             if accessToken != "" {
-                let token = (headerDetails == .APIRequestWithToken) ? "Bearer \(accessToken)" : "Bearer mehedi"
+                let token = (headerDetails == .APIRequestWithToken) ? "Bearer \(accessToken ?? "")" : "Bearer mehedi"
                 request.setValue(token, forHTTPHeaderField: "Authorization")
             }
 
            
             print("url \(url)")
-            print("token \(token)")
+            print("token \(accessToken ?? "")")
             
         default:
             print("NO header")

@@ -55,3 +55,30 @@
 "Phone number Can't be empty" = "Phone number Can't be empty";
 "Password can't be empty" = "Password can't be empty";
 "Confirm Password can't be empty" = "Confirm Password can't be empty";
+
+
+"Current Password can't be empty" = "Current Password can't be empty";
+"New Password can't be empty" = "New Password can't be empty";
+
+
+
+//MARK: - ALERT
+"Confirmation" = "Confirmation";
+"No" = "No";
+"Yes" = "Yes";
+
+//MARK: - CLOSE ACCOUNT
+"Close Account" = "Close Account";
+"Close Your Account" = "Close Your Account";
+
+//MARK: - RESET PASSWORD
+"Reset Password" = "Reset Password";
+"Current Password" = "Current Password";
+"New Password" = "New Password";
+"Confirm Password" = "Confirm Password";
+"Update Password" = "Update Password";
+
+
+//MARK: - CLOSE ACCOUNT
+"My Profile" = "My Profile";
+"Update Details" = "Update Details";

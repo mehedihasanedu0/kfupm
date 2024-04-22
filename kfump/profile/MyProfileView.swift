@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MyProfileView: View {
     
+    @AppStorage(USER_UUID_D) var userUUID: String?
+    
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var emailAddress: String = ""
@@ -20,7 +22,9 @@ struct MyProfileView: View {
     @State var isNavigateToHomeScreen: Bool = false
     @State var isNavigateToOTPVerificationView: Bool = false
     @State var isNavigateToForgetPasswordView: Bool = false
-    @StateObject var authonicationViewModel = AuthenicationViewModel()
+    
+    
+    @StateObject var profileViewModel = ProfileViewModel()
     
     @State private var isEnglishSelected = true
     
@@ -46,45 +50,51 @@ struct MyProfileView: View {
                     
                     
                     CustomTextField(fieldName: "Mehedi",
-                                    value: $firstName,
-                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
+                                    value: $profileViewModel.firstName,
+                                    emptyErrorMessage: "",
                                     isButtonPress: isLoginButtonPress)
+                    .redactShimmer(condition: profileViewModel.isLoading)
                     .disabled(true)
                     .padding(.top,40)
                     
+                    
                     CustomTextField(fieldName: "Hasan",
-                                    value: $lastName,
-                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
+                                    value: $profileViewModel.lastName,
+                                    emptyErrorMessage: "",
                                     isButtonPress: isLoginButtonPress)
-                    .padding(.top,10) 
+                    .redactShimmer(condition: profileViewModel.isLoading)
+                    .padding(.top,10)
                     .disabled(true)
                     
                     CustomDisableTextView(fieldName: "johndoe787@gmail.com",
-                                    value: $emailAddress,
-                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
+                                    value: $profileViewModel.emailAddress,
+                                    emptyErrorMessage: "",
                                     isButtonPress: isLoginButtonPress)
-                    .padding(.top,10)  
+                    .redactShimmer(condition: profileViewModel.isLoading)
+                    .padding(.top,10)
                     .disabled(true)
                     
                     CustomDisableTextView(fieldName: "+966 12-345-6789",
-                                    value: $phoneNumber,
-                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
+                                    value: $profileViewModel.phoneNumber,
+                                    emptyErrorMessage: "",
                                     isButtonPress: isLoginButtonPress)
+                    .redactShimmer(condition: profileViewModel.isLoading)
                     .padding(.top,10)
                     .disabled(true)
                     
                     
                     
                     CustomTextField(fieldName: "Govt ID or Iqama no *",
-                                    value: $govtId,
-                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
+                                    value: $profileViewModel.govtId,
+                                    emptyErrorMessage: "",
                                     isButtonPress: isLoginButtonPress)
+                    .redactShimmer(condition: profileViewModel.isLoading)
                     .padding(.top,10)
 
                     
                     CustomDropDownView(typeOfUserDropdownSelect: typeOfUserDropdownSelect, fieldName: "Type of user",
                                        value: $typeOfUser,
-                                       emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""))
+                                       emptyErrorMessage: "")
                     .padding(.top,10)
                     .disabled(true)
                     
@@ -102,7 +112,7 @@ struct MyProfileView: View {
                         
                         
                     }) {
-                        Text(LocalizationSystem.shared.localizedStringForKey(key: LOGIN_KEY, comment: ""))
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: UPDATE_DETAILS_KEY, comment: ""))
                             .padding(.vertical,10)
                             .font(.custom(FONT_BOLD, size: 16))
                             .bold()
@@ -121,25 +131,27 @@ struct MyProfileView: View {
                     Spacer()
                     
                 }
-                .navigationDestination(isPresented: $isNavigateToForgetPasswordView, destination: { ForgetPasswordView().navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
+//                .navigationDestination(isPresented: $isNavigateToForgetPasswordView, destination: { ForgetPasswordView().navigationBarBackButtonHidden(true) })
+//                .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
+//                .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
                 .padding(20)
                 .background(hexToColor(hex: "#FFFFFF"))
                 
                 
-                if authonicationViewModel.isLoading {
+                if profileViewModel.isLoading {
                     CustomProgressView()
                 }
                 ToastView(isPresented: $showToast, duration: 2.0) {
-                    CustomTost(message: authonicationViewModel.dialogMessage)
+                    CustomTost(message: profileViewModel.dialogMessage)
                 }
                 
             }
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .onAppear {
+                print("User UUID => \(userUUID ?? "")")
+                profileViewModel.getProfileData(userUUID: userUUID ?? "")
             }
-            .navigationBarItems(leading: CustomTitleBarItems(title: "My Profile"))
+            .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: MY_PROFILE_KEY, comment: "")))
 
 
         }

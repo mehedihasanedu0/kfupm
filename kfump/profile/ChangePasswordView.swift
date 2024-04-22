@@ -9,19 +9,22 @@ import SwiftUI
 
 struct ChangePasswordView: View {
     
-    @State var userName: String = ""
-    @State var password: String = ""
-    @State var isLoginButtonPress: Bool = false
+    @State var oldPassword: String = ""
+    @State var newPassword: String = ""
+    @State var confirmPassword: String = ""
+    
+    @State var isChangePasswordButtonPress: Bool = false
     @State var isNavigateToRegistrationView: Bool = false
     @State var isNavigateToHomeScreen: Bool = false
     @State var isNavigateToOTPVerificationView: Bool = false
     @State var isNavigateToForgetPasswordView: Bool = false
-    @StateObject var authonicationViewModel = AuthenicationViewModel()
+    @StateObject var profileViewModel = ProfileViewModel()
     
     @State private var isEnglishSelected = true
     
     @State private var showToast = false
     
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         
@@ -44,23 +47,23 @@ struct ChangePasswordView: View {
 
                     
                     
-                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_KEY, comment: ""),
-                                          password: $password,
-                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
-                                          isButtonPress: isLoginButtonPress)
+                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: CURRENT_PASSWORD_KEY, comment: ""),
+                                          password: $oldPassword,
+                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: CURRENT_PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
+                                          isButtonPress: isChangePasswordButtonPress)
                     .padding(.top,15)
                     
                     
-                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_KEY, comment: ""),
-                                          password: $password,
-                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
-                                          isButtonPress: isLoginButtonPress)
-                    .padding(.top,15)                    
+                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: NEW_PASSWORD_KEY, comment: ""),
+                                          password: $newPassword,
+                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: NEW_PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
+                                          isButtonPress: isChangePasswordButtonPress)
+                    .padding(.top,15)
                     
-                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_KEY, comment: ""),
-                                          password: $password,
-                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
-                                          isButtonPress: isLoginButtonPress)
+                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: CONFIRM_PASSWORD_KEY, comment: ""),
+                                          password: $confirmPassword,
+                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: CONFIRM_PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
+                                          isButtonPress: isChangePasswordButtonPress)
                     .padding(.top,15)
                     
                     
@@ -70,23 +73,21 @@ struct ChangePasswordView: View {
                     
                     Button(action: {
                         
-                        isLoginButtonPress = true
+                        isChangePasswordButtonPress = true
                         
-                        guard !userName.isEmpty,!password.isEmpty else {
+                        guard !oldPassword.isEmpty,!newPassword.isEmpty,!confirmPassword.isEmpty else {
                             return
                         }
                         
-                        let vm = SignInModel(username: userName,
-                                             password: password)
+                        let vm = ChangePasswordRequestModel(oldPassword: oldPassword,
+                                                            newPassword: newPassword,
+                                                            confirmPassword: confirmPassword)
                         
-                        authonicationViewModel.signIn(body: vm) { result in
-                            
+                        profileViewModel.changePassword(userUUID: "vm",body: vm) { success in
                             showToast.toggle()
-                            
-                            if result {
+                            if success {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    
-                                    isNavigateToHomeScreen = true
+                                    presentationMode.wrappedValue.dismiss()
                                 }
                                 
                             }
@@ -96,7 +97,7 @@ struct ChangePasswordView: View {
                         
                         
                     }) {
-                        Text(LocalizationSystem.shared.localizedStringForKey(key: LOGIN_KEY, comment: ""))
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: RESET_PASSWORD_KEY, comment: ""))
                             .padding(.vertical,10)
                             .font(.custom(FONT_BOLD, size: 16))
                             .bold()
@@ -119,21 +120,23 @@ struct ChangePasswordView: View {
                 .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
                 .padding(20)
-                .background(hexToColor(hex: "#FFFFFF"))
+//                .background(hexToColor(hex: "#FFFFFF"))
                 
                 
-                if authonicationViewModel.isLoading {
+                
+                
+                if profileViewModel.isLoading {
                     CustomProgressView()
                 }
                 ToastView(isPresented: $showToast, duration: 2.0) {
-                    CustomTost(message: authonicationViewModel.dialogMessage)
+                    CustomTost(message: profileViewModel.dialogMessage)
                 }
                 
             }
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .onAppear {
             }
-            .navigationBarItems(leading: CustomTitleBarItems(title: "Rest Password"))
+            .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: RESET_PASSWORD_KEY, comment: "")))
 
 
         }

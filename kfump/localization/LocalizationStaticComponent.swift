@@ -66,3 +66,30 @@ let EMAIL_CANT_BE_EMPTY_KEY = "Email Can't be empty"
 let PHONE_NUMBER_CANT_BE_EMPTY_KEY = "Phone number Can't be empty"
 let PASSWORD_CANT_BE_EMPTY_KEY = "Password can't be empty"
 let CONFIRM_PASSWORD_CANT_BE_EMPTY_KEY = "Confirm Password can't be empty"
+
+let CURRENT_PASSWORD_CANT_BE_EMPTY_KEY = "Current Password can't be empty"
+let NEW_PASSWORD_CANT_BE_EMPTY_KEY = "New Password can't be empty"
+
+
+
+//MARK: - ALERT
+let CONFIRMATION_KEY = "Confirmation"
+let NO_KEY = "No"
+let YES_KEY = "Yes"
+
+
+//MARK: - CLOSE ACCOUNT
+let CLOSE_ACCOUNT_KEY = "Close Account"
+let CLOSE_YOUR_ACCOUNT_KEY = "Close Your Account"
+
+//MARK: - RESET PASSWORD
+let RESET_PASSWORD_KEY = "Reset Password"
+let CURRENT_PASSWORD_KEY = "Current Password"
+let NEW_PASSWORD_KEY = "New Password"
+let CONFIRMATION_PASSWORD_KEY = "Confirm Password"
+let UPDATE_PASSWORD_KEY = "Update Password"
+
+
+//MARK: - My Profile
+let MY_PROFILE_KEY = "My Profile"
+let UPDATE_DETAILS_KEY = "Update Details"
