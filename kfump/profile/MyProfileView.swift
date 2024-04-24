@@ -26,10 +26,13 @@ struct MyProfileView: View {
     
     @StateObject var profileViewModel = ProfileViewModel()
     
+    @State private var isShowUserTypeSheet = false
     @State private var isEnglishSelected = true
     
     @State private var showToast = false
     @State private var typeOfUserDropdownSelect = false
+    
+    @State private var selectedUserType = "1"
     
     
     
@@ -51,33 +54,31 @@ struct MyProfileView: View {
                     
                     CustomTextField(fieldName: "Mehedi",
                                     value: $profileViewModel.firstName,
-                                    emptyErrorMessage: "",
+                                    emptyErrorMessage: "First name can't be empty",
                                     isButtonPress: isLoginButtonPress)
                     .redactShimmer(condition: profileViewModel.isLoading)
-                    .disabled(true)
                     .padding(.top,40)
                     
                     
                     CustomTextField(fieldName: "Hasan",
                                     value: $profileViewModel.lastName,
-                                    emptyErrorMessage: "",
+                                    emptyErrorMessage: "Last name can't be empty",
                                     isButtonPress: isLoginButtonPress)
                     .redactShimmer(condition: profileViewModel.isLoading)
                     .padding(.top,10)
-                    .disabled(true)
                     
                     CustomDisableTextView(fieldName: "johndoe787@gmail.com",
-                                    value: $profileViewModel.emailAddress,
-                                    emptyErrorMessage: "",
-                                    isButtonPress: isLoginButtonPress)
+                                          value: $profileViewModel.emailAddress,
+                                          emptyErrorMessage: "",
+                                          isButtonPress: isLoginButtonPress)
                     .redactShimmer(condition: profileViewModel.isLoading)
                     .padding(.top,10)
                     .disabled(true)
                     
                     CustomDisableTextView(fieldName: "+966 12-345-6789",
-                                    value: $profileViewModel.phoneNumber,
-                                    emptyErrorMessage: "",
-                                    isButtonPress: isLoginButtonPress)
+                                          value: $profileViewModel.phoneNumber,
+                                          emptyErrorMessage: "",
+                                          isButtonPress: isLoginButtonPress)
                     .redactShimmer(condition: profileViewModel.isLoading)
                     .padding(.top,10)
                     .disabled(true)
@@ -86,29 +87,68 @@ struct MyProfileView: View {
                     
                     CustomTextField(fieldName: "Govt ID or Iqama no *",
                                     value: $profileViewModel.govtId,
-                                    emptyErrorMessage: "",
+                                    emptyErrorMessage: "Govt ID or Iqama no can't be empty",
                                     isButtonPress: isLoginButtonPress)
                     .redactShimmer(condition: profileViewModel.isLoading)
                     .padding(.top,10)
+                    
+//                    VStack {
+//                        CustomDropDownView(typeOfUserDropdownSelect: typeOfUserDropdownSelect, fieldName: "Type of user",
+//                                           value: $typeOfUser,
+//                                           emptyErrorMessage: "")
+//                        .padding(.top,10)
+//                        .disabled(true)
+//                    }
+//                    .onTapGesture {
+//                        self.isShowUserTypeSheet = true
+//                        print("isShowUserTypeSheet")
+//                    }
+                    
+                    Menu {
+                        ForEach(profileViewModel.userTypeList) { item in
+                            HStack {
+                                Text(item.userType ?? "")
+                                    .font(.headline)
+                                Spacer()
+                            }
+                            .padding(20)
+                            .onTapGesture {
+                                self.typeOfUser = item.userType ?? ""
+                                self.isShowUserTypeSheet = false
+                            }
+                        }
+                    } label: {
+                        CustomDropDownView(typeOfUserDropdownSelect: typeOfUserDropdownSelect, fieldName: "Type of user",
+                                           value: $typeOfUser,
+                                           emptyErrorMessage: "")
+                        .frame(alignment: .leading)
+                        .padding(.top,10)
+                        .disabled(true)
+                    }
+                    .pickerStyle(MenuPickerStyle())
 
                     
-                    CustomDropDownView(typeOfUserDropdownSelect: typeOfUserDropdownSelect, fieldName: "Type of user",
-                                       value: $typeOfUser,
-                                       emptyErrorMessage: "")
-                    .padding(.top,10)
-                    .disabled(true)
+                    
+                    
                     
                     
                     Button(action: {
                         
                         isLoginButtonPress = true
                         
-                        guard !govtId.isEmpty else {
+                        guard !profileViewModel.govtId.isEmpty,!profileViewModel.firstName.isEmpty,!profileViewModel.lastName.isEmpty else {
                             return
                         }
                         
-
                         
+                        let vm = ProfileData(govtIdOrIqamaNo: profileViewModel.govtId,
+                                             firstName: profileViewModel.firstName,
+                                             lastName: profileViewModel.lastName,
+                                             isCloseAccount: false,
+                                             isDelete: false,
+                                             userType: "")
+                        
+                        createParameter(vm: vm)
                         
                         
                     }) {
@@ -127,13 +167,13 @@ struct MyProfileView: View {
                     .cornerRadius(10.0)
                     .padding(.top,20)
                     
-         
+                    
                     Spacer()
                     
                 }
-//                .navigationDestination(isPresented: $isNavigateToForgetPasswordView, destination: { ForgetPasswordView().navigationBarBackButtonHidden(true) })
-//                .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
-//                .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
+                //                .navigationDestination(isPresented: $isNavigateToForgetPasswordView, destination: { ForgetPasswordView().navigationBarBackButtonHidden(true) })
+                //                .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
+                //                .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
                 .padding(20)
                 .background(hexToColor(hex: "#FFFFFF"))
                 
@@ -150,15 +190,33 @@ struct MyProfileView: View {
             .onAppear {
                 print("User UUID => \(userUUID ?? "")")
                 profileViewModel.getProfileData(userUUID: userUUID ?? "")
+                profileViewModel.getUserTypeList()
             }
             .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: MY_PROFILE_KEY, comment: "")))
-
-
+            
+            
         }
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
         
-
         
+        
+    }
+    
+    
+    func createParameter(vm : ProfileData) {
+        
+        let parameter : [String : Any] = [
+            "first_name"       :  vm.firstName ?? "",
+            "lastName"         :  vm.lastName ?? "",
+            "govtIdOrIqamaNo"  :  vm.govtIdOrIqamaNo ?? "",
+            "userType"         :  selectedUserType,
+        ]
+        
+        profileViewModel.fetchDataForUpdateProfileData(uuId: userUUID ?? "", parameter: parameter)
+        
+        if profileViewModel.isSucess {
+            
+        }
     }
     
 }

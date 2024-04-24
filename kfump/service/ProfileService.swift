@@ -21,16 +21,10 @@ class ProfileService {
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     
-    func changePassword(userUUID: String,body: ChangePasswordRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/user/change-password/\(userUUID)/")
-        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
-        return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
+    func userTypeList() -> AnyPublisher<UserTypeListModel, Error> {
+        let url = URL(string: URL.userType)
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithNoHeader)
         
     }
-    
-    func otpVerify(body: OtpModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/user/otp-verify/")
-        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
-        return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
-    }
+ 
 }

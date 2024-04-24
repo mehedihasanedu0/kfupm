@@ -16,36 +16,36 @@ class AuthenticationService {
     }
     
     func signUp(body: SignUpModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/user/registration/")
+        let url = URL(string: URL.registration)
         guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
         return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
     }
     
     func signIn(body: SignInModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/user/login/")
+        let url = URL(string: URL.login)
         guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
         return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
         
     }
     
     func otpVerify(body: OtpModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/user/otp-verify/")
+        let url = URL(string: URL.otp_verify)
         guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
         return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
     }
     
     func resetPassword() -> AnyPublisher<FilterAvailabilityResponse, Error> {
-        let url = URL(string: BASE_URL + "/user/reset-password/")
+        let url = URL(string: URL.forgetPassword)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
     }
     
-    func changePassword() -> AnyPublisher<CourseListResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/user/set-password/")
+    func changePassword(userUUID: String,body: ChangePasswordRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: URL.changePassword)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
     }
         
     func refreshToken() -> AnyPublisher<CourseListResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/user/refresh-token/")
+        let url = URL(string: URL.refreshToken)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
     }
     

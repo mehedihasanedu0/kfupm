@@ -143,5 +143,31 @@ class AuthenicationViewModel : ObservableObject {
         
     }
     
+    func changePassword(userUUID: String,body: ChangePasswordRequestModel,completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        authenticationService.changePassword(userUUID: userUUID,body: body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    
+                }
+            }, receiveValue: { [weak self] data in
+                self?.isLoading = true
+                completion(data.success ?? false)
+            })
+            .store(in: &cancellables)
+        
+        
+    }
+    
     
 }

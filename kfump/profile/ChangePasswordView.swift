@@ -18,7 +18,7 @@ struct ChangePasswordView: View {
     @State var isNavigateToHomeScreen: Bool = false
     @State var isNavigateToOTPVerificationView: Bool = false
     @State var isNavigateToForgetPasswordView: Bool = false
-    @StateObject var profileViewModel = ProfileViewModel()
+    @StateObject var authenicationViewModel = AuthenicationViewModel()
     
     @State private var isEnglishSelected = true
     
@@ -83,7 +83,7 @@ struct ChangePasswordView: View {
                                                             newPassword: newPassword,
                                                             confirmPassword: confirmPassword)
                         
-                        profileViewModel.changePassword(userUUID: "vm",body: vm) { success in
+                        authenicationViewModel.changePassword(userUUID: "vm",body: vm) { success in
                             showToast.toggle()
                             if success {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -125,11 +125,11 @@ struct ChangePasswordView: View {
                 
                 
                 
-                if profileViewModel.isLoading {
+                if authenicationViewModel.isLoading {
                     CustomProgressView()
                 }
                 ToastView(isPresented: $showToast, duration: 2.0) {
-                    CustomTost(message: profileViewModel.dialogMessage)
+                    CustomTost(message: authenicationViewModel.dialogMessage)
                 }
                 
             }

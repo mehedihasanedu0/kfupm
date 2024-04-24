@@ -17,6 +17,7 @@ class ProfileViewModel : ObservableObject {
     
     private let profileService: ProfileService
     private var cancellables = Set<AnyCancellable>()
+    private let networkClient : NetworkClientForMultipart
     
     @Published var isLoading = false
     @Published var isGetCourseActualData = false
@@ -35,8 +36,11 @@ class ProfileViewModel : ObservableObject {
     @Published var govtId: String = ""
     @Published var typeOfUser: String = ""
     
-    init(profileService: ProfileService = ProfileService()) {
+    @Published var userTypeList = [UserType]()
+    
+    init(profileService: ProfileService = ProfileService(),networkClient: NetworkClientForMultipart = NetworkClientForMultipart()) {
         self.profileService = profileService
+        self.networkClient = networkClient
     }
     
     deinit {
@@ -70,10 +74,21 @@ class ProfileViewModel : ObservableObject {
         
     }
     
+
+    private func updateUI(with data: ProfileData) {
+        DispatchQueue.main.async {
+            self.firstName = data.firstName ?? ""
+            self.lastName = data.lastName ?? ""
+            self.emailAddress = data.email ?? ""
+            self.phoneNumber = data.phoneNumber ?? ""
+            self.govtId = data.govtIdOrIqamaNo ?? ""
+        }
+    }
     
-    func changePassword(userUUID: String,body: ChangePasswordRequestModel,completion: @escaping (Bool) -> Void) {
+    func getUserTypeList() {
         isLoading = true
-        profileService.changePassword(userUUID: userUUID,body: body)
+        isSucess = false
+        profileService.userTypeList()
             .handleEvents(receiveCompletion: { [weak self] value in
                 self?.isLoading = false
             })
@@ -89,21 +104,93 @@ class ProfileViewModel : ObservableObject {
                     
                 }
             }, receiveValue: { [weak self] data in
+                self?.userTypeList = data.data
                 self?.isLoading = true
-                completion(data.success ?? false)
             })
             .store(in: &cancellables)
         
         
     }
     
-    private func updateUI(with data: ProfileData) {
-        DispatchQueue.main.async {
-            self.firstName = data.firstName ?? ""
-            self.lastName = data.lastName ?? ""
-            self.emailAddress = data.email ?? ""
-            self.phoneNumber = data.phoneNumber ?? ""
-            self.govtId = data.govtIdOrIqamaNo ?? ""
+    func fetchDataForUpdateProfileData(uuId: String,parameter : [String : Any]) {
+        
+        isLoading = true
+        isSucess = false
+        guard let url = URL(string: "\(URL.profileUpdate)\(uuId)/") else {
+            fatalError("URl was incorrect")
+        }
+        
+        print(url)
+        
+        networkClient.postMultipartData(url: url, parameter: parameter, httpMethod:  HttpMethod.put.rawValue) { (result) in
+        
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            switch result {
+            
+            case .success(let data, let status):
+                
+                switch status {
+                case HTTPStatusCodes.OK:
+                    self.successWith(data: data)
+                    break
+                   
+                case HTTPStatusCodes.Accepted:
+                    self.successWith(data: data)
+                    break
+                   
+                
+                case HTTPStatusCodes.Created:
+                    self.successWith(data: data)
+                    
+                    break
+                    
+                case HTTPStatusCodes.BadRequest:
+                    self.badRequestWith(data: data)
+                    break
+                    
+                default:
+                    break
+                }
+                break
+                
+            case .failure(let error):
+                print(error)
+                break
+            }
+            
+        }
+        
+       
+    }
+    
+    func successWith(data: Data ) {
+        JSONDecoder.decodeData(model: ProfileInfoModel.self, data) {(result) in
+            switch result {
+            case .success(let model):
+                self.isSucess = model.success ?? false
+                self.dialogMessage = model.message ?? ""
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
+        }
+    }
+    
+    
+    func badRequestWith(data: Data ) {
+        JSONDecoder.decodeData(model: BadRequest.self, data) {(result) in
+            switch result {
+            case .success(let model):
+                self.isSucess =  false
+                self.dialogMessage = model.message ?? ""
+                break
+            case .failure(let error):
+                print(error)
+                break
+            }
         }
     }
     

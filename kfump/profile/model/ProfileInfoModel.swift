@@ -11,32 +11,32 @@ struct ProfileInfoModel: Codable {
     
     let success: Bool?
     let message: String?
-    let data: ProfileData?
+    var data: ProfileData?
     
 }
 
 struct ProfileData: Codable {
-    let id: Int
-    let lastLogin: String?
-    let description: String?
-    let designation: String?
-    let username: String
-    let uuid: String?
-    let email: String?
-    let phoneNumber: String?
-    let languagePreferences: String
-    let role: String
-    let govtIdOrIqamaNo: String?
-    let fullName: String
-    let firstName: String?
-    let lastName: String?
-    let cv: String?
-    let status: String
-    let isCloseAccount: Bool
-    let isDelete: Bool
-    let image: String?
-    let userType: String?
-    let groups: [String]
+    var id: Int?
+    var lastLogin: String?
+    var description: String?
+    var designation: String?
+    var username: String?
+    var uuid: String?
+    var email: String?
+    var phoneNumber: String?
+    var languagePreferences: String?
+    var role: String?
+    var govtIdOrIqamaNo: String?
+    var fullName: String?
+    var firstName: String?
+    var lastName: String?
+    var cv: String?
+    var status: String?
+    var isCloseAccount: Bool
+    var isDelete: Bool?
+    var image: String?
+    var userType: String?
+    var groups: [String]?
     
     private enum CodingKeys: String, CodingKey {
         case id, username, uuid, email, status, groups
