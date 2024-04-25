@@ -21,7 +21,7 @@ extension URL {
     static let login                               = "\(URL.baseUrl)/user/login/"
     static let logout                              = "\(URL.baseUrl)/user/login/"
     static let registration                        = "\(URL.baseUrl)/user/registration/"
-    static let changePassword                      = "\(URL.baseUrl)/user/set-password/"
+    static let changePassword                      = "\(URL.baseUrl)/user/change-password/"
     static let forgetPassword                      = "\(URL.baseUrl)/user/reset-password/"
 //    static let resetPassword                       = "\(URL.baseUrl)auth/reset-password"
 //    static let account_verify                      = "\(URL.baseUrl)/account/verify"

@@ -12,8 +12,8 @@ import Combine
 class NetworkClientForMultipart {
     
     static let shared = NetworkClientForMultipart()
-    @AppStorage(IS_LOGIN_D) var isLogin: Bool = false
-    @AppStorage(TOKEN_D) var accessToken: String?
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool = false
+    @AppStorage(Keys.TOKEN_D.rawValue) var accessToken: String?
     
     
     func postMultipartData(url: URL, parameter: [String: Any]? = nil, httpMethod: String, completion:@escaping(HandlerResult)->Void) {

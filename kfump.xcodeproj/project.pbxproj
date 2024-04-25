@@ -21,6 +21,7 @@
 		550569172BD421CE00C49E71 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550569162BD421CE00C49E71 /* ChangePasswordView.swift */; };
 		550569192BD423FA00C49E71 /* CustomLogoutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550569182BD423FA00C49E71 /* CustomLogoutConfirmationView.swift */; };
 		5505691B2BD42D7000C49E71 /* CloseAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5505691A2BD42D7000C49E71 /* CloseAccountView.swift */; };
+		550D964C2BDA5C4A0042FCA6 /* DropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D964B2BDA5C4A0042FCA6 /* DropDownPickerView.swift */; };
 		552657CC2BC11C7E0094212F /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552657CB2BC11C7E0094212F /* FilterViewModel.swift */; };
 		552657CE2BC11CE80094212F /* FilterCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552657CD2BC11CE80094212F /* FilterCategoryResponse.swift */; };
 		552657D02BC11DFB0094212F /* FilterAvailabilityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552657CF2BC11DFB0094212F /* FilterAvailabilityResponse.swift */; };
@@ -138,9 +139,6 @@
 		55F868AB2BD96B3500A05E8F /* BadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F868AA2BD96B3500A05E8F /* BadRequest.swift */; };
 		55F868AD2BD96F2900A05E8F /* ProfileUpdateRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F868AC2BD96F2900A05E8F /* ProfileUpdateRequestModel.swift */; };
 		55F868AF2BD990A300A05E8F /* UserTypeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F868AE2BD990A300A05E8F /* UserTypeListModel.swift */; };
-		55F868B22BD99E9700A05E8F /*  DropdownOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F868B12BD99E9700A05E8F /*  DropdownOption.swift */; };
-		55F868B42BD99EAF00A05E8F /* DropdownOptionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F868B32BD99EAF00A05E8F /* DropdownOptionElement.swift */; };
-		55F868B62BD99EC900A05E8F /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F868B52BD99EC900A05E8F /* Dropdown.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +174,7 @@
 		550569162BD421CE00C49E71 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		550569182BD423FA00C49E71 /* CustomLogoutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLogoutConfirmationView.swift; sourceTree = "<group>"; };
 		5505691A2BD42D7000C49E71 /* CloseAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseAccountView.swift; sourceTree = "<group>"; };
+		550D964B2BDA5C4A0042FCA6 /* DropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPickerView.swift; sourceTree = "<group>"; };
 		552657CB2BC11C7E0094212F /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		552657CD2BC11CE80094212F /* FilterCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategoryResponse.swift; sourceTree = "<group>"; };
 		552657CF2BC11DFB0094212F /* FilterAvailabilityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAvailabilityResponse.swift; sourceTree = "<group>"; };
@@ -295,9 +294,6 @@
 		55F868AA2BD96B3500A05E8F /* BadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadRequest.swift; sourceTree = "<group>"; };
 		55F868AC2BD96F2900A05E8F /* ProfileUpdateRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateRequestModel.swift; sourceTree = "<group>"; };
 		55F868AE2BD990A300A05E8F /* UserTypeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeListModel.swift; sourceTree = "<group>"; };
-		55F868B12BD99E9700A05E8F /*  DropdownOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " DropdownOption.swift"; sourceTree = "<group>"; };
-		55F868B32BD99EAF00A05E8F /* DropdownOptionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownOptionElement.swift; sourceTree = "<group>"; };
-		55F868B52BD99EC900A05E8F /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -741,9 +737,7 @@
 		55F868B02BD99E8800A05E8F /* dropDown */ = {
 			isa = PBXGroup;
 			children = (
-				55F868B12BD99E9700A05E8F /*  DropdownOption.swift */,
-				55F868B32BD99EAF00A05E8F /* DropdownOptionElement.swift */,
-				55F868B52BD99EC900A05E8F /* Dropdown.swift */,
+				550D964B2BDA5C4A0042FCA6 /* DropDownPickerView.swift */,
 			);
 			path = dropDown;
 			sourceTree = "<group>";
@@ -927,7 +921,6 @@
 				5576C8272BB68210007392C8 /* ExploreView.swift in Sources */,
 				559744652BBB02A800122058 /* OtpModifer.swift in Sources */,
 				552657CE2BC11CE80094212F /* FilterCategoryResponse.swift in Sources */,
-				55F868B42BD99EAF00A05E8F /* DropdownOptionElement.swift in Sources */,
 				553336742BB9D67800D5F6E5 /* BottomSheet.swift in Sources */,
 				55DB16302BBC89E90022BDA7 /* WebImageView.swift in Sources */,
 				5581D0BF2BC42C310052393E /* SignInModel.swift in Sources */,
@@ -938,7 +931,6 @@
 				55F8689F2BD9625800A05E8F /* NetworkClientForMultipart.swift in Sources */,
 				55A44ADD2BC3232A0058C995 /* NSMutableData.swift in Sources */,
 				5533366A2BB9C0AF00D5F6E5 /* MoreItems.swift in Sources */,
-				55F868B22BD99E9700A05E8F /*  DropdownOption.swift in Sources */,
 				5533366D2BB9C45800D5F6E5 /* SingleItemView.swift in Sources */,
 				5586B3EF2BBDBA1B00FBAFDC /* Shimmer.swift in Sources */,
 				557B52BE2BCEEAD00044168B /* ForgetPasswordView.swift in Sources */,
@@ -951,7 +943,6 @@
 				55E0D6DA2BC1E78200F2DB39 /* AuthenicationViewModel.swift in Sources */,
 				5576C8292BB68223007392C8 /* MyCourses.swift in Sources */,
 				5533366F2BB9CC0B00D5F6E5 /* FilterView.swift in Sources */,
-				55F868B62BD99EC900A05E8F /* Dropdown.swift in Sources */,
 				553E55FE2BB4A1FA00AFBD7A /* CustomTextField.swift in Sources */,
 				5597446A2BBB370200122058 /* NetworkClient.swift in Sources */,
 				55E0D6DC2BC1E7B100F2DB39 /* AuthenticationService.swift in Sources */,
@@ -959,6 +950,7 @@
 				550569112BD419B500C49E71 /* MyProfileView.swift in Sources */,
 				55A44ADB2BC3160E0058C995 /* CustomTost.swift in Sources */,
 				55A44AD72BC3131B0058C995 /* CommonSuccessResponseModel.swift in Sources */,
+				550D964C2BDA5C4A0042FCA6 /* DropDownPickerView.swift in Sources */,
 				550569172BD421CE00C49E71 /* ChangePasswordView.swift in Sources */,
 				55F868AF2BD990A300A05E8F /* UserTypeListModel.swift in Sources */,
 				550569192BD423FA00C49E71 /* CustomLogoutConfirmationView.swift in Sources */,

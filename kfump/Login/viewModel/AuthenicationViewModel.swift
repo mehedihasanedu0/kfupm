@@ -14,9 +14,9 @@ import SwiftUI
 
 class AuthenicationViewModel : ObservableObject {
     
-    @AppStorage(IS_LOGIN_D) var isLogin: Bool = false
-    @AppStorage(USER_UUID_D) var userUUID: String = ""
-    @AppStorage(TOKEN_D) var userToken: String = ""
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool = false
+    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String = ""
+    @AppStorage(Keys.TOKEN_D.rawValue) var userToken: String = ""
     
     private let authenticationService: AuthenticationService
     private var cancellables = Set<AnyCancellable>()
@@ -94,9 +94,8 @@ class AuthenicationViewModel : ObservableObject {
                 }
                 
                 if user.success ?? false {
-                    shared.set(user.token, forKey: TOKEN_D)
-                    shared.set(true, forKey: IS_LOGIN_D)
-                    shared.synchronize()
+                    self?.userToken = user.token ?? ""
+                    self?.isLogin = true
                 }
                 completion(user.success ?? false)
             })
@@ -161,7 +160,13 @@ class AuthenicationViewModel : ObservableObject {
                     
                 }
             }, receiveValue: { [weak self] data in
-                self?.isLoading = true
+                self?.isLoading = false
+                if data.details != nil && ((data.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = data.details?[0].message ?? ""
+                } else {
+                    self?.dialogMessage = data.message ?? ""
+                }
+                print("self?.dialogMessage => \(self?.dialogMessage)")
                 completion(data.success ?? false)
             })
             .store(in: &cancellables)

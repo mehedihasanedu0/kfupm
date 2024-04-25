@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @AppStorage(IS_LOGIN_D) var isLogin: Bool?
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
     
     @State private var isEnglishSelected = true
     @State private var isNavigateToResetPasswordView = false
     @State private var isNavigateToMyProfileView = false
     @State private var isShowingConfirmationView = false
     @State private var isNavigateToCloseAccountView = false
+    @State private var isNavigateToLoginView = false
     
     var body: some View {
         
@@ -84,6 +85,7 @@ struct ProfileView: View {
             }
             .frame(maxWidth: .infinity)
             .background(hexToColor(hex: "#F9F9F7"))
+            .navigationDestination(isPresented: $isNavigateToLoginView, destination: { LoginView().navigationBarBackButtonHidden(true) })
             .navigationDestination(isPresented: $isNavigateToResetPasswordView, destination: { ChangePasswordView().navigationBarBackButtonHidden(true) })
             .navigationDestination(isPresented: $isNavigateToMyProfileView, destination: { MyProfileView().navigationBarBackButtonHidden(true) })     
             .navigationDestination(isPresented: $isNavigateToCloseAccountView, destination: { CloseAccountView().navigationBarBackButtonHidden(true) })
@@ -107,6 +109,9 @@ struct ProfileView: View {
                     onConfirm: {
                         // Handle Yes action
                         isShowingConfirmationView = false
+                        isNavigateToLoginView = true
+                        UserDefaults.standard.resetKeys()
+                        
                     },
                     onCancel: {
                         // Handle No action

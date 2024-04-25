@@ -40,8 +40,9 @@ class AuthenticationService {
     }
     
     func changePassword(userUUID: String,body: ChangePasswordRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: URL.changePassword)
-        return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
+        let url = URL(string: "\(URL.changePassword)\(userUUID)/")
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.putRequest(url: url,body: data, headerType: .APIRequestWithToken)
     }
         
     func refreshToken() -> AnyPublisher<CourseListResponseModel, Error> {

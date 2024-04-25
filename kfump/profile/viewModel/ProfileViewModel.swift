@@ -26,6 +26,7 @@ class ProfileViewModel : ObservableObject {
     @Published var showingDialogAlert = false
     @Published var dialogMessage = ""
     @Published var isSucess = false
+    @Published var isProfileUpdated = false
     
     @Published var profileData : ProfileData!
     
@@ -34,9 +35,10 @@ class ProfileViewModel : ObservableObject {
     @Published var emailAddress: String = ""
     @Published var phoneNumber: String = ""
     @Published var govtId: String = ""
-    @Published var typeOfUser: String = ""
+    @Published var typeOfUser: Int = 0
     
     @Published var userTypeList = [UserType]()
+    @Published var userTypeOptionList = [String]()
     
     init(profileService: ProfileService = ProfileService(),networkClient: NetworkClientForMultipart = NetworkClientForMultipart()) {
         self.profileService = profileService
@@ -47,7 +49,7 @@ class ProfileViewModel : ObservableObject {
         cancellables.removeAll()
     }
     
-    func getProfileData(userUUID: String) {
+    func getProfileData(userUUID: String,completion: @escaping (Bool) -> Void) {
         isLoading = true
         profileService.profileInfo(userUUID: userUUID)
             .handleEvents(receiveCompletion: { [weak self] value in
@@ -65,9 +67,10 @@ class ProfileViewModel : ObservableObject {
                     
                 }
             }, receiveValue: { [weak self] data in
-                
+                self?.typeOfUser = data.data?.userType ?? 0
                 self?.updateUI(with: data.data!)
                 self?.isLoading = true
+                completion(data.success ?? false)
             })
             .store(in: &cancellables)
         
@@ -85,7 +88,7 @@ class ProfileViewModel : ObservableObject {
         }
     }
     
-    func getUserTypeList() {
+    func getUserTypeList(completion: @escaping (Bool) -> Void) {
         isLoading = true
         isSucess = false
         profileService.userTypeList()
@@ -106,16 +109,25 @@ class ProfileViewModel : ObservableObject {
             }, receiveValue: { [weak self] data in
                 self?.userTypeList = data.data
                 self?.isLoading = true
+                self?.getUserTypeOptionList(data.data)
+                completion(data.success)
             })
             .store(in: &cancellables)
         
         
     }
     
+    
+    private func getUserTypeOptionList(_ typeList: [UserType]) {
+        for type in typeList {
+            self.userTypeOptionList.append(type.userType ?? "")
+        }
+    }
+    
     func fetchDataForUpdateProfileData(uuId: String,parameter : [String : Any]) {
         
         isLoading = true
-        isSucess = false
+        isProfileUpdated = false
         guard let url = URL(string: "\(URL.profileUpdate)\(uuId)/") else {
             fatalError("URl was incorrect")
         }
@@ -169,7 +181,7 @@ class ProfileViewModel : ObservableObject {
         JSONDecoder.decodeData(model: ProfileInfoModel.self, data) {(result) in
             switch result {
             case .success(let model):
-                self.isSucess = model.success ?? false
+                self.isProfileUpdated = model.success ?? false
                 self.dialogMessage = model.message ?? ""
                 break
             case .failure(let error):
@@ -184,7 +196,7 @@ class ProfileViewModel : ObservableObject {
         JSONDecoder.decodeData(model: BadRequest.self, data) {(result) in
             switch result {
             case .success(let model):
-                self.isSucess =  false
+                self.isProfileUpdated =  false
                 self.dialogMessage = model.message ?? ""
                 break
             case .failure(let error):

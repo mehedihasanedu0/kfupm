@@ -9,10 +9,7 @@ import Foundation
 
 
 
-let ORDER_FOOD_D = "Sign Up Later"
-let IS_LOGIN_D = "LOGIN"
-let USER_UUID_D = "User UUID"
-let TOKEN_D = "TOKEN"
+
 let IS_LOGIN_OUT_D = "Log Out"
 let ORDER_FOOD_ITEMS_D = "orderedFoodItems"
 let ORDER_FOOD_IMAGE_D = "orderedFoodImage"
@@ -25,3 +22,17 @@ let CREATE_VISITOR_SUCCESSFULLY_D = "Visitor create successfully"
 let shared = UserDefaults.standard
 
 
+enum Keys: String, CaseIterable {
+    case IS_LOGIN_D = "LOGIN"
+    case USER_UUID_D = "User UUID"
+    case TOKEN_D = "TOKEN"
+}
+
+
+extension UserDefaults {
+    func resetKeys() {
+        Keys.allCases.forEach {
+            removeObject(forKey: $0.rawValue)
+        }
+    }
+}

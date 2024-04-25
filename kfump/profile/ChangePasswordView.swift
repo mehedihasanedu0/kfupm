@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ChangePasswordView: View {
     
+    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
+    
     @State var oldPassword: String = ""
     @State var newPassword: String = ""
     @State var confirmPassword: String = ""
@@ -38,12 +40,7 @@ struct ChangePasswordView: View {
                         .font(.custom("Open Sans", size: 14))
                         .padding(.top,20)
                         .fontWeight(.thin)
-                        .multilineTextAlignment(.center)
-                    
-                    Divider()
-                        .frame(width: 56,height: 2)
-                        .background(hexToColor(hex: "#D0B756"))
-                    
+                        .multilineTextAlignment(.leading)
 
                     
                     
@@ -83,7 +80,7 @@ struct ChangePasswordView: View {
                                                             newPassword: newPassword,
                                                             confirmPassword: confirmPassword)
                         
-                        authenicationViewModel.changePassword(userUUID: "vm",body: vm) { success in
+                        authenicationViewModel.changePassword(userUUID: userUUID ?? "",body: vm) { success in
                             showToast.toggle()
                             if success {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

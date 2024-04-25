@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct kfumpApp: App {
+    
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var loginStatus: Bool?
+    
     var body: some Scene {
         WindowGroup {
-            let loginStatus = UserDefaults.standard.bool(forKey: IS_LOGIN_D)
             
-            if loginStatus {
+            if loginStatus ?? false {
                 Homescreen()
                     .environmentObject(SharedData())
                     .environment(\.colorScheme, .light)

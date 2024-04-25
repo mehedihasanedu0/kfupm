@@ -25,6 +25,9 @@ struct CustomLogoutConfirmationView: View {
                 Image("ic_logout_close")
                     .resizable()
                     .frame(width: 30,height: 30)
+                    .onTapGesture {
+                        onCancel()
+                    }
                 
             }
             .padding(.horizontal)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyProfileView: View {
     
-    @AppStorage(USER_UUID_D) var userUUID: String?
+    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
     
     @State var firstName: String = ""
     @State var lastName: String = ""
@@ -32,7 +32,9 @@ struct MyProfileView: View {
     @State private var showToast = false
     @State private var typeOfUserDropdownSelect = false
     
-    @State private var selectedUserType = "1"
+    @State private var selectedUserType = 0
+    
+    @State var selection1: String? = nil
     
     
     
@@ -92,42 +94,14 @@ struct MyProfileView: View {
                     .redactShimmer(condition: profileViewModel.isLoading)
                     .padding(.top,10)
                     
-//                    VStack {
-//                        CustomDropDownView(typeOfUserDropdownSelect: typeOfUserDropdownSelect, fieldName: "Type of user",
-//                                           value: $typeOfUser,
-//                                           emptyErrorMessage: "")
-//                        .padding(.top,10)
-//                        .disabled(true)
-//                    }
-//                    .onTapGesture {
-//                        self.isShowUserTypeSheet = true
-//                        print("isShowUserTypeSheet")
-//                    }
+                
+                
                     
-                    Menu {
-                        ForEach(profileViewModel.userTypeList) { item in
-                            HStack {
-                                Text(item.userType ?? "")
-                                    .font(.headline)
-                                Spacer()
-                            }
-                            .padding(20)
-                            .onTapGesture {
-                                self.typeOfUser = item.userType ?? ""
-                                self.isShowUserTypeSheet = false
-                            }
-                        }
-                    } label: {
-                        CustomDropDownView(typeOfUserDropdownSelect: typeOfUserDropdownSelect, fieldName: "Type of user",
-                                           value: $typeOfUser,
-                                           emptyErrorMessage: "")
-                        .frame(alignment: .leading)
-                        .padding(.top,10)
-                        .disabled(true)
-                    }
-                    .pickerStyle(MenuPickerStyle())
+                    DropDownPickerView(
+                        selection: $selection1,
+                        options: profileViewModel.userTypeOptionList
+                    )
 
-                    
                     
                     
                     
@@ -146,7 +120,7 @@ struct MyProfileView: View {
                                              lastName: profileViewModel.lastName,
                                              isCloseAccount: false,
                                              isDelete: false,
-                                             userType: "")
+                                             userType: 0)
                         
                         createParameter(vm: vm)
                         
@@ -181,7 +155,7 @@ struct MyProfileView: View {
                 if profileViewModel.isLoading {
                     CustomProgressView()
                 }
-                ToastView(isPresented: $showToast, duration: 2.0) {
+                ToastView(isPresented: $profileViewModel.isProfileUpdated, duration: 2.0) {
                     CustomTost(message: profileViewModel.dialogMessage)
                 }
                 
@@ -189,8 +163,25 @@ struct MyProfileView: View {
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .onAppear {
                 print("User UUID => \(userUUID ?? "")")
-                profileViewModel.getProfileData(userUUID: userUUID ?? "")
-                profileViewModel.getUserTypeList()
+                
+                profileViewModel.getProfileData(userUUID: userUUID ?? "") { result in
+                    if result {
+                        profileViewModel.getUserTypeList() { result in
+                            if result {
+                                print("typeOfUser \(profileViewModel.typeOfUser)")
+                                if profileViewModel.typeOfUser != 0 {
+                                    selection1 = findPersonById(profileViewModel.typeOfUser)?.userType
+                                    print("selection1 \(selection1)")
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                
+
+                
+                
             }
             .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: MY_PROFILE_KEY, comment: "")))
             
@@ -204,23 +195,38 @@ struct MyProfileView: View {
     
     
     func createParameter(vm : ProfileData) {
+       
+        var userType = ""
+        if let person = findPersonByName(selection1 ?? "") {
+            userType = "\(person.id ?? 0)"
+        }
         
-        let parameter : [String : Any] = [
-            "first_name"       :  vm.firstName ?? "",
-            "lastName"         :  vm.lastName ?? "",
-            "govtIdOrIqamaNo"  :  vm.govtIdOrIqamaNo ?? "",
-            "userType"         :  selectedUserType,
+        
+        var parameter : [String : Any] = [
+            "first_name"          :  vm.firstName ?? "",
+            "last_name"           :  vm.lastName ?? "",
+            "govt_id_or_iqama_no" :  vm.govtIdOrIqamaNo ?? "",
+            "user_type"           :  ((userType == "0") ? nil : userType)!
         ]
+
         
+        print("parameter \(parameter)")
         profileViewModel.fetchDataForUpdateProfileData(uuId: userUUID ?? "", parameter: parameter)
         
-        if profileViewModel.isSucess {
-            
-        }
+
+    }
+    
+    
+    func findPersonById(_ id: Int) -> UserType? {
+        return profileViewModel.userTypeList.first { $0.id == id }
+    }    
+    
+    func findPersonByName(_ typeName: String) -> UserType? {
+        return profileViewModel.userTypeList.first { $0.userType == typeName }
     }
     
 }
 
-#Preview {
-    MyProfileView()
-}
+//#Preview {
+//    MyProfileView()
+//}

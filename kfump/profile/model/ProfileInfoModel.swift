@@ -35,7 +35,7 @@ struct ProfileData: Codable {
     var isCloseAccount: Bool
     var isDelete: Bool?
     var image: String?
-    var userType: String?
+    var userType: Int?
     var groups: [String]?
     
     private enum CodingKeys: String, CodingKey {
@@ -44,7 +44,8 @@ struct ProfileData: Codable {
         case lastLogin = "last_login"
         case languagePreferences = "language_preferences"
         case phoneNumber = "phone_number"
-        case role, cv, image, userType
+        case role, cv, image
+        case userType = "user_type"
         case description, designation
         case govtIdOrIqamaNo = "govt_id_or_iqama_no"
         case firstName = "first_name"

@@ -12,8 +12,8 @@ import Combine
 
 class NetworkClient {
     static let shared = NetworkClient()
-    @AppStorage(IS_LOGIN_D) var isLogin: Bool = false
-    @AppStorage(TOKEN_D) var accessToken: String?
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool = false
+    @AppStorage(Keys.TOKEN_D.rawValue) var accessToken: String?
     
     private func APIURLRequest(url: URL, method: String, headers: [String: String]?, body: Data?, headerDetails: APIRequestHeaders = .APIRequestWithNoHeader) -> URLRequest {
         var request = URLRequest(url: url)

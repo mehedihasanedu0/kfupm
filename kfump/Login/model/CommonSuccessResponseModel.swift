@@ -19,12 +19,12 @@ struct CommonSuccessResponseModel: Codable {
 }
 
 struct Details: Codable {
-    var path: String
-    var message: String
-    var uuid: String
+    var path: String?
+    var message: String?
+    var uuid: String?
 }
 
 struct CommonData: Codable {
-    var uuid: String
+    var uuid: String?
 }
 

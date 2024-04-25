@@ -14,7 +14,7 @@ class HomeRepositoryService {
     var isLogin = false
     init(networkClient: NetworkClient = NetworkClient.shared) {
         self.networkClient = networkClient
-        isLogin = shared.object(forKey: IS_LOGIN_D) as? Bool ?? false
+        isLogin = shared.object(forKey: Keys.IS_LOGIN_D.rawValue) as? Bool ?? false
     }
     
     func getCourses() -> AnyPublisher<CourseListResponseModel, Error> {
