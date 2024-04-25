@@ -142,7 +142,7 @@ struct RegistrationView: View {
                     
                 }
                 .padding(20)
-                .navigationDestination(isPresented: $isNavigateToOTPView, destination: { OTPView(emailAddress: email).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToOTPView, destination: { OTPView(emailAddress: email, source: "registration").navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
                 
 

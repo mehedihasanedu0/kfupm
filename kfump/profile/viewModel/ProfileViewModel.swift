@@ -14,6 +14,8 @@ import SwiftUI
 
 class ProfileViewModel : ObservableObject {
     
+    @AppStorage(Keys.USER_NAME.rawValue) var userName: String?
+    @AppStorage(Keys.USER_PROFILE.rawValue) var userProfilePicture: String?
     
     private let profileService: ProfileService
     private var cancellables = Set<AnyCancellable>()
@@ -30,6 +32,7 @@ class ProfileViewModel : ObservableObject {
     
     @Published var profileData : ProfileData!
     
+    @Published var imageUrl: String = ""
     @Published var firstName: String = ""
     @Published var lastName: String = ""
     @Published var emailAddress: String = ""
@@ -68,6 +71,7 @@ class ProfileViewModel : ObservableObject {
                 }
             }, receiveValue: { [weak self] data in
                 self?.typeOfUser = data.data?.userType ?? 0
+                self?.imageUrl = data.data?.image ?? ""
                 self?.updateUI(with: data.data!)
                 self?.isLoading = true
                 completion(data.success ?? false)
@@ -85,6 +89,7 @@ class ProfileViewModel : ObservableObject {
             self.emailAddress = data.email ?? ""
             self.phoneNumber = data.phoneNumber ?? ""
             self.govtId = data.govtIdOrIqamaNo ?? ""
+            self.userName = "\(data.firstName ?? "") \(data.lastName ?? "")"
         }
     }
     
@@ -206,4 +211,25 @@ class ProfileViewModel : ObservableObject {
         }
     }
     
+    
+    func fetchImageData(_ imageUrl: String) {
+        
+        if let url = URL(string: imageUrl) {
+            print("Encoded URL: \(url)")
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                let base64String = data.base64EncodedString()
+                DispatchQueue.main.async {
+                    self.userProfilePicture = base64String
+                }
+            }.resume()
+            
+        } else {
+            print("Failed to encode URL")
+        }
+        
+        
+    }
 }

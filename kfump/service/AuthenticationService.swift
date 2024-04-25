@@ -34,9 +34,16 @@ class AuthenticationService {
         return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
     }
     
-    func resetPassword() -> AnyPublisher<FilterAvailabilityResponse, Error> {
+    func forgetPassword(body: ForgetPasswordRequestModel) -> AnyPublisher<ForgetPasswordResponseModel, Error> {
         let url = URL(string: URL.forgetPassword)
-        return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
+    }
+    
+    func resetPassword(body: ResetPasswordRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: URL.resetPassword)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
     }
     
     func changePassword(userUUID: String,body: ChangePasswordRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
@@ -45,7 +52,7 @@ class AuthenticationService {
         return networkClient.putRequest(url: url,body: data, headerType: .APIRequestWithToken)
     }
         
-    func refreshToken() -> AnyPublisher<CourseListResponseModel, Error> {
+    func refreshToken() -> AnyPublisher<CommonSuccessResponseModel, Error> {
         let url = URL(string: URL.refreshToken)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
     }

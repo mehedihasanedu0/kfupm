@@ -10,6 +10,9 @@ import SwiftUI
 struct ProfileView: View {
     
     @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
+    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
+    @AppStorage(Keys.USER_NAME.rawValue) var userName: String?
+    @AppStorage(Keys.USER_PROFILE.rawValue) var userImageBase64: String?
     
     @State private var isEnglishSelected = true
     @State private var isNavigateToResetPasswordView = false
@@ -18,20 +21,34 @@ struct ProfileView: View {
     @State private var isNavigateToCloseAccountView = false
     @State private var isNavigateToLoginView = false
     
+    @StateObject var profileViewModel = ProfileViewModel()
+    
+    
     var body: some View {
         
         
         ZStack {
             
             VStack {
-                Image("nature")
-                    .resizable()
-                    .frame(width: 130,height: 130)
-                    .cornerRadius(65)
-                    .padding(.top,50)
+                
+                if let image = decodeBase64ToImage(userImageBase64 ?? "") {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 130,height: 130)
+                        .cornerRadius(65)
+                        .padding(.top,50)
+                } else {
+                    Image("nature")
+                        .resizable()
+                        .frame(width: 130,height: 130)
+                        .cornerRadius(65)
+                        .padding(.top,50)
+                }
+                
+
                 
                 
-                Text("Md.Mehedi Hasan")
+                Text(userName ?? "")
                     .font(.custom(FONT_SEMIBOLD, size: 20))
                     .padding()
                 
@@ -119,6 +136,13 @@ struct ProfileView: View {
                     }
                 )
                 .transition(.scale)
+            }
+        }
+        .onAppear {
+            profileViewModel.getProfileData(userUUID: userUUID ?? "") { result in
+                if result {
+                    profileViewModel.fetchImageData(profileViewModel.imageUrl)
+                }
             }
         }
         

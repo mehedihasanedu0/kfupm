@@ -84,3 +84,15 @@ var profileItemList : [ProfileItem] = [
     ProfileItem(id: 6, nameAr: "حساب مغلق", nameEn: "Close Account", image: "ic_close_account")
 ]
  
+
+
+func encodeImageToBase64String(_ image: UIImage) -> String? {
+    guard let imageData = image.pngData() else { return nil }
+    return imageData.base64EncodedString()
+}
+
+
+func decodeBase64ToImage(_ base64: String) -> UIImage? {
+    guard let imageData = Data(base64Encoded: base64) else { return nil }
+    return UIImage(data: imageData)
+}

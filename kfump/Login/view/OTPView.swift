@@ -18,6 +18,7 @@ struct OTPView: View {
         case  pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven
     }
     
+    var source : String
     @FocusState private var pinFocusState : FocusPin?
     @State var pinOne: String = ""
     @State var pinTwo: String = ""
@@ -30,6 +31,7 @@ struct OTPView: View {
     @State private var showToast = false
     
     @State var isNavigateToHomeScreen: Bool = false
+    @State var isNavigateToResetPassword: Bool = false
     @StateObject var authonicationViewModel = AuthenicationViewModel()
     
     var body: some View {
@@ -95,12 +97,18 @@ struct OTPView: View {
                     let vm = OtpModel(emailOrPhone: emailAddress,
                                       otpCode: otp1)
                     
-                    authonicationViewModel.otpVerify(body: vm) { result in
+                    authonicationViewModel.otpVerify(body: vm,isAutoLogin: (source == "registration")) { result in
                         showToast.toggle()
  
                         if result {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                isNavigateToHomeScreen = true
+                                print("source > \(source) ")
+                                if source == "resetPassword" {
+                                    isNavigateToResetPassword = true
+                                } else {
+                                    isNavigateToHomeScreen = true
+                                }
+                                
                             }
                         }
                     }
@@ -129,6 +137,7 @@ struct OTPView: View {
             }
             .padding(20)
             .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToResetPassword, destination: { ResetPasswordView(token: authonicationViewModel.token ).navigationBarBackButtonHidden(true) })
             
             if authonicationViewModel.isLoading {
                 CustomProgressView()

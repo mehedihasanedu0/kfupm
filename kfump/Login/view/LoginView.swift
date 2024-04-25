@@ -86,7 +86,6 @@ struct LoginView: View {
                             }
                             
                         }
-                        .navigationDestination(isPresented: $isNavigateToOTPVerificationView, destination: { OTPView(emailAddress: userName).navigationBarBackButtonHidden(true) })
                         
                         
                         Button(action: {

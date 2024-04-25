@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ResetPasswordView: View {
-    @State var userName: String = ""
+    
+    
     @State var password: String = ""
+    @State var confirmPassword: String = ""
     @State var isLoginButtonPress: Bool = false
     @State var isNavigateToRegistrationView: Bool = false
-    @State var isNavigateToHomeScreen: Bool = false
+    @State var isNavigateToLogin: Bool = false
     @State var isNavigateToOTPVerificationView: Bool = false
     @State var isNavigateToForgetPasswordView: Bool = false
     @StateObject var authonicationViewModel = AuthenicationViewModel()
@@ -20,7 +22,7 @@ struct ResetPasswordView: View {
     @State private var isEnglishSelected = true
     
     @State private var showToast = false
-    
+    var token = ""
     
 
     
@@ -52,9 +54,9 @@ struct ResetPasswordView: View {
                     .padding(.top,15)
                     
                     
-                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_KEY, comment: ""),
-                                          password: $password,
-                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
+                    CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: CONFIRM_PASSWORD_KEY, comment: ""),
+                                          password: $confirmPassword,
+                                          emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: CONFIRM_PASSWORD_CANT_BE_EMPTY_KEY, comment: ""),
                                           isButtonPress: isLoginButtonPress)
                     .padding(.top,15)
                     
@@ -67,21 +69,22 @@ struct ResetPasswordView: View {
                         
                         isLoginButtonPress = true
                         
-                        guard !userName.isEmpty,!password.isEmpty else {
+                        guard !password.isEmpty,!confirmPassword.isEmpty else {
                             return
                         }
                         
-                        let vm = SignInModel(username: userName,
-                                             password: password)
-                        
-                        authonicationViewModel.signIn(body: vm) { result in
+                        let vm = ResetPasswordRequestModel(newPassword: password,
+                                                           conformPassword: confirmPassword,
+                                                           token: token)
+                        print("resetPassword vm \(vm)")
+                        authonicationViewModel.resetPassword(body: vm) { result in
                             
                             showToast.toggle()
                             
                             if result {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     
-                                    isNavigateToHomeScreen = true
+                                    isNavigateToLogin = true
                                 }
                                 
                             }
@@ -91,7 +94,7 @@ struct ResetPasswordView: View {
                         
                         
                     }) {
-                        Text(LocalizationSystem.shared.localizedStringForKey(key: RESET_PASSWORD_KEY, comment: ""))
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: UPDATE_PASSWORD_KEY, comment: ""))
                             .padding(.vertical,10)
                             .font(.custom(FONT_BOLD, size: 16))
                             .bold()
@@ -110,9 +113,8 @@ struct ResetPasswordView: View {
                     Spacer()
                     
                 }
-                .navigationDestination(isPresented: $isNavigateToForgetPasswordView, destination: { ForgetPasswordView().navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToLogin, destination: { LoginView().navigationBarBackButtonHidden(true) })
+
                 .padding(20)
                 .background(hexToColor(hex: "#FFFFFF"))
                 

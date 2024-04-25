@@ -26,6 +26,8 @@ enum Keys: String, CaseIterable {
     case IS_LOGIN_D = "LOGIN"
     case USER_UUID_D = "User UUID"
     case TOKEN_D = "TOKEN"
+    case USER_NAME = "User Name"
+    case USER_PROFILE = "User Profile Image"
 }
 
 

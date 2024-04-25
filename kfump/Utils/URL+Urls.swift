@@ -23,11 +23,10 @@ extension URL {
     static let registration                        = "\(URL.baseUrl)/user/registration/"
     static let changePassword                      = "\(URL.baseUrl)/user/change-password/"
     static let forgetPassword                      = "\(URL.baseUrl)/user/reset-password/"
-//    static let resetPassword                       = "\(URL.baseUrl)auth/reset-password"
-//    static let account_verify                      = "\(URL.baseUrl)/account/verify"
+    static let resetPassword                       = "\(URL.baseUrl)/user/set-password/"
     static let otp_verify                          = "\(URL.baseUrl)/user/otp-verify/"
     static let delete_account                      = "\(URL.baseUrl)auth/delete-account"
-    static let refreshToken                      = "\(URL.baseUrl)/user/refresh-token/"
+    static let refreshToken                        = "\(URL.baseUrl)/user/refresh-token/"
     
     
     // MARK: Profile

@@ -27,6 +27,7 @@ class AuthenicationViewModel : ObservableObject {
     @Published var showingDialogAlert = false
     @Published var dialogMessage = ""
     @Published var isSucess = false
+    @Published var token = ""
     
     
     init(authenticationService: AuthenticationService = AuthenticationService()) {
@@ -69,7 +70,7 @@ class AuthenicationViewModel : ObservableObject {
     }
         
     
-    func otpVerify(body: OtpModel, completion: @escaping (Bool) -> Void) {
+    func otpVerify(body: OtpModel,isAutoLogin: Bool = false, completion: @escaping (Bool) -> Void) {
         isLoading = true
         authenticationService.otpVerify(body: body)
             .handleEvents(receiveCompletion: { [weak self] value in
@@ -87,13 +88,14 @@ class AuthenicationViewModel : ObservableObject {
                 }
             }, receiveValue: { [weak self] user in
                 self?.isLoading = true
+                self?.token = user.token ?? ""
                 if user.details != nil && ((user.details?.count ?? 0) > 0) {
                     self?.dialogMessage = user.details?[0].message ?? ""
                 } else {
                     self?.dialogMessage = user.message ?? ""
                 }
                 
-                if user.success ?? false {
+                if user.success ?? false && isAutoLogin {
                     self?.userToken = user.token ?? ""
                     self?.isLogin = true
                 }
@@ -107,6 +109,110 @@ class AuthenicationViewModel : ObservableObject {
     func signIn(body: SignInModel, completion: @escaping (Bool) -> Void) {
         isLoading = true
         authenticationService.signIn(body: body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] user in
+                
+                self?.isLoading = true
+                if user.details != nil && ((user.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = user.details?[0].message ?? ""
+                } else {
+                    self?.dialogMessage = user.message ?? ""
+                }
+                
+                if user.success ?? false {
+                    self?.userToken = user.access_token ?? ""
+                    self?.isLogin = true
+                    self?.userUUID =  user.data?.uuid ?? ""
+                }
+                
+                completion(user.success ?? false)
+            })
+            .store(in: &cancellables)
+        
+        
+    }    
+    
+    func forgetPassword(body: ForgetPasswordRequestModel, completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        authenticationService.forgetPassword(body: body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] user in
+                
+                self?.isLoading = true
+                if user.details != nil && ((user.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = user.details?[0].message ?? ""
+                } else {
+                    self?.dialogMessage = user.message ?? ""
+                }
+                
+                
+                completion(user.success ?? false)
+            })
+            .store(in: &cancellables)
+        
+        
+    }
+    
+    func resetPassword(body: ResetPasswordRequestModel, completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        authenticationService.resetPassword(body: body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] user in
+                
+                self?.isLoading = true
+                if user.details != nil && ((user.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = user.details?[0].message ?? ""
+                } else {
+                    self?.dialogMessage = user.message ?? ""
+                }
+                
+                completion(user.success ?? false)
+            })
+            .store(in: &cancellables)
+        
+        
+    }  
+    
+    
+    func refreshToken(body: ResetPasswordRequestModel, completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        authenticationService.resetPassword(body: body)
             .handleEvents(receiveCompletion: { [weak self] value in
                 self?.isLoading = false
             })

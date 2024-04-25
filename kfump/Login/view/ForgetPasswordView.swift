@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ForgetPasswordView: View {
-    @State var userName: String = ""
-    @State var password: String = ""
+    
+    @State var emailOrPhone: String = ""
+    
     @State var isLoginButtonPress: Bool = false
     @State var isNavigateToRegistrationView: Bool = false
     @State var isNavigateToHomeScreen: Bool = false
@@ -47,8 +48,8 @@ struct ForgetPasswordView: View {
                         
                         
                         CustomTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: EMAIL_OR_PHONE_KEY, comment: ""),
-                                        value: $userName,
-                                        emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
+                                        value: $emailOrPhone,
+                                        emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: EMAIL_CANT_BE_EMPTY_KEY, comment: ""),
                                         isButtonPress: isLoginButtonPress)
                         .padding(.top,20)
                         
@@ -60,21 +61,20 @@ struct ForgetPasswordView: View {
                             
                             isLoginButtonPress = true
                             
-                            guard !userName.isEmpty,!password.isEmpty else {
+                            guard !emailOrPhone.isEmpty else {
                                 return
                             }
                             
-                            let vm = SignInModel(username: userName,
-                                                 password: password)
+                            let vm = ForgetPasswordRequestModel(emailOrPhone: emailOrPhone)
                             
-                            authonicationViewModel.signIn(body: vm) { result in
+                            authonicationViewModel.forgetPassword(body: vm) { result in
                                 
                                 showToast.toggle()
                                 
                                 if result {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                         
-                                        isNavigateToHomeScreen = true
+                                        isNavigateToOTPVerificationView = true
                                     }
                                     
                                 }
@@ -84,7 +84,7 @@ struct ForgetPasswordView: View {
                             
                             
                         }) {
-                            Text(LocalizationSystem.shared.localizedStringForKey(key: LOGIN_KEY, comment: ""))
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: RESET_PASSWORD_KEY, comment: ""))
                                 .padding(.vertical,10)
                                 .font(.custom(FONT_BOLD, size: 16))
                                 .bold()
@@ -103,7 +103,7 @@ struct ForgetPasswordView: View {
                         
                         
                     }
-                    .navigationDestination(isPresented: $isNavigateToRegistrationView, destination: { RegistrationView().navigationBarBackButtonHidden(true) })
+                    .navigationDestination(isPresented: $isNavigateToOTPVerificationView, destination: { OTPView(emailAddress: emailOrPhone,source: "resetPassword").navigationBarBackButtonHidden(true) })
                     .navigationDestination(isPresented: $isNavigateToHomeScreen, destination: { Homescreen().navigationBarBackButtonHidden(true) })
                     .padding(20)
                     
