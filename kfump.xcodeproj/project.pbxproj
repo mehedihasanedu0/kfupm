@@ -65,6 +65,16 @@
 		5576C8322BB6911D007392C8 /* SingleCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576C8312BB6911D007392C8 /* SingleCourseView.swift */; };
 		557B52BE2BCEEAD00044168B /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B52BD2BCEEAD00044168B /* ForgetPasswordView.swift */; };
 		5581D0BF2BC42C310052393E /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581D0BE2BC42C310052393E /* SignInModel.swift */; };
+		55823DE52BDC1C88000F4A32 /* ClassRoutingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DE42BDC1C88000F4A32 /* ClassRoutingModel.swift */; };
+		55823DE72BDC21C9000F4A32 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DE62BDC21C9000F4A32 /* ProgressBarView.swift */; };
+		55823DE92BDC23A5000F4A32 /* RatingInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DE82BDC23A5000F4A32 /* RatingInformationView.swift */; };
+		55823DEB2BDC3F00000F4A32 /* RatingInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DEA2BDC3F00000F4A32 /* RatingInfoModel.swift */; };
+		55823DED2BDC4049000F4A32 /* CourseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DEC2BDC4049000F4A32 /* CourseDetailsView.swift */; };
+		55823DEF2BDC4A92000F4A32 /* SingleReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DEE2BDC4A92000F4A32 /* SingleReviewView.swift */; };
+		55823DF12BDC4FA8000F4A32 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DF02BDC4FA8000F4A32 /* StarRatingView.swift */; };
+		55823DF32BDC5303000F4A32 /* CourseReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DF22BDC5303000F4A32 /* CourseReviewModel.swift */; };
+		55823DF52BDC5602000F4A32 /* SingleSyllabusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DF42BDC5602000F4A32 /* SingleSyllabusView.swift */; };
+		55823DF72BDC5AE1000F4A32 /* SyllabusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DF62BDC5AE1000F4A32 /* SyllabusModel.swift */; };
 		5586B3EF2BBDBA1B00FBAFDC /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5586B3EE2BBDBA1B00FBAFDC /* Shimmer.swift */; };
 		5586B3F12BBDBDB200FBAFDC /* RedactAndShimmerViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5586B3F02BBDBDB200FBAFDC /* RedactAndShimmerViewModifier.swift */; };
 		5586B4172BBDC35600FBAFDC /* OpenSans_Condensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5586B3F22BBDC35600FBAFDC /* OpenSans_Condensed-Bold.ttf */; };
@@ -112,6 +122,7 @@
 		5597446C2BBB37A400122058 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5597446B2BBB37A400122058 /* NetworkConstant.swift */; };
 		5597446E2BBB380700122058 /* Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5597446D2BBB380700122058 /* Websocket.swift */; };
 		559A6E0B2BD6F54800B59C13 /* ChangePasswordRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559A6E0A2BD6F54800B59C13 /* ChangePasswordRequestModel.swift */; };
+		55A326B02BDC134100D9F545 /* ClassRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A326AF2BDC134100D9F545 /* ClassRoutineView.swift */; };
 		55A44AD32BC30BBD0058C995 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A44AD22BC30BBD0058C995 /* SignUpModel.swift */; };
 		55A44AD52BC30DA90058C995 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A44AD42BC30DA90058C995 /* Encodable.swift */; };
 		55A44AD72BC3131B0058C995 /* CommonSuccessResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A44AD62BC3131B0058C995 /* CommonSuccessResponseModel.swift */; };
@@ -226,6 +237,16 @@
 		5576C8312BB6911D007392C8 /* SingleCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCourseView.swift; sourceTree = "<group>"; };
 		557B52BD2BCEEAD00044168B /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		5581D0BE2BC42C310052393E /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		55823DE42BDC1C88000F4A32 /* ClassRoutingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRoutingModel.swift; sourceTree = "<group>"; };
+		55823DE62BDC21C9000F4A32 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		55823DE82BDC23A5000F4A32 /* RatingInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingInformationView.swift; sourceTree = "<group>"; };
+		55823DEA2BDC3F00000F4A32 /* RatingInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingInfoModel.swift; sourceTree = "<group>"; };
+		55823DEC2BDC4049000F4A32 /* CourseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsView.swift; sourceTree = "<group>"; };
+		55823DEE2BDC4A92000F4A32 /* SingleReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleReviewView.swift; sourceTree = "<group>"; };
+		55823DF02BDC4FA8000F4A32 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		55823DF22BDC5303000F4A32 /* CourseReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewModel.swift; sourceTree = "<group>"; };
+		55823DF42BDC5602000F4A32 /* SingleSyllabusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSyllabusView.swift; sourceTree = "<group>"; };
+		55823DF62BDC5AE1000F4A32 /* SyllabusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusModel.swift; sourceTree = "<group>"; };
 		5586B3EE2BBDBA1B00FBAFDC /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		5586B3F02BBDBDB200FBAFDC /* RedactAndShimmerViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactAndShimmerViewModifier.swift; sourceTree = "<group>"; };
 		5586B3F22BBDC35600FBAFDC /* OpenSans_Condensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-Bold.ttf"; sourceTree = "<group>"; };
@@ -273,6 +294,7 @@
 		5597446B2BBB37A400122058 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		5597446D2BBB380700122058 /* Websocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Websocket.swift; sourceTree = "<group>"; };
 		559A6E0A2BD6F54800B59C13 /* ChangePasswordRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRequestModel.swift; sourceTree = "<group>"; };
+		55A326AF2BDC134100D9F545 /* ClassRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRoutineView.swift; sourceTree = "<group>"; };
 		55A44AD22BC30BBD0058C995 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		55A44AD42BC30DA90058C995 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		55A44AD62BC3131B0058C995 /* CommonSuccessResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSuccessResponseModel.swift; sourceTree = "<group>"; };
@@ -414,6 +436,7 @@
 		553E55B12BB48EFB00AFBD7A /* kfump */ = {
 			isa = PBXGroup;
 			children = (
+				55A326AD2BDC131600D9F545 /* courseDetails */,
 				5573EA542BDB7D8800E9FCF9 /* splashScreen */,
 				5502F8AE2BC4812A00C79A56 /* controller */,
 				55DB16272BBC78AF0022BDA7 /* service */,
@@ -492,6 +515,8 @@
 				550569122BD41AAC00C49E71 /* CustomDropDownView.swift */,
 				550569142BD41DB400C49E71 /* CustomDisableTextView.swift */,
 				550569182BD423FA00C49E71 /* CustomLogoutConfirmationView.swift */,
+				55823DE62BDC21C9000F4A32 /* ProgressBarView.swift */,
+				55823DF02BDC4FA8000F4A32 /* StarRatingView.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -594,6 +619,17 @@
 			path = profile;
 			sourceTree = "<group>";
 		};
+		55823DE32BDC1C6F000F4A32 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				55823DE42BDC1C88000F4A32 /* ClassRoutingModel.swift */,
+				55823DEA2BDC3F00000F4A32 /* RatingInfoModel.swift */,
+				55823DF22BDC5303000F4A32 /* CourseReviewModel.swift */,
+				55823DF62BDC5AE1000F4A32 /* SyllabusModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		5586B3ED2BBDB9FC00FBAFDC /* shemar */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,6 +712,27 @@
 				55F868A42BD9662700A05E8F /* HTTPStatusCodes.swift */,
 			);
 			path = network;
+			sourceTree = "<group>";
+		};
+		55A326AD2BDC131600D9F545 /* courseDetails */ = {
+			isa = PBXGroup;
+			children = (
+				55823DE32BDC1C6F000F4A32 /* model */,
+				55A326AE2BDC132300D9F545 /* view */,
+			);
+			path = courseDetails;
+			sourceTree = "<group>";
+		};
+		55A326AE2BDC132300D9F545 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				55A326AF2BDC134100D9F545 /* ClassRoutineView.swift */,
+				55823DE82BDC23A5000F4A32 /* RatingInformationView.swift */,
+				55823DEC2BDC4049000F4A32 /* CourseDetailsView.swift */,
+				55823DEE2BDC4A92000F4A32 /* SingleReviewView.swift */,
+				55823DF42BDC5602000F4A32 /* SingleSyllabusView.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		55A44AD12BC30BAB0058C995 /* model */ = {
@@ -956,6 +1013,7 @@
 				55DB16302BBC89E90022BDA7 /* WebImageView.swift in Sources */,
 				5581D0BF2BC42C310052393E /* SignInModel.swift in Sources */,
 				5502F8A72BC4675500C79A56 /* LocalizationSystem.swift in Sources */,
+				55823DE52BDC1C88000F4A32 /* ClassRoutingModel.swift in Sources */,
 				55D9D4452BC07E7B0078A808 /* SingleSearchItem.swift in Sources */,
 				5502F8A92BC467D900C79A56 /* SetLanguage.swift in Sources */,
 				553E55FB2BB49AC200AFBD7A /* Helper.swift in Sources */,
@@ -969,7 +1027,10 @@
 				559A6E0B2BD6F54800B59C13 /* ChangePasswordRequestModel.swift in Sources */,
 				558B9E392BBF16E300EA5B84 /* FilterCourseItem.swift in Sources */,
 				550D96522BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift in Sources */,
+				55823DF72BDC5AE1000F4A32 /* SyllabusModel.swift in Sources */,
 				553E55EF2BB491ED00AFBD7A /* LoadMoreModifier.swift in Sources */,
+				55823DE92BDC23A5000F4A32 /* RatingInformationView.swift in Sources */,
+				55823DEB2BDC3F00000F4A32 /* RatingInfoModel.swift in Sources */,
 				552657D02BC11DFB0094212F /* FilterAvailabilityResponse.swift in Sources */,
 				5597446E2BBB380700122058 /* Websocket.swift in Sources */,
 				559744622BBAF15000122058 /* OTPView.swift in Sources */,
@@ -978,12 +1039,14 @@
 				5533366F2BB9CC0B00D5F6E5 /* FilterView.swift in Sources */,
 				553E55FE2BB4A1FA00AFBD7A /* CustomTextField.swift in Sources */,
 				5597446A2BBB370200122058 /* NetworkClient.swift in Sources */,
+				55A326B02BDC134100D9F545 /* ClassRoutineView.swift in Sources */,
 				55E0D6DC2BC1E7B100F2DB39 /* AuthenticationService.swift in Sources */,
 				554B754F2BB5CA4800D40BE2 /* RegistrationView.swift in Sources */,
 				550569112BD419B500C49E71 /* MyProfileView.swift in Sources */,
 				55A44ADB2BC3160E0058C995 /* CustomTost.swift in Sources */,
 				55A44AD72BC3131B0058C995 /* CommonSuccessResponseModel.swift in Sources */,
 				550D964C2BDA5C4A0042FCA6 /* DropDownPickerView.swift in Sources */,
+				55823DF32BDC5303000F4A32 /* CourseReviewModel.swift in Sources */,
 				550569172BD421CE00C49E71 /* ChangePasswordView.swift in Sources */,
 				55F868AF2BD990A300A05E8F /* UserTypeListModel.swift in Sources */,
 				550569192BD423FA00C49E71 /* CustomLogoutConfirmationView.swift in Sources */,
@@ -993,6 +1056,7 @@
 				55DB16352BBC8C420022BDA7 /* CustomImage.swift in Sources */,
 				55DB16292BBC78C40022BDA7 /* HomeRepositoryService.swift in Sources */,
 				5576C82B2BB68265007392C8 /* ProfileView.swift in Sources */,
+				55823DF12BDC4FA8000F4A32 /* StarRatingView.swift in Sources */,
 				553E55F22BB491ED00AFBD7A /* StaticComponentForSharedPreferrence.swift in Sources */,
 				5576C82F2BB68C7E007392C8 /* SearchView.swift in Sources */,
 				5505691B2BD42D7000C49E71 /* CloseAccountView.swift in Sources */,
@@ -1020,6 +1084,7 @@
 				55F868A52BD9662700A05E8F /* HTTPStatusCodes.swift in Sources */,
 				5576C82D2BB68279007392C8 /* MoreView.swift in Sources */,
 				55F868A92BD96B0400A05E8F /* JSONDecoder+Decoder.swift in Sources */,
+				55823DED2BDC4049000F4A32 /* CourseDetailsView.swift in Sources */,
 				55F781C42BD2EEE1007CEB03 /* ResetPasswordView.swift in Sources */,
 				5597446C2BBB37A400122058 /* NetworkConstant.swift in Sources */,
 				550D964E2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift in Sources */,
@@ -1027,10 +1092,13 @@
 				5576C8322BB6911D007392C8 /* SingleCourseView.swift in Sources */,
 				5502F8B22BC4897E00C79A56 /* LocalizationView.swift in Sources */,
 				55554EB32BD57E5D00EC6889 /* ProfileInfoModel.swift in Sources */,
+				55823DEF2BDC4A92000F4A32 /* SingleReviewView.swift in Sources */,
 				552657CC2BC11C7E0094212F /* FilterViewModel.swift in Sources */,
 				55DB16332BBC8C040022BDA7 /* ImageCache.swift in Sources */,
+				55823DF52BDC5602000F4A32 /* SingleSyllabusView.swift in Sources */,
 				55F868AB2BD96B3500A05E8F /* BadRequest.swift in Sources */,
 				554B754C2BB5C9F200D40BE2 /* LoginView.swift in Sources */,
+				55823DE72BDC21C9000F4A32 /* ProgressBarView.swift in Sources */,
 				55A44AE12BC3342C0058C995 /* OtpModel.swift in Sources */,
 				553336712BB9D3A200D5F6E5 /* FilterMenuView.swift in Sources */,
 				553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */,
@@ -1216,12 +1284,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1239,7 +1305,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1252,12 +1317,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1275,7 +1338,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

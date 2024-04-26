@@ -14,7 +14,12 @@ struct ExploreView: View {
     @State var detentHeight: CGFloat = 0
     @State var showSearchView: Bool = false
     @State var isCloseButtonVisible: Bool = true
+    
     @State private var filterItemIds: [Int] = []
+    
+    @State var isNavigateToCourseDetailsView: Bool = true
+    
+    
     
     @StateObject var homeviewModel = HomeViewModel()
     
@@ -97,6 +102,9 @@ struct ExploreView: View {
                                     SingleCourseView(course: course)
                                         .padding(.bottom,2)
                                         .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.courseList.count == 11)
+                                        .onTapGesture {
+                                            isNavigateToCourseDetailsView = true
+                                        }
                                 }
                             }.padding(.top,15)
                         }
@@ -122,6 +130,7 @@ struct ExploreView: View {
                     authenicationViewModel.refreshToken(body: vm)
                 }
             }
+            .navigationDestination(isPresented: $isNavigateToCourseDetailsView, destination: { CourseDetailsView().navigationBarBackButtonHidden(true) })
         }
     }
     
