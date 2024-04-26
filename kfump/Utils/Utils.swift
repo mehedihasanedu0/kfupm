@@ -7,6 +7,7 @@
 
 
 import Foundation
+import SwiftUI
 
 class Utils {
     
@@ -361,4 +362,40 @@ class Utils {
         return ""
         
     }
+    
+    
+    // MARK: - Refresh Token
+    static func isJWTTokenExpire() -> Bool {
+        
+        @AppStorage(Keys.TOKEN_D.rawValue) var jwtToken: String?
+        print("jwtToken \(jwtToken ?? "")")
+
+        var payload64 = jwtToken!.components(separatedBy: ".")[1]
+
+        while payload64.count % 4 != 0 {
+            payload64 += "="
+        }
+
+        print("base64 encoded payload: \(payload64)")
+        let payloadData = Data(base64Encoded: payload64,
+                               options:.ignoreUnknownCharacters)!
+        let payload = String(data: payloadData, encoding: .utf8)!
+        print(payload)
+        
+        let json = try! JSONSerialization.jsonObject(with: payloadData, options: []) as! [String:Any]
+        let exp = json["exp"] as! Int
+        let expDate = Date(timeIntervalSince1970: TimeInterval(exp))
+        let isValid = expDate.compare(Date()) == .orderedDescending
+        
+        print("json \(json)")
+        print("exp \(exp)")
+        print("isValid \(isValid)")
+        
+        return !isValid
+        
+    }
+    
 }
+
+
+

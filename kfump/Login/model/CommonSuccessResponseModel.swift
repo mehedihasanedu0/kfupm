@@ -14,6 +14,7 @@ struct CommonSuccessResponseModel: Codable {
     var message: String?
     var token: String?
     var access_token: String?
+    var refresh_token: String?
     var details: [Details]?
     var data: CommonData?
 }

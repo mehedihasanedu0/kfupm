@@ -14,9 +14,10 @@ import SwiftUI
 
 class AuthenicationViewModel : ObservableObject {
     
-    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool = false
-    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String = ""
-    @AppStorage(Keys.TOKEN_D.rawValue) var userToken: String = ""
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
+    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
+    @AppStorage(Keys.TOKEN_D.rawValue) var userToken: String?
+    @AppStorage(Keys.refreshToken.rawValue) var refreshToken: String?
     
     private let authenticationService: AuthenticationService
     private var cancellables = Set<AnyCancellable>()
@@ -96,7 +97,8 @@ class AuthenicationViewModel : ObservableObject {
                 }
                 
                 if user.success ?? false && isAutoLogin {
-                    self?.userToken = user.token ?? ""
+                    self?.userToken = user.access_token ?? ""
+                    self?.refreshToken = user.refresh_token ?? ""
                     self?.isLogin = true
                 }
                 completion(user.success ?? false)
@@ -133,6 +135,7 @@ class AuthenicationViewModel : ObservableObject {
                 
                 if user.success ?? false {
                     self?.userToken = user.access_token ?? ""
+                    self?.refreshToken = user.refresh_token ?? ""
                     self?.isLogin = true
                     self?.userUUID =  user.data?.uuid ?? ""
                 }
@@ -210,9 +213,9 @@ class AuthenicationViewModel : ObservableObject {
     }  
     
     
-    func refreshToken(body: ResetPasswordRequestModel, completion: @escaping (Bool) -> Void) {
+    func refreshToken(body: RefreshTokenRequestModel) {
         isLoading = true
-        authenticationService.resetPassword(body: body)
+        authenticationService.refreshToken(body: body)
             .handleEvents(receiveCompletion: { [weak self] value in
                 self?.isLoading = false
             })
@@ -228,20 +231,9 @@ class AuthenicationViewModel : ObservableObject {
                 }
             }, receiveValue: { [weak self] user in
                 
-                self?.isLoading = true
-                if user.details != nil && ((user.details?.count ?? 0) > 0) {
-                    self?.dialogMessage = user.details?[0].message ?? ""
-                } else {
-                    self?.dialogMessage = user.message ?? ""
-                }
+                self?.userToken = user.access_token ?? ""
+                self?.refreshToken = user.refresh_token ?? ""
                 
-                if user.success ?? false {
-                    self?.userToken = user.access_token ?? ""
-                    self?.isLogin = true
-                    self?.userUUID =  user.data?.uuid ?? ""
-                }
-                
-                completion(user.success ?? false)
             })
             .store(in: &cancellables)
         

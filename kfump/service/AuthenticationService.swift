@@ -52,9 +52,10 @@ class AuthenticationService {
         return networkClient.putRequest(url: url,body: data, headerType: .APIRequestWithToken)
     }
         
-    func refreshToken() -> AnyPublisher<CommonSuccessResponseModel, Error> {
+    func refreshToken(body: RefreshTokenRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
         let url = URL(string: URL.refreshToken)
-        return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data, headerType: .APIRequestWithNoHeader)
     }
     
     

@@ -10,7 +10,8 @@ import SwiftUI
 struct Homescreen: View {
     
     @State private var selection = 0
-    
+    @StateObject var authenicationViewModel = AuthenicationViewModel()
+    @AppStorage(Keys.refreshToken.rawValue) var refreshToken: String?
     
     var body: some View {
         NavigationStack  {
@@ -54,6 +55,14 @@ struct Homescreen: View {
             }
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .accentColor(hexToColor(hex: "#007D40"))
+            .onAppear {
+                print("isJWTTokenExpire => \(Utils.isJWTTokenExpire())")
+                if Utils.isJWTTokenExpire() {
+                    let vm = RefreshTokenRequestModel(refreshToken: refreshToken)
+                    authenicationViewModel.refreshToken(body: vm)
+                }
+                
+            }
             
         }
     }

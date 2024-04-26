@@ -5,34 +5,35 @@
 "More" = "أكثر";
 
 //Login
-"Sign Up Later" = "سجل لاحقا";
-"Welcome to\nContinuing \nEducation Programs" = "مرحباً بك في\nمتابعة \nبرامج التعليم";
-"Email/Phone" = "البريد الإلكتروني/الهاتف";
-"Password" = "كلمة المرور";
-"Forget Password" = "نسيت كلمة المرور";
-"Login" = "تسجيل الدخول";
-"Continue with KFU ID" = "تواصل مع معرف KFU";
+"Sign Up Later" = "سجل لاحقاً";
+"Welcome to\nContinuing \nEducation Programs" = "أهلا بك في برامج التعليم المستمر";
+"Email/Phone" = "البريد الإلكتروني / رقم التواصل";
+"Password" = "الرقم السري";
+"Forget Password" = "نسيت الرقم السري";
+"Login" = " دخول";
+"Or" = "أو";
+"Continue with KFU ID" = "تابع مع الرقم الجامعي";
 "Don’t have an account? " = "ليس لديك حساب؟";
-"Registration" = "تسجيل";
+"Registration" = "التسجيل";
 
 //Registration
-"Sign UP" = "اشتراك";
-"Full Name *" = "الاسم الكامل *";
-"Email *" = "بريد إلكتروني *";
-"Phone Number *" = "رقم التليفون *";
-"Confirm Password" = "تأكيد كلمة المرور";
-"Already have an account? " = "هل لديك حساب؟";
-"Log in" = "تسجيل الدخول";
+"Sign UP" = "للتسجيل";
+"Full Name *" = "الاسم الكامل";
+"Email *" = "البريد الإلكتروني";
+"Phone Number *" = "رقم التواصل";
+"Confirm Password" = "أكد كلمة المرور";
+"Already have an account? " = "لديك حساب معنا؟ تسجيل";
+"Log in" = "الدخول";
 
 //OTP Code
-"Enter OTP" = "أدخل كلمة المرور لمرة واحدة";
-"Confirm OTP" = "تأكيد كلمة المرور لمرة واحدة";
+"Enter OTP" = "ادخل الرمز";
+"Confirm OTP" = "تحقق من الرمز";
 
 //Home
 
-"Search courses" = "البحث في الدورات";
+"Search courses" = "ابحث عن الدورات";
 "Browse" = "تصفح";
-"Course" = "دورة";
+"Course" = "الدورات";
 
 
 // Filter

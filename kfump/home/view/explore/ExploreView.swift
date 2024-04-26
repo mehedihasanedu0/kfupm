@@ -18,7 +18,9 @@ struct ExploreView: View {
     
     @StateObject var homeviewModel = HomeViewModel()
     
-//    var courses: [Course] = Course.sampleData // Replace with your data source
+    @StateObject var authenicationViewModel = AuthenicationViewModel()
+    @AppStorage(Keys.refreshToken.rawValue) var refreshToken: String?
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -114,7 +116,12 @@ struct ExploreView: View {
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal,20)
-            
+            .onAppear {
+                if Utils.isJWTTokenExpire() {
+                    let vm = RefreshTokenRequestModel(refreshToken: refreshToken)
+                    authenicationViewModel.refreshToken(body: vm)
+                }
+            }
         }
     }
     
