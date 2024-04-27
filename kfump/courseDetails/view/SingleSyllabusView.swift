@@ -9,13 +9,15 @@ import SwiftUI
 
 struct SingleSyllabusView: View {
     
+    let singleSyllabus : SyllabusModel?
+    
     var body: some View {
         VStack {
             HStack {
                 
                 VStack {
                     VStack {
-                        Text("1")
+                        Text("\(singleSyllabus?.weekNo ?? 0)")
                             .font(.custom(FONT_BOLD, size: 18))
                         Text("WEEK")
                             .font(.custom(FONT_LIGHT, size: 10))
@@ -33,12 +35,12 @@ struct SingleSyllabusView: View {
                 
                 VStack {
                     
-                    Text("Thinking like a UX designer")
-                        .font(.custom(FONT_MEDIUM, size: 15)) 
+                    Text(singleSyllabus?.title ?? "")
+                        .font(.custom(FONT_MEDIUM, size: 15))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                     
-                    Text("In this module, you will learn what it means to be happy and why pursuing happiness is not a pointless endeavor. Dr. Santos addresses how our minds lie to us and how the science shows that our misconceptions about money, grades, and social media are holding us back from implementing the techniques studied in positive psychology.")
+                    Text(singleSyllabus?.details ?? "")
                         .font(.custom(FONT_LIGHT, size: 14))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical,5)
@@ -50,7 +52,7 @@ struct SingleSyllabusView: View {
                             .resizable()
                             .frame(width: 20,height: 20)
                         
-                        Text("2 offline lecture, 1 assignment, 1 quiz")
+                        Text(singleSyllabus?.syllabus ?? "")
                             .font(.custom(FONT_MEDIUM, size: 13))
                             .foregroundColor(hexToColor(hex: "#7C7C7C"))
                         
@@ -64,7 +66,7 @@ struct SingleSyllabusView: View {
                             .resizable()
                             .frame(width: 20,height: 20)
                         
-                        Text("2 classes to attend")
+                        Text(singleSyllabus?.attendanceMessage ?? "")
                             .font(.custom(FONT_MEDIUM, size: 13))
                             .foregroundColor(hexToColor(hex: "#7C7C7C"))
                         
@@ -84,5 +86,5 @@ struct SingleSyllabusView: View {
 }
 
 #Preview {
-    SingleSyllabusView()
+    SingleSyllabusView(singleSyllabus: nil)
 }

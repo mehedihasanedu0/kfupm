@@ -18,7 +18,7 @@ let FONT_BOLD = "OpenSans-Bold"
 
 var isRTL = LocalizationSystem.shared.getLanguage() == "ar"
 
-func hexToColor(hex: String) -> Color {
+func hexToColor(hex: String,alpha: Double = 1.0) -> Color {
     var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
     hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
 
@@ -30,10 +30,11 @@ func hexToColor(hex: String) -> Color {
     let green = Double((rgb & 0x00FF00) >> 8) / 255.0
     let blue = Double(rgb & 0x0000FF) / 255.0
 
-    return Color(red: red, green: green, blue: blue)
+    return Color(red: red, green: green, blue: blue,opacity: alpha)
 }
 
-func hexToColor(hex: String) -> UIColor {
+
+func hexToColor(hex: String,alpha: Double = 1.0) -> UIColor {
     var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
     hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
 
@@ -45,7 +46,7 @@ func hexToColor(hex: String) -> UIColor {
     let green = Double((rgb & 0x00FF00) >> 8) / 255.0
     let blue = Double(rgb & 0x0000FF) / 255.0
 
-    return UIColor(red: red, green: green, blue: blue, alpha: 1)
+    return UIColor(red: red, green: green, blue: blue, alpha: alpha)
 }
 
 

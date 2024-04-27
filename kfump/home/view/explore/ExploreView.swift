@@ -17,7 +17,7 @@ struct ExploreView: View {
     
     @State private var filterItemIds: [Int] = []
     
-    @State var isNavigateToCourseDetailsView: Bool = true
+    @State var isNavigateToCourseDetailsView: Bool = false
     
     
     
@@ -34,7 +34,6 @@ struct ExploreView: View {
     
     var body: some View {
         
-        NavigationStack {
             ZStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     
@@ -99,13 +98,26 @@ struct ExploreView: View {
                         ScrollView(.vertical, showsIndicators: false) {
                             LazyVGrid(columns: columns, spacing: 20) {
                                 ForEach(homeviewModel.courseList, id: \.id) { course in
+//                                    
+//                                    Button(action: {
+//                                        print("Course tapped: \(course.id)")
+//                                        isNavigateToCourseDetailsView = true
+//                                        
+//                                    }) {
+//                                        SingleCourseView(course: course)
+//                                            .padding(.bottom,2)
+//                                            .redactShimmer(condition: self.homeviewModel.isLoading && self.homeviewModel.courseList.count == 11)
+//                                    }
                                     SingleCourseView(course: course)
                                         .padding(.bottom,2)
                                         .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.courseList.count == 11)
                                         .onTapGesture {
+                                            print("Course tapped: \(course.id)")
                                             isNavigateToCourseDetailsView = true
                                         }
+
                                 }
+                              
                             }.padding(.top,15)
                         }
                         .onAppear() {
@@ -131,7 +143,7 @@ struct ExploreView: View {
                 }
             }
             .navigationDestination(isPresented: $isNavigateToCourseDetailsView, destination: { CourseDetailsView().navigationBarBackButtonHidden(true) })
-        }
+        
     }
     
     
