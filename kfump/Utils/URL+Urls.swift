@@ -32,8 +32,9 @@ extension URL {
     // MARK: Profile
     static let userType                            = "\(URL.baseUrl)/user/user-type/"
     
-    // MARK: - Home
-    static let home                                = "\(URL.baseUrl)user/homepage"
+    // MARK: - More
+    static let createReportAnIssue                 = "\(URL.baseUrl)/cms/report-an-issues/"
+    static let getAllreportIssue                   = "\(URL.baseUrl)/cms/report-an-issues/"
     
 
     // MARK: - Reservation

@@ -70,6 +70,9 @@ let CONFIRM_PASSWORD_CANT_BE_EMPTY_KEY = "Confirm Password can't be empty"
 let CURRENT_PASSWORD_CANT_BE_EMPTY_KEY = "Current Password can't be empty"
 let NEW_PASSWORD_CANT_BE_EMPTY_KEY = "New Password can't be empty"
 
+let DETAILS_CANT_BE_EMPTY_KEY = "Details can't be empty"
+let SUBJECT_CANT_BE_EMPTY_KEY = "Subject can't be empty"
+
 
 
 //MARK: - ALERT
@@ -93,3 +96,60 @@ let UPDATE_PASSWORD_KEY = "Update Password"
 //MARK: - My Profile
 let MY_PROFILE_KEY = "My Profile"
 let UPDATE_DETAILS_KEY = "Update Details"
+
+
+//MARK: - COURSE
+let ENROLLED_COURSE_KEY = "Enrolled Courses"
+let COURSE_DETAILS_KEY = "Course Details"
+let ENROLL_NO_KEY = "Enroll Now"
+let ENROLMENT_AS_A_GROUP_KEY = "Enrolment as a Group"
+let ABOUT_THIS_COURSE_KEY = "About this Course"
+let INSTRUCTOR_KEY = "Instructor"
+let SYLLABUS_KEY = "Syllabus"
+let CLASS_ROUTINE_KEY = "Class Routine"
+let REVIEWS_KEY = "Reviews"
+let RATING_INFORMATION_KEY = "Rating Information"
+let VIEW_MORE_KEY = "View more"
+let CHECKOUT_KEY = "Checkout"
+let PAYMENT_METHOD_KEY = "Payment Method"
+let SUMMERY_KEY = "Summery"
+let VAT_KEY = "VAT"
+let TOTAL_PRICE_KEY = "Total Price"
+let BY_COMPLETING_YOUR_PURCHASE_KEY = "By completing your purchase you agree these "
+let TERMS_OF_SERVICE_KEY = "Terms of Service"
+let PROCEED_KEY = "Proceed"
+let ENROLL_KEY = "Enroll"
+
+
+
+let PAYMENT_HISSTORY_KEY = "Payment History"
+let COURSE_NAME_KEY = "Course Name"
+let AMOUNT_KEY = "Amount"
+let ENROLMENT_TYPE_KEY = "Enrolment type"
+
+
+
+//MARK: - MORE
+let SUBJECT_KEY = "Subject"
+let DETAILS_KEY = "Details"
+let SUBMIT_KEY = "Submit"
+let SEND_KEY = "Send"
+let REPORT_AN_ISSUE_KEY = "Report an Issue"
+let CONTACT_US_KEY = "Contact Us"
+let ATTANDANCE_HISTORY_KEY = "Attendance History"
+let COURSE_HISTORY_KEY = "Course History"
+let YOUR_ISSUES_KEY = "Your Issues"
+
+
+let RESOLVE_KEY = "Your Issues"
+let PENDING_KEY = "Your Issues"
+let ISSUE_ID_KEY = "Issue ID"
+let ISSUE_NAME_KEY = "Issue Name"
+let SUBMIT_ISSUE_KEY = "Submit Issue"
+let TRACK_YOUR_SUBMITTED_ISSUE_KEY = "Track your submitted issues..."
+
+
+let DATE_KEY = "Date"
+let STUDENT_NAME_KEY = "Student name"
+let PRESENT_KEY = "Present"
+let ABSENT_KEY = "Absent"

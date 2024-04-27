@@ -62,6 +62,7 @@
 		5561754A2BDD0F70004DD996 /* SingleEnrolledCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556175492BDD0F70004DD996 /* SingleEnrolledCourseView.swift */; };
 		5561754C2BDD14DB004DD996 /* OngoingCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */; };
 		5561754E2BDD163D004DD996 /* CourseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5561754D2BDD163D004DD996 /* CourseHistoryView.swift */; };
+		5569C1EB2BDD603A00B06607 /* SingleIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5569C1EA2BDD603A00B06607 /* SingleIssueView.swift */; };
 		5573EA532BDB74FA00E9FCF9 /* RefreshTokenRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5573EA522BDB74FA00E9FCF9 /* RefreshTokenRequestModel.swift */; };
 		5573EA562BDB7DC400E9FCF9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5573EA552BDB7DC300E9FCF9 /* SplashView.swift */; };
 		5576C8242BB681B4007392C8 /* Homescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576C8232BB681B4007392C8 /* Homescreen.swift */; };
@@ -83,6 +84,15 @@
 		55823DF32BDC5303000F4A32 /* CourseReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DF22BDC5303000F4A32 /* CourseReviewModel.swift */; };
 		55823DF52BDC5602000F4A32 /* SingleSyllabusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DF42BDC5602000F4A32 /* SingleSyllabusView.swift */; };
 		55823DF72BDC5AE1000F4A32 /* SyllabusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DF62BDC5AE1000F4A32 /* SyllabusModel.swift */; };
+		5585C24A2BDD1E2800986987 /* AttendanceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C2492BDD1E2800986987 /* AttendanceHistoryView.swift */; };
+		5585C24C2BDD233600986987 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C24B2BDD233600986987 /* ContactUsView.swift */; };
+		5585C24E2BDD24C800986987 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C24D2BDD24C800986987 /* CustomTextView.swift */; };
+		5585C2502BDD364500986987 /* ReportAnIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C24F2BDD364500986987 /* ReportAnIssueView.swift */; };
+		5585C2522BDD38E400986987 /* IssuesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C2512BDD38E400986987 /* IssuesView.swift */; };
+		5585C2542BDD44B000986987 /* MoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C2532BDD44B000986987 /* MoreService.swift */; };
+		5585C2572BDD461F00986987 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C2562BDD461F00986987 /* MoreViewModel.swift */; };
+		5585C2592BDD478100986987 /* ReportedAnIssueRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C2582BDD478100986987 /* ReportedAnIssueRequestModel.swift */; };
+		5585C25B2BDD485400986987 /* ReportedAnIssueResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585C25A2BDD485400986987 /* ReportedAnIssueResponseModel.swift */; };
 		5586B3EF2BBDBA1B00FBAFDC /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5586B3EE2BBDBA1B00FBAFDC /* Shimmer.swift */; };
 		5586B3F12BBDBDB200FBAFDC /* RedactAndShimmerViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5586B3F02BBDBDB200FBAFDC /* RedactAndShimmerViewModifier.swift */; };
 		5586B4172BBDC35600FBAFDC /* OpenSans_Condensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5586B3F22BBDC35600FBAFDC /* OpenSans_Condensed-Bold.ttf */; };
@@ -241,6 +251,7 @@
 		556175492BDD0F70004DD996 /* SingleEnrolledCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEnrolledCourseView.swift; sourceTree = "<group>"; };
 		5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingCourseView.swift; sourceTree = "<group>"; };
 		5561754D2BDD163D004DD996 /* CourseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseHistoryView.swift; sourceTree = "<group>"; };
+		5569C1EA2BDD603A00B06607 /* SingleIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleIssueView.swift; sourceTree = "<group>"; };
 		5573EA522BDB74FA00E9FCF9 /* RefreshTokenRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenRequestModel.swift; sourceTree = "<group>"; };
 		5573EA552BDB7DC300E9FCF9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		5574F7DF2BBDE1CF00583DF5 /* Kfump_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Kfump_Info.plist; sourceTree = "<group>"; };
@@ -263,6 +274,15 @@
 		55823DF22BDC5303000F4A32 /* CourseReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseReviewModel.swift; sourceTree = "<group>"; };
 		55823DF42BDC5602000F4A32 /* SingleSyllabusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSyllabusView.swift; sourceTree = "<group>"; };
 		55823DF62BDC5AE1000F4A32 /* SyllabusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllabusModel.swift; sourceTree = "<group>"; };
+		5585C2492BDD1E2800986987 /* AttendanceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceHistoryView.swift; sourceTree = "<group>"; };
+		5585C24B2BDD233600986987 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
+		5585C24D2BDD24C800986987 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		5585C24F2BDD364500986987 /* ReportAnIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAnIssueView.swift; sourceTree = "<group>"; };
+		5585C2512BDD38E400986987 /* IssuesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesView.swift; sourceTree = "<group>"; };
+		5585C2532BDD44B000986987 /* MoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreService.swift; sourceTree = "<group>"; };
+		5585C2562BDD461F00986987 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		5585C2582BDD478100986987 /* ReportedAnIssueRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedAnIssueRequestModel.swift; sourceTree = "<group>"; };
+		5585C25A2BDD485400986987 /* ReportedAnIssueResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedAnIssueResponseModel.swift; sourceTree = "<group>"; };
 		5586B3EE2BBDBA1B00FBAFDC /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		5586B3F02BBDBDB200FBAFDC /* RedactAndShimmerViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedactAndShimmerViewModifier.swift; sourceTree = "<group>"; };
 		5586B3F22BBDC35600FBAFDC /* OpenSans_Condensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans_Condensed-Bold.ttf"; sourceTree = "<group>"; };
@@ -408,6 +428,8 @@
 			isa = PBXGroup;
 			children = (
 				553336692BB9C0AF00D5F6E5 /* MoreItems.swift */,
+				5585C2582BDD478100986987 /* ReportedAnIssueRequestModel.swift */,
+				5585C25A2BDD485400986987 /* ReportedAnIssueResponseModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -449,11 +471,11 @@
 		553E55B12BB48EFB00AFBD7A /* kfump */ = {
 			isa = PBXGroup;
 			children = (
+				55DB16272BBC78AF0022BDA7 /* service */,
 				556175452BDD0B43004DD996 /* more */,
 				55A326AD2BDC131600D9F545 /* courseDetails */,
 				5573EA542BDB7D8800E9FCF9 /* splashScreen */,
 				5502F8AE2BC4812A00C79A56 /* controller */,
-				55DB16272BBC78AF0022BDA7 /* service */,
 				559744682BBB36F000122058 /* network */,
 				553336722BB9D66600D5F6E5 /* extention */,
 				5576C8222BB68193007392C8 /* home */,
@@ -531,6 +553,7 @@
 				550569182BD423FA00C49E71 /* CustomLogoutConfirmationView.swift */,
 				55823DE62BDC21C9000F4A32 /* ProgressBarView.swift */,
 				55823DF02BDC4FA8000F4A32 /* StarRatingView.swift */,
+				5585C24D2BDD24C800986987 /* CustomTextView.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -583,6 +606,7 @@
 		556175452BDD0B43004DD996 /* more */ = {
 			isa = PBXGroup;
 			children = (
+				5585C2552BDD460C00986987 /* viewmodel */,
 				5533366B2BB9C0DC00D5F6E5 /* model */,
 				556175462BDD0B48004DD996 /* view */,
 			);
@@ -598,6 +622,11 @@
 				556175492BDD0F70004DD996 /* SingleEnrolledCourseView.swift */,
 				5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */,
 				5561754D2BDD163D004DD996 /* CourseHistoryView.swift */,
+				5585C2492BDD1E2800986987 /* AttendanceHistoryView.swift */,
+				5585C24B2BDD233600986987 /* ContactUsView.swift */,
+				5585C24F2BDD364500986987 /* ReportAnIssueView.swift */,
+				5585C2512BDD38E400986987 /* IssuesView.swift */,
+				5569C1EA2BDD603A00B06607 /* SingleIssueView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -666,6 +695,14 @@
 				55823DF62BDC5AE1000F4A32 /* SyllabusModel.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		5585C2552BDD460C00986987 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				5585C2562BDD461F00986987 /* MoreViewModel.swift */,
+			);
+			path = viewmodel;
 			sourceTree = "<group>";
 		};
 		5586B3ED2BBDB9FC00FBAFDC /* shemar */ = {
@@ -823,6 +860,7 @@
 				55DB16282BBC78C40022BDA7 /* HomeRepositoryService.swift */,
 				55E0D6DB2BC1E7B100F2DB39 /* AuthenticationService.swift */,
 				55554EB62BD57F7D00EC6889 /* ProfileService.swift */,
+				5585C2532BDD44B000986987 /* MoreService.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -1051,6 +1089,7 @@
 				5556EC912BDCDF7600A78948 /* InstructorView.swift in Sources */,
 				552657CE2BC11CE80094212F /* FilterCategoryResponse.swift in Sources */,
 				553336742BB9D67800D5F6E5 /* BottomSheet.swift in Sources */,
+				5585C2542BDD44B000986987 /* MoreService.swift in Sources */,
 				55DB16302BBC89E90022BDA7 /* WebImageView.swift in Sources */,
 				5581D0BF2BC42C310052393E /* SignInModel.swift in Sources */,
 				5502F8A72BC4675500C79A56 /* LocalizationSystem.swift in Sources */,
@@ -1065,13 +1104,16 @@
 				5533366D2BB9C45800D5F6E5 /* SingleItemView.swift in Sources */,
 				5586B3EF2BBDBA1B00FBAFDC /* Shimmer.swift in Sources */,
 				557B52BE2BCEEAD00044168B /* ForgetPasswordView.swift in Sources */,
+				5585C24A2BDD1E2800986987 /* AttendanceHistoryView.swift in Sources */,
 				559A6E0B2BD6F54800B59C13 /* ChangePasswordRequestModel.swift in Sources */,
+				5585C25B2BDD485400986987 /* ReportedAnIssueResponseModel.swift in Sources */,
 				558B9E392BBF16E300EA5B84 /* FilterCourseItem.swift in Sources */,
 				550D96522BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift in Sources */,
 				55823DF72BDC5AE1000F4A32 /* SyllabusModel.swift in Sources */,
 				553E55EF2BB491ED00AFBD7A /* LoadMoreModifier.swift in Sources */,
 				55823DE92BDC23A5000F4A32 /* RatingInformationView.swift in Sources */,
 				55823DEB2BDC3F00000F4A32 /* RatingInfoModel.swift in Sources */,
+				5569C1EB2BDD603A00B06607 /* SingleIssueView.swift in Sources */,
 				552657D02BC11DFB0094212F /* FilterAvailabilityResponse.swift in Sources */,
 				5597446E2BBB380700122058 /* Websocket.swift in Sources */,
 				556175442BDD04EB004DD996 /* PaymentHistoryResponseModel.swift in Sources */,
@@ -1097,6 +1139,7 @@
 				558B9E3B2BBF18F500EA5B84 /* FilterAvailableItem.swift in Sources */,
 				553E55F32BB491ED00AFBD7A /* Utils.swift in Sources */,
 				55DB16352BBC8C420022BDA7 /* CustomImage.swift in Sources */,
+				5585C24C2BDD233600986987 /* ContactUsView.swift in Sources */,
 				55DB16292BBC78C40022BDA7 /* HomeRepositoryService.swift in Sources */,
 				5576C82B2BB68265007392C8 /* ProfileView.swift in Sources */,
 				556175422BDD03F3004DD996 /* PaymentHistoryView.swift in Sources */,
@@ -1109,17 +1152,21 @@
 				55D1FA5C2BB6D936004D5F7F /* Course.swift in Sources */,
 				554B75492BB5B96D00D40BE2 /* CustomSecureTextField.swift in Sources */,
 				5505690F2BD414EC00C49E71 /* NavigationConfigurator.swift in Sources */,
+				5585C2572BDD461F00986987 /* MoreViewModel.swift in Sources */,
+				5585C24E2BDD24C800986987 /* CustomTextView.swift in Sources */,
 				5502F8B02BC4813800C79A56 /* AppController.swift in Sources */,
 				5586B3F12BBDBDB200FBAFDC /* RedactAndShimmerViewModifier.swift in Sources */,
 				5576C8242BB681B4007392C8 /* Homescreen.swift in Sources */,
 				55DB162E2BBC822A0022BDA7 /* CustomProgressView.swift in Sources */,
 				55DB162C2BBC7B8F0022BDA7 /* CourseListResponseModel.swift in Sources */,
 				55A44AD32BC30BBD0058C995 /* SignUpModel.swift in Sources */,
+				5585C2502BDD364500986987 /* ReportAnIssueView.swift in Sources */,
 				550569132BD41AAC00C49E71 /* CustomDropDownView.swift in Sources */,
 				5502F8AD2BC4722100C79A56 /* LocalizationStaticComponent.swift in Sources */,
 				550569152BD41DB400C49E71 /* CustomDisableTextView.swift in Sources */,
 				55F868A72BD9677E00A05E8F /* URL+Urls.swift in Sources */,
 				55F868A12BD9658E00A05E8F /* WebService.swift in Sources */,
+				5585C2592BDD478100986987 /* ReportedAnIssueRequestModel.swift in Sources */,
 				55F868AD2BD96F2900A05E8F /* ProfileUpdateRequestModel.swift in Sources */,
 				55DB16372BBC8C780022BDA7 /* ImageLoader.swift in Sources */,
 				55F781C62BD2F359007CEB03 /* CustomTitleBarItems.swift in Sources */,
@@ -1150,6 +1197,7 @@
 				553336712BB9D3A200D5F6E5 /* FilterMenuView.swift in Sources */,
 				553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */,
 				5561754C2BDD14DB004DD996 /* OngoingCourseView.swift in Sources */,
+				5585C2522BDD38E400986987 /* IssuesView.swift in Sources */,
 				558B9E3E2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift in Sources */,
 				55DB16262BBC77F90022BDA7 /* HomeViewModel.swift in Sources */,
 				5573EA532BDB74FA00E9FCF9 /* RefreshTokenRequestModel.swift in Sources */,

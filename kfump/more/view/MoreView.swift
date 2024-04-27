@@ -14,6 +14,10 @@ struct MoreView: View {
     @State var isNavigateToOngoingCoursesView = false
     @State var isNavigateToHistoryCoursesView = false
     @State var isNavigateToAttendanceHistoryView = false
+    @State var isNavigateToContactusView = false
+    @State var isNavigateToReportAnIssueView = false
+    @State var isNavigateToMessageView = false
+    @State var isNavigateToNotificationView = false
     var moreItems: [MoreItems] = MoreItems.sampleData // Replace with your data source
     
     var body: some View {
@@ -37,6 +41,9 @@ struct MoreView: View {
         .navigationDestination(isPresented: $isNavigateToEnrolledCoursesView, destination: { EnrolledCoursesView().navigationBarBackButtonHidden(true) })
         .navigationDestination(isPresented: $isNavigateToOngoingCoursesView, destination: { OngoingCourseView().navigationBarBackButtonHidden(true) })
         .navigationDestination(isPresented: $isNavigateToHistoryCoursesView, destination: { CourseHistoryView().navigationBarBackButtonHidden(true) })
+        .navigationDestination(isPresented: $isNavigateToAttendanceHistoryView, destination: { AttendanceHistoryView().navigationBarBackButtonHidden(true) })        
+        .navigationDestination(isPresented: $isNavigateToContactusView, destination: { ContactUsView().navigationBarBackButtonHidden(true) })
+        .navigationDestination(isPresented: $isNavigateToReportAnIssueView, destination: { ReportAnIssueView().navigationBarBackButtonHidden(true) })
     }
     
     func handleAction(for item: MoreItems) {
@@ -54,13 +61,17 @@ struct MoreView: View {
             print("HistoryCourses")
             isNavigateToHistoryCoursesView = true
         case 5:
-            print("Payment History selected")
-            // Log out
-//            isShowingConfirmationView.toggle()
+            print("Message")
+            isNavigateToMessageView.toggle()
         case 6:
-            print("Payment History selected")
-            // Close Account
-//            isNavigateToCloseAccountView = true
+            print("Notification")
+            isNavigateToNotificationView = true
+        case 7:
+            print("Report An Issue")
+            isNavigateToReportAnIssueView = true
+        case 8:
+            print("Contact Us")
+            isNavigateToContactusView = true
         default:
             break
         }
