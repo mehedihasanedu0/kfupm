@@ -20,6 +20,7 @@ struct ProfileView: View {
     @State private var isShowingConfirmationView = false
     @State private var isNavigateToCloseAccountView = false
     @State private var isNavigateToLoginView = false
+    @State private var isNavigateToPaymentHistoryView = false
     
     @StateObject var profileViewModel = ProfileViewModel()
     
@@ -105,7 +106,8 @@ struct ProfileView: View {
             .navigationDestination(isPresented: $isNavigateToLoginView, destination: { LoginView().navigationBarBackButtonHidden(true) })
             .navigationDestination(isPresented: $isNavigateToResetPasswordView, destination: { ChangePasswordView().navigationBarBackButtonHidden(true) })
             .navigationDestination(isPresented: $isNavigateToMyProfileView, destination: { MyProfileView().navigationBarBackButtonHidden(true) })     
-            .navigationDestination(isPresented: $isNavigateToCloseAccountView, destination: { CloseAccountView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToCloseAccountView, destination: { CloseAccountView().navigationBarBackButtonHidden(true) })            
+            .navigationDestination(isPresented: $isNavigateToPaymentHistoryView, destination: { PaymentHistoryView().navigationBarBackButtonHidden(true) })
             
             
             
@@ -160,6 +162,7 @@ struct ProfileView: View {
         case 3:
             // Payment History
             print("Payment History selected")
+            isNavigateToPaymentHistoryView = true
         case 4:
             // Change Language
             print("Language setting selected")

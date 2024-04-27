@@ -44,7 +44,7 @@ struct Course: Identifiable, Codable {
     
     static let dummyData = [
     
-        Course(id: 1, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
+        Course(id: 1, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "nature", title: "Python for Beginners - Learn Programming from scratch", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
         Course(id: 2, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
         Course(id: 3, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
         Course(id: 4, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
@@ -56,6 +56,21 @@ struct Course: Identifiable, Codable {
         Course(id: 10, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
         Course(id: 11, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
     
+    ]    
+    
+    static let ongoingSampleData = [
+        Course(id: 1, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "nature", title: "Python for Beginners - Learn Programming from scratch", subtitle: "", description: "", status: "ONGOING", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
+        Course(id: 2, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "ONGOING", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
+    ]    
+    
+    static let courseHistorySampleData = [
+        Course(id: 1, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "nature", title: "Python for Beginners - Learn Programming from scratch", subtitle: "", description: "", status: "COMPLETED", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
+        Course(id: 2, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "COMPLETED", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
+    ]    
+    
+    static let enrolledSampleData = [
+        Course(id: 1, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "nature", title: "Python for Beginners - Learn Programming from scratch", subtitle: "", description: "", status: "ENROLLED", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
+        Course(id: 2, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "", title: "", subtitle: "", description: "", status: "ENROLLED", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil),
     ]
 }
 

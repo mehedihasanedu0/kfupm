@@ -10,6 +10,7 @@ import SwiftUI
 struct CourseDetailsView: View {
     
     @State var isEntollTypeSingle: Bool = true
+    @State var isNavigateToCheckoutView: Bool = false
     
     @State private var selectedTab = "About"
     let tabs = ["About", "Instructor", "Syllabus", "Class Routine"]
@@ -116,6 +117,7 @@ struct CourseDetailsView: View {
             .background(.white)
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_KEY, comment: "")))
+            .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView().navigationBarBackButtonHidden(true) })
         }
     }
     
@@ -128,6 +130,7 @@ struct CourseDetailsView: View {
             HStack {
                 Button(action: {
                     self.isEntollTypeSingle = true
+                    self.isNavigateToCheckoutView = true
                     
                 }) {
                     Text("Enroll Now")
@@ -150,6 +153,7 @@ struct CourseDetailsView: View {
                 
                 Button(action: {
                     self.isEntollTypeSingle = false
+                    self.isNavigateToCheckoutView = true
                     
                 }) {
                     Text("Enrolment as a Group")
@@ -277,6 +281,6 @@ struct CourseDetailsView: View {
     }
 }
 
-#Preview {
-    CourseDetailsView()
-}
+//#Preview {
+//    CourseDetailsView()
+//}

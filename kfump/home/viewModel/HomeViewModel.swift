@@ -23,6 +23,9 @@ class HomeViewModel : ObservableObject {
     @Published var isSucess = false
     
     @Published var courseList : [Course] = Course.dummyData
+    @Published var ongoingCourseList : [Course] = Course.ongoingSampleData
+    @Published var courseHistoryList : [Course] = Course.courseHistorySampleData
+    @Published var enrolledCourseList : [Course] = Course.enrolledSampleData
     @Published var courseListBySearchKey = [Course]()
     
     init(homeRepositoryService: HomeRepositoryService = HomeRepositoryService()) {

@@ -72,7 +72,7 @@ struct InstructorView: View {
                     
                     // Courses
                     HStack {
-                        Image(systemName: "book.closed")
+                        Image("instructor_courses")
                             .foregroundColor(.gray)
                         Text("2 Courses")
                             .font(.custom(FONT_MEDIUM, size: 12))
