@@ -75,7 +75,7 @@ struct RegistrationView: View {
                                     value: $phoneNumber,
                                     emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: PHONE_NUMBER_CANT_BE_EMPTY_KEY, comment: ""),
                                     isButtonPress: isRegistrationButtonPress)
-                    .keyboardType(.phonePad)
+                    .keyboardType(.numberPad)
                     .padding(.top,15)
                     
                     

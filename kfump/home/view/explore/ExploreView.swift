@@ -19,6 +19,8 @@ struct ExploreView: View {
     
     @State var isNavigateToCourseDetailsView: Bool = false
     
+    @State var courseId: Int = 0
+    
     
     
     @StateObject var homeviewModel = HomeViewModel()
@@ -52,7 +54,10 @@ struct ExploreView: View {
                                 isCloseButtonVisible = true
                             }
                             .onChange(of: searchValue) { newValue in
-                                homeviewModel.getCourseListBySearchKey(searchKey: newValue)
+                                if newValue != "" {
+                                    homeviewModel.getCourseListBySearchKey(searchKey: newValue)
+                                }
+                                
                             }
                             .onSubmit {
                                 showSearchView = false
@@ -112,7 +117,8 @@ struct ExploreView: View {
                                         .padding(.bottom,2)
                                         .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.courseList.count == 11)
                                         .onTapGesture {
-                                            print("Course tapped: \(course.id)")
+                                            courseId = course.id ?? 0
+                                            print("courseId \(courseId)")
                                             isNavigateToCourseDetailsView = true
                                         }
 
@@ -121,7 +127,10 @@ struct ExploreView: View {
                             }.padding(.top,15)
                         }
                         .onAppear() {
-                            homeviewModel.getCourseList()
+                            if homeviewModel.courseListBySearchKey.count == 0 {
+                                homeviewModel.getCourseList()
+                            }
+                            
                         }
                         .padding(.bottom,10)
                     }
@@ -129,9 +138,9 @@ struct ExploreView: View {
                     
                 }
                 
-//                if homeviewModel.isLoading {
-//                    CustomProgressView()
-//                }
+                if homeviewModel.isLoadingBySearchKey {
+                    CustomProgressView()
+                }
             }
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -142,7 +151,7 @@ struct ExploreView: View {
                     authenicationViewModel.refreshToken(body: vm)
                 }
             }
-            .navigationDestination(isPresented: $isNavigateToCourseDetailsView, destination: { CourseDetailsView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToCourseDetailsView, destination: { CourseDetailsView(courseId: courseId).navigationBarBackButtonHidden(true) })
         
     }
     
@@ -167,7 +176,7 @@ struct ExploreView: View {
     
     var filterViewLabel: some View {
         
-        FilterView(totalResult: 120,filterValue: filterItemIds.count, onFilterTapped: {
+        FilterView(totalResult: homeviewModel.courseList.count,filterValue: filterItemIds.count, onFilterTapped: {
             self.presentSheet.toggle()
         })
         .padding(.top, 20)
@@ -188,7 +197,7 @@ struct ExploreView: View {
     var searchViewLabel: some View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
-                ForEach(homeviewModel.courseListBySearchKey, id: \.id) { course in
+                ForEach(homeviewModel.courseList, id: \.id) { course in
                     SingleSearchItem(course: course)
                         .padding(.bottom,2)
                         .onTapGesture {
@@ -196,6 +205,8 @@ struct ExploreView: View {
                             isCloseButtonVisible = false
                             searchValue = course.title ?? " "
                             self.hideKeyboard()
+                            courseId = course.id ?? 0
+                            isNavigateToCourseDetailsView = true
                         }
                 }
             }

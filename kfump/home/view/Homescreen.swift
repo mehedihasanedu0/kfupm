@@ -10,6 +10,8 @@ import SwiftUI
 struct Homescreen: View {
     
     @State private var selection = 0
+    @State private var oldSelectedItem = 0
+    @State var isPresentingMoreView = false
     @StateObject var authenicationViewModel = AuthenicationViewModel()
     @AppStorage(Keys.refreshToken.rawValue) var refreshToken: String?
     
@@ -41,7 +43,7 @@ struct Homescreen: View {
                 .tag(2)
                 .id(2)
                 
-                MoreView().tabItem {
+                Text("").tabItem {
                     selection == 3 ? Image("tab_more") : Image("tab_more")
                     Text(LocalizationSystem.shared.localizedStringForKey(key: MORE_KEY, comment: "")).font(.custom("SST Arabic Roman", size: 14))
                 }
@@ -63,10 +65,24 @@ struct Homescreen: View {
             }
             
         }
+        .onChange(of: selection) {
+
+            if 3 == selection {
+                self.isPresentingMoreView = true
+                self.selection = self.oldSelectedItem
+            } else if (isPresentingMoreView == false) {
+                self.oldSelectedItem = $0
+            }
+        }
+        .sheet(isPresented: $isPresentingMoreView, onDismiss: {
+            self.selection = self.oldSelectedItem
+        }) {
+            MoreView()
+        }
         
     }
 }
 
-#Preview {
-    Homescreen()
-}
+//#Preview {
+//    Homescreen()
+//}

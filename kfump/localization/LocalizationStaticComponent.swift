@@ -61,6 +61,7 @@ let CLEAR_ALL_KEY = "Clear All"
 
 //MARK: - VALIDATION
 let USER_NAME_CANT_BE_EMPTY_KEY = "User Name Can't be empty"
+let EMAIL_OR_PHONE_CANT_BE_EMPTY_KEY = "Email/phone cannot be empty"
 let FULL_NAME_CANT_BE_EMPTY_KEY = "Full Name Can't be empty"
 let EMAIL_CANT_BE_EMPTY_KEY = "Email Can't be empty"
 let PHONE_NUMBER_CANT_BE_EMPTY_KEY = "Phone number Can't be empty"

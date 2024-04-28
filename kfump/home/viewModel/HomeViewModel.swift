@@ -81,6 +81,9 @@ class HomeViewModel : ObservableObject {
                     self.courseListBySearchKey = []
                 }
             }, receiveValue: { [weak self] courseResponse in
+                self?.courseList.removeAll()
+                self?.courseListBySearchKey.removeAll()
+                self?.courseList = courseResponse.items
                 self?.courseListBySearchKey = courseResponse.items
                 self?.isLoadingBySearchKey = true
             })

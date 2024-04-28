@@ -22,6 +22,9 @@ struct ProfileView: View {
     @State private var isNavigateToLoginView = false
     @State private var isNavigateToPaymentHistoryView = false
     
+    @State private var selectedImage = UIImage()
+    @State private var showSheet = false
+    
     @StateObject var profileViewModel = ProfileViewModel()
     
     
@@ -32,21 +35,48 @@ struct ProfileView: View {
             
             VStack {
                 
-                if let image = decodeBase64ToImage(userImageBase64 ?? "") {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 130,height: 130)
-                        .cornerRadius(65)
-                        .padding(.top,50)
-                } else {
-                    Image("nature")
-                        .resizable()
-                        .frame(width: 130,height: 130)
-                        .cornerRadius(65)
-                        .padding(.top,50)
+                if var image = decodeBase64ToImage(userImageBase64 ?? "") {
+                    if #available(iOS 17.0, *) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 130,height: 130)
+                            .cornerRadius(65)
+                            .padding(.top,50)
+                            .onTapGesture {
+                                showSheet = true
+                            }
+                            .sheet(isPresented: $showSheet) {
+                                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$selectedImage)
+                            }
+                            .onChange(of : selectedImage) {
+                                userImageBase64 = encodeImageToBase64String(selectedImage)
+                                uploadProfileImage()
+                            }
+                        
+                    }
+                    
+                } else  {
+                    if #available(iOS 17.0, *) {
+                        Image(uiImage: selectedImage)
+                            .resizable()
+                            .frame(width: 130,height: 130)
+                            .cornerRadius(65)
+                            .padding(.top,50)
+                            .background(.gray)
+                            .onTapGesture {
+                                showSheet = true
+                            }
+                            .sheet(isPresented: $showSheet) {
+                                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$selectedImage)
+                            }
+                            .onChange(of : selectedImage) {
+                                userImageBase64 = encodeImageToBase64String(selectedImage)
+                                uploadProfileImage()
+                            }
+                    }
+
                 }
                 
-
                 
                 
                 Text(userName ?? "")
@@ -179,6 +209,15 @@ struct ProfileView: View {
     
     
     
+    func uploadProfileImage() {
+        var parameter : [String : Any] = [
+            "image"          :  selectedImage
+        ]
+
+        print("parameter \(parameter)")
+        profileViewModel.fetchDataForUpdateProfileData(uuId: userUUID ?? "", parameter: parameter)
+    }
+    
     
     
     var localizationView: some View {
@@ -238,7 +277,7 @@ struct ProfileView: View {
     
 }
 
-
-#Preview {
-    ProfileView()
-}
+//
+//#Preview {
+//    ProfileView()
+//}

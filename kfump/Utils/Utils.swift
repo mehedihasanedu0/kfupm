@@ -367,9 +367,15 @@ class Utils {
     // MARK: - Refresh Token
     static func isJWTTokenExpire() -> Bool {
         
+        @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
         @AppStorage(Keys.TOKEN_D.rawValue) var jwtToken: String?
         print("jwtToken \(jwtToken ?? "")")
+        print("isLogin \(isLogin ?? false)")
 
+        if !(isLogin ?? false)  {
+            return false
+        }
+        
         var payload64 = jwtToken!.components(separatedBy: ".")[1]
 
         while payload64.count % 4 != 0 {

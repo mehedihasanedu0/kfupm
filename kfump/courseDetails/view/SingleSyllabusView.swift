@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SingleSyllabusView: View {
     
-    let singleSyllabus : SyllabusModel?
+    let singleSyllabus : SyllabusInfo?
     
     var body: some View {
         VStack {
@@ -17,7 +17,7 @@ struct SingleSyllabusView: View {
                 
                 VStack {
                     VStack {
-                        Text("\(singleSyllabus?.weekNo ?? 0)")
+                        Text("\(singleSyllabus?.week ?? "0")")
                             .font(.custom(FONT_BOLD, size: 18))
                         Text("WEEK")
                             .font(.custom(FONT_LIGHT, size: 10))
@@ -35,12 +35,12 @@ struct SingleSyllabusView: View {
                 
                 VStack {
                     
-                    Text(singleSyllabus?.title ?? "")
+                    Text(singleSyllabus?.syllabusTitle ?? "")
                         .font(.custom(FONT_MEDIUM, size: 15))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                     
-                    Text(singleSyllabus?.details ?? "")
+                    Text(singleSyllabus?.description ?? "")
                         .font(.custom(FONT_LIGHT, size: 14))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical,5)
@@ -52,7 +52,7 @@ struct SingleSyllabusView: View {
                             .resizable()
                             .frame(width: 20,height: 20)
                         
-                        Text(singleSyllabus?.syllabus ?? "")
+                        Text("\(singleSyllabus?.noOfLectures ?? "") offline lecture,\(singleSyllabus?.noOfAssignment ?? "") assignment, \(singleSyllabus?.noOfQuiz ?? "") quiz")
                             .font(.custom(FONT_MEDIUM, size: 13))
                             .foregroundColor(hexToColor(hex: "#7C7C7C"))
                         
@@ -66,7 +66,7 @@ struct SingleSyllabusView: View {
                             .resizable()
                             .frame(width: 20,height: 20)
                         
-                        Text(singleSyllabus?.attendanceMessage ?? "")
+                        Text("\(singleSyllabus?.classToAttend ?? "") classes to attend")
                             .font(.custom(FONT_MEDIUM, size: 13))
                             .foregroundColor(hexToColor(hex: "#7C7C7C"))
                         

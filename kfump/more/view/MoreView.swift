@@ -21,29 +21,40 @@ struct MoreView: View {
     var moreItems: [MoreItems] = MoreItems.sampleData // Replace with your data source
     
     var body: some View {
-        ZStack {
-            VStack {
-                LazyVStack(spacing: 15) {
-                    ForEach(moreItems) { item in
-                        SingleItemView(isDotViewShow: (item.id == 6),
-                                       isBottomDividerShow: item.id != 8,
-                                       moreItems: item )
-                        .onTapGesture {
-                            if isLogin ?? false {
-                                handleAction(for: item)
+        
+        NavigationStack  {
+            ZStack {
+                VStack {
+                    
+                    Divider()
+                        .frame(width: 60,height: 6)
+                        .background(hexToColor(hex: "#E0E0DC"))
+                        .cornerRadius(4)
+                        .padding(.bottom,30)
+                    
+                    LazyVStack(spacing: 15) {
+                        ForEach(moreItems) { item in
+                            SingleItemView(isDotViewShow: (item.id == 6),
+                                           isBottomDividerShow: item.id != 8,
+                                           moreItems: item )
+                            .onTapGesture {
+                                if isLogin ?? false {
+                                    handleAction(for: item)
+                                }
+                                
                             }
-                            
                         }
-                    }
-                }.padding(.bottom,20)
+                    }.padding(.bottom,20)
+                }
             }
+            .navigationDestination(isPresented: $isNavigateToEnrolledCoursesView, destination: { EnrolledCoursesView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToOngoingCoursesView, destination: { OngoingCourseView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToHistoryCoursesView, destination: { CourseHistoryView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToAttendanceHistoryView, destination: { AttendanceHistoryView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToContactusView, destination: { ContactUsView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToReportAnIssueView, destination: { ReportAnIssueView().navigationBarBackButtonHidden(true) })
         }
-        .navigationDestination(isPresented: $isNavigateToEnrolledCoursesView, destination: { EnrolledCoursesView().navigationBarBackButtonHidden(true) })
-        .navigationDestination(isPresented: $isNavigateToOngoingCoursesView, destination: { OngoingCourseView().navigationBarBackButtonHidden(true) })
-        .navigationDestination(isPresented: $isNavigateToHistoryCoursesView, destination: { CourseHistoryView().navigationBarBackButtonHidden(true) })
-        .navigationDestination(isPresented: $isNavigateToAttendanceHistoryView, destination: { AttendanceHistoryView().navigationBarBackButtonHidden(true) })        
-        .navigationDestination(isPresented: $isNavigateToContactusView, destination: { ContactUsView().navigationBarBackButtonHidden(true) })
-        .navigationDestination(isPresented: $isNavigateToReportAnIssueView, destination: { ReportAnIssueView().navigationBarBackButtonHidden(true) })
+        
     }
     
     func handleAction(for item: MoreItems) {

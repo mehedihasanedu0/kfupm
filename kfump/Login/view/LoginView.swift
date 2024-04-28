@@ -60,7 +60,7 @@ struct LoginView: View {
                         
                         CustomTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: EMAIL_OR_PHONE_KEY, comment: ""),
                                         value: $userName,
-                                        emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: USER_NAME_CANT_BE_EMPTY_KEY, comment: ""),
+                                        emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: EMAIL_OR_PHONE_CANT_BE_EMPTY_KEY, comment: ""),
                                         isButtonPress: isLoginButtonPress)
                         .padding(.top,40)
                         
@@ -223,50 +223,57 @@ struct LoginView: View {
     
     var localizationView: some View {
         
-        MyEqualWidthHStack {
-            Button(action: {
-                isEnglishSelected = true
-                if LocalizationSystem.shared.getLanguage() == "ar" {
-                    changeLanguage(code: "en")
-                    isRTL = false
-                }
-                
-            }) {
-                Text("EN")
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(isEnglishSelected ? .bold : .regular)
-                    .padding(.vertical,10)
-                    .padding(.horizontal,22)
-                    .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
-                    .foregroundColor(isEnglishSelected ? .white : .black)
-                    .cornerRadius(25)
-                
-            }
+        VStack {
             
-            Button(action: {
-                isEnglishSelected = false
+            HStack(spacing: 0) {
                 
-                if LocalizationSystem.shared.getLanguage() == "en" {
-                    changeLanguage(code: "ar")
-                    isRTL = true
-                }
-                
-                
-            }) {
-                Text("AR")
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(!isEnglishSelected ? .bold : .regular)
-                    .padding(.vertical,10)
-                    .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
-                    .foregroundColor(!isEnglishSelected ? .white : .black)
-                    .cornerRadius(25)
+                VStack {
+                    Text("EN")
+                        .font(.custom(FONT_MEDIUM, size: 14))
+                        .padding(.vertical,5)
+                        .frame(width: 51)
+                        .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                        .foregroundColor(isEnglishSelected ? .white : .black)
                     
+                }
+                .onTapGesture {
+                    isEnglishSelected = true
+                    if LocalizationSystem.shared.getLanguage() == "ar" {
+                        changeLanguage(code: "en")
+                        isRTL = false
+                    }
+                }
+                .cornerRadius(25)
+                .padding(.trailing,3)
+                
+                
+                VStack {
+                    Text("AR")
+                        .padding(.vertical,5)
+                        .font(.custom(FONT_MEDIUM, size: 14))
+                        .frame(width: 51)
+                        .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                        .foregroundColor(!isEnglishSelected ? .white : .black)
+                        .onTapGesture {
+                            isEnglishSelected = false
+                            
+                            if LocalizationSystem.shared.getLanguage() == "en" {
+                                changeLanguage(code: "ar")
+                                isRTL = true
+                            }
+                        }
+                }
+                .cornerRadius(25)
+                .padding(.leading,3)
+                
+                
+                
             }
-            
         }
-        .frame(width: 150, height: 50)
+        .frame(width: 115, height: 36)
         .background(hexToColor(hex: "#E4F4EA"))
         .cornerRadius(25)
+        
     }
     
     
@@ -275,8 +282,8 @@ struct LoginView: View {
     }
 }
 
-//#Preview {
-//    LoginView()
-//}
+#Preview {
+    LoginView()
+}
 
 

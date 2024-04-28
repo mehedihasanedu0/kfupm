@@ -37,8 +37,8 @@ extension URL {
     static let getAllreportIssue                   = "\(URL.baseUrl)/cms/report-an-issues/"
     
 
-    // MARK: - Reservation
-    static let add_reservation                     = "\(URL.baseUrl)/reservation/add"
+    // MARK: - Course
+    static let courseDetails                       = "\(URL.baseUrl)/course/about/"
     static let customer_getReservation_byDate      = "\(URL.baseUrl)/reservation/customer/view?seller="
     
     // MARK: - Cupon

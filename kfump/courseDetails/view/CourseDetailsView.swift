@@ -10,10 +10,15 @@ import SwiftUI
 struct CourseDetailsView: View {
     
     @State var isEntollTypeSingle: Bool = true
+    @State var isViewHidden: Bool = true
     @State var isNavigateToCheckoutView: Bool = false
     
     @State private var selectedTab = "About"
     let tabs = ["About", "Instructor", "Syllabus", "Class Routine"]
+    
+    @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
+    
+    var courseId : Int!
     
     var body: some View {
         
@@ -22,20 +27,31 @@ struct CourseDetailsView: View {
                 
                 VStack {
                     
-                    Image("nature")
-                        .resizable()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 250)
-                        .cornerRadius(12)
-                        .padding(.top,30)
+                    if courseDetailsViewModel.courseData != nil {
+                        WebImageView(imageUrl: courseDetailsViewModel.courseData?.coverImage ?? "")
+                            .aspectRatio(18/13, contentMode: .fill)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 250)
+                            .cornerRadius(12)
+                            .padding(.top,30)
+                            
+                        
+                    } else {
+                        Image("nature")
+                            .resizable()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 250)
+                            .cornerRadius(12)
+                            .padding(.top,30)
+                    }
                     
-                    
-                    Text("Figma UI UX Design Essentials for Beginners")
+                
+                    Text(courseDetailsViewModel.courseData?.title ?? "")
                         .font(.custom(FONT_BOLD, size: 20))
                         .padding(.top)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("Learn javascript online and supercharge your web design with this Javascript for beginners training course.")
+                    Text(courseDetailsViewModel.courseData?.subtitle ?? "")
                         .font(.custom(FONT_LIGHT, size: 16))
                         .padding(.vertical,5)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,7 +79,7 @@ struct CourseDetailsView: View {
                     .padding(.top,30)   
                     
                     
-                    Text("A recent survey found that 37% of teens say they have poor mental health. This 6-week course aims to curb this mental health crisis by bringing together the best insights from Dr. Laurie Santos’ popular Yale course Psychology and the Good Life. In this course, you will explore what the field of psychology teaches us about how to be happier, how to feel less stressed, and how to thrive in high school and beyond.")
+                    Text(courseDetailsViewModel.courseData?.description ?? "")
                         .font(.custom(FONT_LIGHT, size: 16))
                         .padding(.vertical,5)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -79,7 +95,7 @@ struct CourseDetailsView: View {
                     }
                     .padding(.top,30)
                     
-                    ForEach(SyllabusModel.sampleData) { item in
+                    ForEach(courseDetailsViewModel.scyllabusInfo) { item in
                         SingleSyllabusView(singleSyllabus: item)
                         
                         Divider()
@@ -94,7 +110,7 @@ struct CourseDetailsView: View {
                     }
                     .padding(.top,15)
                     
-                    ClassRoutineView()
+                    ClassRoutineView(singleClassRoutine: courseDetailsViewModel.classRoutineInfo)
                         .padding(.top,8)
                     
 
@@ -113,6 +129,11 @@ struct CourseDetailsView: View {
                 
                 
                 
+            }
+            .redactShimmer(condition: courseDetailsViewModel.isLoading)
+            .onAppear {
+                print("courseId \(courseId)")
+                courseDetailsViewModel.courseDetails(courseId: courseId)
             }
             .background(.white)
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
