@@ -31,6 +31,7 @@ struct OTPView: View {
     @State private var showToast = false
     
     @State var isNavigateToHomeScreen: Bool = false
+    @State var isNavigateToLogin: Bool = false
     @State var isNavigateToResetPassword: Bool = false
     @StateObject var authonicationViewModel = AuthenicationViewModel()
     

@@ -31,6 +31,7 @@ extension URL {
     
     // MARK: Profile
     static let userType                            = "\(URL.baseUrl)/user/user-type/"
+    static let colseAccount                        = "\(URL.baseUrl)/user/close-account/"
     
     // MARK: - More
     static let createReportAnIssue                 = "\(URL.baseUrl)/cms/report-an-issues/"

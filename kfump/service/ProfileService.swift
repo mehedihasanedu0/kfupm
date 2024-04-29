@@ -6,10 +6,12 @@
 //
 
 import Foundation
-import Foundation
+import SwiftUI
 import Combine
 
 class ProfileService {
+    
+    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
     
     private let networkClient: NetworkClient
     init(networkClient: NetworkClient = NetworkClient.shared) {
@@ -24,6 +26,13 @@ class ProfileService {
     func userTypeList() -> AnyPublisher<UserTypeListModel, Error> {
         let url = URL(string: URL.userType)
         return networkClient.getRequest(url: url,headerType: .APIRequestWithNoHeader)
+        
+    }
+    
+    func colseAccount(body: CloseAccountRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: "\(URL.colseAccount)\(userUUID ?? "")/")
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.putRequest(url: url,body: data,headerType: .APIRequestWithToken)
         
     }
  

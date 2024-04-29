@@ -57,12 +57,11 @@ struct ProfileView: View {
                     
                 } else  {
                     if #available(iOS 17.0, *) {
-                        Image(uiImage: selectedImage)
+                        Image("demo_profile")
                             .resizable()
                             .frame(width: 130,height: 130)
-                            .cornerRadius(65)
+                            .background(.gray).cornerRadius(65)
                             .padding(.top,50)
-                            .background(.gray)
                             .onTapGesture {
                                 showSheet = true
                             }

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct CloseAccountView: View {
     
+    @StateObject var profileViewModel = ProfileViewModel()
     @State private var isShowingConfirmationView = false
+    @State private var isNavigateToLoginView = false
+    @State private var showToast = false
     
     var body: some View {
         ZStack {
@@ -26,31 +29,6 @@ struct CloseAccountView: View {
                     
                     
                     isShowingConfirmationView = true
-//                    isLoginButtonPress = true
-//                    
-//                    guard !userName.isEmpty,!password.isEmpty else {
-//                        return
-//                    }
-//                    
-//                    let vm = SignInModel(username: userName,
-//                                         password: password)
-//                    
-//                    authonicationViewModel.signIn(body: vm) { result in
-//                        
-//                        showToast.toggle()
-//                        
-//                        if result {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                
-//                                isNavigateToHomeScreen = true
-//                            }
-//                            
-//                        }
-//                        
-//                    }
-                    
-                    
-                    
                 }) {
                     Text(LocalizationSystem.shared.localizedStringForKey(key: CLOSE_YOUR_ACCOUNT_KEY, comment: ""))
                         .padding(.vertical,10)
@@ -87,6 +65,18 @@ struct CloseAccountView: View {
                     message: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly",
                     onConfirm: {
                         // Handle Yes action
+                        let vm = CloseAccountRequestModel(isCloseAccount: true)
+                        profileViewModel.colseAccount(body: vm) { result in
+                            showToast.toggle()
+                            if result {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    UserDefaults.standard.resetKeys()
+                                    isNavigateToLoginView = true
+                                }
+                                
+                            }
+                            
+                        }
                         isShowingConfirmationView = false
                     },
                     onCancel: {
@@ -98,15 +88,25 @@ struct CloseAccountView: View {
             }
             
             
+            if profileViewModel.isLoadingCloseView {
+                CustomProgressView()
+            }
+            
+            ToastView(isPresented: $showToast, duration: 2.0) {
+                CustomTost(message: profileViewModel.dialogMessage)
+            }
+            
+            
         }
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .onAppear {
         }
         .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: CLOSE_ACCOUNT_KEY, comment: "")))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
+        .navigationDestination(isPresented: $isNavigateToLoginView, destination: { LoginView().navigationBarBackButtonHidden(true) })
     }
 }
 
-#Preview {
-    CloseAccountView()
-}
+//#Preview {
+//    CloseAccountView()
+//}

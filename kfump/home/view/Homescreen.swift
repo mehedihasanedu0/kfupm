@@ -12,8 +12,10 @@ struct Homescreen: View {
     @State private var selection = 0
     @State private var oldSelectedItem = 0
     @State var isPresentingMoreView = false
+    @State var isNavigateToLoginView = false
     @StateObject var authenicationViewModel = AuthenicationViewModel()
     @AppStorage(Keys.refreshToken.rawValue) var refreshToken: String?
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
     
     var body: some View {
         
@@ -66,19 +68,27 @@ struct Homescreen: View {
             
         }
         .onChange(of: selection) {
-
-            if 3 == selection {
-                self.isPresentingMoreView = true
-                self.selection = self.oldSelectedItem
-            } else if (isPresentingMoreView == false) {
-                self.oldSelectedItem = $0
+            print("selection \(selection)")
+            if ((2 == selection && !(isLogin ?? false)) || (3 == selection && !(isLogin ?? false))) {
+                isNavigateToLoginView = true
+            } else {
+                
+                if 3 == selection {
+                    self.isPresentingMoreView = true
+                    self.selection = self.oldSelectedItem
+                } else if (isPresentingMoreView == false) {
+                    self.oldSelectedItem = $0
+                }
             }
+
+            
         }
         .sheet(isPresented: $isPresentingMoreView, onDismiss: {
             self.selection = self.oldSelectedItem
         }) {
             MoreView()
         }
+        .navigationDestination(isPresented: $isNavigateToLoginView, destination: { LoginView().navigationBarBackButtonHidden(true) })
         
     }
 }

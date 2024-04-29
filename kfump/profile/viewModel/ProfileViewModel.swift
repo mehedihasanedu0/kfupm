@@ -22,6 +22,7 @@ class ProfileViewModel : ObservableObject {
     private let networkClient : NetworkClientForMultipart
     
     @Published var isLoading = false
+    @Published var isLoadingCloseView = false
     @Published var isGetCourseActualData = false
     @Published var isLoadingBySearchKey = false
     @Published var error: Error?
@@ -116,6 +117,35 @@ class ProfileViewModel : ObservableObject {
                 self?.isLoading = true
                 self?.getUserTypeOptionList(data.data)
                 completion(data.success)
+            })
+            .store(in: &cancellables)
+        
+        
+    }    
+    
+    
+    func colseAccount(body: CloseAccountRequestModel,completion: @escaping (Bool) -> Void) {
+        isLoadingCloseView = true
+        profileService.colseAccount(body: body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoadingCloseView = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    
+                }
+            }, receiveValue: { [weak self] data in
+                print("Colosed user \(data)")
+                self?.dialogMessage = data.message ?? ""
+                self?.isLoadingCloseView = false
+                completion(data.success ?? false)
             })
             .store(in: &cancellables)
         
