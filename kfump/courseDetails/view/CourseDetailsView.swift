@@ -12,138 +12,203 @@ struct CourseDetailsView: View {
     @State var isEntollTypeSingle: Bool = true
     @State var isViewHidden: Bool = true
     @State var isNavigateToCheckoutView: Bool = false
+    @State var isShowingGroupEnrolledView: Bool = false
+    
     
     @State private var selectedTab = "About"
     let tabs = ["About", "Instructor", "Syllabus", "Class Routine"]
     
     @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
+    @State var isNavigateToEnrolledCourseView : Bool = false
     
     var courseId : Int!
     
     var body: some View {
         
-        ScrollView {
-            VStack {
+        ZStack {
+            
+            ScrollView {
+                
                 
                 VStack {
                     
-                    if courseDetailsViewModel.courseData != nil {
-                        WebImageView(imageUrl: courseDetailsViewModel.courseData?.coverImage ?? "")
-                            .aspectRatio(18/13, contentMode: .fill)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 250)
-                            .cornerRadius(12)
-                            .padding(.top,30)
+                    VStack {
+                        
+                        if courseDetailsViewModel.courseData != nil {
+                            WebImageView(imageUrl: courseDetailsViewModel.courseData?.coverImage ?? "")
+                                .aspectRatio(18/13, contentMode: .fill)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 250)
+                                .cornerRadius(12)
+                                .padding(.top,30)
                             
+                            
+                        } else {
+                            Image("nature")
+                                .resizable()
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 250)
+                                .cornerRadius(12)
+                                .padding(.top,30)
+                        }
                         
-                    } else {
-                        Image("nature")
-                            .resizable()
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 250)
-                            .cornerRadius(12)
-                            .padding(.top,30)
-                    }
-                    
-                
-                    Text(courseDetailsViewModel.courseData?.title ?? "")
-                        .font(.custom(FONT_BOLD, size: 20))
-                        .padding(.top)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Text(courseDetailsViewModel.courseData?.subtitle ?? "")
-                        .font(.custom(FONT_LIGHT, size: 16))
-                        .padding(.vertical,5)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    
-                    
-                    enrolledButtonView
-                }
-                .padding(.horizontal,20)
-                
-                
-                menuListView
-                    .shadow(color: .gray, radius: 0.2, x: 0, y: 0)
-                
-                VStack {
-                    
-                    
-                    
-                    
-                    HStack {
-                        Text("About this Course")
-                            .font(.custom(FONT_BOLD, size: 16))
-                        Spacer()
-                    }
-                    .padding(.top,30)   
-                    
-                    
-                    Text(courseDetailsViewModel.courseData?.description ?? "")
-                        .font(.custom(FONT_LIGHT, size: 16))
-                        .padding(.vertical,5)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    
-                    InstructorView()
-                    
-                    
-                    HStack {
-                        Text("Syllabus")
-                            .font(.custom(FONT_BOLD, size: 16))
-                        Spacer()
-                    }
-                    .padding(.top,30)
-                    
-                    ForEach(courseDetailsViewModel.scyllabusInfo) { item in
-                        SingleSyllabusView(singleSyllabus: item)
                         
-                        Divider()
+                        Text(courseDetailsViewModel.courseData?.title ?? "")
+                            .font(.custom(FONT_BOLD, size: 20))
+                            .padding(.top)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text(courseDetailsViewModel.courseData?.subtitle ?? "")
+                            .font(.custom(FONT_LIGHT, size: 16))
+                            .padding(.vertical,5)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        
+                        
+                        enrolledButtonView
                     }
-                    .padding(.top,8)
-                    .padding(.bottom,10)
+                    .padding(.horizontal,20)
                     
-                    HStack {
-                        Text("Class Routing")
-                            .font(.custom(FONT_BOLD, size: 16))
-                        Spacer()
-                    }
-                    .padding(.top,15)
                     
-                    ClassRoutineView(singleClassRoutine: courseDetailsViewModel.classRoutineInfo)
+                    menuListView
+                        .shadow(color: .gray, radius: 0.2, x: 0, y: 0)
+                    
+                    VStack {
+                        
+                        
+                        
+                        
+                        HStack {
+                            Text("About this Course")
+                                .font(.custom(FONT_BOLD, size: 16))
+                            Spacer()
+                        }
+                        .padding(.top,30)
+                        
+                        
+                        Text(courseDetailsViewModel.courseData?.description ?? "")
+                            .font(.custom(FONT_LIGHT, size: 16))
+                            .padding(.vertical,5)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        
+                        InstructorView()
+                        
+                        
+                        HStack {
+                            Text("Syllabus")
+                                .font(.custom(FONT_BOLD, size: 16))
+                            Spacer()
+                        }
+                        .padding(.top,30)
+                        
+                        ForEach(courseDetailsViewModel.scyllabusInfo) { item in
+                            SingleSyllabusView(singleSyllabus: item)
+                            
+                            Divider()
+                        }
                         .padding(.top,8)
-                    
-
-                    HStack {
-                        Text("Reviews")
-                            .font(.custom(FONT_SEMIBOLD, size: 16))
-                        Spacer()
+                        .padding(.bottom,10)
+                        
+                        HStack {
+                            Text("Class Routing")
+                                .font(.custom(FONT_BOLD, size: 16))
+                            Spacer()
+                        }
+                        .padding(.top,15)
+                        
+                        ClassRoutineView(singleClassRoutine: courseDetailsViewModel.classRoutineInfo)
+                            .padding(.top,8)
+                        
+                        
+                        HStack {
+                            Text("Reviews")
+                                .font(.custom(FONT_SEMIBOLD, size: 16))
+                            Spacer()
+                        }
+                        .padding(.vertical)
+                        
+                        reviewView
+                        
                     }
-                    .padding(.vertical)
+                    .padding(.horizontal,20)
                     
-                    reviewView
+                    
+                    
                     
                 }
-                .padding(.horizontal,20)
-                
+                .redactShimmer(condition: courseDetailsViewModel.isLoading)
+                .onAppear {
+                    print("courseId \(courseId)")
+                    if courseDetailsViewModel.courseData == nil {
+                        courseDetailsViewModel.courseDetails(courseId: courseId)
+                    }
+                    
+                }
+                .background(.white)
+                .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
+                .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_KEY, comment: "")))
+                .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView(enrolledData: courseDetailsViewModel.enrolledData).navigationBarBackButtonHidden(true) })   
+
                 
                 
                 
             }
-            .redactShimmer(condition: courseDetailsViewModel.isLoading)
-            .onAppear {
-                print("courseId \(courseId)")
-                courseDetailsViewModel.courseDetails(courseId: courseId)
+            
+            
+            if isShowingGroupEnrolledView {
+                groupEnrolledView
             }
-            .background(.white)
-            .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-            .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_KEY, comment: "")))
-            .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView().navigationBarBackButtonHidden(true) })
+            
+            
+            if courseDetailsViewModel.isLoadingEnrollment {
+                CustomProgressView()
+            }
+            
+//            ToastView(isPresented: $courseDetailsViewModel.isLoadingEnrollment, duration: 2.0) {
+//                CustomTost(message: courseDetailsViewModel.dialogMessage)
+//            }
+            
         }
     }
     
     
     
+    
+    var groupEnrolledView: some View {
+        ZStack {
+            Rectangle()
+                .fill(Color.black)
+                .opacity(0.6)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    isShowingGroupEnrolledView = false
+                }
+            
+            GroupEnrolledView(
+                courseId: courseId,
+                title: "Enrolment as a Group",
+                message: "You can send the invitation at most 5 people at a time. They will get notification through email and need to accept the invitation in order to join.",
+                onConfirm: {
+                    // Handle Yes action
+                    isShowingGroupEnrolledView = false
+                    let vm = EnrolledRequestModel(courseId: courseId, enrolledType: "Group")
+                    courseDetailsViewModel.enrolled(body: vm) { result in
+                        if result {
+                            isNavigateToCheckoutView = true
+                        }
+                    }
+                    
+                },
+                onCancel: {
+                    // Handle No action
+                    isShowingGroupEnrolledView = false
+                }
+            )
+            .transition(.scale)
+        }
+        
+    }
     
     var enrolledButtonView: some View {
         
@@ -151,7 +216,12 @@ struct CourseDetailsView: View {
             HStack {
                 Button(action: {
                     self.isEntollTypeSingle = true
-                    self.isNavigateToCheckoutView = true
+                    let vm = EnrolledRequestModel(courseId: courseId, enrolledType: "Single")
+                    courseDetailsViewModel.enrolled(body: vm) { result in
+                        if result {
+                            self.isNavigateToCheckoutView = true
+                        }
+                    }
                     
                 }) {
                     Text("Enroll Now")
@@ -159,7 +229,7 @@ struct CourseDetailsView: View {
                         .font(.custom(FONT_SEMIBOLD, size: 16))
                         .foregroundColor(isEntollTypeSingle ? .white : hexToColor(hex: "#007D40"))
                         .padding(.horizontal,20)
-                        
+                    
                     
                 }
                 
@@ -174,7 +244,7 @@ struct CourseDetailsView: View {
                 
                 Button(action: {
                     self.isEntollTypeSingle = false
-                    self.isNavigateToCheckoutView = true
+                    self.isShowingGroupEnrolledView  = true
                     
                 }) {
                     Text("Enrolment as a Group")
@@ -217,7 +287,7 @@ struct CourseDetailsView: View {
                             .background(self.selectedTab == tab ? hexToColor(hex: "#007D40") : .white)
                             .foregroundColor(self.selectedTab == tab ? Color.white : Color.gray)
                             .cornerRadius(20)
-                            
+                        
                     }
                     .overlay {
                         RoundedRectangle(cornerRadius: 22)
@@ -237,7 +307,7 @@ struct CourseDetailsView: View {
     var reviewView: some View {
         
         VStack {
-
+            
             VStack {
                 
                 HStack {
@@ -250,7 +320,7 @@ struct CourseDetailsView: View {
                     .font(.custom(FONT_LIGHT, size: 14))
                     .frame(maxWidth: .infinity,alignment: .leading)
                     .padding(.vertical, 10)
-                    
+                
                 
                 Divider()
                     .padding(.vertical, 15)
@@ -289,8 +359,8 @@ struct CourseDetailsView: View {
                 
             }
             .padding(.horizontal)
-
-           
+            
+            
         }
         .padding(.top,8)
         .frame(maxWidth: .infinity)

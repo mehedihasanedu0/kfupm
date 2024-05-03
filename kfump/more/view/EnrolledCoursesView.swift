@@ -26,6 +26,7 @@ struct EnrolledCoursesView: View {
                         ForEach(homeviewModel.enrolledCourseList, id: \.id) { course in
                             SingleEnrolledCourseView(course: course)
                                 .padding(.bottom,2)
+                                .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.enrolledCourseList.count == 6)
                                 .onTapGesture {
                                     print("Course tapped: \(course.id)")
                                     isNavigateToCourseDetailsView = true
@@ -36,11 +37,14 @@ struct EnrolledCoursesView: View {
                     }.padding(.top,15)
                 }
                 .onAppear() {
-    //                homeviewModel.getCourseList()
+                    homeviewModel.getEnrolledCourseList()
                 }
                 .padding(.bottom,10)
             }
             .padding(.horizontal)
+        }
+        .onAppear {
+            
         }
         .background(hexToColor(hex: "#FFFFFF"))
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)

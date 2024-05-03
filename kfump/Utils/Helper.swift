@@ -21,15 +21,15 @@ var isRTL = LocalizationSystem.shared.getLanguage() == "ar"
 func hexToColor(hex: String,alpha: Double = 1.0) -> Color {
     var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
     hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-
+    
     var rgb: UInt64 = 0
-
+    
     Scanner(string: hexSanitized).scanHexInt64(&rgb)
-
+    
     let red = Double((rgb & 0xFF0000) >> 16) / 255.0
     let green = Double((rgb & 0x00FF00) >> 8) / 255.0
     let blue = Double(rgb & 0x0000FF) / 255.0
-
+    
     return Color(red: red, green: green, blue: blue,opacity: alpha)
 }
 
@@ -37,15 +37,15 @@ func hexToColor(hex: String,alpha: Double = 1.0) -> Color {
 func hexToColor(hex: String,alpha: Double = 1.0) -> UIColor {
     var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
     hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-
+    
     var rgb: UInt64 = 0
-
+    
     Scanner(string: hexSanitized).scanHexInt64(&rgb)
-
+    
     let red = Double((rgb & 0xFF0000) >> 16) / 255.0
     let green = Double((rgb & 0x00FF00) >> 8) / 255.0
     let blue = Double(rgb & 0x0000FF) / 255.0
-
+    
     return UIColor(red: red, green: green, blue: blue, alpha: alpha)
 }
 
@@ -84,7 +84,7 @@ var profileItemList : [ProfileItem] = [
     ProfileItem(id: 5, nameAr: "تسجيل خروج", nameEn: "Log out", image: "ic_logout"),
     ProfileItem(id: 6, nameAr: "حساب مغلق", nameEn: "Close Account", image: "ic_close_account")
 ]
- 
+
 
 
 func encodeImageToBase64String(_ image: UIImage) -> String? {
@@ -96,4 +96,31 @@ func encodeImageToBase64String(_ image: UIImage) -> String? {
 func decodeBase64ToImage(_ base64: String) -> UIImage? {
     guard let imageData = Data(base64Encoded: base64) else { return nil }
     return UIImage(data: imageData)
+}
+
+
+func isValidEmail(_ email: String) -> Bool {
+    
+    guard let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue) else {
+        return false
+    }
+
+    let matches = detector.matches(in: email, options: [], range: NSRange(location: 0, length: email.utf16.count))
+    
+    for match in matches {
+        if match.url?.scheme == "mailto" {
+            return true
+        }
+    }
+    
+    return false
+}
+
+func getDate(_ item : String?) -> String {
+    return DateUtils.convertDateString(item ?? "2024-04-29", fromFormat: "yyyy-MM-dd", toFormat: "MM/dd/yyyy")
+}
+
+
+func doubleFormat(_ value : Double) -> String {
+    return  String(format: "%.2f", value)
 }

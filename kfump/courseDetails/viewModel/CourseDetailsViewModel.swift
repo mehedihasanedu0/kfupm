@@ -15,6 +15,7 @@ class CourseDetailsViewModel : ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var isLoading = false
+    @Published var isLoadingEnrollment = false
     @Published var isGetCourseActualData = false
     @Published var isLoadingBySearchKey = false
     @Published var error: Error?
@@ -28,6 +29,8 @@ class CourseDetailsViewModel : ObservableObject {
     @Published var scyllabusInfo = [SyllabusInfo]()
     @Published var classRoutineInfo = [ClassRoutineInfo]()
     
+    @Published var enrolledData : CourseEnrolledData?
+    
     init(courseService: CourseService = CourseService()) {
         self.courseService = courseService
     }
@@ -35,6 +38,7 @@ class CourseDetailsViewModel : ObservableObject {
     deinit {
         cancellables.removeAll()
     }
+    
     
     func courseDetails(courseId: Int) {
         isLoading = true
@@ -61,6 +65,85 @@ class CourseDetailsViewModel : ObservableObject {
             })
             .store(in: &cancellables)
         
+        
+    }
+    
+    func enrolled(body: EnrolledRequestModel,completion: @escaping (Bool) -> Void) {
+        isLoadingEnrollment = true
+        courseService.enrollment(body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoadingEnrollment = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    
+                }
+            }, receiveValue: { [weak self] data in
+                self?.isLoadingEnrollment = true
+                self?.enrolledData = data.data
+                completion(data.success)
+                
+            })
+            .store(in: &cancellables)
+        
+    }    
+    
+    func singlePayment(body: SinglePaymentRequestModel,completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        courseService.singlePayment(body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] data in
+                self?.isLoading = true
+                self?.dialogMessage = data.message ?? ""
+                completion(data.success ?? false)
+                
+            })
+            .store(in: &cancellables)
+        
+    }   
+    
+    func groupEnrolled(body: GroupEnrollRequestModel,completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        courseService.groupPayment(body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] data in
+                self?.isLoading = true
+                self?.dialogMessage = data.message ?? ""
+                completion(data.success ?? false)
+                
+            })
+            .store(in: &cancellables)
         
     }
     

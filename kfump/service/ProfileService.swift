@@ -27,7 +27,13 @@ class ProfileService {
         let url = URL(string: URL.userType)
         return networkClient.getRequest(url: url,headerType: .APIRequestWithNoHeader)
         
+    }   
+    
+    func paymentHistory() -> AnyPublisher<PaymentHistoryResponseModel, Error> {
+        let url = URL(string: URL.paymentHistory)
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
+    
     
     func colseAccount(body: CloseAccountRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
         let url = URL(string: "\(URL.colseAccount)\(userUUID ?? "")/")

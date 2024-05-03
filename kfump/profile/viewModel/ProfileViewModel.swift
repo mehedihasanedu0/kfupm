@@ -42,6 +42,7 @@ class ProfileViewModel : ObservableObject {
     @Published var typeOfUser: Int = 0
     
     @Published var userTypeList = [UserType]()
+    @Published var paymentHistoryList = [PaymentHistoryResponseModel.PaymentHistory]()
     @Published var userTypeOptionList = [String]()
     
     init(profileService: ProfileService = ProfileService(),networkClient: NetworkClientForMultipart = NetworkClientForMultipart()) {
@@ -262,4 +263,31 @@ class ProfileViewModel : ObservableObject {
         
         
     }
+    
+    func paymentHistory() {
+        isLoadingCloseView = true
+        profileService.paymentHistory()
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoadingCloseView = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    
+                }
+            }, receiveValue: { [weak self] data in
+                self?.dialogMessage = data.message
+                self?.paymentHistoryList = data.data
+            })
+            .store(in: &cancellables)
+        
+        
+    }
+    
 }

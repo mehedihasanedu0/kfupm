@@ -32,6 +32,7 @@ extension URL {
     // MARK: Profile
     static let userType                            = "\(URL.baseUrl)/user/user-type/"
     static let colseAccount                        = "\(URL.baseUrl)/user/close-account/"
+    static let paymentHistory                      = "\(URL.baseUrl)/payment/history/"
     
     // MARK: - More
     static let createReportAnIssue                 = "\(URL.baseUrl)/cms/report-an-issues/"
@@ -40,7 +41,9 @@ extension URL {
 
     // MARK: - Course
     static let courseDetails                       = "\(URL.baseUrl)/course/about/"
-    static let customer_getReservation_byDate      = "\(URL.baseUrl)/reservation/customer/view?seller="
+    static let enrolledCourse                      = "\(URL.baseUrl)/payment/checkout/"
+    static let cashPayment                         = "\(URL.baseUrl)/payment/create/"
+    static let enrolledGroup                       = "\(URL.baseUrl)/group/enrolled/"
     
     // MARK: - Cupon
     static let apply_cupon                         = "\(URL.baseUrl)discount-coupon/apply"
@@ -67,15 +70,8 @@ extension URL {
     static let accept_quotation                    = "\(URL.baseUrl)/quotation/update/"
     
     // MARK: - Home
-    static let seller_home                         = "\(URL.baseUrl)/customer/home"
-    static let get_trending_offer                  = "\(URL.baseUrl)/home/trending"
-    static let top_rated_saller                    = "\(URL.baseUrl)/home/top-rated"
-    static let newest_saller                       = "\(URL.baseUrl)/home/newest"
-    static let near_by_salon                       = "\(URL.baseUrl)/customer/nearby-shops?service="
-    
-    static let search_sp                           = "\(URL.baseUrl)sp/list"
-    static let all_new_sp                          = "\(URL.baseUrl)sp/list?order_type=newest"
-    static let all_top_rated_sp                    = "\(URL.baseUrl)sp/list?order_type=top-rated"
+    static let courseList                         = "\(URL.baseUrl)/course/browse-course-list/?page=1&limit=100"
+    static let courseListWithStatus               = "\(URL.baseUrl)/course/enroll-courses/?page=1&limit=100"
     
     // MARK: - Payment
     static let process_to_payment                  = "\(URL.baseUrl)order/proceed-to-payment"

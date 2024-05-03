@@ -96,28 +96,88 @@ class HomeViewModel : ObservableObject {
     
     
     
-//    func getCourseList(completion: @escaping (Bool) -> Void) {
-//        isLoading = true
-//        homeRepositoryService.getCourses()
-//            .handleEvents(receiveCompletion: { [weak self] value in
-//                self?.isLoading = false
-//            })
-//            .sink(receiveCompletion: { completion in
-//                switch completion {
-//                case .finished:
-//                    break
-//                case .failure(let error):
-//                    self.error = error
-//                    self.showingDialogAlert = true
-//                    self.dialogMessage = error.localizedDescription
-//                }
-//            }, receiveValue: { [weak self] inviteeResponse in
-//                self?.courseList = inviteeResponse.items
-//                self?.isLoading = true
-//            })
-//            .store(in: &cancellables)
-//        
-//        
-//    }
+    func getEnrolledCourseList() {
+        isLoading = true
+        homeRepositoryService.getCoursesWithStatus(status: "ENROLLED")
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    self.enrolledCourseList = []
+                }
+            }, receiveValue: { [weak self] inviteeResponse in
+                self?.enrolledCourseList = inviteeResponse.items
+                self?.isLoading = true
+            })
+            .store(in: &cancellables)
+        
+        
+    }    
+    
+    
+    
+    func getOngoingCourseList() {
+        isLoading = true
+        homeRepositoryService.getCoursesWithStatus(status: "ONGOING")
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    self.ongoingCourseList = []
+                }
+            }, receiveValue: { [weak self] inviteeResponse in
+                self?.ongoingCourseList = inviteeResponse.items
+                self?.isLoading = false
+            })
+            .store(in: &cancellables)
+        
+        
+    }    
+    
+    func getCompletedCourseList() {
+        isLoading = true
+        homeRepositoryService.getCoursesWithStatus(status: "COMPLETED")
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    self.courseHistoryList = []
+                }
+            }, receiveValue: { [weak self] inviteeResponse in
+                self?.courseHistoryList = inviteeResponse.items
+                self?.isLoading = true
+            })
+            .store(in: &cancellables)
+        
+        
+    }
+    
+    
+    
+    
     
 }

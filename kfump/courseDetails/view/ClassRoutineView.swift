@@ -29,7 +29,7 @@ struct ClassRoutineView: View {
                             Image("course_calendar")
                                 .resizable()
                                 .frame(width: 12,height: 12)
-                            Text(getDate(item))
+                            Text(getDate(item.date ?? ""))
                                 .font(.custom(FONT_LIGHT, size: 12))
                         }
                         HStack {
@@ -61,9 +61,6 @@ struct ClassRoutineView: View {
         
     }
     
-    func getDate(_ item : ClassRoutineInfo) -> String {
-        return DateUtils.convertDateString(item.date ?? "2024-04-29", fromFormat: "yyyy-MM-dd", toFormat: "MM/dd/yyyy")
-    }
     
     func getTime(_ item : ClassRoutineInfo) -> String {
         let startTime = DateUtils.convertTimeString(item.startTime ?? "10:00:00", fromFormat: "HH:mm:ss", toFormat: "HH:mm")

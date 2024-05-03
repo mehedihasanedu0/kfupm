@@ -18,9 +18,15 @@ class HomeRepositoryService {
     }
     
     func getCourses() -> AnyPublisher<CourseListResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/course/browse-course-list/?page=1&limit=100")
+        let url = URL(string: URL.courseList)
+        return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
+    }    
+    
+    func getCoursesWithStatus(status: String = "") -> AnyPublisher<CourseListResponseModel, Error> {
+        let url = URL(string: "\(URL.courseListWithStatus)&status=\(status)")
         return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
     }
+    
     
     func getCoursesBySearchKey(searchKey: String) -> AnyPublisher<CourseListResponseModel, Error> {
         let url = URL(string: BASE_URL + "/course/browse-course-list/?search=\(searchKey)&page=1&limit=100")

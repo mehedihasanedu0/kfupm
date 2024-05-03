@@ -16,13 +16,10 @@ struct SingleEnrolledCourseView: View {
         ZStack {
             VStack {
                 
-                Image("nature")
-                    .resizable()
+                
+                WebImageView(imageUrl: course.coverImage ?? "")
+                    .aspectRatio(18/13, contentMode: .fill)
                     .frame(height: 130)
-//                
-//                WebImageView(imageUrl: course.coverImage ?? "")
-//                    .aspectRatio(18/13, contentMode: .fill)
-//                    .frame(height: 130)
                 
                 HStack {
                     

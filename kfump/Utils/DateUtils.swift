@@ -58,4 +58,20 @@ class DateUtils {
         }
     }
     
+        
+    static func paymentHistoryDateFormat(_ dateString: String) -> String {
+        let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        if let date = isoDateFormatter.date(from: dateString) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            return dateFormatter.string(from: date)
+        } else {
+            print("Failed to parse date")
+        }
+        
+        return ""
+    }
+    
 }

@@ -9,37 +9,58 @@ import SwiftUI
 
 struct CheckoutView: View {
     
+    var enrolledData : CourseEnrolledData?
+    
     @State var isPaymentTypeCash = true
+    @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
+    @State private var showToast = false
+    @State private var isNavigateToEnrolledCourseView = false
+    @State private var paymentMethod = "Cash"
     
     var body: some View {
         
-        ScrollView {
-            VStack {
-                
-                Text("Figma UI UX Design Essentials for Beginners")
-                    .font(.custom(FONT_BOLD, size: 20))
-                    .padding(.top)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text("Learn javascript online and supercharge your web design with this Javascript for beginners training course.")
-                    .font(.custom(FONT_LIGHT, size: 16))
-                    .padding(.vertical,5)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                
-                Divider()
-                    .padding(.vertical)
-                
-                paymentMethodView
-                
-                summeryView
-                    .padding(.top,50)
-                
+        
+        ZStack {
+            ScrollView {
+                VStack {
+                    
+                    Text("Figma UI UX Design Essentials for Beginners")
+                        .font(.custom(FONT_BOLD, size: 20))
+                        .padding(.top)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("Learn javascript online and supercharge your web design with this Javascript for beginners training course.")
+                        .font(.custom(FONT_LIGHT, size: 16))
+                        .padding(.vertical,5)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    
+                    Divider()
+                        .padding(.vertical)
+                    
+                    paymentMethodView
+                    
+                    summeryView
+                        .padding(.top,50)
+                    
+                }
+                .padding(.horizontal)
+                .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
+                .navigationBarItems(leading: CustomTitleBarItems(title: "Checkout"))
+                .navigationDestination(isPresented: $isNavigateToEnrolledCourseView, destination: {
+                    EnrolledCoursesView().navigationBarBackButtonHidden(true) })
             }
-            .padding(.horizontal)
-            .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-            .navigationBarItems(leading: CustomTitleBarItems(title: "Checkout"))
+            
+            if courseDetailsViewModel.isLoading {
+                CustomProgressView()
+            }
+            
+            ToastView(isPresented: $showToast, duration: 2.0) {
+                CustomTost(message: courseDetailsViewModel.dialogMessage)
+            }
         }
+        
+
         
         
     }
@@ -57,7 +78,7 @@ struct CheckoutView: View {
                     .font(.custom(FONT_REGULAR, size: 14))
                 
                 Spacer()
-                Text("SR79.90")
+                Text("SR\(enrolledData?.serviceCost ?? "0.00")")
                     .font(.custom(FONT_SEMIBOLD, size: 14))
                 
             }
@@ -73,7 +94,7 @@ struct CheckoutView: View {
                 Text("VAT %")
                     .font(.custom(FONT_REGULAR, size: 14))
                 Spacer()
-                Text("SR3.99")
+                Text("SR\(enrolledData?.vatPercent ?? "0.00")")
                     .font(.custom(FONT_SEMIBOLD, size: 14))
             }
             
@@ -82,7 +103,7 @@ struct CheckoutView: View {
                 Text("Total Price")
                     .font(.custom(FONT_SEMIBOLD, size: 14))
                 Spacer()
-                Text("SR75.91")
+                Text("SR\(enrolledData?.totalAmount ?? "0.00")")
                     .font(.custom(FONT_SEMIBOLD, size: 14))
             }
             .padding(.top,10)
@@ -103,28 +124,19 @@ struct CheckoutView: View {
             
             Button(action: {
                 
-//                isLoginButtonPress = true
-//                
-//                guard !userName.isEmpty,!password.isEmpty else {
-//                    return
-//                }
-//                
-//                let vm = SignInModel(username: userName,
-//                                     password: password)
-//                
-//                authonicationViewModel.signIn(body: vm) { result in
-//                    
-//                    showToast.toggle()
-//                    
-//                    if result {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                            
-//                            isNavigateToHomeScreen = true
-//                        }
-//                        
-//                    }
-//                    
-//                }
+                
+                let vm = SinglePaymentRequestModel(courseId: enrolledData?.course ?? 0, paymentMethod: isPaymentTypeCash ? "Cash" : "Pay tab")
+                
+                courseDetailsViewModel.singlePayment(body: vm) { result in
+                    showToast.toggle()
+                    if result {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            isNavigateToEnrolledCourseView = true
+                        }
+                        
+                    }
+                    
+                }
                 
                 
                 

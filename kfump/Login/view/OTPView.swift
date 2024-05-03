@@ -35,6 +35,8 @@ struct OTPView: View {
     @State var isNavigateToResetPassword: Bool = false
     @StateObject var authonicationViewModel = AuthenicationViewModel()
     
+    @State var OTP : String = ""
+    
     var body: some View {
         
         
@@ -62,12 +64,11 @@ struct OTPView: View {
                 
                 ZStack {
                     
-                    otpContainerView
-                        .padding(.top,60)
-                        .padding(.bottom,20)
-                        .onAppear {
-                            pinFocusState = .pinOne
-                        }
+                    CustomOtpView { value in
+                        print("value => \(value)")
+                        OTP = value
+                    }
+                    
                     
                     
                     Button {
@@ -88,15 +89,15 @@ struct OTPView: View {
                     
                     print("otp => \(otp)")
                     
-                    let otp1 = pinOne + pinTwo + pinThree + pinFour + pinFive + pinSix + pinSeven
-                    print("otp => \(otp1)")
+                   
+                    print("otp => \(OTP)")
                     
                     if otp.count != 6 {
                         return
                     }
                     
                     let vm = OtpModel(emailOrPhone: emailAddress,
-                                      otpCode: otp1)
+                                      otpCode: OTP)
                     
                     authonicationViewModel.otpVerify(body: vm,isAutoLogin: (source == "registration")) { result in
                         showToast.toggle()
@@ -160,28 +161,40 @@ struct OTPView: View {
         
         HStack(spacing:10, content: {
 
-            TextField("", text: $pinOne)
+            CustomOtpTextField(text: $pinOne)
                 .modifier(OtpModifer(pin:$pinOne))
                 .onChange(of:pinOne){newVal in
+                    
+                    if let range = newVal.range(of: ""), range.isEmpty {
+                        print("Delete key pressed while textField is empty")
+                    }
                     if (newVal.count == 1) {
                         pinFocusState = .pinTwo
-                    }
+                    } else if (newVal.count == 0) {
+                       pinFocusState = .pinOne
+                   }
                 }
                 .focused($pinFocusState, equals: .pinOne)
+                .onReceive(pinOne.publisher.last()) { val in
+                    print("val: \(val)")
+//                    if string.count < prevString.count {
+//                        print("backspace pressed, do something clever here")
+//                    } else {
+//                        print("val: \(val)")
+//                    }
+                }
             
             Divider()
                 .frame(width: 1,height: 36)
                 .foregroundColor(hexToColor(hex: "#E0E0DC"))
 
-            TextField("", text:  $pinTwo)
+            CustomOtpTextField(text:  $pinTwo)
                 .modifier(OtpModifer(pin:$pinTwo))
                 .onChange(of:pinTwo){newVal in
                     if (newVal.count == 1) {
                         pinFocusState = .pinThree
-                    }else {
-                        if (newVal.count == 0) {
-                            pinFocusState = .pinOne
-                        }
+                    } else if (newVal.count == 0) {
+                        pinFocusState = .pinOne
                     }
                 }
                 .focused($pinFocusState, equals: .pinTwo)
@@ -196,10 +209,8 @@ struct OTPView: View {
                 .onChange(of:pinThree){newVal in
                     if (newVal.count == 1) {
                         pinFocusState = .pinFour
-                    }else {
-                        if (newVal.count == 0) {
-                            pinFocusState = .pinTwo
-                        }
+                    } else if (newVal.count == 0) {
+                        pinFocusState = .pinTwo
                     }
                 }
                 .focused($pinFocusState, equals: .pinThree)
@@ -214,10 +225,8 @@ struct OTPView: View {
                 .onChange(of:pinFour){newVal in
                     if (newVal.count == 1) {
                         pinFocusState = .pinFive
-                    } else {
-                        if (newVal.count == 0) {
-                            pinFocusState = .pinThree
-                        }
+                    } else if (newVal.count == 0) {
+                        pinFocusState = .pinThree
                     }
                 }
                 .focused($pinFocusState, equals: .pinFour)
@@ -232,10 +241,8 @@ struct OTPView: View {
                 .onChange(of:pinFive){newVal in
                     if (newVal.count == 1) {
                         pinFocusState = .pinSix
-                    } else {
-                        if (newVal.count == 0) {
-                            pinFocusState = .pinFour
-                        }
+                    } else if (newVal.count == 0) {
+                        pinFocusState = .pinFour
                     }
                 }
                 .focused($pinFocusState, equals: .pinFive)
@@ -249,13 +256,12 @@ struct OTPView: View {
                 .onChange(of:pinSix){newVal in
                     if (newVal.count == 1) {
                         pinFocusState = .pinSeven
-                    } else {
-                        if (newVal.count == 0) {
-                            pinFocusState = .pinFive
-                        }
+                    } else if (newVal.count == 0) {
+                        pinFocusState = .pinFive
                     }
                 }
                 .focused($pinFocusState, equals: .pinSix)   
+                
             
             Divider()
                 .frame(width: 1,height: 36)
@@ -263,10 +269,11 @@ struct OTPView: View {
             
             TextField("", text:$pinSeven)
                 .modifier(OtpModifer(pin:$pinSeven))
-                .onChange(of:pinSeven){newVal in
+                .onChange(of:pinSeven) {newVal in
                     if (newVal.count == 0) {
                         pinFocusState = .pinSix
-                    } else {
+                    } else if newVal.count == 1 {
+                        pinFocusState = .pinSeven
                         hideKeyboard()
                     }
                 }
