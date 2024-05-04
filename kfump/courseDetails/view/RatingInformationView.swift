@@ -9,7 +9,9 @@ import SwiftUI
 
 struct RatingInformationView: View {
     
-    var singleRatingInfo : RatingInfoModel?
+    var singleRatingNumber : String?
+    var singleRatingProgress : Double?
+    
     
     var body: some View {
         
@@ -18,11 +20,11 @@ struct RatingInformationView: View {
                 Image(systemName: "star.fill")
                     .foregroundColor(hexToColor(hex: "#D0B756"))
                 
-                Text("\(singleRatingInfo?.ratingNumber ?? 0)")
+                Text(singleRatingNumber ?? "")
                     .font(.custom(FONT_MEDIUM, size: 14))
                 
                 
-                ProgressView(value: singleRatingInfo?.progress, total: 100)
+                ProgressView(value: singleRatingProgress, total: 100)
                     .accentColor(hexToColor(hex: "#D0B756"))
                     .scaleEffect(x: 1, y: 4, anchor: .center)
                     .progressViewStyle(.linear)
@@ -30,7 +32,7 @@ struct RatingInformationView: View {
                     .cornerRadius(5)
                     .padding(.horizontal)
                 
-                Text("\(Int(singleRatingInfo?.progress ?? 0.0))%")
+                Text("\(Int(singleRatingProgress ?? 0))%")
                     .font(.custom(FONT_MEDIUM, size: 14))
                 
             }

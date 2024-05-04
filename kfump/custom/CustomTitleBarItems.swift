@@ -25,7 +25,7 @@ struct CustomTitleBarItems: View {
                 
             }) {
                 HStack {
-                    Image("ic_back")
+                    Image(isRTL ? "ic_back_ar" : "ic_back")
                         .resizable()
                         .foregroundColor(.black)
                         .frame(width: 25,height: 25)

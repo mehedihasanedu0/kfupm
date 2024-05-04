@@ -26,8 +26,11 @@ class CourseDetailsViewModel : ObservableObject {
     private let courseService: CourseService
     
     @Published var courseData : CourseData?
-    @Published var scyllabusInfo = [SyllabusInfo]()
-    @Published var classRoutineInfo = [ClassRoutineInfo]()
+    @Published var scyllabusInfo : [SyllabusInfo]?
+    @Published var classRoutineInfo : [ClassRoutineInfo]?
+    @Published var ratingInfo : [Rating]?
+    @Published var ratingPercentage : [String: Double]?
+    @Published var instructor : CreatedBy?
     
     @Published var enrolledData : CourseEnrolledData?
     
@@ -61,6 +64,9 @@ class CourseDetailsViewModel : ObservableObject {
                 self?.courseData = data.data
                 self?.scyllabusInfo = data.data.syllabusInfo ?? []
                 self?.classRoutineInfo = data.data.classRoutineInfo ?? []
+                self?.ratingInfo = data.data.rating ?? []
+                self?.ratingPercentage = data.data.ratingPercentage ?? [:]
+                self?.instructor = data.data.createdBy
                 
             })
             .store(in: &cancellables)

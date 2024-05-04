@@ -15,7 +15,7 @@ struct SinglePaymentHistoryView: View {
         
         VStack {
             HStack {
-                Text("Date:")
+                Text("\(LocalizationSystem.shared.localizedStringForKey(key: DATE_KEY, comment: "")):")
                     .font(.custom(FONT_MEDIUM, size: 14))
                 Text(DateUtils.paymentHistoryDateFormat(singlePayment?.createdAt ?? ""))
                     .font(.custom(FONT_REGULAR, size: 14))
@@ -28,7 +28,7 @@ struct SinglePaymentHistoryView: View {
                 .padding(.vertical)
             
             HStack {
-                Text("Course Name:")
+                Text("\(LocalizationSystem.shared.localizedStringForKey(key: COURSE_NAME_KEY, comment: "")):")
                     .font(.custom(FONT_MEDIUM, size: 14))
                 Text(singlePayment?.course?.title ?? "")
                     .font(.custom(FONT_REGULAR, size: 14))
@@ -36,7 +36,7 @@ struct SinglePaymentHistoryView: View {
             .frame(maxWidth: .infinity,alignment: .leading)
             
             HStack {
-                Text("Amount:")
+                Text("\(LocalizationSystem.shared.localizedStringForKey(key: AMOUNT_KEY, comment: "")):")
                     .font(.custom(FONT_MEDIUM, size: 14))
                 Text("SA \(doubleFormat(singlePayment?.totalAmount ?? 0.0))")
                     .font(.custom(FONT_REGULAR, size: 14))
@@ -45,7 +45,7 @@ struct SinglePaymentHistoryView: View {
             .padding(.top,2)
             
             HStack {
-                Text("Enrolment type:")
+                Text("\(LocalizationSystem.shared.localizedStringForKey(key: ENROLMENT_TYPE_KEY, comment: "")):")
                     .font(.custom(FONT_MEDIUM, size: 14))
                 Text(singlePayment?.enrollmentType == "PERSONAL" ? "Personal" : "")
                     .font(.custom(FONT_REGULAR, size: 14))

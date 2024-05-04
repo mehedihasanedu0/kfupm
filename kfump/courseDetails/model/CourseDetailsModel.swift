@@ -41,10 +41,12 @@ struct CourseData: Codable{
     var enrollmentStatus: String?
     
     enum CodingKeys: String, CodingKey {
-        case id, createdBy,rating, createdAt = "created_at", updatedAt = "updated_at", title, subtitle, description, status, registrationStatus, slug, fee, groupEnrolledDiscountFee, qrCode, category, availability, ratingPercentage, ratingAverage, enrollmentStatus
+        case id,rating, createdAt = "created_at", updatedAt = "updated_at", title, subtitle, description, status, registrationStatus, slug, fee, groupEnrolledDiscountFee, qrCode, category, availability, ratingAverage, enrollmentStatus
         case coverImage = "cover_image"
         case syllabusInfo = "syllabus_info"
         case classRoutineInfo = "class_routine_info"
+        case ratingPercentage = "rating_percentage"
+        case createdBy = "created_by"
     }
 }
 

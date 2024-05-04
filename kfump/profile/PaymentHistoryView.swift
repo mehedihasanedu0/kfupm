@@ -36,7 +36,7 @@ struct PaymentHistoryView: View {
             }
             .padding(.horizontal)
             .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-            .navigationBarItems(leading: CustomTitleBarItems(title: "Payment History"))
+            .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: PAYMENT_HISSTORY_KEY, comment: "")))
             
         }  
     }

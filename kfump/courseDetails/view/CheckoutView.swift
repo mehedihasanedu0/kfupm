@@ -24,12 +24,12 @@ struct CheckoutView: View {
             ScrollView {
                 VStack {
                     
-                    Text("Figma UI UX Design Essentials for Beginners")
+                    Text(enrolledData?.courseInfo.title ?? "")
                         .font(.custom(FONT_BOLD, size: 20))
                         .padding(.top)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text("Learn javascript online and supercharge your web design with this Javascript for beginners training course.")
+                    Text(enrolledData?.courseInfo.description ?? "")
                         .font(.custom(FONT_LIGHT, size: 16))
                         .padding(.vertical,5)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -46,7 +46,7 @@ struct CheckoutView: View {
                 }
                 .padding(.horizontal)
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-                .navigationBarItems(leading: CustomTitleBarItems(title: "Checkout"))
+                .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: CHECKOUT_KEY, comment: "")))
                 .navigationDestination(isPresented: $isNavigateToEnrolledCourseView, destination: {
                     EnrolledCoursesView().navigationBarBackButtonHidden(true) })
             }
@@ -69,12 +69,12 @@ struct CheckoutView: View {
     var summeryView: some View {
         
         VStack {
-            Text("Summery")
+            Text(LocalizationSystem.shared.localizedStringForKey(key: SUMMERY_KEY, comment: ""))
                 .font(.custom(FONT_SEMIBOLD, size: 16))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                Text("Original Price")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: TOTAL_PRICE_KEY, comment: ""))
                     .font(.custom(FONT_REGULAR, size: 14))
                 
                 Spacer()
@@ -91,7 +91,7 @@ struct CheckoutView: View {
             
             // VAT Percentage
             HStack {
-                Text("VAT %")
+                Text("\(LocalizationSystem.shared.localizedStringForKey(key: VAT_KEY, comment: "")) %")
                     .font(.custom(FONT_REGULAR, size: 14))
                 Spacer()
                 Text("SR\(enrolledData?.vatPercent ?? "0.00")")
@@ -100,7 +100,7 @@ struct CheckoutView: View {
             
             
             HStack {
-                Text("Total Price")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: TOTAL_PRICE_KEY, comment: ""))
                     .font(.custom(FONT_SEMIBOLD, size: 14))
                 Spacer()
                 Text("SR\(enrolledData?.totalAmount ?? "0.00")")
@@ -109,14 +109,14 @@ struct CheckoutView: View {
             .padding(.top,10)
             
             
-            Text("By completing your purchase you agree these")
+            Text(LocalizationSystem.shared.localizedStringForKey(key: BY_COMPLETING_YOUR_PURCHASE_KEY, comment: ""))
                 .font(.custom(FONT_REGULAR, size: 12))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.gray)
                 .padding(.top)
             
             
-            Text("Terms of Service")
+            Text(LocalizationSystem.shared.localizedStringForKey(key: TERMS_OF_SERVICE_KEY, comment: ""))
                 .font(.custom(FONT_MEDIUM, size: 12))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(hexToColor(hex: "#007D40"))
@@ -141,7 +141,7 @@ struct CheckoutView: View {
                 
                 
             }) {
-                Text("Proceed")
+                Text(LocalizationSystem.shared.localizedStringForKey(key: PROCEED_KEY, comment: ""))
                     .padding(.vertical,10)
                     .font(.custom(FONT_BOLD, size: 16))
                     .bold()
@@ -167,7 +167,7 @@ struct CheckoutView: View {
     var paymentMethodView: some View {
         
         VStack {
-            Text("Payment Method")
+            Text(LocalizationSystem.shared.localizedStringForKey(key: PAYMENT_METHOD_KEY, comment: ""))
                 .font(.custom(FONT_SEMIBOLD, size: 16))
                 .padding(.top)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -179,7 +179,7 @@ struct CheckoutView: View {
                             .resizable()
                             .frame(width: 20,height: 20)
                         
-                        Text("Cash")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: CASH_KEY, comment: ""))
                             .font(.custom(FONT_MEDIUM, size: 14))
                     }
                     .padding(.vertical,8)
@@ -197,7 +197,7 @@ struct CheckoutView: View {
                             .resizable()
                             .frame(width: 20,height: 20)
                         
-                        Text("Pay Tab")
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: PAYTAB_KEY, comment: ""))
                             .font(.custom(FONT_MEDIUM, size: 14))
                     }
                     .onTapGesture {

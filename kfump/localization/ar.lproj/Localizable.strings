@@ -81,3 +81,59 @@
 //MARK: - CLOSE ACCOUNT
 "My Profile" = "ملفي";
 "Update Details" = "تحديث التفاصيل";
+
+
+//MARK: - COURSE
+"Enrolled Courses" = "البرامج المسجلة";
+"Course Details" = "التفاصيل";
+"Enroll Now" = "سجل الآن";
+"Enrolment as a Group" = "التسجيل كمجموعة";
+"About this Course" = "عن البرنامج";
+"Instructor" = "المدرب";
+"Syllabus" = "محتويات البرنامج";
+"Class Routine" = "مواعيد الحصة";
+"Reviews" = "اراء الطلاب";
+"Rating Information" = "التقييمات";
+"View more" = "عرض المزيد";
+"Checkout" = "الدفع";
+"Payment Method" = "وسيلة الدفع";
+"Summery" = "ملخص الطلب";
+"VAT" = "الضريبة";
+"Cash" = "نقداَ";
+"Pay Tab" = "باي تاب";
+"Total Price" = "السعر الاجمالي";
+"Original Price" = "السعر الأساسي";
+"By completing your purchase you agree these " = "عند أكمالك عملية الشراء انت توافق على جميع شروط سياسة الخدمة";
+"Terms of Service" = "Terms of Service";
+"Proceed" = "إكمال";
+"Enroll" = "سجل";
+
+
+
+"Payment History" = "سجل المدفوعات";
+"Course Name" = "اسم البرنامج";
+"Amount" = "السعر";
+"Enrolment type" = "نوع التسجيل";
+
+
+//MARK: - MORE
+"Subject" = "الموضوع";
+"Details" = "التفاصيل";
+"Submit" = "أرسل";
+"Send" = "ارسل";
+"Report an Issue" = "الإبلاغ عن مشكلة";
+"Contact Us" = "التواصل معنا";
+"Attendance History" = "سجل الحضور";
+"Course History" = "سجل الحضور";
+"Your Issues" = "بلاغاتك";
+
+"Resolve" = "تم حل البلاغ";
+"Pending" = "تحت المراجعة";
+"Issue ID" = "رقم البلاغ";
+"Issue Name" = "اسم البلاغ";
+"Submit Issue" = "تسليم البلاغ";
+"Track your submitted issues..." = "Track your submitted issues...";
+"Date" = "التاريخ";
+"Student name" = "اسم الطالب";
+"Present" = "حاضر";
+"Absent" = "غائب";

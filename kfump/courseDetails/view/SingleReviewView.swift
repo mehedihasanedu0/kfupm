@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SingleReviewView: View {
     
-    var singleReview : CourseReviewModel?
+    var singleReview : Rating?
     
     var body: some View {
         VStack {
@@ -22,11 +22,11 @@ struct SingleReviewView: View {
                 
                 
                 VStack {
-                    Text(singleReview?.name ?? "")
+                    Text(singleReview?.user?.firstName ?? "")
                         .font(.custom(FONT_MEDIUM, size: 14))
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Text(singleReview?.date ?? "")
+                    Text(singleReview?.createdAt ?? "")
                         .font(.custom(FONT_MEDIUM, size: 12))
                         .foregroundColor(hexToColor(hex: "#7C7C7C"))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -35,19 +35,19 @@ struct SingleReviewView: View {
             }
             
             
-            Text(singleReview?.review ?? "")
+            Text(singleReview?.description ?? "")
                 .font(.custom(FONT_MEDIUM, size: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(hexToColor(hex: "#7C7C7C"))
                 .padding(.vertical,10)
             
             
-            Text("\(Int(singleReview?.rating ?? 0.0))")
+            Text("\(Int(singleReview?.rate ?? 0.0))")
                 .font(.custom(FONT_SEMIBOLD, size: 24))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom,5)
             
-            StarRatingView(rating: Int(singleReview?.rating ?? 0.0))
+            StarRatingView(rating: Int(singleReview?.rate ?? 0.0))
                 .padding(.bottom,5)
             
         }

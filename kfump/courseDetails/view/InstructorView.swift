@@ -11,6 +11,7 @@ import SwiftUI
 
 struct InstructorView: View {
     
+    var instructor : CreatedBy?
     
     var body: some View {
         VStack {
@@ -25,19 +26,19 @@ struct InstructorView: View {
             .padding(.bottom)
             
             HStack {
-                // Profile image
-                Image("nature")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                
+                
+                WebImageView(imageUrl: instructor?.image ?? "")
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 3))
+                
                 
                 // Profile details
                 VStack(alignment: .leading, spacing: 4) {
                     // Name and tag
                     HStack {
-                        Text("John Doe")
+                        Text(instructor?.fullName ?? "")
                             .font(.custom(FONT_BOLD, size: 14))
                             .foregroundColor(.gray)
                         
@@ -61,11 +62,11 @@ struct InstructorView: View {
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundColor(hexToColor(hex: "#D0B756"))
-                        Text("4.77/5 ")
+                        Text("\(doubleFormat(instructor?.ratingAverage ?? 0.0))/5 ")
                             .font(.custom(FONT_MEDIUM, size: 12))
                             .foregroundColor(hexToColor(hex: "#D0B756"))
                         
-                        Text("(9 Ratings)")
+                        Text("(\(instructor?.totalRating ?? 0) Ratings)")
                             .font(.custom(FONT_MEDIUM, size: 12))
                             .foregroundColor(.gray)
                     }
@@ -74,7 +75,7 @@ struct InstructorView: View {
                     HStack {
                         Image("instructor_courses")
                             .foregroundColor(.gray)
-                        Text("2 Courses")
+                        Text("\(instructor?.totalCourse ?? 0) Courses")
                             .font(.custom(FONT_MEDIUM, size: 12))
                             .foregroundColor(.gray)
                     }

@@ -82,3 +82,62 @@
 //MARK: - CLOSE ACCOUNT
 "My Profile" = "My Profile";
 "Update Details" = "Update Details";
+
+
+//MARK: - COURSE
+"Enrolled Courses" = "Enrolled Courses";
+"Course Details" = "Course Details";
+"Enroll Now" = "Enroll Now";
+"Enrolment as a Group" = "Enrolment as a Group";
+"About this Course" = "About this Course";
+"Instructor" = "Instructor";
+"Syllabus" = "Syllabus";
+"Class Routine" = "Class Routine";
+"Reviews" = "Reviews";
+"Rating Information" = "Rating Information";
+"View more" = "View more";
+"Checkout" = "Checkout";
+"Payment Method" = "Payment Method";
+"Summery" = "Summery";
+"VAT" = "VAT";
+"Summery" = "Summery";
+"Cash" = "Cash";
+"Pay Tab" = "Pay Tab";
+"Original Price" = "Original Price";
+"Total Price" = "Total Price";
+"By completing your purchase you agree these " = "By completing your purchase you agree these ";
+"Terms of Service" = "Terms of Service";
+"Proceed" = "Proceed";
+"Enroll" = "Enroll";
+
+
+
+"Payment History" = "Payment History";
+"Course Name" = "Course Name";
+"Amount" = "Amount";
+"Enrolment type" = "Enrolment type";
+
+
+//MARK: - MORE
+"Subject" = "Subject";
+"Details" = "Details";
+"Submit" = "Submit";
+"Send" = "Send";
+"Report an Issue" = "Report an Issue";
+"Contact Us" = "Contact Us";
+"Attendance History" = "Attendance History";
+"Course History" = "Course History";
+"Your Issues" = "Your Issues";
+
+"Resolve" = "Resolve";
+"Pending" = "Pending";
+"Issue ID" = "Issue ID";
+"Issue Name" = "Issue Name";
+"Submit Issue" = "Submit Issue";
+"Track your submitted issues..." = "Track your submitted issues...";
+"Date" = "Date";
+"Student name" = "Student name";
+"Present" = "Present";
+"Absent" = "Absent";
+
+

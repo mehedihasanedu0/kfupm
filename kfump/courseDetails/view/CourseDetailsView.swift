@@ -17,6 +17,7 @@ struct CourseDetailsView: View {
     
     @State private var selectedTab = "About"
     let tabs = ["About", "Instructor", "Syllabus", "Class Routine"]
+    let tabsAr = ["اعرف اكثر", "المدرب", "محتويات البرنامج", "مواعيد الحصة"]
     
     @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
     @State var isNavigateToEnrolledCourseView : Bool = false
@@ -79,7 +80,7 @@ struct CourseDetailsView: View {
                         
                         
                         HStack {
-                            Text("About this Course")
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: ABOUT_THIS_COURSE_KEY, comment: ""))
                                 .font(.custom(FONT_BOLD, size: 16))
                             Spacer()
                         }
@@ -92,37 +93,57 @@ struct CourseDetailsView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         
-                        InstructorView()
+                        InstructorView(instructor: courseDetailsViewModel.instructor)
                         
                         
-                        HStack {
-                            Text("Syllabus")
-                                .font(.custom(FONT_BOLD, size: 16))
-                            Spacer()
-                        }
-                        .padding(.top,30)
                         
-                        ForEach(courseDetailsViewModel.scyllabusInfo) { item in
-                            SingleSyllabusView(singleSyllabus: item)
+                        
+                        
+                        if let scyllabusInfo = courseDetailsViewModel.scyllabusInfo {
                             
-                            Divider()
-                        }
-                        .padding(.top,8)
-                        .padding(.bottom,10)
-                        
-                        HStack {
-                            Text("Class Routing")
-                                .font(.custom(FONT_BOLD, size: 16))
-                            Spacer()
-                        }
-                        .padding(.top,15)
-                        
-                        ClassRoutineView(singleClassRoutine: courseDetailsViewModel.classRoutineInfo)
+                            if scyllabusInfo.count != 0 {
+                                HStack {
+                                    Text(LocalizationSystem.shared.localizedStringForKey(key: SYLLABUS_KEY, comment: ""))
+                                        .font(.custom(FONT_BOLD, size: 16))
+                                    Spacer()
+                                }
+                                .padding(.top,30)
+                            }
+                            
+                            ForEach(scyllabusInfo) { item in
+                                SingleSyllabusView(singleSyllabus: item)
+                                
+                                Divider()
+                            }
                             .padding(.top,8)
+                            .padding(.bottom,10)
+                            
+                        }
+                        
+                        
+                        if let classRoutineInfo = courseDetailsViewModel.classRoutineInfo {
+                            
+                            if classRoutineInfo.count != 0 {
+                                HStack {
+                                    Text(LocalizationSystem.shared.localizedStringForKey(key: CLASS_ROUTINE_KEY, comment: ""))
+                                        .font(.custom(FONT_BOLD, size: 16))
+                                    Spacer()
+                                }
+                                .padding(.top,15)
+                            }
+                            
+                            ClassRoutineView(singleClassRoutine: classRoutineInfo)
+                                .padding(.top,8)
+                            
+                        }
+                        
+                        
+                        
+                        
                         
                         
                         HStack {
-                            Text("Reviews")
+                            Text(LocalizationSystem.shared.localizedStringForKey(key: REVIEWS_KEY, comment: ""))
                                 .font(.custom(FONT_SEMIBOLD, size: 16))
                             Spacer()
                         }
@@ -187,7 +208,7 @@ struct CourseDetailsView: View {
             
             GroupEnrolledView(
                 courseId: courseId,
-                title: "Enrolment as a Group",
+                title: LocalizationSystem.shared.localizedStringForKey(key: ENROLMENT_AS_A_GROUP_KEY, comment: ""),
                 message: "You can send the invitation at most 5 people at a time. They will get notification through email and need to accept the invitation in order to join.",
                 onConfirm: {
                     // Handle Yes action
@@ -276,7 +297,7 @@ struct CourseDetailsView: View {
         
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(tabs, id: \.self) { tab in
+                ForEach(isRTL ? tabsAr : tabs, id: \.self) { tab in
                     Button(action: {
                         self.selectedTab = tab
                     }) {
@@ -311,7 +332,7 @@ struct CourseDetailsView: View {
             VStack {
                 
                 HStack {
-                    Text("Rating Information")
+                    Text(LocalizationSystem.shared.localizedStringForKey(key: RATING_INFORMATION_KEY, comment: ""))
                         .font(.custom(FONT_MEDIUM, size: 18))
                     Spacer()
                 }
@@ -326,36 +347,53 @@ struct CourseDetailsView: View {
                     .padding(.vertical, 15)
                 
                 HStack {
-                    Text("4.7")
+                    Text("\(doubleFormat(courseDetailsViewModel.courseData?.ratingAverage ?? 0))")
                         .font(.custom(FONT_BOLD, size: 18))
                     Text("out of 5")
                         .font(.custom(FONT_REGULAR, size: 14))
                     Spacer()
                 }
                 
-                StarRatingView(rating: 3)
+                StarRatingView(rating: Int(courseDetailsViewModel.courseData?.ratingAverage ?? 0.0))
                     .padding(.bottom,5)
                 
                 
-                ForEach(RatingInfoModel.sampleData) { item in
-                    RatingInformationView(singleRatingInfo: item)
+                if let ratingPercentage = courseDetailsViewModel.ratingPercentage {
+                    ForEach(ratingPercentage.sorted(by: { $0.key < $1.key }), id: \.key) { (key, value) in
+                        RatingInformationView(singleRatingNumber: key,singleRatingProgress: value)
+                    }
                 }
                 
-                Divider()
-                    .padding(.vertical, 15)
                 
+               
                 
-                HStack {
-                    Text("Showing  3 Out Of 20 ")
-                        .font(.custom(FONT_MEDIUM, size: 18))
-                    Spacer()
+
+                
+                if let ratingInfo = courseDetailsViewModel.ratingInfo {
+                    
+                    if ratingInfo.count != 0 {
+                        
+                        Divider()
+                            .padding(.vertical, 15)
+                        
+                        
+                        
+                        HStack {
+                            Text("Showing  3 Out Of \(courseDetailsViewModel.ratingInfo?.count ?? 0) ")
+                                .font(.custom(FONT_MEDIUM, size: 18))
+                            Spacer()
+                        }
+                    }
+                    
+                    
+                    ForEach(ratingInfo) { item in
+                        SingleReviewView(singleReview: item)
+                            .padding(.bottom,5)
+                    }
+                    .padding(.bottom)
                 }
                 
-                ForEach(CourseReviewModel.sampleData) { item in
-                    SingleReviewView(singleReview: item)
-                        .padding(.bottom,5)
-                }
-                .padding(.bottom)
+                
                 
             }
             .padding(.horizontal)

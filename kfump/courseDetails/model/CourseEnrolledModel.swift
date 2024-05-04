@@ -34,6 +34,7 @@ struct CourseEnrolledData: Codable {
     let createdAt: String
     let updatedAt: String
     let course: Int
+    let courseInfo: Course
     let user: Int
     
     enum CodingKeys: String, CodingKey {
@@ -47,5 +48,6 @@ struct CourseEnrolledData: Codable {
         case totalAmount = "total_amount"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case courseInfo = "course_info"
     }
 }
