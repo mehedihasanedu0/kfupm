@@ -62,7 +62,6 @@
 		556175482BDD0B5F004DD996 /* EnrolledCoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556175472BDD0B5F004DD996 /* EnrolledCoursesView.swift */; };
 		5561754A2BDD0F70004DD996 /* SingleEnrolledCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556175492BDD0F70004DD996 /* SingleEnrolledCourseView.swift */; };
 		5561754C2BDD14DB004DD996 /* OngoingCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */; };
-		5561754E2BDD163D004DD996 /* CourseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5561754D2BDD163D004DD996 /* CourseHistoryView.swift */; };
 		556283592BE22C21008A7200 /* GroupEnrolledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556283582BE22C21008A7200 /* GroupEnrolledView.swift */; };
 		5562835B2BE2318A008A7200 /* SingleEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5562835A2BE2318A008A7200 /* SingleEmailView.swift */; };
 		55682B4C2BE531F700BE6B1F /* SinglePaaymentRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55682B4B2BE531F700BE6B1F /* SinglePaaymentRequestModel.swift */; };
@@ -139,6 +138,7 @@
 		558B9E392BBF16E300EA5B84 /* FilterCourseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E382BBF16E300EA5B84 /* FilterCourseItem.swift */; };
 		558B9E3B2BBF18F500EA5B84 /* FilterAvailableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E3A2BBF18F500EA5B84 /* FilterAvailableItem.swift */; };
 		558B9E3E2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E3D2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift */; };
+		5591AE692BE7FB1800A94DBA /* CourseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591AE682BE7FB1800A94DBA /* CourseHistoryView.swift */; };
 		559744622BBAF15000122058 /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744612BBAF15000122058 /* OTPView.swift */; };
 		559744652BBB02A800122058 /* OtpModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744642BBB02A800122058 /* OtpModifer.swift */; };
 		5597446A2BBB370200122058 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744692BBB370200122058 /* NetworkClient.swift */; };
@@ -266,7 +266,6 @@
 		556175472BDD0B5F004DD996 /* EnrolledCoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrolledCoursesView.swift; sourceTree = "<group>"; };
 		556175492BDD0F70004DD996 /* SingleEnrolledCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEnrolledCourseView.swift; sourceTree = "<group>"; };
 		5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingCourseView.swift; sourceTree = "<group>"; };
-		5561754D2BDD163D004DD996 /* CourseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseHistoryView.swift; sourceTree = "<group>"; };
 		556283582BE22C21008A7200 /* GroupEnrolledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupEnrolledView.swift; sourceTree = "<group>"; };
 		5562835A2BE2318A008A7200 /* SingleEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEmailView.swift; sourceTree = "<group>"; };
 		55682B4B2BE531F700BE6B1F /* SinglePaaymentRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePaaymentRequestModel.swift; sourceTree = "<group>"; };
@@ -344,6 +343,7 @@
 		558B9E382BBF16E300EA5B84 /* FilterCourseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCourseItem.swift; sourceTree = "<group>"; };
 		558B9E3A2BBF18F500EA5B84 /* FilterAvailableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAvailableItem.swift; sourceTree = "<group>"; };
 		558B9E3D2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFilterItemSelectView.swift; sourceTree = "<group>"; };
+		5591AE682BE7FB1800A94DBA /* CourseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseHistoryView.swift; sourceTree = "<group>"; };
 		559744612BBAF15000122058 /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		559744642BBB02A800122058 /* OtpModifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpModifer.swift; sourceTree = "<group>"; };
 		559744692BBB370200122058 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
@@ -651,12 +651,12 @@
 		556175462BDD0B48004DD996 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				55A84F932BE7FA6700D2EAAE /* courseHistory */,
 				5576C82C2BB68279007392C8 /* MoreView.swift */,
 				5533366C2BB9C45800D5F6E5 /* SingleItemView.swift */,
 				556175472BDD0B5F004DD996 /* EnrolledCoursesView.swift */,
 				556175492BDD0F70004DD996 /* SingleEnrolledCourseView.swift */,
 				5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */,
-				5561754D2BDD163D004DD996 /* CourseHistoryView.swift */,
 				5585C2492BDD1E2800986987 /* AttendanceHistoryView.swift */,
 				5585C24B2BDD233600986987 /* ContactUsView.swift */,
 				5585C24F2BDD364500986987 /* ReportAnIssueView.swift */,
@@ -885,6 +885,14 @@
 				5573EA522BDB74FA00E9FCF9 /* RefreshTokenRequestModel.swift */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		55A84F932BE7FA6700D2EAAE /* courseHistory */ = {
+			isa = PBXGroup;
+			children = (
+				5591AE682BE7FB1800A94DBA /* CourseHistoryView.swift */,
+			);
+			path = courseHistory;
 			sourceTree = "<group>";
 		};
 		55D1FA5A2BB6D925004D5F7F /* model */ = {
@@ -1202,6 +1210,7 @@
 				55823DF32BDC5303000F4A32 /* CourseReviewModel.swift in Sources */,
 				550569172BD421CE00C49E71 /* ChangePasswordView.swift in Sources */,
 				55F868AF2BD990A300A05E8F /* UserTypeListModel.swift in Sources */,
+				5591AE692BE7FB1800A94DBA /* CourseHistoryView.swift in Sources */,
 				550569192BD423FA00C49E71 /* CustomLogoutConfirmationView.swift in Sources */,
 				553E55B52BB48EFB00AFBD7A /* ContentView.swift in Sources */,
 				558B9E3B2BBF18F500EA5B84 /* FilterAvailableItem.swift in Sources */,
@@ -1263,7 +1272,6 @@
 				55DB16332BBC8C040022BDA7 /* ImageCache.swift in Sources */,
 				55823DF52BDC5602000F4A32 /* SingleSyllabusView.swift in Sources */,
 				55E207902BE0273D001116C2 /* CloseAccountRequestModel.swift in Sources */,
-				5561754E2BDD163D004DD996 /* CourseHistoryView.swift in Sources */,
 				55F868AB2BD96B3500A05E8F /* BadRequest.swift in Sources */,
 				554B754C2BB5C9F200D40BE2 /* LoginView.swift in Sources */,
 				5556EC932BDCE77C00A78948 /* CheckoutView.swift in Sources */,
@@ -1457,7 +1465,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8.0;
+				CURRENT_PROJECT_VERSION = 9.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
 				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
@@ -1491,7 +1499,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8.0;
+				CURRENT_PROJECT_VERSION = 9.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
 				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;

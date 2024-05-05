@@ -27,6 +27,8 @@ struct ProfileView: View {
     
     @StateObject var profileViewModel = ProfileViewModel()
     
+    @Binding var selectedTabIndex: Int
+    
     
     var body: some View {
         
@@ -35,7 +37,7 @@ struct ProfileView: View {
             
             VStack {
                 
-                if var image = decodeBase64ToImage(userImageBase64 ?? "") {
+                if let image = decodeBase64ToImage(userImageBase64 ?? "") {
                     if #available(iOS 17.0, *) {
                         Image(uiImage: image)
                             .resizable()
@@ -123,7 +125,7 @@ struct ProfileView: View {
                 
                 Spacer()
             }
-            .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
+            
             .onAppear {
                 print("isEnglishSelected => \(isEnglishSelected)")
                 print("LocalizationSystem.shared.getLanguage() => \(LocalizationSystem.shared.getLanguage())")
@@ -169,6 +171,7 @@ struct ProfileView: View {
                 .transition(.scale)
             }
         }
+        .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .onAppear {
             profileViewModel.getProfileData(userUUID: userUUID ?? "") { result in
                 if result {
@@ -209,7 +212,7 @@ struct ProfileView: View {
     
     
     func uploadProfileImage() {
-        var parameter : [String : Any] = [
+        let parameter : [String : Any] = [
             "image"          :  selectedImage
         ]
 
@@ -217,66 +220,70 @@ struct ProfileView: View {
         profileViewModel.fetchDataForUpdateProfileData(uuId: userUUID ?? "", parameter: parameter)
     }
     
-    
-    
     var localizationView: some View {
         
-        MyEqualWidthHStack {
-            Button(action: {
-                isEnglishSelected = true
-                if LocalizationSystem.shared.getLanguage() == "ar" {
-                    changeLanguage(code: "en")
-                    isRTL = false
-                }
+        VStack {
+            
+            HStack(spacing: 0) {
                 
-            }) {
-                Text("EN")
-                    .font(.custom(FONT_MEDIUM, size: 15))
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(isEnglishSelected ? .bold : .regular)
-                    .padding(.vertical,3)
-                    .padding(.horizontal,4)
-                    .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
-                    .foregroundColor(isEnglishSelected ? .white : .black)
-                    .cornerRadius(15)
+                VStack {
+                    Text("EN")
+                        .font(.custom(FONT_MEDIUM, size: 12))
+                        .padding(.vertical,5)
+                        .frame(width: isEnglishSelected ? 36 : 30)
+                        .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                        .foregroundColor(isEnglishSelected ? .white : .black)
+                    
+                }
+                .onTapGesture {
+                    isEnglishSelected = true
+                    if LocalizationSystem.shared.getLanguage() == "ar" {
+                        changeLanguage(code: "en")
+                        isRTL = false
+                    }
+                }
+                .cornerRadius(25)
+                .padding(.trailing,3)
+                
+                
+                VStack {
+                    Text("AR")
+                        .padding(.vertical,4)
+                        .font(.custom(FONT_MEDIUM, size: 12))
+                        .frame(width: !isEnglishSelected ? 36 : 30)
+                        .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                        .foregroundColor(!isEnglishSelected ? .white : .black)
+                        .onTapGesture {
+                            isEnglishSelected = false
+                            
+                            if LocalizationSystem.shared.getLanguage() == "en" {
+                                changeLanguage(code: "ar")
+                                isRTL = true
+                            }
+                        }
+                }
+                .cornerRadius(25)
+                .padding(.leading,1)
+                
+                
                 
             }
-            
-            Button(action: {
-                isEnglishSelected = false
-                
-                if LocalizationSystem.shared.getLanguage() == "en" {
-                    changeLanguage(code: "ar")
-                    isRTL = true
-                }
-                
-                
-            }) {
-                Text("AR")
-                    .font(.custom(FONT_MEDIUM, size: 15))
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(!isEnglishSelected ? .bold : .regular)
-                    .padding(.vertical,4)
-                    .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
-                    .foregroundColor(!isEnglishSelected ? .white : .black)
-                    .cornerRadius(15)
-                
-            }
-            
         }
-        .frame(width: 70, height: 30)
+        .frame(width: 75, height: 30)
         .background(hexToColor(hex: "#E4F4EA"))
         .cornerRadius(25)
+        
     }
     
     
     func changeLanguage(code : String) {
+        selectedTabIndex = 2
         SetLanguage.shared.setLanguage(code: code)
     }
     
 }
 
-//
+
 //#Preview {
 //    ProfileView()
 //}

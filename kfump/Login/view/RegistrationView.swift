@@ -49,9 +49,8 @@ struct RegistrationView: View {
                     }
                     
                     Text(LocalizationSystem.shared.localizedStringForKey(key: SIGN_UP_KEY, comment: ""))
-                        .font(.custom(FONT_BOLD, size: 32))
+                        .font(.custom(FONT_REGULAR, size: 32))
                         .padding(.top,20)
-                        .fontWeight(.thin)
                         .multilineTextAlignment(.center)
                     
                     Divider()
@@ -165,50 +164,57 @@ struct RegistrationView: View {
     
     var localizationView: some View {
         
-        MyEqualWidthHStack {
-            Button(action: {
-                isEnglishSelected = true
-                if LocalizationSystem.shared.getLanguage() == "ar" {
-                    changeLanguage(code: "en")
-                    isRTL = false
-                }
-                
-            }) {
-                Text("EN")
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(isEnglishSelected ? .bold : .regular)
-                    .padding(.vertical,10)
-                    .padding(.horizontal,22)
-                    .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
-                    .foregroundColor(isEnglishSelected ? .white : .black)
-                    .cornerRadius(25)
-                
-            }
+        VStack {
             
-            Button(action: {
-                isEnglishSelected = false
+            HStack(spacing: 0) {
                 
-                if LocalizationSystem.shared.getLanguage() == "en" {
-                    changeLanguage(code: "ar")
-                    isRTL = true
-                }
-                
-                
-            }) {
-                Text("AR")
-                    .frame(maxWidth: .infinity)
-                    .fontWeight(!isEnglishSelected ? .bold : .regular)
-                    .padding(.vertical,10)
-                    .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
-                    .foregroundColor(!isEnglishSelected ? .white : .black)
-                    .cornerRadius(25)
+                VStack {
+                    Text("EN")
+                        .font(.custom(FONT_MEDIUM, size: 14))
+                        .padding(.vertical,6)
+                        .frame(width: isEnglishSelected ? 52 : 37)
+                        .background(isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                        .foregroundColor(isEnglishSelected ? .white : .black)
                     
+                }
+                .onTapGesture {
+                    isEnglishSelected = true
+                    if LocalizationSystem.shared.getLanguage() == "ar" {
+                        changeLanguage(code: "en")
+                        isRTL = false
+                    }
+                }
+                .cornerRadius(25)
+                .padding(.trailing,3)
+                
+                
+                VStack {
+                    Text("AR")
+                        .padding(.vertical,5)
+                        .font(.custom(FONT_MEDIUM, size: 14))
+                        .frame(width: !isEnglishSelected ? 52 : 37)
+                        .background(!isEnglishSelected ? hexToColor(hex: "#41B06B") : .clear)
+                        .foregroundColor(!isEnglishSelected ? .white : .black)
+                        .onTapGesture {
+                            isEnglishSelected = false
+                            
+                            if LocalizationSystem.shared.getLanguage() == "en" {
+                                changeLanguage(code: "ar")
+                                isRTL = true
+                            }
+                        }
+                }
+                .cornerRadius(25)
+                .padding(.leading,3)
+                
+                
+                
             }
-            
         }
-        .frame(width: 150, height: 50)
+        .frame(width: 103, height: 36)
         .background(hexToColor(hex: "#E4F4EA"))
         .cornerRadius(25)
+        
     }
     
     

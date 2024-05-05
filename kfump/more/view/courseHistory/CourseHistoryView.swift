@@ -2,12 +2,13 @@
 //  CourseHistoryView.swift
 //  kfump
 //
-//  Created by Mehedi Hasan on 27/4/24.
+//  Created by Mehedi Hasan on 5/5/24.
 //
 
 import SwiftUI
 
 struct CourseHistoryView: View {
+    
     @StateObject var homeviewModel = HomeViewModel()
     @State var isNavigateToCourseDetailsView = false
     

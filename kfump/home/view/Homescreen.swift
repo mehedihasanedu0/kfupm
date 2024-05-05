@@ -37,7 +37,7 @@ struct Homescreen: View {
                     }
                     .tag(1).id(1)
                 
-                ProfileView().tabItem {
+                ProfileView(selectedTabIndex: $selection).tabItem {
                     selection == 2 ? Image("tab_profile") : Image("tab_profile")
                     Image("chat")
                     Text(LocalizationSystem.shared.localizedStringForKey(key: PROFILE_KEY, comment: "")).font(.custom("SST Arabic Roman", size: 14))

@@ -49,9 +49,8 @@ struct LoginView: View {
                     }
                     
                     Text(LocalizationSystem.shared.localizedStringForKey(key: WELCOME_TO_CONTINUE_EDUCATION_PROGRAM_KEY, comment: ""))
-                        .font(.custom("Open Sans", size: 32))
+                        .font(.custom(FONT_REGULAR, size: 32))
                         .padding(.top,20)
-                        .fontWeight(.thin)
                         .multilineTextAlignment(.center)
                     
                     Divider()
