@@ -45,19 +45,19 @@ struct OTPView: View {
             VStack {
                 
                 Text(LocalizationSystem.shared.localizedStringForKey(key: ENTER_OTP_KEY, comment: ""))
-                    .font(.custom("Open Sans", size: 32))
-                    .padding(.top,70)
-                    .fontWeight(.thin)
+                    .font(.custom(FONT_REGULAR , size: 32))
+                    .padding(.top,20)
                     .multilineTextAlignment(.center)
                 
                 Divider()
                     .frame(width: 56,height: 2)
                     .background(hexToColor(hex: "#D0B756"))
+                    .offset(y: -15)
                 
                 
                 Text("In publishing and graphic design, Lorem ipsum is a placeholder text commonly")
                     .font(.custom("Open Sans", size: 16))
-                    .padding(.top,20)
+                    .padding(.top,10)
                     .foregroundColor(hexToColor(hex: "#7A7A7A"))
                     .multilineTextAlignment(.center)
                 
@@ -291,6 +291,6 @@ struct OTPView: View {
     
 }
 
-//#Preview {
-//    OTPView(emailAddress: "")
-//}
+#Preview {
+    OTPView(emailAddress: "", source: "")
+}

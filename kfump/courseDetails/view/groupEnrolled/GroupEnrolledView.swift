@@ -30,6 +30,8 @@ struct GroupEnrolledView: View {
     ]
     
     @State private var showToast = false
+    @State private var showToastIfEmailIdentical = false
+    @State private var customMessage: String = ""
     
     var body: some View {
         
@@ -119,8 +121,15 @@ struct GroupEnrolledView: View {
             
             ToastView(isPresented: $showToast, duration: 2.0) {
                 CustomTost(message: courseDetailsViewModel.dialogMessage)
+            } 
+            
+            ToastView(isPresented: $showToastIfEmailIdentical, duration: 2.0) {
+                CustomTost(message: customMessage)
             }
             
+        }
+        .onTapGesture {
+            hideKeyboard()
         }
         
     }
@@ -138,14 +147,34 @@ struct GroupEnrolledView: View {
                         .stroke(Color.gray, lineWidth: 0.3)
                 )
                 .onChange(of: textValue) { newValue in
+                    
+//                    if newValue != "" && newValue.contains("\n") {
+//                        hideKeyboard()
+//                        textValue.removeAll()
+//                        return
+//                    }
+                    
+                    
                     if let lastCharacter = newValue.last, lastCharacter == " " {
-                        print("Space pressed!")
-                        print("textValue \(textValue)")
-                        print("isValidEmail \(isValidEmail(textValue))")
                         if isValidEmail(textValue) {
+                            
+                            if emailist.count == 5 {
+                                showToastIfEmailIdentical = true
+                                customMessage = "You can send the invitation at most 5 people at a time"
+                                return
+                            }
+                            
+                            if emailist.contains(textValue) {
+                                showToastIfEmailIdentical = true
+                                customMessage = "This email is already provided"
+                                return
+                            }
                             emailist.append(textValue)
                             textValue.removeAll()
+                            
                         } else {
+                            showToastIfEmailIdentical = true
+                            customMessage = "Please provide a valid email"
                             textValue = newValue.replacingOccurrences(of: " ", with: "")
                         }
                     }

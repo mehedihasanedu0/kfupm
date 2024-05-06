@@ -14,9 +14,12 @@ struct SingleEmailView: View {
         var body: some View {
             HStack {
                 Text(email)
-                    .font(.custom(FONT_LIGHT, size: 13))
+                    .font(.custom(FONT_LIGHT, size: 11))
                     .foregroundColor(.black)
                     .padding(5)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                
                 Button(action: onDelete) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.gray)

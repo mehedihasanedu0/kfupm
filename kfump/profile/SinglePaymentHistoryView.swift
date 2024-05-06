@@ -47,7 +47,7 @@ struct SinglePaymentHistoryView: View {
             HStack {
                 Text("\(LocalizationSystem.shared.localizedStringForKey(key: ENROLMENT_TYPE_KEY, comment: "")):")
                     .font(.custom(FONT_MEDIUM, size: 14))
-                Text(singlePayment?.enrollmentType == "PERSONAL" ? "Personal" : "")
+                Text(singlePayment?.enrollmentType == "PERSONAL" ? "Personal" : "Group")
                     .font(.custom(FONT_REGULAR, size: 14))
             }
             .frame(maxWidth: .infinity,alignment: .leading)

@@ -139,6 +139,8 @@
 		558B9E3B2BBF18F500EA5B84 /* FilterAvailableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E3A2BBF18F500EA5B84 /* FilterAvailableItem.swift */; };
 		558B9E3E2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558B9E3D2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift */; };
 		5591AE692BE7FB1800A94DBA /* CourseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591AE682BE7FB1800A94DBA /* CourseHistoryView.swift */; };
+		5591AE6B2BE7FC5700A94DBA /* CourseHistoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591AE6A2BE7FC5700A94DBA /* CourseHistoryDetailsView.swift */; };
+		5591AE6F2BE8120F00A94DBA /* SelectStartRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5591AE6E2BE8120E00A94DBA /* SelectStartRatingView.swift */; };
 		559744622BBAF15000122058 /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744612BBAF15000122058 /* OTPView.swift */; };
 		559744652BBB02A800122058 /* OtpModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744642BBB02A800122058 /* OtpModifer.swift */; };
 		5597446A2BBB370200122058 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744692BBB370200122058 /* NetworkClient.swift */; };
@@ -344,6 +346,8 @@
 		558B9E3A2BBF18F500EA5B84 /* FilterAvailableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAvailableItem.swift; sourceTree = "<group>"; };
 		558B9E3D2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFilterItemSelectView.swift; sourceTree = "<group>"; };
 		5591AE682BE7FB1800A94DBA /* CourseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseHistoryView.swift; sourceTree = "<group>"; };
+		5591AE6A2BE7FC5700A94DBA /* CourseHistoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseHistoryDetailsView.swift; sourceTree = "<group>"; };
+		5591AE6E2BE8120E00A94DBA /* SelectStartRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStartRatingView.swift; sourceTree = "<group>"; };
 		559744612BBAF15000122058 /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		559744642BBB02A800122058 /* OtpModifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpModifer.swift; sourceTree = "<group>"; };
 		559744692BBB370200122058 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
@@ -891,6 +895,8 @@
 			isa = PBXGroup;
 			children = (
 				5591AE682BE7FB1800A94DBA /* CourseHistoryView.swift */,
+				5591AE6A2BE7FC5700A94DBA /* CourseHistoryDetailsView.swift */,
+				5591AE6E2BE8120E00A94DBA /* SelectStartRatingView.swift */,
 			);
 			path = courseHistory;
 			sourceTree = "<group>";
@@ -1161,6 +1167,7 @@
 				5585C2542BDD44B000986987 /* MoreService.swift in Sources */,
 				55DB16302BBC89E90022BDA7 /* WebImageView.swift in Sources */,
 				5581D0BF2BC42C310052393E /* SignInModel.swift in Sources */,
+				5591AE6F2BE8120F00A94DBA /* SelectStartRatingView.swift in Sources */,
 				5502F8A72BC4675500C79A56 /* LocalizationSystem.swift in Sources */,
 				559F00522BDEE5CD00C7BBFF /* CourseService.swift in Sources */,
 				55823DE52BDC1C88000F4A32 /* ClassRoutingModel.swift in Sources */,
@@ -1259,6 +1266,7 @@
 				55F868A92BD96B0400A05E8F /* JSONDecoder+Decoder.swift in Sources */,
 				55823DED2BDC4049000F4A32 /* CourseDetailsView.swift in Sources */,
 				556283592BE22C21008A7200 /* GroupEnrolledView.swift in Sources */,
+				5591AE6B2BE7FC5700A94DBA /* CourseHistoryDetailsView.swift in Sources */,
 				559F00492BDEC1DA00C7BBFF /* ImagePicker.swift in Sources */,
 				55F781C42BD2EEE1007CEB03 /* ResetPasswordView.swift in Sources */,
 				5597446C2BBB37A400122058 /* NetworkConstant.swift in Sources */,
@@ -1464,10 +1472,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.0;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1486,6 +1496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1498,10 +1509,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.0;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1520,6 +1533,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

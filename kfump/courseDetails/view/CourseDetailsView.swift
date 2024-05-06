@@ -17,10 +17,11 @@ struct CourseDetailsView: View {
     
     @State private var selectedTab = "About"
     let tabs = ["About", "Instructor", "Syllabus", "Class Routine"]
-    let tabsAr = ["اعرف اكثر", "المدرب", "محتويات البرنامج", "مواعيد الحصة"]
+//    let tabsAr = ["اعرف اكثر", "المدرب", "محتويات البرنامج", "مواعيد الحصة"]
     
     @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
     @State var isNavigateToEnrolledCourseView : Bool = false
+    @State var focusPoint : String = "about"
     
     var courseId : Int!
     
@@ -29,149 +30,170 @@ struct CourseDetailsView: View {
         ZStack {
             
             ScrollView {
-                
-                
-                VStack {
+                ScrollViewReader { scrollView in
                     
                     VStack {
                         
-                        if courseDetailsViewModel.courseData != nil {
-                            WebImageView(imageUrl: courseDetailsViewModel.courseData?.coverImage ?? "")
-                                .aspectRatio(18/13, contentMode: .fill)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 250)
-                                .cornerRadius(12)
-                                .padding(.top,30)
+                        VStack {
                             
-                            
-                        } else {
-                            Image("nature")
-                                .resizable()
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 250)
-                                .cornerRadius(12)
-                                .padding(.top,30)
-                        }
-                        
-                        
-                        Text(courseDetailsViewModel.courseData?.title ?? "")
-                            .font(.custom(FONT_BOLD, size: 20))
-                            .padding(.top)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text(courseDetailsViewModel.courseData?.subtitle ?? "")
-                            .font(.custom(FONT_LIGHT, size: 16))
-                            .padding(.vertical,5)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        
-                        
-                        enrolledButtonView
-                    }
-                    .padding(.horizontal,20)
-                    
-                    
-                    menuListView
-                        .shadow(color: .gray, radius: 0.2, x: 0, y: 0)
-                    
-                    VStack {
-                        
-                        
-                        
-                        
-                        HStack {
-                            Text(LocalizationSystem.shared.localizedStringForKey(key: ABOUT_THIS_COURSE_KEY, comment: ""))
-                                .font(.custom(FONT_BOLD, size: 16))
-                            Spacer()
-                        }
-                        .padding(.top,30)
-                        
-                        
-                        Text(courseDetailsViewModel.courseData?.description ?? "")
-                            .font(.custom(FONT_LIGHT, size: 16))
-                            .padding(.vertical,5)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        
-                        InstructorView(instructor: courseDetailsViewModel.instructor)
-                        
-                        
-                        
-                        
-                        
-                        if let scyllabusInfo = courseDetailsViewModel.scyllabusInfo {
-                            
-                            if scyllabusInfo.count != 0 {
-                                HStack {
-                                    Text(LocalizationSystem.shared.localizedStringForKey(key: SYLLABUS_KEY, comment: ""))
-                                        .font(.custom(FONT_BOLD, size: 16))
-                                    Spacer()
-                                }
-                                .padding(.top,30)
-                            }
-                            
-                            ForEach(scyllabusInfo) { item in
-                                SingleSyllabusView(singleSyllabus: item)
+                            if courseDetailsViewModel.courseData != nil {
+                                WebImageView(imageUrl: courseDetailsViewModel.courseData?.coverImage ?? "")
+                                    .aspectRatio(18/13, contentMode: .fill)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 250)
+                                    .cornerRadius(12)
+                                    .padding(.top,30)
                                 
-                                Divider()
+                                
+                            } else {
+                                Image("nature")
+                                    .resizable()
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 250)
+                                    .cornerRadius(12)
+                                    .padding(.top,30)
                             }
-                            .padding(.top,8)
-                            .padding(.bottom,10)
                             
+                            
+                            Text(courseDetailsViewModel.courseData?.title ?? "")
+                                .font(.custom(FONT_BOLD, size: 20))
+                                .padding(.top)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Text(courseDetailsViewModel.courseData?.subtitle ?? "")
+                                .font(.custom(FONT_LIGHT, size: 16))
+                                .padding(.vertical,5)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            
+                            
+                            enrolledButtonView
                         }
+                        .padding(.horizontal,20)
                         
                         
-                        if let classRoutineInfo = courseDetailsViewModel.classRoutineInfo {
-                            
-                            if classRoutineInfo.count != 0 {
-                                HStack {
-                                    Text(LocalizationSystem.shared.localizedStringForKey(key: CLASS_ROUTINE_KEY, comment: ""))
-                                        .font(.custom(FONT_BOLD, size: 16))
-                                    Spacer()
+                        menuListView
+                            .shadow(color: .gray, radius: 0.2, x: 0, y: 0)
+                            .onChange(of: selectedTab) { newValue in
+                                if selectedTab == "About" {
+                                    focusPoint = "about"
+                                    
+                                } else if selectedTab == "Instructor" {
+                                    focusPoint = "instructor"
+                                } else if selectedTab == "Syllabus" {
+                                    focusPoint = "syllabus"
+                                } else if selectedTab == "Class Routine" {
+                                    focusPoint = "classRoutine"
                                 }
-                                .padding(.top,15)
+                                withAnimation {
+                                    print(focusPoint)
+                                    scrollView.scrollTo(focusPoint, anchor: .top)
+                                }
+                            }
+                        
+                        VStack {
+                            
+                            
+                            
+                            
+                            HStack {
+                                Text(LocalizationSystem.shared.localizedStringForKey(key: ABOUT_THIS_COURSE_KEY, comment: ""))
+                                    .font(.custom(FONT_BOLD, size: 16))
+                                Spacer()
+                            }
+                            .padding(.top,30)
+                            
+                            
+                            Text(courseDetailsViewModel.courseData?.description ?? "")
+                                .font(.custom(FONT_LIGHT, size: 16))
+                                .padding(.vertical,5)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .id("about")
+                            
+                            
+                            InstructorView(instructor: courseDetailsViewModel.instructor)
+                                .id("instructor")
+                            
+                        
+                            
+                            
+                            
+                            if let scyllabusInfo = courseDetailsViewModel.scyllabusInfo {
+                                
+                                if scyllabusInfo.count != 0 {
+                                    HStack {
+                                        Text(LocalizationSystem.shared.localizedStringForKey(key: SYLLABUS_KEY, comment: ""))
+                                            .font(.custom(FONT_BOLD, size: 16))
+                                        Spacer()
+                                    }
+                                    .padding(.top,30)
+                                }
+                                
+                                ForEach(scyllabusInfo) { item in
+                                    SingleSyllabusView(singleSyllabus: item)
+                                    
+                                    Divider()
+                                }
+                                .id("syllabus")
+                                .padding(.top,8)
+                                .padding(.bottom,10)
+                                
+                            }
+                           
+                            
+                            
+                            if let classRoutineInfo = courseDetailsViewModel.classRoutineInfo {
+                                
+                                if classRoutineInfo.count != 0 {
+                                    HStack {
+                                        Text(LocalizationSystem.shared.localizedStringForKey(key: CLASS_ROUTINE_KEY, comment: ""))
+                                            .font(.custom(FONT_BOLD, size: 16))
+                                        Spacer()
+                                    }
+                                    .padding(.top,15)
+                                }
+                                
+                                ClassRoutineView(singleClassRoutine: classRoutineInfo)
+                                    .padding(.top,8)
+                                    .id("classRoutine")
+                                
                             }
                             
-                            ClassRoutineView(singleClassRoutine: classRoutineInfo)
-                                .padding(.top,8)
+                            
+                            
+                            
+                            
+                            
+                            HStack {
+                                Text(LocalizationSystem.shared.localizedStringForKey(key: REVIEWS_KEY, comment: ""))
+                                    .font(.custom(FONT_SEMIBOLD, size: 16))
+                                Spacer()
+                            }
+                            .padding(.vertical)
+                            
+                            reviewView
                             
                         }
+                        .padding(.horizontal,20)
                         
                         
                         
                         
-                        
-                        
-                        HStack {
-                            Text(LocalizationSystem.shared.localizedStringForKey(key: REVIEWS_KEY, comment: ""))
-                                .font(.custom(FONT_SEMIBOLD, size: 16))
-                            Spacer()
+                    }
+                    .redactShimmer(condition: courseDetailsViewModel.isLoading)
+                    .onAppear {
+                        print("courseId \(courseId)")
+                        if courseDetailsViewModel.courseData == nil {
+                            courseDetailsViewModel.courseDetails(courseId: courseId)
                         }
-                        .padding(.vertical)
-                        
-                        reviewView
                         
                     }
-                    .padding(.horizontal,20)
-                    
-                    
-                    
-                    
-                }
-                .redactShimmer(condition: courseDetailsViewModel.isLoading)
-                .onAppear {
-                    print("courseId \(courseId)")
-                    if courseDetailsViewModel.courseData == nil {
-                        courseDetailsViewModel.courseDetails(courseId: courseId)
-                    }
+                    .background(.white)
+                    .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
+                    .navigationBarItems(leading: isShowingGroupEnrolledView ? nil : CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_DETAILS_KEY, comment: "")))
+                    .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView(enrolledData: courseDetailsViewModel.enrolledData).navigationBarBackButtonHidden(true) })
                     
                 }
-                .background(.white)
-                .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-                .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_KEY, comment: "")))
-                .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView(enrolledData: courseDetailsViewModel.enrolledData).navigationBarBackButtonHidden(true) })   
-
-                
                 
                 
             }
@@ -186,9 +208,9 @@ struct CourseDetailsView: View {
                 CustomProgressView()
             }
             
-//            ToastView(isPresented: $courseDetailsViewModel.isLoadingEnrollment, duration: 2.0) {
-//                CustomTost(message: courseDetailsViewModel.dialogMessage)
-//            }
+            //            ToastView(isPresented: $courseDetailsViewModel.isLoadingEnrollment, duration: 2.0) {
+            //                CustomTost(message: courseDetailsViewModel.dialogMessage)
+            //            }
             
         }
     }
@@ -203,6 +225,7 @@ struct CourseDetailsView: View {
                 .opacity(0.6)
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
+                    hideKeyboard()
                     isShowingGroupEnrolledView = false
                 }
             
@@ -297,7 +320,7 @@ struct CourseDetailsView: View {
         
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(isRTL ? tabsAr : tabs, id: \.self) { tab in
+                ForEach(tabs, id: \.self) { tab in
                     Button(action: {
                         self.selectedTab = tab
                     }) {
@@ -365,9 +388,9 @@ struct CourseDetailsView: View {
                 }
                 
                 
-               
                 
-
+                
+                
                 
                 if let ratingInfo = courseDetailsViewModel.ratingInfo {
                     

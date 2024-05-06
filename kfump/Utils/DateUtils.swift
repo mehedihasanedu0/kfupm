@@ -60,17 +60,34 @@ class DateUtils {
     
         
     static func paymentHistoryDateFormat(_ dateString: String) -> String {
-        let isoDateFormatter = ISO8601DateFormatter()
-        isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-
-        if let date = isoDateFormatter.date(from: dateString) {
+        let sparateDateString = addPlus6Hour(dateString).components(separatedBy: "T")[0]
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatterGet.date(from: sparateDateString) {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy"
             return dateFormatter.string(from: date)
         } else {
             print("Failed to parse date")
         }
-        
+        return ""
+    }
+    
+    
+    
+    static func addPlus6Hour(_ dateString: String) -> String {
+        let isoDateFormatter = ISO8601DateFormatter()
+        isoDateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard let date = isoDateFormatter.date(from: dateString) else {
+            print("Failed to parse date")
+            return ""
+        }
+        var calendar = Calendar.current
+        if let newDate = calendar.date(byAdding: .hour, value: 6, to: date) {
+            return isoDateFormatter.string(from: newDate)
+        } else {
+            print("Failed to add 6 hours to the date")
+        }
         return ""
     }
     

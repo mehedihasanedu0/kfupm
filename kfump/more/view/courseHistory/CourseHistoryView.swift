@@ -10,7 +10,7 @@ import SwiftUI
 struct CourseHistoryView: View {
     
     @StateObject var homeviewModel = HomeViewModel()
-    @State var isNavigateToCourseDetailsView = false
+    @State var isNavigateToCourseHistoryDetailsView = false
     
     let columns = [
         GridItem(.flexible()),
@@ -28,7 +28,7 @@ struct CourseHistoryView: View {
                                 .padding(.bottom,2)
                                 .onTapGesture {
                                     print("Course tapped: \(course.id)")
-                                    isNavigateToCourseDetailsView = true
+                                    isNavigateToCourseHistoryDetailsView = true
                                 }
 
                         }
@@ -46,6 +46,7 @@ struct CourseHistoryView: View {
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Courses"))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
+        .navigationDestination(isPresented: $isNavigateToCourseHistoryDetailsView, destination: { CourseHistoryDetailsView().navigationBarBackButtonHidden(true) })
     }
 }
 
