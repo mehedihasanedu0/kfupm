@@ -23,9 +23,9 @@ class HomeViewModel : ObservableObject {
     @Published var isSucess = false
     
     @Published var courseList : [Course] = Course.dummyData
-    @Published var ongoingCourseList : [Course] = Course.ongoingSampleData
-    @Published var courseHistoryList : [Course] = Course.courseHistorySampleData
-    @Published var enrolledCourseList : [Course] = Course.enrolledSampleData
+    @Published var ongoingCourseList : [SingleEnrolledItem] = Course.enrolledSampleData
+    @Published var courseHistoryList : [SingleEnrolledItem] = Course.enrolledSampleData 
+    @Published var enrolledCourseList : [SingleEnrolledItem] = Course.enrolledSampleData
     @Published var courseListBySearchKey = [Course]()
     
     init(homeRepositoryService: HomeRepositoryService = HomeRepositoryService()) {
@@ -114,8 +114,8 @@ class HomeViewModel : ObservableObject {
                     self.enrolledCourseList = []
                 }
             }, receiveValue: { [weak self] inviteeResponse in
-                self?.enrolledCourseList = inviteeResponse.items
-                self?.isLoading = true
+                self?.enrolledCourseList = inviteeResponse.data
+                self?.isLoading = false
             })
             .store(in: &cancellables)
         
@@ -142,7 +142,7 @@ class HomeViewModel : ObservableObject {
                     self.ongoingCourseList = []
                 }
             }, receiveValue: { [weak self] inviteeResponse in
-                self?.ongoingCourseList = inviteeResponse.items
+                self?.ongoingCourseList = inviteeResponse.data
                 self?.isLoading = false
             })
             .store(in: &cancellables)
@@ -168,7 +168,7 @@ class HomeViewModel : ObservableObject {
                     self.courseHistoryList = []
                 }
             }, receiveValue: { [weak self] inviteeResponse in
-                self?.courseHistoryList = inviteeResponse.items
+                self?.courseHistoryList = inviteeResponse.data
                 self?.isLoading = true
             })
             .store(in: &cancellables)

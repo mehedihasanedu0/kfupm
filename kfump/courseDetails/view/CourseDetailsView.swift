@@ -66,8 +66,15 @@ struct CourseDetailsView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             
+                            if courseDetailsViewModel.courseData?.enrollmentStatus == "ENROLLED" {
+                                
+                                afterEnrolledView
+
+                                
+                            } else {
+                                enrolledButtonView
+                            }
                             
-                            enrolledButtonView
                         }
                         .padding(.horizontal,20)
                         
@@ -254,6 +261,44 @@ struct CourseDetailsView: View {
         
     }
     
+    var afterEnrolledView: some View {
+        
+        HStack {
+            
+            Button(action: {
+               
+                
+            }) {
+                HStack {
+                    
+                    Text("Enrolled ")
+                        .padding(.vertical,10)
+                        .font(.custom(FONT_SEMIBOLD, size: 16))
+                        .foregroundColor(isEntollTypeSingle ? .white : hexToColor(hex: "#007D40"))
+                        .padding(.horizontal,20)
+                    
+                    Image("drop_arrow")
+                        .resizable()
+                        .frame(width: 15, height: 15)
+                        .padding(.trailing,15)
+                }
+                
+                
+                
+            }
+            
+            .frame(height: 45)
+            .background(isEntollTypeSingle ? hexToColor(hex: "#007D40") : .white)
+            .cornerRadius(22)
+            .overlay {
+                RoundedRectangle(cornerRadius: 22)
+                    .stroke(isEntollTypeSingle ? Color .clear : hexToColor(hex: "#007D40"), lineWidth: 2)
+            }
+            
+            Spacer()
+        }
+        .padding(.top)
+    }
     var enrolledButtonView: some View {
         
         VStack {

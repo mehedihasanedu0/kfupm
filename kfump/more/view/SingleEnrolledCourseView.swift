@@ -20,6 +20,9 @@ struct SingleEnrolledCourseView: View {
                 WebImageView(imageUrl: course.coverImage ?? "")
                     .aspectRatio(18/13, contentMode: .fill)
                     .frame(height: 130)
+                    .onAppear{
+                        print("Single Course \(course)")
+                    }
                 
                 HStack {
                     
@@ -28,7 +31,7 @@ struct SingleEnrolledCourseView: View {
                         .cornerRadius(15)
                     
                     
-                    Text("Mehedi Hasan")
+                    Text(course.createdBy?.fullName ?? "")
                         .font(.custom(FONT_REGULAR, size: 11))
                     
                     Spacer()
@@ -71,6 +74,6 @@ struct SingleEnrolledCourseView: View {
     }
 }
 
-#Preview {
-    SingleEnrolledCourseView(course: Course(id: 1, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "nature", title: "Python for Beginners - Learn Programming from scratch", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil))
-}
+//#Preview {
+//    SingleEnrolledCourseView(course: Course(id: 1, createdBy: nil, createdAt: "", updatedAt: "", coverImage: "nature", title: "Python for Beginners - Learn Programming from scratch", subtitle: "", description: "", status: "", registrationStatus: "", slug: "", fee: 0.0, groupEnrolledDiscountFee: 0.0, qrCode: "", category: nil, availability: 0, facilitator: nil))
+//}

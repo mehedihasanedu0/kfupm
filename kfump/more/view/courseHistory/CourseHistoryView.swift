@@ -24,7 +24,7 @@ struct CourseHistoryView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(homeviewModel.courseHistoryList, id: \.id) { course in
-                            SingleEnrolledCourseView(course: course)
+                            SingleEnrolledCourseView(course: course.course!)
                                 .padding(.bottom,2)
                                 .onTapGesture {
                                     print("Course tapped: \(course.id)")

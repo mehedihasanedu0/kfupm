@@ -12,22 +12,22 @@ struct SingleEmailView: View {
         var onDelete: () -> Void
         
         var body: some View {
-            HStack {
+            ZStack {
                 Text(email)
                     .font(.custom(FONT_LIGHT, size: 11))
                     .foregroundColor(.black)
-                    .padding(5)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    .padding(.horizontal, 5)
+                    .padding(.vertical,8)
+                    .padding(.trailing,20)
+                    .multilineTextAlignment(.leading)
                 
                 Button(action: onDelete) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.gray)
                 }
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .padding(.horizontal,8)
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(15)
         }
 }
 

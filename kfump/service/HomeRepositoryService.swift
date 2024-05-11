@@ -22,7 +22,7 @@ class HomeRepositoryService {
         return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
     }    
     
-    func getCoursesWithStatus(status: String = "") -> AnyPublisher<CourseListResponseModel, Error> {
+    func getCoursesWithStatus(status: String = "") -> AnyPublisher<EnrolledCourseResponseModel, Error> {
         let url = URL(string: "\(URL.courseListWithStatus)&status=\(status)")
         return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
     }
