@@ -77,10 +77,12 @@ struct CourseDetailsView: View {
                             
                         }
                         .padding(.horizontal,20)
+                        .padding(.bottom,25)
+                        .background(hexToColor(hex: "#FAF9F6",alpha: 0.9))
                         
                         
                         menuListView
-                            .shadow(color: .gray, radius: 0.2, x: 0, y: 0)
+                            .shadow(color: .gray, radius: 0.1, x: 0, y: 0)
                             .onChange(of: selectedTab) { newValue in
                                 if selectedTab == "About" {
                                     focusPoint = "about"
@@ -97,25 +99,28 @@ struct CourseDetailsView: View {
                                     scrollView.scrollTo(focusPoint, anchor: .top)
                                 }
                             }
+                            .offset(y: -25)
+                            .background(hexToColor(hex: "#FFFFFF"))
                         
                         VStack {
                             
                             
-                            
-                            
                             HStack {
-                                Text(LocalizationSystem.shared.localizedStringForKey(key: ABOUT_THIS_COURSE_KEY, comment: ""))
-                                    .font(.custom(FONT_BOLD, size: 16))
+                                Text("About this")
+                                    .font(.custom(FONT_BOLD, size: 16)) +
+                                Text(" Course")
+                                    .font(.custom(FONT_MEDIUM, size: 16))
                                 Spacer()
                             }
                             .padding(.top,30)
+                            .id("about")
                             
                             
                             Text(courseDetailsViewModel.courseData?.description ?? "")
                                 .font(.custom(FONT_LIGHT, size: 16))
                                 .padding(.vertical,5)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .id("about")
+                                
                             
                             
                             InstructorView(instructor: courseDetailsViewModel.instructor)
@@ -134,6 +139,7 @@ struct CourseDetailsView: View {
                                         Spacer()
                                     }
                                     .padding(.top,30)
+                                    .id("syllabus")
                                 }
                                 
                                 ForEach(scyllabusInfo) { item in
@@ -141,7 +147,7 @@ struct CourseDetailsView: View {
                                     
                                     Divider()
                                 }
-                                .id("syllabus")
+                                
                                 .padding(.top,8)
                                 .padding(.bottom,10)
                                 
@@ -158,11 +164,12 @@ struct CourseDetailsView: View {
                                         Spacer()
                                     }
                                     .padding(.top,15)
+                                    .id("classRoutine")
                                 }
                                 
                                 ClassRoutineView(singleClassRoutine: classRoutineInfo)
                                     .padding(.top,8)
-                                    .id("classRoutine")
+                                    
                                 
                             }
                             
@@ -181,7 +188,10 @@ struct CourseDetailsView: View {
                             reviewView
                             
                         }
+                        .background(hexToColor(hex: "#FAF9F6",alpha: 0.2))
                         .padding(.horizontal,20)
+                        .offset(y: -25)
+                        
                         
                         
                         
@@ -198,12 +208,14 @@ struct CourseDetailsView: View {
                     .background(.white)
                     .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                     .navigationBarItems(leading: isShowingGroupEnrolledView ? nil : CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_DETAILS_KEY, comment: "")))
+                    .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7",alpha: 0.7), titleColor: .white)
                     .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView(enrolledData: courseDetailsViewModel.enrolledData).navigationBarBackButtonHidden(true) })
                     
                 }
-                
+                .background(.clear)
                 
             }
+            .background(hexToColor(hex: "#F9F9F7"))
             
             
             if isShowingGroupEnrolledView {
@@ -271,24 +283,24 @@ struct CourseDetailsView: View {
             }) {
                 HStack {
                     
-                    Text("Enrolled ")
+                    Text("Enrolled")
                         .padding(.vertical,10)
                         .font(.custom(FONT_SEMIBOLD, size: 16))
                         .foregroundColor(isEntollTypeSingle ? .white : hexToColor(hex: "#007D40"))
-                        .padding(.horizontal,20)
+//                        .padding(.leading,15)
                     
                     Image("drop_arrow")
                         .resizable()
                         .frame(width: 15, height: 15)
-                        .padding(.trailing,15)
+                        .padding(.leading,15)
                 }
                 
                 
                 
             }
             
-            .frame(height: 45)
-            .background(isEntollTypeSingle ? hexToColor(hex: "#007D40") : .white)
+            .frame(width: 156, height: 45)
+            .background(hexToColor(hex: "#007D40"))
             .cornerRadius(22)
             .overlay {
                 RoundedRectangle(cornerRadius: 22)
@@ -417,8 +429,9 @@ struct CourseDetailsView: View {
                 HStack {
                     Text("\(doubleFormat(courseDetailsViewModel.courseData?.ratingAverage ?? 0))")
                         .font(.custom(FONT_BOLD, size: 18))
-                    Text("out of 5")
+                    Text("Out of 5")
                         .font(.custom(FONT_REGULAR, size: 14))
+                        .foregroundColor(hexToColor(hex: "#6F7284"))
                     Spacer()
                 }
                 

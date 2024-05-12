@@ -52,7 +52,8 @@ struct SingleEnrolledCourseView: View {
                 
                 HStack {
                     
-                    Text(course.status ?? "")
+//                    Text(course.status ?? "")
+                    Text("ENROLLED")
                         .font(.custom(FONT_SEMIBOLD, size: 10))
                         .foregroundColor(hexToColor(hex: "#D0B756"))
                     

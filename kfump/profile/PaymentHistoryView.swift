@@ -17,15 +17,14 @@ struct PaymentHistoryView: View {
             
             VStack {
                 
-                ForEach(profileViewModel.paymentHistoryList,id: \.id) { item in
+                ForEach(profileViewModel.paymentHistoryList.filter { $0.totalAmount != nil },id: \.id) { item in
                     
                     SinglePaymentHistoryView(singlePayment: item)
                     .padding()
                     .background(hexToColor(hex: "#F9F9F7"))
                     .padding(.bottom,10)
                     .cornerRadius(10)
-                    
-                    
+                        
                 }
                 
                 Spacer()

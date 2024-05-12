@@ -14,7 +14,7 @@ struct ClassRoutineView: View {
     var body: some View {
         
         VStack {
-            ForEach(singleClassRoutine,id: \.id) { item in
+            ForEach(Array(singleClassRoutine.enumerated()), id: \.1.id) { index, item in
                 
                 VStack {
                     HStack {
@@ -43,7 +43,7 @@ struct ClassRoutineView: View {
                     
                     .padding(.vertical,15)
                     .padding(.horizontal,10)
-                    .background(hexToColor(hex: ((item.id ?? 0)  % 2 == 1) ? "#FFFFFF" : "#E5E5D9"))
+                    .background((index % 2 == 1) ? hexToColor(hex: "#E5E5D9",alpha: 0.4) : hexToColor(hex: "#FFFFFF"))
                     
                     //                    Divider()
                     //                        .frame(height: 1)
@@ -53,7 +53,7 @@ struct ClassRoutineView: View {
         }
         .overlay {
             RoundedRectangle(cornerRadius: 12)
-                .stroke(.gray, lineWidth: 0.3)
+                .stroke(hexToColor(hex: "#E5E5D9"), lineWidth: 1)
         }
         
         

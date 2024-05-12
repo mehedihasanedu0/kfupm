@@ -28,8 +28,8 @@ struct SinglePaymentHistoryView: View {
                 .padding(.vertical)
             
             HStack {
-                Text("\(LocalizationSystem.shared.localizedStringForKey(key: COURSE_NAME_KEY, comment: "")):")
-                    .font(.custom(FONT_MEDIUM, size: 14))
+                Text("\(LocalizationSystem.shared.localizedStringForKey(key: COURSE_NAME_KEY, comment: "")): ")
+                    .font(.custom(FONT_MEDIUM, size: 14)) +
                 Text(singlePayment?.course?.title ?? "")
                     .font(.custom(FONT_REGULAR, size: 14))
             }

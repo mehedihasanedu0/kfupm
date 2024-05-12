@@ -74,7 +74,7 @@ struct CheckoutView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack {
-                Text(LocalizationSystem.shared.localizedStringForKey(key: TOTAL_PRICE_KEY, comment: ""))
+                Text(LocalizationSystem.shared.localizedStringForKey(key: ORIGINAL_PRICE_KEY, comment: ""))
                     .font(.custom(FONT_REGULAR, size: 14))
                 
                 Spacer()
@@ -167,10 +167,18 @@ struct CheckoutView: View {
     var paymentMethodView: some View {
         
         VStack {
-            Text(LocalizationSystem.shared.localizedStringForKey(key: PAYMENT_METHOD_KEY, comment: ""))
-                .font(.custom(FONT_SEMIBOLD, size: 16))
-                .padding(.top)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            HStack {
+                
+                Text("Payment")
+                    .font(.custom(FONT_SEMIBOLD, size: 16)) +
+                Text(" Method")
+                    .font(.custom(FONT_LIGHT, size: 16))
+                
+            }
+            .padding(.top)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
             
             GeometryReader { geometry in
                 HStack {

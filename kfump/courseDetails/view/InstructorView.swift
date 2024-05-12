@@ -31,7 +31,7 @@ struct InstructorView: View {
                 WebImageView(imageUrl: instructor?.image ?? "")
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 3))
+                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
                 
                 
                 // Profile details
@@ -51,7 +51,7 @@ struct InstructorView: View {
                             .padding(.vertical,5)
                             .padding(.horizontal,10)
                             .background(hexToColor(hex: "#D0B756"))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .clipShape(RoundedRectangle(cornerRadius: 13))
                             .padding(.leading)
                         
                         
@@ -61,7 +61,10 @@ struct InstructorView: View {
                     // Rating
                     HStack {
                         Image(systemName: "star.fill")
+                            .resizable()
                             .foregroundColor(hexToColor(hex: "#D0B756"))
+                            .frame(width: 12,height: 12)
+                        
                         Text("\(doubleFormat(instructor?.ratingAverage ?? 0.0))/5 ")
                             .font(.custom(FONT_MEDIUM, size: 12))
                             .foregroundColor(hexToColor(hex: "#D0B756"))
@@ -74,7 +77,11 @@ struct InstructorView: View {
                     // Courses
                     HStack {
                         Image("instructor_courses")
+                            .resizable()
                             .foregroundColor(.gray)
+                            .frame(width: 12,height: 12)
+                            
+                        
                         Text("\(instructor?.totalCourse ?? 0) Courses")
                             .font(.custom(FONT_MEDIUM, size: 12))
                             .foregroundColor(.gray)
