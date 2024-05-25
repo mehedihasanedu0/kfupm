@@ -13,7 +13,7 @@ import Combine
 class NetworkClient {
     static let shared = NetworkClient()
     @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool = false
-    @AppStorage(Keys.TOKEN_D.rawValue) var accessToken: String?
+    @AppStorage(Keys.TOKEN_D.rawValue) var accessToken: String  = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkZW50aWZpZXIiOiI2ZTQ0NGVjYS01MGY3LTRmZjgtOTU5Ni0xN2Q2ODYwYTNjYTMiLCJleHAiOjE3MTY2NDQ5OTIsImlhdCI6MTcxNjYxNDk5Mi41MTE3ODl9.bliMYJFXvFp_MVs_Q1aze9Ylz_7jMxXqYgdO5bx4z0c"
     
     private func APIURLRequest(url: URL, method: String, headers: [String: String]?, body: Data?, headerDetails: APIRequestHeaders = .APIRequestWithNoHeader) -> URLRequest {
         var request = URLRequest(url: url)

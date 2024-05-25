@@ -45,6 +45,11 @@ class CourseService {
     func courseDetails(courseId: Int) -> AnyPublisher<CourseDetailsResponseModel, Error> {
         let url = URL(string: "\(URL.courseDetails)\(courseId)/")
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
+    }  
+    
+    func ongoingCourseDetails(courseId: Int) -> AnyPublisher<OngoingCourseDetailsResponseModel, Error> {
+        let url = URL(string: "\(URL.ongoingCourseDetails)\(courseId)/")
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     
 }

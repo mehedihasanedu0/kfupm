@@ -12,6 +12,9 @@ struct OngoingCourseView: View {
     @StateObject var homeviewModel = HomeViewModel()
     @State var isNavigateToCourseDetailsView = false
     
+    @State var selectedCoureId = 0
+    @State var selectedCoureTitle = ""
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -28,6 +31,8 @@ struct OngoingCourseView: View {
                                 .padding(.bottom,2)
                                 .onTapGesture {
                                     print("Course tapped: \(course.id)")
+                                    selectedCoureId = course.id ?? 0
+                                    selectedCoureTitle = course.course?.title ?? ""
                                     isNavigateToCourseDetailsView = true
                                 }
 
@@ -46,6 +51,7 @@ struct OngoingCourseView: View {
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Courses"))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
+        .navigationDestination(isPresented: $isNavigateToCourseDetailsView, destination: { OngoingCourseDetailsView(courseId: selectedCoureId,courseTitle: selectedCoureTitle).navigationBarBackButtonHidden(true) })
     }
 }
 

@@ -45,6 +45,9 @@ extension URL {
     static let cashPayment                         = "\(URL.baseUrl)/payment/create/"
     static let enrolledGroup                       = "\(URL.baseUrl)/group/enrolled/"
     
+    
+    static let ongoingCourseDetails                = "\(URL.baseUrl)/course/class-create/"
+    
     // MARK: - Cupon
     static let apply_cupon                         = "\(URL.baseUrl)discount-coupon/apply"
     static let delete_cupon                        = "\(URL.baseUrl)discount-coupon/remove"

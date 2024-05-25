@@ -33,6 +33,7 @@
 		5533366F2BB9CC0B00D5F6E5 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5533366E2BB9CC0B00D5F6E5 /* FilterView.swift */; };
 		553336712BB9D3A200D5F6E5 /* FilterMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553336702BB9D3A200D5F6E5 /* FilterMenuView.swift */; };
 		553336742BB9D67800D5F6E5 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553336732BB9D67800D5F6E5 /* BottomSheet.swift */; };
+		553623522BFE6B730032B49C /* OngoingCourseDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553623512BFE6B730032B49C /* OngoingCourseDetailsView.swift */; };
 		553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55B22BB48EFB00AFBD7A /* kfumpApp.swift */; };
 		553E55B52BB48EFB00AFBD7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E55B42BB48EFB00AFBD7A /* ContentView.swift */; };
 		553E55B72BB48EFE00AFBD7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 553E55B62BB48EFE00AFBD7A /* Assets.xcassets */; };
@@ -164,6 +165,9 @@
 		55A44ADF2BC328BD0058C995 /* CreateBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A44ADE2BC328BD0058C995 /* CreateBody.swift */; };
 		55A44AE12BC3342C0058C995 /* OtpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A44AE02BC3342C0058C995 /* OtpModel.swift */; };
 		55AFC46E2BE426A600B7566B /* CustomOtpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AFC46D2BE426A600B7566B /* CustomOtpTextField.swift */; };
+		55B8355F2C01ACEA00315EB8 /* OngoingCourseDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B8355E2C01ACEA00315EB8 /* OngoingCourseDetailsViewModel.swift */; };
+		55B835612C01B0BA00315EB8 /* OngoingCourseDetailsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B835602C01B0BA00315EB8 /* OngoingCourseDetailsResponseModel.swift */; };
+		55B835642C01B98F00315EB8 /* SingleCourseItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B835632C01B98F00315EB8 /* SingleCourseItemView.swift */; };
 		55C30F1A2BE4AE90009F792D /* CustomOtpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C30F192BE4AE90009F792D /* CustomOtpView.swift */; };
 		55D1FA5C2BB6D936004D5F7F /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1FA5B2BB6D936004D5F7F /* Course.swift */; };
 		55D9D4452BC07E7B0078A808 /* SingleSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D9D4442BC07E7B0078A808 /* SingleSearchItem.swift */; };
@@ -237,6 +241,7 @@
 		5533366E2BB9CC0B00D5F6E5 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		553336702BB9D3A200D5F6E5 /* FilterMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMenuView.swift; sourceTree = "<group>"; };
 		553336732BB9D67800D5F6E5 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		553623512BFE6B730032B49C /* OngoingCourseDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingCourseDetailsView.swift; sourceTree = "<group>"; };
 		553E55AF2BB48EFB00AFBD7A /* kfump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kfump.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		553E55B22BB48EFB00AFBD7A /* kfumpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kfumpApp.swift; sourceTree = "<group>"; };
 		553E55B42BB48EFB00AFBD7A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -371,6 +376,9 @@
 		55A44ADE2BC328BD0058C995 /* CreateBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBody.swift; sourceTree = "<group>"; };
 		55A44AE02BC3342C0058C995 /* OtpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpModel.swift; sourceTree = "<group>"; };
 		55AFC46D2BE426A600B7566B /* CustomOtpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOtpTextField.swift; sourceTree = "<group>"; };
+		55B8355E2C01ACEA00315EB8 /* OngoingCourseDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingCourseDetailsViewModel.swift; sourceTree = "<group>"; };
+		55B835602C01B0BA00315EB8 /* OngoingCourseDetailsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingCourseDetailsResponseModel.swift; sourceTree = "<group>"; };
+		55B835632C01B98F00315EB8 /* SingleCourseItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCourseItemView.swift; sourceTree = "<group>"; };
 		55C30F192BE4AE90009F792D /* CustomOtpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOtpView.swift; sourceTree = "<group>"; };
 		55D1FA5B2BB6D936004D5F7F /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		55D9D4442BC07E7B0078A808 /* SingleSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSearchItem.swift; sourceTree = "<group>"; };
@@ -465,6 +473,7 @@
 				553336692BB9C0AF00D5F6E5 /* MoreItems.swift */,
 				5585C2582BDD478100986987 /* ReportedAnIssueRequestModel.swift */,
 				5585C25A2BDD485400986987 /* ReportedAnIssueResponseModel.swift */,
+				55B835602C01B0BA00315EB8 /* OngoingCourseDetailsResponseModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -655,6 +664,7 @@
 		556175462BDD0B48004DD996 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				55B835622C01B96400315EB8 /* ongoingCourse */,
 				55A84F932BE7FA6700D2EAAE /* courseHistory */,
 				5576C82C2BB68279007392C8 /* MoreView.swift */,
 				5533366C2BB9C45800D5F6E5 /* SingleItemView.swift */,
@@ -755,6 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				5585C2562BDD461F00986987 /* MoreViewModel.swift */,
+				55B8355E2C01ACEA00315EB8 /* OngoingCourseDetailsViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -899,6 +910,15 @@
 				5591AE6E2BE8120E00A94DBA /* SelectStartRatingView.swift */,
 			);
 			path = courseHistory;
+			sourceTree = "<group>";
+		};
+		55B835622C01B96400315EB8 /* ongoingCourse */ = {
+			isa = PBXGroup;
+			children = (
+				553623512BFE6B730032B49C /* OngoingCourseDetailsView.swift */,
+				55B835632C01B98F00315EB8 /* SingleCourseItemView.swift */,
+			);
+			path = ongoingCourse;
 			sourceTree = "<group>";
 		};
 		55D1FA5A2BB6D925004D5F7F /* model */ = {
@@ -1224,6 +1244,7 @@
 				553E55F32BB491ED00AFBD7A /* Utils.swift in Sources */,
 				55DB16352BBC8C420022BDA7 /* CustomImage.swift in Sources */,
 				5585C24C2BDD233600986987 /* ContactUsView.swift in Sources */,
+				55B835612C01B0BA00315EB8 /* OngoingCourseDetailsResponseModel.swift in Sources */,
 				55DB16292BBC78C40022BDA7 /* HomeRepositoryService.swift in Sources */,
 				5576C82B2BB68265007392C8 /* ProfileView.swift in Sources */,
 				556175422BDD03F3004DD996 /* PaymentHistoryView.swift in Sources */,
@@ -1234,6 +1255,7 @@
 				5505691B2BD42D7000C49E71 /* CloseAccountView.swift in Sources */,
 				553E55F12BB491ED00AFBD7A /* SharedData.swift in Sources */,
 				55A44AD52BC30DA90058C995 /* Encodable.swift in Sources */,
+				553623522BFE6B730032B49C /* OngoingCourseDetailsView.swift in Sources */,
 				559F00502BDEE5B800C7BBFF /* CourseDetailsViewModel.swift in Sources */,
 				55D1FA5C2BB6D936004D5F7F /* Course.swift in Sources */,
 				554B75492BB5B96D00D40BE2 /* CustomSecureTextField.swift in Sources */,
@@ -1263,6 +1285,7 @@
 				556175482BDD0B5F004DD996 /* EnrolledCoursesView.swift in Sources */,
 				55F868A52BD9662700A05E8F /* HTTPStatusCodes.swift in Sources */,
 				5576C82D2BB68279007392C8 /* MoreView.swift in Sources */,
+				55B835642C01B98F00315EB8 /* SingleCourseItemView.swift in Sources */,
 				55F868A92BD96B0400A05E8F /* JSONDecoder+Decoder.swift in Sources */,
 				55823DED2BDC4049000F4A32 /* CourseDetailsView.swift in Sources */,
 				556283592BE22C21008A7200 /* GroupEnrolledView.swift in Sources */,
@@ -1287,6 +1310,7 @@
 				55A44AE12BC3342C0058C995 /* OtpModel.swift in Sources */,
 				553336712BB9D3A200D5F6E5 /* FilterMenuView.swift in Sources */,
 				553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */,
+				55B8355F2C01ACEA00315EB8 /* OngoingCourseDetailsViewModel.swift in Sources */,
 				5561754C2BDD14DB004DD996 /* OngoingCourseView.swift in Sources */,
 				5585C2522BDD38E400986987 /* IssuesView.swift in Sources */,
 				558B9E3E2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift in Sources */,
@@ -1472,12 +1496,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 12.0;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1496,7 +1518,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1509,12 +1530,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 12.0;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 13.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1533,7 +1552,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
