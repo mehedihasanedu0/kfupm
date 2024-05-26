@@ -24,7 +24,7 @@ struct EnrolledCoursesView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(homeviewModel.enrolledCourseList, id: \.id) { course in
-                            SingleEnrolledCourseView(course: course.course!)
+                            SingleEnrolledCourseView(course: course.course!,courseStatus: course.status ?? "")
                                 .padding(.bottom,2)
                                 .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.enrolledCourseList.count == 6)
                                 .onTapGesture {

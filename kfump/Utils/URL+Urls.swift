@@ -37,6 +37,8 @@ extension URL {
     // MARK: - More
     static let createReportAnIssue                 = "\(URL.baseUrl)/cms/report-an-issues/"
     static let getAllreportIssue                   = "\(URL.baseUrl)/cms/report-an-issues/"
+    static let contactUs                           = "\(URL.baseUrl)/cms/get-in-touch/"
+    static let attendanceHistory                   = "\(URL.baseUrl)/attendance/history/"
     
 
     // MARK: - Course
@@ -44,6 +46,7 @@ extension URL {
     static let enrolledCourse                      = "\(URL.baseUrl)/payment/checkout/"
     static let cashPayment                         = "\(URL.baseUrl)/payment/create/"
     static let enrolledGroup                       = "\(URL.baseUrl)/group/enrolled/"
+    static let createReview                        = "\(URL.baseUrl)/course/rating/"
     
     
     static let ongoingCourseDetails                = "\(URL.baseUrl)/course/class-create/"
@@ -65,6 +68,12 @@ extension URL {
     static let review_list                        = "\(URL.baseUrl)sp/reviews/"
     static let seller_filter                       = "\(URL.baseUrl)/seller/profile/filter?"
     static let service_list_on_map                 = "\(URL.baseUrl)/seller/service/customer-list-on-map"
+    
+    
+    
+    // MARK: - Genarate Certificate
+    static let genarateTranscript                  = "\(URL.baseUrl)/course/generate_transcript/"
+    static let genarateCertificate                 = "\(URL.baseUrl)/course/generate_certificate/"
     
     
     

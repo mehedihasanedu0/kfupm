@@ -11,12 +11,20 @@ struct CourseHistoryDetailsView: View {
     
     
     @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
+    @StateObject var pdfNetworkManager = PDFNetworkManager()
     @State var isNavigateToEnrolledCourseView : Bool = false
+    @State private var showActivityViewController = false
+    @State private var showActivityViewControllerForDigital = false
     
     var courseId : Int!
     
     @State var rating: Int = 0
     @State var reviewTextView: String = ""
+    @State private var showToast = false
+    @State private var count = 0
+    
+    @State private var pdfURL: URL?
+    @State private var errorMessage: String?
     
     var body: some View {
         
@@ -74,8 +82,16 @@ struct CourseHistoryDetailsView: View {
                 }
                 
             }
+            
+            if courseDetailsViewModel.isLoadingForCreateReview {
+                CustomProgressView()
+            }
+            ToastView(isPresented: $showToast, duration: 2.0) {
+                CustomTost(message: "Review Create Successfully")
+            }
+            
         }
-        .redactShimmer(condition: courseDetailsViewModel.isLoading)
+        .redactShimmer(condition: courseDetailsViewModel.isLoading && courseDetailsViewModel.courseData == nil)
         .onAppear {
             print("courseId -< \(courseId)")
             courseDetailsViewModel.courseDetails(courseId: courseId)
@@ -84,15 +100,17 @@ struct CourseHistoryDetailsView: View {
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .navigationBarItems(leading: CustomTitleBarItems(title: "Course History Details"))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
+        .hideKeyboardOnTap()
+        .sheet(isPresented: $showActivityViewController) {
+            ActivityViewController(activityItems: [pdfNetworkManager.transcriptPDFData!])
+                }        
+        .sheet(isPresented: $showActivityViewControllerForDigital) {
+            ActivityViewController(activityItems: [pdfNetworkManager.digitalCertificatePDFData!])
+                }
 //        .navigationDestination(isPresented: $isNavigateToCourseHistoryDetailsView, destination: { CourseHistoryDetailsView().navigationBarBackButtonHidden(true) })
         
     }
-    //    Skill level: All Levels
-    //
-    //    Languages: Arbi
-    //    Captions: No
-    //    Lectures: 16
-    //    Video: 3.5 total hour
+
     
     var byTheNUmber : some View {
         VStack {
@@ -154,13 +172,7 @@ struct CourseHistoryDetailsView: View {
             
             HStack {
                 Button(action: {
-    //                self.isEntollTypeSingle = true
-    //                let vm = EnrolledRequestModel(courseId: courseId, enrolledType: "Single")
-    //                courseDetailsViewModel.enrolled(body: vm) { result in
-    //                    if result {
-    //                        self.isNavigateToCheckoutView = true
-    //                    }
-    //                }
+                    pdfNetworkManager.downloadgenarateTranscriptPDF(courseID: 28)
                     
                 }) {
                     Text("Download Now")
@@ -171,7 +183,18 @@ struct CourseHistoryDetailsView: View {
                     
                     
                 }
-                
+                .onChange(of: pdfNetworkManager.transcriptPDFData) { newData in
+                    if let data = newData {
+                         pdfNetworkManager.savePDFToFilesApp(data: data, fileName: "transcript") { success in
+                            if success {
+                                print("PDF saved successfully.")
+                                showActivityViewController = true
+                            } else {
+                                print("Failed to save PDF.")
+                            }
+                        }
+                    }
+                }
                 .frame(height: 45)
                 .background(hexToColor(hex: "#007D40"))
                 .cornerRadius(22)
@@ -194,13 +217,7 @@ struct CourseHistoryDetailsView: View {
             
             HStack {
                 Button(action: {
-    //                self.isEntollTypeSingle = true
-    //                let vm = EnrolledRequestModel(courseId: courseId, enrolledType: "Single")
-    //                courseDetailsViewModel.enrolled(body: vm) { result in
-    //                    if result {
-    //                        self.isNavigateToCheckoutView = true
-    //                    }
-    //                }
+                    pdfNetworkManager.downloadDigitalCertificatePDF(courseID: 28)
                     
                 }) {
                     Text("Download Now")
@@ -211,7 +228,17 @@ struct CourseHistoryDetailsView: View {
                     
                     
                 }
-                
+                .onChange(of: pdfNetworkManager.digitalCertificatePDFData) { newData in
+                    if let data = newData {
+                         pdfNetworkManager.savePDFToFilesApp(data: data, fileName: "digitalCertificate") { success in
+                            if success {
+                                showActivityViewControllerForDigital = true
+                            } else {
+                                print("Failed to save PDF.")
+                            }
+                        }
+                    }
+                }
                 .frame(height: 45)
                 .background(.white)
                 .cornerRadius(22)
@@ -354,13 +381,23 @@ struct CourseHistoryDetailsView: View {
             
             HStack {
                 Button(action: {
-    //                self.isEntollTypeSingle = true
-    //                let vm = EnrolledRequestModel(courseId: courseId, enrolledType: "Single")
-    //                courseDetailsViewModel.enrolled(body: vm) { result in
-    //                    if result {
-    //                        self.isNavigateToCheckoutView = true
-    //                    }
-    //                }
+                    
+                    if reviewTextView == "" {
+                        return
+                    }
+                    
+                    let vm = CourseRatingRequestModel(rate: rating,
+                                                      description: reviewTextView,
+                                                      course: courseId)
+                    print("vm \(vm)")
+                    courseDetailsViewModel.createReview(body: vm) { result in
+                        if result {
+                            self.showToast = true
+                            self.reviewTextView = ""
+                            courseDetailsViewModel.courseDetails(courseId: courseId)
+                            hideKeyboard()
+                        }
+                    }
                     
                 }) {
                     Text("Submit Review ")
@@ -387,6 +424,18 @@ struct CourseHistoryDetailsView: View {
 
         }
     }
+}
+
+
+struct ActivityViewController: UIViewControllerRepresentable {
+    let activityItems: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        return activityViewController
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
 //#Preview {

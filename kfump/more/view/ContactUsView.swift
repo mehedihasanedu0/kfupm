@@ -15,8 +15,9 @@ struct ContactUsView: View {
     @State var subject: String = ""
     @State var isLoginButtonPress: Bool = false
     
+    @StateObject var moreViewModel = MoreViewModel()
     @Environment(\.presentationMode) var presentationMode
-    
+    @State private var showToast = false
     
     var body: some View {
         
@@ -53,26 +54,26 @@ struct ContactUsView: View {
                         
                         isLoginButtonPress = true
                         
-//                        guard !userName.isEmpty,!password.isEmpty else {
-//                            return
-//                        }
-//                        
-//                        let vm = SignInModel(username: userName,
-//                                             password: password)
-//                        
-//                        authonicationViewModel.signIn(body: vm) { result in
-//                            
-//                            showToast.toggle()
-//                            
-//                            if result {
-//                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                                    
-//                                    presentationMode.wrappedValue.dismiss()
-//                                }
-//                                
-//                            }
-//                            
-//                        }
+                        guard !fullName.isEmpty,!eamil.isEmpty,!subject.isEmpty else {
+                            return
+                        }
+                        
+                        let vm = ContactUsRequestModel(full_name: fullName,
+                                                       email: eamil,
+                                                       subject: subject)
+                        
+                        moreViewModel.createContactUs(body: vm) { result in
+                            
+                            showToast.toggle()
+                            
+                            if result {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                                
+                            }
+                            
+                        }
                         
                         
                         
@@ -96,13 +97,24 @@ struct ContactUsView: View {
                 .padding(.horizontal)
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                 .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: CONTACT_US_KEY , comment: "")))
+                
+                
+                if moreViewModel.isLoading {
+                    CustomProgressView()
+                }
+                ToastView(isPresented: $showToast, duration: 2.0) {
+                    CustomTost(message: moreViewModel.dialogMessage)
+                }
+                
+                
             }
             .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
         }
+        .hideKeyboardOnTap()
 
     }
 }
 
-#Preview {
-    ContactUsView()
-}
+//#Preview {
+//    ContactUsView()
+//}

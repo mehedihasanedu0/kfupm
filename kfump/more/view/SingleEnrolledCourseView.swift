@@ -10,6 +10,7 @@ import SwiftUI
 struct SingleEnrolledCourseView: View {
     
     var course: Course
+    let courseStatus : String!
     
     var body: some View {
         
@@ -53,7 +54,7 @@ struct SingleEnrolledCourseView: View {
                 HStack {
                     
 //                    Text(course.status ?? "")
-                    Text("ENROLLED")
+                    Text(courseStatus)
                         .font(.custom(FONT_SEMIBOLD, size: 10))
                         .foregroundColor(hexToColor(hex: "#D0B756"))
                     

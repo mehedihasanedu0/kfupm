@@ -25,6 +25,7 @@ class MoreViewModel : ObservableObject {
     private let moreService: MoreService
     
     @Published var issueList = [IssueReport]()
+    @Published var attendanceHistory = [AttendanceData]()
     
     init(moreService: MoreService = MoreService()) {
         self.moreService = moreService
@@ -33,6 +34,36 @@ class MoreViewModel : ObservableObject {
     deinit {
         cancellables.removeAll()
     }
+    
+    func createContactUs(body: ContactUsRequestModel, completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        moreService.createContactUs(body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] user in
+                self?.isLoading = false
+                if user.details != nil && ((user.details?.count ?? 0) > 0) {
+                    self?.dialogMessage = (user.details?[0].path == "Password") ? ("\(user.details?[0].path ?? "") : " + (user.details?[0].message ?? "")) : (user.details?[0].message ?? "")
+                } else {
+                    self?.dialogMessage = user.message ?? ""
+                }
+                completion(user.success ?? false)
+            })
+            .store(in: &cancellables)
+        
+        
+    }   
     
     func createReportedIssue(body: ReportedAnIssueRequestModel, completion: @escaping (Bool) -> Void) {
         isLoading = true
@@ -85,6 +116,33 @@ class MoreViewModel : ObservableObject {
             }, receiveValue: { [weak self] data in
                 self?.issueList = data.data ?? []
                 self?.isLoading = true
+            })
+            .store(in: &cancellables)
+        
+        
+    }
+    
+        
+    func getAttendanceHistory() {
+        isLoading = true
+        moreService.getAttendanceHistory()
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    
+                }
+            }, receiveValue: { [weak self] data in
+                self?.attendanceHistory = data.data
+                self?.isLoading = false
             })
             .store(in: &cancellables)
         

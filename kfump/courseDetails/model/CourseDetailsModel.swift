@@ -122,10 +122,12 @@ struct User: Codable {
     var username: String?
     var email: String?
     var firstName: String?
+    var fullName: String?
     var lastName: String?
     var image: String?
     
     enum CodingKeys: String, CodingKey {
         case id, username, email, firstName = "first_name", lastName = "last_name", image
+        case fullName = "full_name"
     }
 }

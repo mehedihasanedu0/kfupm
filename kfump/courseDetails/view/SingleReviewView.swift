@@ -15,10 +15,11 @@ struct SingleReviewView: View {
         VStack {
             
             HStack {
-                Image("nature")
-                    .resizable()
+                
+                WebImageView(imageUrl: singleReview?.user?.image ?? "")
                     .frame(width: 48,height: 48)
                     .cornerRadius(8)
+  
                 
                 
                 VStack {
@@ -59,6 +60,6 @@ struct SingleReviewView: View {
     }
 }
 
-#Preview {
-    SingleReviewView()
-}
+//#Preview {
+//    SingleReviewView()
+//}

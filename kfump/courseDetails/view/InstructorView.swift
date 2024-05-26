@@ -31,7 +31,7 @@ struct InstructorView: View {
                 WebImageView(imageUrl: instructor?.image ?? "")
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    .overlay(Circle().stroke(Color.white, lineWidth: 0))
                 
                 
                 // Profile details

@@ -52,4 +52,10 @@ class CourseService {
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     
+    func createReview(_ body: CourseRatingRequestModel) -> AnyPublisher<CourseRatingResponseModel, Error> {
+        let url = URL(string: URL.createReview)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    }
+    
 }
