@@ -22,7 +22,7 @@ struct SelectStartRatingView: View {
                             .scaledToFit()
                             .foregroundColor(index < self.rating ? hexToColor(hex: "#D0B756") : hexToColor(hex: "#E0E0DC"))
                     }
-                    .frame(width: geometry.size.width / 5) // Set each star's width to 1/5 of the container's width
+                    .frame(width: 30) // Set each star's width to 1/5 of the container's width
                     .buttonStyle(PlainButtonStyle()) // Remove button default style
                     .gesture(
                         DragGesture(minimumDistance: 0)
@@ -36,7 +36,7 @@ struct SelectStartRatingView: View {
                 }
             }
         }
-        .frame(height: 20)
+        .frame( height: 20)
     }
 }
 

@@ -11,8 +11,12 @@ struct OngoingCourseDetailsView: View {
     
     @StateObject var courseDetailsViewModel = OngoingCourseDetailsViewModel()
     
+    @State var isNavigateToPDFView = false
+    @State var isNavigateToVideoView = false
+    
     var courseId = 0
     var courseTitle = ""
+    @State var selectedClassItemUrl = ""
     
     var body: some View {
         
@@ -70,6 +74,10 @@ struct OngoingCourseDetailsView: View {
                             SingleCourseItemView(singleLecture: lecture)
                                 .padding(.bottom,2)
                                 .padding(.top,10)
+                                .onTapGesture {
+                                    self.selectedClassItemUrl = lecture.file ?? ""
+                                    showLectureItem(fileExtention: lecture.fileExtension ?? "")
+                                }
                             
                             Divider()
                         }
@@ -81,6 +89,7 @@ struct OngoingCourseDetailsView: View {
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                 .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Course details"))
                 .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
+                .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl).navigationBarBackButtonHidden(true) })
             }
         }
         .onAppear {
@@ -129,8 +138,17 @@ struct OngoingCourseDetailsView: View {
         }
         .padding(.top)
     }
+    
+    func showLectureItem(fileExtention: String) {
+        switch (fileExtention) {
+        case "mp4" : isNavigateToVideoView = true
+        case "pdf" : isNavigateToPDFView = true
+        default:
+            print("Item Extention Not Match")
+        }
+    }
 }
 
-#Preview {
-    OngoingCourseDetailsView()
-}
+//#Preview {
+//    OngoingCourseDetailsView()
+//}

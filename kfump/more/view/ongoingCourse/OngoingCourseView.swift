@@ -29,6 +29,7 @@ struct OngoingCourseView: View {
                         ForEach(homeviewModel.ongoingCourseList, id: \.id) { course in
                             SingleEnrolledCourseView(course: course.course!)
                                 .padding(.bottom,2)
+                                .redactShimmer(condition: homeviewModel.isLoading)
                                 .onTapGesture {
                                     print("Course tapped: \(course.id)")
                                     selectedCoureId = course.id ?? 0
@@ -41,7 +42,7 @@ struct OngoingCourseView: View {
                     }.padding(.top,15)
                 }
                 .onAppear() {
-    //                homeviewModel.getCourseList()
+                    homeviewModel.getOngoingCourseList()
                 }
                 .padding(.bottom,10)
             }

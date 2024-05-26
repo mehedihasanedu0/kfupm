@@ -11,7 +11,7 @@ struct CourseHistoryView: View {
     
     @StateObject var homeviewModel = HomeViewModel()
     @State var isNavigateToCourseHistoryDetailsView = false
-    
+    @State var courseId  = 0
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -26,8 +26,10 @@ struct CourseHistoryView: View {
                         ForEach(homeviewModel.courseHistoryList, id: \.id) { course in
                             SingleEnrolledCourseView(course: course.course!)
                                 .padding(.bottom,2)
+                                .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.courseList.count == 11)
                                 .onTapGesture {
-                                    print("Course tapped: \(course.id)")
+                                    print("Course tapped: \(course.course?.id ?? 0)")
+                                    courseId = course.course?.id ?? 0
                                     isNavigateToCourseHistoryDetailsView = true
                                 }
 
@@ -35,21 +37,22 @@ struct CourseHistoryView: View {
                       
                     }.padding(.top,15)
                 }
-                .onAppear() {
-    //                homeviewModel.getCourseList()
-                }
+
                 .padding(.bottom,10)
             }
             .padding(.horizontal)
         }
+        .onAppear {
+            homeviewModel.getCompletedCourseList()
+        }
         .background(hexToColor(hex: "#FFFFFF"))
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-        .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Courses"))
+        .navigationBarItems(leading: CustomTitleBarItems(title: "Course History"))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
-        .navigationDestination(isPresented: $isNavigateToCourseHistoryDetailsView, destination: { CourseHistoryDetailsView().navigationBarBackButtonHidden(true) })
+        .navigationDestination(isPresented: $isNavigateToCourseHistoryDetailsView, destination: { CourseHistoryDetailsView(courseId: courseId).navigationBarBackButtonHidden(true) })
     }
 }
 
-#Preview {
-    CourseHistoryView()
-}
+//#Preview {
+//    CourseHistoryView()
+//}

@@ -78,6 +78,8 @@
 		5576C82F2BB68C7E007392C8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576C82E2BB68C7E007392C8 /* SearchView.swift */; };
 		5576C8322BB6911D007392C8 /* SingleCourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576C8312BB6911D007392C8 /* SingleCourseView.swift */; };
 		557B52BE2BCEEAD00044168B /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B52BD2BCEEAD00044168B /* ForgetPasswordView.swift */; };
+		557F742B2C023BC40060CA46 /* PDFViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F742A2C023BC40060CA46 /* PDFViewWrapper.swift */; };
+		557F742D2C023BFC0060CA46 /* PDFViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557F742C2C023BFC0060CA46 /* PDFViewerView.swift */; };
 		5581D0BF2BC42C310052393E /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581D0BE2BC42C310052393E /* SignInModel.swift */; };
 		55823DE52BDC1C88000F4A32 /* ClassRoutingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DE42BDC1C88000F4A32 /* ClassRoutingModel.swift */; };
 		55823DE72BDC21C9000F4A32 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55823DE62BDC21C9000F4A32 /* ProgressBarView.swift */; };
@@ -289,6 +291,8 @@
 		5576C82E2BB68C7E007392C8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		5576C8312BB6911D007392C8 /* SingleCourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCourseView.swift; sourceTree = "<group>"; };
 		557B52BD2BCEEAD00044168B /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
+		557F742A2C023BC40060CA46 /* PDFViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewWrapper.swift; sourceTree = "<group>"; };
+		557F742C2C023BFC0060CA46 /* PDFViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewerView.swift; sourceTree = "<group>"; };
 		5581D0BE2BC42C310052393E /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		55823DE42BDC1C88000F4A32 /* ClassRoutingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRoutingModel.swift; sourceTree = "<group>"; };
 		55823DE62BDC21C9000F4A32 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
@@ -579,6 +583,7 @@
 		553E55FC2BB4A1CE00AFBD7A /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				557F74292C023BB30060CA46 /* pdf */,
 				550D96532BDAD18C0042FCA6 /* image */,
 				55F868B02BD99E8800A05E8F /* dropDown */,
 				5586B3ED2BBDB9FC00FBAFDC /* shemar */,
@@ -670,7 +675,6 @@
 				5533366C2BB9C45800D5F6E5 /* SingleItemView.swift */,
 				556175472BDD0B5F004DD996 /* EnrolledCoursesView.swift */,
 				556175492BDD0F70004DD996 /* SingleEnrolledCourseView.swift */,
-				5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */,
 				5585C2492BDD1E2800986987 /* AttendanceHistoryView.swift */,
 				5585C24B2BDD233600986987 /* ContactUsView.swift */,
 				5585C24F2BDD364500986987 /* ReportAnIssueView.swift */,
@@ -743,6 +747,14 @@
 				554D043C2BE55E6B0042EB28 /* SinglePaymentHistoryView.swift */,
 			);
 			path = profile;
+			sourceTree = "<group>";
+		};
+		557F74292C023BB30060CA46 /* pdf */ = {
+			isa = PBXGroup;
+			children = (
+				557F742A2C023BC40060CA46 /* PDFViewWrapper.swift */,
+			);
+			path = pdf;
 			sourceTree = "<group>";
 		};
 		55823DE32BDC1C6F000F4A32 /* model */ = {
@@ -915,8 +927,10 @@
 		55B835622C01B96400315EB8 /* ongoingCourse */ = {
 			isa = PBXGroup;
 			children = (
+				5561754B2BDD14DB004DD996 /* OngoingCourseView.swift */,
 				553623512BFE6B730032B49C /* OngoingCourseDetailsView.swift */,
 				55B835632C01B98F00315EB8 /* SingleCourseItemView.swift */,
+				557F742C2C023BFC0060CA46 /* PDFViewerView.swift */,
 			);
 			path = ongoingCourse;
 			sourceTree = "<group>";
@@ -1269,6 +1283,7 @@
 				55DB162C2BBC7B8F0022BDA7 /* CourseListResponseModel.swift in Sources */,
 				55A44AD32BC30BBD0058C995 /* SignUpModel.swift in Sources */,
 				5585C2502BDD364500986987 /* ReportAnIssueView.swift in Sources */,
+				557F742D2C023BFC0060CA46 /* PDFViewerView.swift in Sources */,
 				55AFC46E2BE426A600B7566B /* CustomOtpTextField.swift in Sources */,
 				550569132BD41AAC00C49E71 /* CustomDropDownView.swift in Sources */,
 				5502F8AD2BC4722100C79A56 /* LocalizationStaticComponent.swift in Sources */,
@@ -1295,6 +1310,7 @@
 				5597446C2BBB37A400122058 /* NetworkConstant.swift in Sources */,
 				550D964E2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift in Sources */,
 				55A44ADF2BC328BD0058C995 /* CreateBody.swift in Sources */,
+				557F742B2C023BC40060CA46 /* PDFViewWrapper.swift in Sources */,
 				5576C8322BB6911D007392C8 /* SingleCourseView.swift in Sources */,
 				5502F8B22BC4897E00C79A56 /* LocalizationView.swift in Sources */,
 				55554EB32BD57E5D00EC6889 /* ProfileInfoModel.swift in Sources */,

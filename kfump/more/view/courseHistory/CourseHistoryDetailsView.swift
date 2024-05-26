@@ -50,7 +50,7 @@ struct CourseHistoryDetailsView: View {
                             .padding(.top)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text("A recent survey found that 37% of teens say they have poor mental health. This 6-week course aims to curb this mental health crisis by bringing together the best insights from Dr.")
+                        Text(courseDetailsViewModel.courseData?.description ?? "")
                             .font(.custom(FONT_LIGHT, size: 16))
                             .padding(.vertical,5)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,9 +63,10 @@ struct CourseHistoryDetailsView: View {
                         description
                         
                         
-                        InstructorView()
+                        InstructorView(instructor: courseDetailsViewModel.instructor)
                         
                         ratingInformation
+                            .padding(.bottom,40)
                         
                         
                     }
@@ -74,6 +75,16 @@ struct CourseHistoryDetailsView: View {
                 
             }
         }
+        .redactShimmer(condition: courseDetailsViewModel.isLoading)
+        .onAppear {
+            print("courseId -< \(courseId)")
+            courseDetailsViewModel.courseDetails(courseId: courseId)
+        }
+        .background(hexToColor(hex: "#FFFFFF"))
+        .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
+        .navigationBarItems(leading: CustomTitleBarItems(title: "Course History Details"))
+        .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
+//        .navigationDestination(isPresented: $isNavigateToCourseHistoryDetailsView, destination: { CourseHistoryDetailsView().navigationBarBackButtonHidden(true) })
         
     }
     //    Skill level: All Levels
@@ -225,7 +236,7 @@ struct CourseHistoryDetailsView: View {
                 .font(.custom(FONT_BOLD, size: 20))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text("In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In publishing and graphic design.")
+            Text(courseDetailsViewModel.courseData?.description ?? "")
                 .font(.custom(FONT_LIGHT, size: 16))
                 .padding(.vertical,2)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -321,7 +332,7 @@ struct CourseHistoryDetailsView: View {
     var writeReviewAndRating: some View {
         VStack {
             Text("Write your rating and review")
-                .font(.custom(FONT_BOLD, size: 20))
+                .font(.custom(FONT_SEMIBOLD, size: 20))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Text("Your Rating")
@@ -378,6 +389,6 @@ struct CourseHistoryDetailsView: View {
     }
 }
 
-#Preview {
-    CourseHistoryDetailsView()
-}
+//#Preview {
+//    CourseHistoryDetailsView()
+//}

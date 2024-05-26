@@ -169,7 +169,7 @@ class HomeViewModel : ObservableObject {
                 }
             }, receiveValue: { [weak self] inviteeResponse in
                 self?.courseHistoryList = inviteeResponse.data
-                self?.isLoading = true
+                self?.isLoading = false
             })
             .store(in: &cancellables)
         
