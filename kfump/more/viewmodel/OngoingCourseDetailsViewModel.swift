@@ -89,5 +89,29 @@ class OngoingCourseDetailsViewModel : ObservableObject {
             .store(in: &cancellables)
         
         
+    }    
+    
+    func readLecture(lectureId: Int) {
+        isLoading = true
+        courseService.readLecture(lectureId)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    
+                }
+            }, receiveValue: { [weak self] data in
+                self?.isLoading = true
+            })
+            .store(in: &cancellables)
+        
     }
 }

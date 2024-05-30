@@ -149,6 +149,8 @@
 		5597446A2BBB370200122058 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559744692BBB370200122058 /* NetworkClient.swift */; };
 		5597446C2BBB37A400122058 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5597446B2BBB37A400122058 /* NetworkConstant.swift */; };
 		5597446E2BBB380700122058 /* Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5597446D2BBB380700122058 /* Websocket.swift */; };
+		55990FFB2C04F18E00B082A9 /* ImageViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55990FFA2C04F18E00B082A9 /* ImageViewerView.swift */; };
+		55990FFD2C04F2C500B082A9 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55990FFC2C04F2C500B082A9 /* VideoPlayerView.swift */; };
 		559A6E0B2BD6F54800B59C13 /* ChangePasswordRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559A6E0A2BD6F54800B59C13 /* ChangePasswordRequestModel.swift */; };
 		559F00492BDEC1DA00C7BBFF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F00482BDEC1DA00C7BBFF /* ImagePicker.swift */; };
 		559F004B2BDEDE6000C7BBFF /* CourseDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F004A2BDEDE6000C7BBFF /* CourseDetailsModel.swift */; };
@@ -369,6 +371,8 @@
 		559744692BBB370200122058 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		5597446B2BBB37A400122058 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		5597446D2BBB380700122058 /* Websocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Websocket.swift; sourceTree = "<group>"; };
+		55990FFA2C04F18E00B082A9 /* ImageViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerView.swift; sourceTree = "<group>"; };
+		55990FFC2C04F2C500B082A9 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		559A6E0A2BD6F54800B59C13 /* ChangePasswordRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordRequestModel.swift; sourceTree = "<group>"; };
 		559F00482BDEC1DA00C7BBFF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		559F004A2BDEDE6000C7BBFF /* CourseDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsModel.swift; sourceTree = "<group>"; };
@@ -951,6 +955,8 @@
 				553623512BFE6B730032B49C /* OngoingCourseDetailsView.swift */,
 				55B835632C01B98F00315EB8 /* SingleCourseItemView.swift */,
 				557F742C2C023BFC0060CA46 /* PDFViewerView.swift */,
+				55990FFA2C04F18E00B082A9 /* ImageViewerView.swift */,
+				55990FFC2C04F2C500B082A9 /* VideoPlayerView.swift */,
 			);
 			path = ongoingCourse;
 			sourceTree = "<group>";
@@ -1290,6 +1296,7 @@
 				55DB16352BBC8C420022BDA7 /* CustomImage.swift in Sources */,
 				5585C24C2BDD233600986987 /* ContactUsView.swift in Sources */,
 				55B835612C01B0BA00315EB8 /* OngoingCourseDetailsResponseModel.swift in Sources */,
+				55990FFD2C04F2C500B082A9 /* VideoPlayerView.swift in Sources */,
 				55DB16292BBC78C40022BDA7 /* HomeRepositoryService.swift in Sources */,
 				5576C82B2BB68265007392C8 /* ProfileView.swift in Sources */,
 				556175422BDD03F3004DD996 /* PaymentHistoryView.swift in Sources */,
@@ -1356,6 +1363,7 @@
 				55823DF52BDC5602000F4A32 /* SingleSyllabusView.swift in Sources */,
 				55E207902BE0273D001116C2 /* CloseAccountRequestModel.swift in Sources */,
 				55F868AB2BD96B3500A05E8F /* BadRequest.swift in Sources */,
+				55990FFB2C04F18E00B082A9 /* ImageViewerView.swift in Sources */,
 				554B754C2BB5C9F200D40BE2 /* LoginView.swift in Sources */,
 				5556EC932BDCE77C00A78948 /* CheckoutView.swift in Sources */,
 				55823DE72BDC21C9000F4A32 /* ProgressBarView.swift in Sources */,
@@ -1549,7 +1557,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13.0;
+				CURRENT_PROJECT_VERSION = 14.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
 				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
@@ -1583,7 +1591,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13.0;
+				CURRENT_PROJECT_VERSION = 14.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
 				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;

@@ -15,7 +15,7 @@ struct SingleCourseItemView: View {
         VStack {
             HStack {
                 
-                Image(getItemIconType(singleLecture.fileExtension ?? ""))
+                Image((singleLecture.isRead ?? false) ? "ic_read_lecture" : getItemIconType(singleLecture.fileExtension ?? ""))
                     .resizable()
                     .frame(width: 20,height: 20)
                     .offset(y: -10)

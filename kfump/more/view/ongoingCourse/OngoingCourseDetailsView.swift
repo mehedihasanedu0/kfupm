@@ -13,10 +13,12 @@ struct OngoingCourseDetailsView: View {
     
     @State var isNavigateToPDFView = false
     @State var isNavigateToVideoView = false
+    @State var isNavigateToImageView = false
     
     var courseId = 0
     var courseTitle = ""
     @State var selectedClassItemUrl = ""
+    @State var selectedLectureTitle = ""
     
     var body: some View {
         
@@ -75,7 +77,11 @@ struct OngoingCourseDetailsView: View {
                                 .padding(.bottom,2)
                                 .padding(.top,10)
                                 .onTapGesture {
+                                    if !(lecture.isRead ?? false) {
+                                        courseDetailsViewModel.readLecture(lectureId: lecture.id ?? 0)
+                                    }
                                     self.selectedClassItemUrl = lecture.file ?? ""
+                                    self.selectedLectureTitle = lecture.title ?? ""
                                     showLectureItem(fileExtention: lecture.fileExtension ?? "")
                                 }
                             
@@ -89,7 +95,9 @@ struct OngoingCourseDetailsView: View {
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                 .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Course details"))
                 .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
-                .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })                
+                .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoPlayerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
             }
         }
         .onAppear {
@@ -143,6 +151,7 @@ struct OngoingCourseDetailsView: View {
         switch (fileExtention) {
         case "mp4" : isNavigateToVideoView = true
         case "pdf" : isNavigateToPDFView = true
+        case "png" : isNavigateToImageView = true
         default:
             print("Item Extention Not Match")
         }

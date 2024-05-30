@@ -1,14 +1,13 @@
 //
-//  PDFViewerView.swift
+//  VideoPlayerView.swift
 //  kfump
 //
-//  Created by Mehedi Hasan on 25/5/24.
+//  Created by Mehedi Hasan on 27/5/24.
 //
 
 import SwiftUI
 
-struct PDFViewerView: View {
-    
+struct VideoPlayerView: View {
     @StateObject var pdfNetworkManager = PDFNetworkManager()
     @State private var showActivityViewController = false
     
@@ -18,8 +17,7 @@ struct PDFViewerView: View {
         
         ZStack {
             VStack {
-                PDFViewWrapper(url: URL(string: url)!)
-                    .edgesIgnoringSafeArea(.all)
+                
                 
                 
                 Divider()
@@ -33,7 +31,7 @@ struct PDFViewerView: View {
         .navigationBarItems(leading: CustomTitleBarItems(title: title))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
         .sheet(isPresented: $showActivityViewController) {
-            ActivityViewController(activityItems: [pdfNetworkManager.pdfData!])
+            ActivityViewController(activityItems: [pdfNetworkManager.videoData!])
                 }
         
     }
@@ -43,29 +41,28 @@ struct PDFViewerView: View {
         HStack {
             
             Button(action: {
-                
-                pdfNetworkManager.downloadPDF(urlString: url)
+                pdfNetworkManager.downloadVideo(from: url)
                 
             }) {
                 HStack {
                     
-                    Text("Download PDF")
+                    Text("Download Video")
                         .padding(.vertical,10)
                         .font(.custom(FONT_SEMIBOLD, size: 16))
                         .foregroundColor(.white)
      
                 }
                 
-                
-                
             }
-            .onChange(of: pdfNetworkManager.pdfData) { newData in
+            .onChange(of: pdfNetworkManager.videoData) { newData in
                 if let data = newData {
-                     pdfNetworkManager.savePDFToFilesApp(data: data, fileName: "lecture") { success in
+                    pdfNetworkManager.saveVideo(data: data) { success in
                         if success {
-                            showActivityViewController = true
+                            if let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                                directory.appendingPathComponent("Video.mp4")
+                            }
                         } else {
-                            print("Failed to save PDF.")
+                            print("Failed to save video.")
                         }
                     }
                 }
@@ -95,7 +92,7 @@ struct PDFViewerView: View {
     }
 }
 
+
 //#Preview {
-//    
-//    PDFViewerView(url: URL(string: "https://kfu-admin.ewnbd.com/media/uploads/title_5MgGjYQ.pdf")!)
+//    VideoPlayerView()
 //}

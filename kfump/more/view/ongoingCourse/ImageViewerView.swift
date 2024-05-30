@@ -1,13 +1,13 @@
 //
-//  PDFViewerView.swift
+//  ImageViewerView.swift
 //  kfump
 //
-//  Created by Mehedi Hasan on 25/5/24.
+//  Created by Mehedi Hasan on 27/5/24.
 //
 
 import SwiftUI
 
-struct PDFViewerView: View {
+struct ImageViewerView: View {
     
     @StateObject var pdfNetworkManager = PDFNetworkManager()
     @State private var showActivityViewController = false
@@ -18,8 +18,11 @@ struct PDFViewerView: View {
         
         ZStack {
             VStack {
-                PDFViewWrapper(url: URL(string: url)!)
-                    .edgesIgnoringSafeArea(.all)
+                WebImageView(imageUrl: url)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 600)
+                    .cornerRadius(12)
+                    .padding(.top,30)
                 
                 
                 Divider()
@@ -49,7 +52,7 @@ struct PDFViewerView: View {
             }) {
                 HStack {
                     
-                    Text("Download PDF")
+                    Text("Download Image")
                         .padding(.vertical,10)
                         .font(.custom(FONT_SEMIBOLD, size: 16))
                         .foregroundColor(.white)
@@ -61,7 +64,7 @@ struct PDFViewerView: View {
             }
             .onChange(of: pdfNetworkManager.pdfData) { newData in
                 if let data = newData {
-                     pdfNetworkManager.savePDFToFilesApp(data: data, fileName: "lecture") { success in
+                     pdfNetworkManager.saveImageToFilesApp(data: data, fileName: "lecture") { success in
                         if success {
                             showActivityViewController = true
                         } else {
@@ -95,7 +98,3 @@ struct PDFViewerView: View {
     }
 }
 
-//#Preview {
-//    
-//    PDFViewerView(url: URL(string: "https://kfu-admin.ewnbd.com/media/uploads/title_5MgGjYQ.pdf")!)
-//}

@@ -56,6 +56,12 @@ class CourseService {
         let url = URL(string: URL.createReview)
         guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
         return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    }    
+    
+    
+    func readLecture(_ lectureId: Int) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: "\(URL.readLecture)\(lectureId)/" )
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     
 }
