@@ -16,12 +16,16 @@ struct CourseDetailsView: View {
     
     
     @State private var selectedTab = "About"
-    let tabs = ["About", "Instructor", "Syllabus", "Class Routine"]
-//    let tabsAr = ["اعرف اكثر", "المدرب", "محتويات البرنامج", "مواعيد الحصة"]
+    let tabs = ["About", "Instructor", "Syllabus", "Class Routine","Reviews"]
+    //    let tabsAr = ["اعرف اكثر", "المدرب", "محتويات البرنامج", "مواعيد الحصة"]
     
     @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
     @State var isNavigateToEnrolledCourseView : Bool = false
     @State var focusPoint : String = "about"
+    @State var courseStatus : String = ""
+    
+    let courseStatuses = ["Cancel"]
+    @State private var selectedCourseStatus: String = "Pending"
     
     var courseId : Int!
     
@@ -66,10 +70,10 @@ struct CourseDetailsView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             
-                            if courseDetailsViewModel.courseData?.enrollmentStatus == "ENROLLED" {
+                            if courseDetailsViewModel.courseData?.enrollmentStatus != "In Cart" && courseDetailsViewModel.courseData?.enrollmentStatus != nil    {
                                 
                                 afterEnrolledView
-
+                                
                                 
                             } else {
                                 enrolledButtonView
@@ -93,7 +97,10 @@ struct CourseDetailsView: View {
                                     focusPoint = "syllabus"
                                 } else if selectedTab == "Class Routine" {
                                     focusPoint = "classRoutine"
+                                } else if selectedTab == "Reviews" {
+                                    focusPoint = "reviews"
                                 }
+                                
                                 withAnimation {
                                     print(focusPoint)
                                     scrollView.scrollTo(focusPoint, anchor: .top)
@@ -120,13 +127,13 @@ struct CourseDetailsView: View {
                                 .font(.custom(FONT_LIGHT, size: 16))
                                 .padding(.vertical,5)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                
+                            
                             
                             
                             InstructorView(instructor: courseDetailsViewModel.instructor)
                                 .id("instructor")
                             
-                        
+                            
                             
                             
                             
@@ -147,12 +154,11 @@ struct CourseDetailsView: View {
                                     
                                     Divider()
                                 }
-                                
                                 .padding(.top,8)
                                 .padding(.bottom,10)
                                 
                             }
-                           
+                            
                             
                             
                             if let classRoutineInfo = courseDetailsViewModel.classRoutineInfo {
@@ -169,7 +175,7 @@ struct CourseDetailsView: View {
                                 
                                 ClassRoutineView(singleClassRoutine: classRoutineInfo)
                                     .padding(.top,8)
-                                    
+                                
                                 
                             }
                             
@@ -184,8 +190,10 @@ struct CourseDetailsView: View {
                                 Spacer()
                             }
                             .padding(.vertical)
+                            .id("reviews")
                             
                             reviewView
+                            
                             
                         }
                         .background(hexToColor(hex: "#FAF9F6",alpha: 0.2))
@@ -278,26 +286,50 @@ struct CourseDetailsView: View {
         HStack {
             
             Button(action: {
-               
+                
                 
             }) {
-                HStack {
+                
+                if courseDetailsViewModel.courseData?.enrollmentStatus ?? "" == "ENROLLED" {
                     
-                    Text("Enrolled")
+                    HStack {
+                        
+                        Menu {
+                            ForEach(courseStatuses, id: \.self) { status in
+                                Button(action: {
+                                    selectedCourseStatus = status
+                                }) {
+                                    Text(status)
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Text("Enrolled")
+                                    .foregroundColor(.white)
+                                    .padding(.leading)
+                                
+                                Image("drop_arrow")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
+                                    .padding(.leading,15)
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                } else {
+                    Text(getCourseStatus(courseDetailsViewModel.courseData?.enrollmentStatus ?? ""))
                         .padding(.vertical,10)
                         .font(.custom(FONT_SEMIBOLD, size: 16))
                         .foregroundColor(isEntollTypeSingle ? .white : hexToColor(hex: "#007D40"))
-//                        .padding(.leading,15)
-                    
-                    Image("drop_arrow")
-                        .resizable()
-                        .frame(width: 15, height: 15)
-                        .padding(.leading,15)
+                    //                        .padding(.leading,15)
                 }
                 
                 
                 
             }
+            
             
             .frame(width: 156, height: 45)
             .background(hexToColor(hex: "#007D40"))
@@ -488,6 +520,17 @@ struct CourseDetailsView: View {
         
         
         
+    }
+    
+    func getCourseStatus(_ courseStatus: String) -> String {
+        switch courseStatus {
+        case "COMPLETE":
+            return "Complete"
+        case "In Cart":
+            return "Pending"
+        default:
+            return courseStatus
+        }
     }
 }
 

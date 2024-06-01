@@ -62,6 +62,11 @@ class CourseService {
     func readLecture(_ lectureId: Int) -> AnyPublisher<CommonSuccessResponseModel, Error> {
         let url = URL(string: "\(URL.readLecture)\(lectureId)/" )
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
+    }    
+    
+    func getQuizeList(_ quiseId: Int) -> AnyPublisher<QuizeResponseModel, Error> {
+        let url = URL(string: "\(URL.quiseList)\(quiseId)/" )
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     
 }

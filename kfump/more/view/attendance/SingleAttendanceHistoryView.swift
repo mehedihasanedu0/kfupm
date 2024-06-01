@@ -46,7 +46,7 @@ struct SingleAttendanceHistoryView: View {
             .padding(.top,2)
             
             HStack {
-                Text("Present")
+                Text(singleAttendance.isPresent ? "Present" : "Absent")
                     .font(.custom(FONT_MEDIUM, size: 14))
                     .padding(.vertical,6)
                     .padding(.horizontal,15)

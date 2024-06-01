@@ -12,6 +12,7 @@ struct OngoingCourseDetailsView: View {
     @StateObject var courseDetailsViewModel = OngoingCourseDetailsViewModel()
     
     @State var isNavigateToPDFView = false
+    @State var isNavigateToQuizeView = false
     @State var isNavigateToVideoView = false
     @State var isNavigateToImageView = false
     
@@ -80,6 +81,11 @@ struct OngoingCourseDetailsView: View {
                                     if !(lecture.isRead ?? false) {
                                         courseDetailsViewModel.readLecture(lectureId: lecture.id ?? 0)
                                     }
+                                    
+                                    
+                                    if (lecture.classTypeName ?? "" == "Quiz") {
+                                        self.isNavigateToQuizeView = true
+                                    }
                                     self.selectedClassItemUrl = lecture.file ?? ""
                                     self.selectedLectureTitle = lecture.title ?? ""
                                     showLectureItem(fileExtention: lecture.fileExtension ?? "")
@@ -98,6 +104,7 @@ struct OngoingCourseDetailsView: View {
                 .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })                
                 .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoPlayerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
             }
         }
         .onAppear {

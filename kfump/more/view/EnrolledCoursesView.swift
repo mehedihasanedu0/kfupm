@@ -11,6 +11,7 @@ struct EnrolledCoursesView: View {
     
     @StateObject var homeviewModel = HomeViewModel()
     @State var isNavigateToCourseDetailsView = false
+    @State var courseId: Int = 0
     
     let columns = [
         GridItem(.flexible()),
@@ -26,10 +27,12 @@ struct EnrolledCoursesView: View {
                         ForEach(homeviewModel.enrolledCourseList, id: \.id) { course in
                             SingleEnrolledCourseView(course: course.course!,courseStatus: course.status ?? "")
                                 .padding(.bottom,2)
-                                .redactShimmer(condition: homeviewModel.isLoading && homeviewModel.enrolledCourseList.count == 6)
+                                .redactShimmer(condition: homeviewModel.isLoading)
                                 .onTapGesture {
+                                    courseId = course.id ?? 0
                                     print("Course tapped: \(course.id)")
                                     isNavigateToCourseDetailsView = true
+                                    
                                 }
 
                         }
@@ -47,6 +50,7 @@ struct EnrolledCoursesView: View {
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .navigationBarItems(leading: CustomTitleBarItems(title: "Enrolled Courses"))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
+        .navigationDestination(isPresented: $isNavigateToCourseDetailsView, destination: { CourseDetailsView(courseId: courseId).navigationBarBackButtonHidden(true) })
     }
 }
 

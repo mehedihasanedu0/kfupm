@@ -18,6 +18,7 @@ struct ContactUsView: View {
     @StateObject var moreViewModel = MoreViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State private var showToast = false
+    @State private var showToastForEmailValidation = false
     
     var body: some View {
         
@@ -53,8 +54,12 @@ struct ContactUsView: View {
                     Button(action: {
                         
                         isLoginButtonPress = true
+               
+                        if !eamil.isEmpty && !isValidEmail(eamil) {
+                            showToastForEmailValidation = true
+                        }
                         
-                        guard !fullName.isEmpty,!eamil.isEmpty,!subject.isEmpty else {
+                        guard !eamil.isEmpty,!fullName.isEmpty,!subject.isEmpty else {
                             return
                         }
                         
@@ -102,8 +107,14 @@ struct ContactUsView: View {
                 if moreViewModel.isLoading {
                     CustomProgressView()
                 }
+                
                 ToastView(isPresented: $showToast, duration: 2.0) {
                     CustomTost(message: moreViewModel.dialogMessage)
+                }
+                
+                
+                ToastView(isPresented: $showToastForEmailValidation, duration: 2.0) {
+                    CustomTost(message: "Invalid Email address")
                 }
                 
                 

@@ -47,7 +47,8 @@ extension URL {
     static let cashPayment                         = "\(URL.baseUrl)/payment/create/"
     static let enrolledGroup                       = "\(URL.baseUrl)/group/enrolled/"
     static let createReview                        = "\(URL.baseUrl)/course/rating/"
-    static let readLecture                          = "\(URL.baseUrl)/course/lecture-is-read/"
+    static let readLecture                         = "\(URL.baseUrl)/course/lecture-is-read/"
+    static let quiseList                           = "\(URL.baseUrl)/course/trainer-view-quiz-assignment-list/"
     
     
     static let ongoingCourseDetails                = "\(URL.baseUrl)/course/class-create/"
