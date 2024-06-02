@@ -67,6 +67,12 @@ class CourseService {
     func getQuizeList(_ quiseId: Int) -> AnyPublisher<QuizeResponseModel, Error> {
         let url = URL(string: "\(URL.quiseList)\(quiseId)/" )
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
+    }   
+    
+    func submitQuizeAnswer(_ body : QuizeSubmitRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: URL.quiseAns)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
     }
     
 }

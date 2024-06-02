@@ -25,6 +25,8 @@
 		550D964E2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D964D2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift */; };
 		550D96502BDAB89A0042FCA6 /* ResetPasswordRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D964F2BDAB89A0042FCA6 /* ResetPasswordRequestModel.swift */; };
 		550D96522BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D96512BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift */; };
+		551EC5192C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551EC5182C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift */; };
+		551EC51B2C0CE83500BED1E6 /* PDFSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551EC51A2C0CE83500BED1E6 /* PDFSubmitView.swift */; };
 		552657CC2BC11C7E0094212F /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552657CB2BC11C7E0094212F /* FilterViewModel.swift */; };
 		552657CE2BC11CE80094212F /* FilterCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552657CD2BC11CE80094212F /* FilterCategoryResponse.swift */; };
 		552657D02BC11DFB0094212F /* FilterAvailabilityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552657CF2BC11DFB0094212F /* FilterAvailabilityResponse.swift */; };
@@ -247,6 +249,8 @@
 		550D964D2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordRequestModel.swift; sourceTree = "<group>"; };
 		550D964F2BDAB89A0042FCA6 /* ResetPasswordRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordRequestModel.swift; sourceTree = "<group>"; };
 		550D96512BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordResponseModel.swift; sourceTree = "<group>"; };
+		551EC5182C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizeSubmitRequestModel.swift; sourceTree = "<group>"; };
+		551EC51A2C0CE83500BED1E6 /* PDFSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFSubmitView.swift; sourceTree = "<group>"; };
 		552657CB2BC11C7E0094212F /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		552657CD2BC11CE80094212F /* FilterCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategoryResponse.swift; sourceTree = "<group>"; };
 		552657CF2BC11DFB0094212F /* FilterAvailabilityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAvailabilityResponse.swift; sourceTree = "<group>"; };
@@ -507,6 +511,7 @@
 				55C1D2632C03B2D400169050 /* ContactUsRequestModel.swift */,
 				55C1D2652C03B79A00169050 /* AttendanceListResponseModel.swift */,
 				55FD72822C0909BF00A8C910 /* QuizeResponseModel.swift */,
+				551EC5182C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -966,6 +971,7 @@
 				55990FFC2C04F2C500B082A9 /* VideoPlayerView.swift */,
 				55FD727E2C09001100A8C910 /* QuizeView.swift */,
 				55FD72802C0900EB00A8C910 /* SingleQuizeView.swift */,
+				551EC51A2C0CE83500BED1E6 /* PDFSubmitView.swift */,
 			);
 			path = ongoingCourse;
 			sourceTree = "<group>";
@@ -1379,7 +1385,9 @@
 				5556EC932BDCE77C00A78948 /* CheckoutView.swift in Sources */,
 				55823DE72BDC21C9000F4A32 /* ProgressBarView.swift in Sources */,
 				55A44AE12BC3342C0058C995 /* OtpModel.swift in Sources */,
+				551EC51B2C0CE83500BED1E6 /* PDFSubmitView.swift in Sources */,
 				553336712BB9D3A200D5F6E5 /* FilterMenuView.swift in Sources */,
+				551EC5192C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift in Sources */,
 				55FD727F2C09001100A8C910 /* QuizeView.swift in Sources */,
 				553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */,
 				55B8355F2C01ACEA00315EB8 /* OngoingCourseDetailsViewModel.swift in Sources */,
@@ -1568,12 +1576,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1592,7 +1598,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1605,12 +1610,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1629,7 +1632,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

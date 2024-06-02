@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SingleQuizeView: View {
     
-    var questionTitle : String!
+    var questionTitle: String
+    var isButtonPress: Bool
     @Binding var ans: String
     
     var body: some View {
@@ -28,7 +29,7 @@ struct SingleQuizeView: View {
                 
             }
             
-            CustomTextField(fieldName: "Write your answer here", value: $ans, emptyErrorMessage: "This field can't be empty")
+            CustomTextField(fieldName: "Write your answer here", value: $ans, emptyErrorMessage: "This field can't be empty",isButtonPress: isButtonPress)
         }
     }
 }

@@ -49,6 +49,7 @@ extension URL {
     static let createReview                        = "\(URL.baseUrl)/course/rating/"
     static let readLecture                         = "\(URL.baseUrl)/course/lecture-is-read/"
     static let quiseList                           = "\(URL.baseUrl)/course/trainer-view-quiz-assignment-list/"
+    static let quiseAns                            = "\(URL.baseUrl)/course/class-quiz-assignment-submit/"
     
     
     static let ongoingCourseDetails                = "\(URL.baseUrl)/course/class-create/"

@@ -15,6 +15,7 @@ struct OngoingCourseDetailsView: View {
     @State var isNavigateToQuizeView = false
     @State var isNavigateToVideoView = false
     @State var isNavigateToImageView = false
+    @State var isNavigateToAssignmentView = false
     
     var courseId = 0
     var courseTitle = ""
@@ -83,11 +84,19 @@ struct OngoingCourseDetailsView: View {
                                     }
                                     
                                     
-                                    if (lecture.classTypeName ?? "" == "Quiz") {
-                                        self.isNavigateToQuizeView = true
-                                    }
                                     self.selectedClassItemUrl = lecture.file ?? ""
                                     self.selectedLectureTitle = lecture.title ?? ""
+                                    
+                                    if (lecture.classTypeName ?? "" == "Quiz") {
+                                        self.isNavigateToQuizeView = true
+                                        return
+                                    }
+                                    
+                                    if (lecture.classTypeName ?? "" == "Assignment" && lecture.fileExtension ?? "" == "pdf" ) {
+                                        self.isNavigateToAssignmentView = true
+                                        return
+                                    }
+
                                     showLectureItem(fileExtention: lecture.fileExtension ?? "")
                                 }
                             
@@ -105,6 +114,7 @@ struct OngoingCourseDetailsView: View {
                 .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoPlayerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(url: selectedClassItemUrl).navigationBarBackButtonHidden(true) })
             }
         }
         .onAppear {
