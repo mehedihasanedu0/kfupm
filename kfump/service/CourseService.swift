@@ -73,6 +73,18 @@ class CourseService {
         let url = URL(string: URL.quiseAns)
         guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
         return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    }   
+    
+    func submitAssignment(_ body : AssignmentSubmitRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: URL.assignmentSubmit)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    }    
+    
+    func courseStatusChange(_ body : CourseStatusRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: URL.courseStatusChange)
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
     }
     
 }

@@ -6,11 +6,24 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct PDFSubmitView: View {
     
     @State private var isHovered = false
+    @StateObject var courseDetailsViewModel = OngoingCourseDetailsViewModel()
+    @State private var isActionSheetPresented = false
+    @State private var isDocumentPickerPresented = false
+    @State private var isImagePickerPresented = false
+    @State private var selectedFileURL: URL? = nil
+    @State private var selectedImage = UIImage()
+    @State private var showTost = false
+    @Environment(\.presentationMode) var presentationMode
+    
+    
+    
     let url: String!
+    let lectureId: Int!
     
     var body: some View {
         
@@ -21,18 +34,59 @@ struct PDFSubmitView: View {
                 
                 
                 uploadView
+                    .onTapGesture {
+                        isActionSheetPresented = true
+                    }
+                    .sheet(isPresented: $isActionSheetPresented) {
+                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$selectedImage)
+                    }
+                    .onChange(of: selectedImage) { newData in
+                        uploadProfileImage()
+                    }
+//                    .actionSheet(isPresented: $isActionSheetPresented) {
+//                        ActionSheet(
+//                            title: Text("Select a file"),
+//                            buttons: [
+//                                .default(Text("Select Document")) {
+//                                    isDocumentPickerPresented = true
+//                                },
+//                                .default(Text("Select Image or Video")) {
+//                                    isImagePickerPresented = true
+//                                },
+//                                .cancel()
+//                            ]
+//                        )
+//                    }
+//                    .sheet(isPresented: $isDocumentPickerPresented) {
+//                        DocumentPickerView(selectedFileURL: $selectedFileURL)
+//                    }
+//                    .sheet(isPresented: $isImagePickerPresented) {
+//                        ImagePickerView(selectedFileURL: $selectedFileURL)
+//                    }
+//                    .onChange(of: selectedFileURL) { newData in
+//                        uploadProfileImage()
+//                    }
                 
                 submitButtonView
                     .padding(.top,10)
                     .padding(.bottom,20)
             }
+            
+            if courseDetailsViewModel.isLoading {
+                CustomProgressView()
+            }
+            
+            ToastView(isPresented: $showTost, duration: 2.0) {
+                CustomTost(message: "Please upload a File")
+            }
+            
         }
-    
+        
         .background(isHovered ? Color.gray.opacity(0.1) : Color.clear)
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .navigationBarItems(leading: CustomTitleBarItems(title: "Assignment Submit"))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
-
+        
     }
     
     var uploadView: some View {
@@ -42,7 +96,7 @@ struct PDFSubmitView: View {
                 .frame(maxWidth: .infinity,alignment: .leading)
                 .foregroundColor(.black)
                 .padding(.horizontal,20)
-                
+            
             
             VStack {
                 Image("ic_file_upload")
@@ -71,6 +125,7 @@ struct PDFSubmitView: View {
             .padding(.horizontal)
             .padding(.top,10)
         }
+        
     }
     
     var submitButtonView: some View {
@@ -79,13 +134,31 @@ struct PDFSubmitView: View {
             
             Button(action: {
                 
+                var vm = AssignmentSubmitRequestModel(lecture_id: lectureId,
+                                                      assignment_submit_info: AssignmentSubmitInfo(file: courseDetailsViewModel.filePath))
+                
+                if courseDetailsViewModel.filePath == "" {
+                    showTost = true
+                    return
+                }
+                
+                print("vm")
+                courseDetailsViewModel.submitAssignment(vm) { result in
+                    if result {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        
+                    }
+                }
+                
             }) {
                 HStack {
                     Text("Submit")
                         .padding(.vertical,10)
                         .font(.custom(FONT_SEMIBOLD, size: 16))
                         .foregroundColor(hexToColor(hex: "#007D40"))
-     
+                    
                 }
                 
             }
@@ -113,6 +186,25 @@ struct PDFSubmitView: View {
         }
         .padding(.top)
     }
+    
+    func uploadProfileImage() {
+        
+        do {
+//            let fileData = try Data(contentsOf: selectedFileURL!)
+            let parameter : [String : Any] = [
+                "file"          :  selectedImage
+            ]
+            
+            print("parameter \(parameter)")
+            courseDetailsViewModel.fileUpload(parameter: parameter)
+            
+            print("File parameter set: \(parameter)")
+        } catch {
+            print("Failed to read file data: \(error.localizedDescription)")
+        }
+        
+    }
+    
 }
 
 //#Preview {
@@ -125,3 +217,34 @@ struct PDFSubmitView: View {
 //            .frame(width: 300, height: 200)
 //    }
 //}
+
+//
+//struct DocumentPickerView: UIViewControllerRepresentable {
+//    @Binding var selectedFileURL: URL?
+//    
+//    func makeCoordinator() -> Coordinator {
+//        Coordinator(self)
+//    }
+//    
+//    func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
+//        let supportedTypes: [UTType] = [.pdf, .png, .log, .mpeg4Movie]
+//        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
+//        documentPicker.delegate = context.coordinator
+//        return documentPicker
+//    }
+//    
+//    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {}
+//    
+//    class Coordinator: NSObject, UIDocumentPickerDelegate {
+//        var parent: DocumentPickerView
+//        
+//        init(_ parent: DocumentPickerView) {
+//            self.parent = parent
+//        }
+//        
+//        func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+//            parent.selectedFileURL = urls.first
+//        }
+//    }
+//}
+

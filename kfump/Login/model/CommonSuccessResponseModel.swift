@@ -13,6 +13,7 @@ struct CommonSuccessResponseModel: Codable {
     var timestamp: String?
     var message: String?
     var token: String?
+    var file: String?
     var access_token: String?
     var refresh_token: String?
     var details: [Details]?

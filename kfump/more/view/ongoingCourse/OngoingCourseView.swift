@@ -31,8 +31,8 @@ struct OngoingCourseView: View {
                                 .padding(.bottom,2)
                                 .redactShimmer(condition: homeviewModel.isLoading)
                                 .onTapGesture {
-                                    print("Course tapped: \(course.id)")
-                                    selectedCoureId = course.id ?? 0
+                                    print("Course tapped: \(course.course?.id)")
+                                    selectedCoureId = course.course?.id ?? 0
                                     selectedCoureTitle = course.course?.title ?? ""
                                     isNavigateToCourseDetailsView = true
                                 }

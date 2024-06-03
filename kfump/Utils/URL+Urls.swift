@@ -50,6 +50,8 @@ extension URL {
     static let readLecture                         = "\(URL.baseUrl)/course/lecture-is-read/"
     static let quiseList                           = "\(URL.baseUrl)/course/trainer-view-quiz-assignment-list/"
     static let quiseAns                            = "\(URL.baseUrl)/course/class-quiz-assignment-submit/"
+    static let assignmentSubmit                    = "\(URL.baseUrl)/course/class-quiz-assignment-submit/"
+    static let courseStatusChange                  = "\(URL.baseUrl)/course/enroll-status-update/"
     
     
     static let ongoingCourseDetails                = "\(URL.baseUrl)/course/class-create/"
@@ -117,7 +119,8 @@ extension URL {
     
     // MARK: - Update
     static let profileUpdate                      = "\(URL.baseUrl)/user/profile/"
-    static let profile_picture_upload              = "\(URL.baseUrl)user/change-profile-picture"
+    static let profile_picture_upload             = "\(URL.baseUrl)/user/change-profile-picture"
+    static let uploadFile                         = "\(URL.baseUrl)/upload/"
     
     //MARK: - Favourite
     static let favourite_list                      = "\(URL.baseUrl)sp/favorite"

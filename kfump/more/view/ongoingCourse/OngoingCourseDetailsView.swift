@@ -9,7 +9,8 @@ import SwiftUI
 
 struct OngoingCourseDetailsView: View {
     
-    @StateObject var courseDetailsViewModel = OngoingCourseDetailsViewModel()
+    @StateObject var ongoingDetailsViewModel = OngoingCourseDetailsViewModel()
+    @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
     
     @State var isNavigateToPDFView = false
     @State var isNavigateToQuizeView = false
@@ -17,10 +18,16 @@ struct OngoingCourseDetailsView: View {
     @State var isNavigateToImageView = false
     @State var isNavigateToAssignmentView = false
     
+    @State private var isShowingConfirmationView = false
+    @State private var isShowingSuccessfullView = false
+    
     var courseId = 0
     var courseTitle = ""
     @State var selectedClassItemUrl = ""
     @State var selectedLectureTitle = ""
+    @State var selectedLectureId = 0
+    
+    let courseStatuses = ["Withdraw"]
     
     var body: some View {
         
@@ -34,7 +41,7 @@ struct OngoingCourseDetailsView: View {
                                 Image("ic_video")
                                     .resizable()
                                     .frame(width: 20,height: 20)
-                                Text("\(courseDetailsViewModel.ongoingCourse?.videoCount ?? 0) Videos")
+                                Text("\(ongoingDetailsViewModel.ongoingCourse?.videoCount ?? 0) Videos")
                                     .font(.custom(FONT_LIGHT, size: 12))
                             }
                             
@@ -42,7 +49,7 @@ struct OngoingCourseDetailsView: View {
                                 Image("ic_pdf")
                                     .resizable()
                                     .frame(width: 20,height: 20)
-                                Text("\(courseDetailsViewModel.ongoingCourse?.pdfCount ?? 0) Pdf")
+                                Text("\(ongoingDetailsViewModel.ongoingCourse?.pdfCount ?? 0) Pdf")
                                     .font(.custom(FONT_LIGHT, size: 12))
                             }
                             .padding(.leading,10)
@@ -51,7 +58,7 @@ struct OngoingCourseDetailsView: View {
                                 Image("ic_assignment")
                                     .resizable()
                                     .frame(width: 20,height: 20)
-                                Text("\(courseDetailsViewModel.ongoingCourse?.assignmentCount ?? 0) Assignments")
+                                Text("\(ongoingDetailsViewModel.ongoingCourse?.assignmentCount ?? 0) Assignments")
                                     .font(.custom(FONT_LIGHT, size: 12))
                             }
                             .padding(.leading,10)
@@ -73,19 +80,20 @@ struct OngoingCourseDetailsView: View {
                     
                     VStack {
               
-                        ForEach(courseDetailsViewModel.ongoingCourse?.data ?? [], id: \.id) { lecture in
+                        ForEach(ongoingDetailsViewModel.ongoingCourse?.data ?? [], id: \.id) { lecture in
                             
                             SingleCourseItemView(singleLecture: lecture)
                                 .padding(.bottom,2)
                                 .padding(.top,10)
                                 .onTapGesture {
                                     if !(lecture.isRead ?? false) {
-                                        courseDetailsViewModel.readLecture(lectureId: lecture.id ?? 0)
+                                        ongoingDetailsViewModel.readLecture(lectureId: lecture.id ?? 0)
                                     }
                                     
                                     
                                     self.selectedClassItemUrl = lecture.file ?? ""
                                     self.selectedLectureTitle = lecture.title ?? ""
+                                    self.selectedLectureId = lecture.id ?? 0
                                     
                                     if (lecture.classTypeName ?? "" == "Quiz") {
                                         self.isNavigateToQuizeView = true
@@ -107,6 +115,7 @@ struct OngoingCourseDetailsView: View {
                     .background(.white)
                     
                 }
+                .redactShimmer(condition: ongoingDetailsViewModel.isLoading)
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                 .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Course details"))
                 .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
@@ -114,11 +123,62 @@ struct OngoingCourseDetailsView: View {
                 .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoPlayerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(url: selectedClassItemUrl).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(url: selectedClassItemUrl,lectureId: selectedLectureId).navigationBarBackButtonHidden(true) })
             }
+            
+            
+            if isShowingConfirmationView {
+                
+                Rectangle()
+                    .fill(Color.black)
+                    .opacity(0.6)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isShowingConfirmationView = false
+                    }
+                
+                CustomConfirmationView(
+                    title: "Are you sure?",
+                    message: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly",
+                    onConfirm: {
+                        // Handle Yes action
+                        isShowingConfirmationView = false
+                        courseStatusChangeToWithdraw()
+                        
+                        
+                    },
+                    onCancel: {
+                        // Handle No action
+                        isShowingConfirmationView = false
+                    }
+                )
+                .transition(.scale)
+            }            
+            
+            if isShowingSuccessfullView {
+                
+                Rectangle()
+                    .fill(Color.black)
+                    .opacity(0.6)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isShowingSuccessfullView = false
+                    }
+                
+                CustomSuccessView(
+                    title: "Request Sent Successfully",
+                    message: "Your course has been created successfully. Please wait for admin approval. After that, your course will be withdraw.",
+                    onCancel: {
+                        // Handle No action
+                        isShowingSuccessfullView = false
+                    }
+                )
+                .transition(.scale)
+            }
+            
         }
         .onAppear {
-            courseDetailsViewModel.getOngoingCourseDetails(courseId: 3)
+            ongoingDetailsViewModel.getOngoingCourseDetails(courseId: courseId)
         }
         
         .background(hexToColor(hex: "#F9F9F7"))
@@ -133,18 +193,29 @@ struct OngoingCourseDetailsView: View {
                 
                 
             }) {
+                
                 HStack {
                     
-                    Text("Take Action")
-                        .padding(.vertical,10)
-                        .font(.custom(FONT_SEMIBOLD, size: 16))
-                        .foregroundColor(.white)
-                    //                        .padding(.leading,15)
+                    Menu {
+                        ForEach(courseStatuses, id: \.self) { status in
+                            Button(action: {
+                                isShowingConfirmationView = true
+                            }) {
+                                Text(status)
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Text("Take Action")
+                                .foregroundColor(.white)
+                                .padding(.leading,10)
+                            
+                            Image("drop_arrow")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                        }
+                    }
                     
-                    Image("drop_arrow")
-                        .resizable()
-                        .frame(width: 15, height: 15)
-                        .padding(.leading,5)
                 }
                 
                 
@@ -171,6 +242,14 @@ struct OngoingCourseDetailsView: View {
         case "png" : isNavigateToImageView = true
         default:
             print("Item Extention Not Match")
+        }
+    }   
+    
+    func courseStatusChangeToWithdraw() {
+        let vm = CourseStatusRequestModel(courseId: courseId, status: "DROP")
+        print("vm => \(vm)")
+        courseDetailsViewModel.courseStatusChange(body: vm) { resilt in
+            isShowingSuccessfullView = true
         }
     }
 }

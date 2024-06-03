@@ -177,6 +177,31 @@ class CourseDetailsViewModel : ObservableObject {
             })
             .store(in: &cancellables)
         
+    } 
+    
+    func courseStatusChange(body: CourseStatusRequestModel,completion: @escaping (Bool) -> Void) {
+        isLoading = true
+        courseService.courseStatusChange(body)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoadingForCreateReview = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] data in
+                self?.isLoadingForCreateReview = false
+                completion(data.success ?? false)
+                
+            })
+            .store(in: &cancellables)
+        
     }
     
 }

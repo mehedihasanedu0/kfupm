@@ -50,6 +50,9 @@ struct ProfileView: View {
                             .sheet(isPresented: $showSheet) {
                                 ImagePicker(sourceType: .photoLibrary, selectedImage: self.$selectedImage)
                             }
+//                            .sheet(isPresented: $showSheet) {
+//                                ImagePicker(sourceType: .photoLibrary, selectedImage: self.$selectedImage)
+//                            }
                             .onChange(of : selectedImage) {
                                 userImageBase64 = encodeImageToBase64String(selectedImage)
                                 uploadProfileImage()
@@ -153,7 +156,7 @@ struct ProfileView: View {
                         isShowingConfirmationView = false
                     }
                 
-                CustomLogoutConfirmationView(
+                CustomConfirmationView(
                     title: "Confirmation",
                     message: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly",
                     onConfirm: {

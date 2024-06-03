@@ -24,7 +24,10 @@ struct CourseDetailsView: View {
     @State var focusPoint : String = "about"
     @State var courseStatus : String = ""
     
-    let courseStatuses = ["Cancel"]
+    @State private var isShowingConfirmationView = false
+    @State private var isShowingSuccessfullView = false
+    
+    let courseStatuses = ["Drop"]
     @State private var selectedCourseStatus: String = "Pending"
     
     var courseId : Int!
@@ -239,6 +242,55 @@ struct CourseDetailsView: View {
             //                CustomTost(message: courseDetailsViewModel.dialogMessage)
             //            }
             
+            if isShowingConfirmationView {
+                
+                Rectangle()
+                    .fill(Color.black)
+                    .opacity(0.6)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isShowingConfirmationView = false
+                    }
+                
+                CustomConfirmationView(
+                    title: "Are you sure?",
+                    message: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly",
+                    onConfirm: {
+                        // Handle Yes action
+                        isShowingConfirmationView = false
+                        courseStatusChangeToWithdraw()
+                        
+                        
+                    },
+                    onCancel: {
+                        // Handle No action
+                        isShowingConfirmationView = false
+                    }
+                )
+                .transition(.scale)
+            }
+            
+            if isShowingSuccessfullView {
+                
+                Rectangle()
+                    .fill(Color.black)
+                    .opacity(0.6)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        isShowingSuccessfullView = false
+                    }
+                
+                CustomSuccessView(
+                    title: "Request Sent Successfully",
+                    message: "Your course has been created successfully. Please wait for admin approval. After that, your course will be withdraw.",
+                    onCancel: {
+                        // Handle No action
+                        isShowingSuccessfullView = false
+                    }
+                )
+                .transition(.scale)
+            }
+            
         }
     }
     
@@ -297,7 +349,7 @@ struct CourseDetailsView: View {
                         Menu {
                             ForEach(courseStatuses, id: \.self) { status in
                                 Button(action: {
-                                    selectedCourseStatus = status
+                                    isShowingConfirmationView = true
                                 }) {
                                     Text(status)
                                 }
@@ -530,6 +582,14 @@ struct CourseDetailsView: View {
             return "Pending"
         default:
             return courseStatus
+        }
+    }
+    
+    func courseStatusChangeToWithdraw() {
+        let vm = CourseStatusRequestModel(courseId: courseId, status: "DROP")
+        print("vm => \(vm)")
+        courseDetailsViewModel.courseStatusChange(body: vm) { resilt in
+            isShowingSuccessfullView = true
         }
     }
 }

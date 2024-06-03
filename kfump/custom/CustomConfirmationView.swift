@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomLogoutConfirmationView: View {
+struct CustomConfirmationView: View {
     var title: String
     var message: String
     var onConfirm: () -> Void
@@ -89,5 +89,5 @@ struct CustomLogoutConfirmationView: View {
 }
 
 #Preview {
-    CustomLogoutConfirmationView(title: "Confirmation", message: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly", onConfirm: {}, onCancel:  {})
+    CustomConfirmationView(title: "Confirmation", message: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly", onConfirm: {}, onCancel:  {})
 }
