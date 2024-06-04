@@ -28,5 +28,6 @@ struct Details: Codable {
 
 struct CommonData: Codable {
     var uuid: String?
+    var id: Int?
 }
 

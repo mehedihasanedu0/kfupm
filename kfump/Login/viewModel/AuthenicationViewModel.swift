@@ -17,6 +17,7 @@ class AuthenicationViewModel : ObservableObject {
     @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
     @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
     @AppStorage(Keys.TOKEN_D.rawValue) var userToken: String?
+    @AppStorage(Keys.USER_ID.rawValue) var userId: Int?
     @AppStorage(Keys.refreshToken.rawValue) var refreshToken: String?
     
     private let authenticationService: AuthenticationService
@@ -138,6 +139,7 @@ class AuthenicationViewModel : ObservableObject {
                     self?.refreshToken = user.refresh_token ?? ""
                     self?.isLogin = true
                     self?.userUUID =  user.data?.uuid ?? ""
+                    self?.userId =  user.data?.id ?? 0
                 }
                 
                 completion(user.success ?? false)

@@ -33,8 +33,7 @@ struct OngoingCourseDetailsResponseModel: Codable {
 
 // MARK: - Lecture Model
 struct Lecture: Codable, Identifiable {
-    
-    let id: Int?
+    var id: LectureID?
     let title: String?
     let classTypeName: String?
     let test: String?
@@ -54,7 +53,8 @@ struct Lecture: Codable, Identifiable {
     let userId: Int?
 
     enum CodingKeys: String, CodingKey {
-        case id, title
+        case id = "id"
+        case title
         case classTypeName = "class_type_name"
         case test
         case createdAt = "created_at"
@@ -72,7 +72,55 @@ struct Lecture: Codable, Identifiable {
         case classType = "class_type"
         case userId = "user_id"
     }
+    
+    
 }
 
 
+enum LectureID: Codable, Hashable {
+    case int(Int)
+    case string(String)
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let intValue = try? container.decode(Int.self) {
+            self = .int(intValue)
+        } else if let stringValue = try? container.decode(String.self) {
+            self = .string(stringValue)
+        } else {
+            throw DecodingError.typeMismatch(LectureID.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Expected Int or UUID for LectureID"))
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .int(let intValue):
+            try container.encode(intValue)
+        case .string(let stringValue):
+            try container.encode(stringValue)
+        }
+    }
+    
+    // Implementing Hashable protocol
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case .int(let intValue):
+            hasher.combine(intValue)
+        case .string(let stringValue):
+            hasher.combine(stringValue)
+        }
+    }
+    
+    static func == (lhs: LectureID, rhs: LectureID) -> Bool {
+        switch (lhs, rhs) {
+        case (.int(let lhsValue), .int(let rhsValue)):
+            return lhsValue == rhsValue
+        case (.string(let lhsValue), .string(let rhsValue)):
+            return lhsValue == rhsValue
+        default:
+            return false
+        }
+    }
+}
 

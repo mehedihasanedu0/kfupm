@@ -28,6 +28,7 @@ class OngoingCourseDetailsViewModel : ObservableObject {
     
     @Published var ongoingCourse : OngoingCourseDetailsResponseModel?
     @Published var quizeList: [TraineeSubmission] = []
+    @Published var viewGurdList: [TraineeGrade] = []
     @Published var answers: [String] = []
     @Published var filePath: String = ""
     
@@ -142,6 +143,31 @@ class OngoingCourseDetailsViewModel : ObservableObject {
                 self?.isLoading = false
                 self?.quizeList = data.data
                 self?.answers = Array(repeating: "", count: data.data.count)
+            })
+            .store(in: &cancellables)
+        
+    }     
+    
+    func viewGirds(courseId: Int) {
+        isLoading = true
+        courseService.viewGirds(courseId)
+            .handleEvents(receiveCompletion: { [weak self] value in
+                self?.isLoading = false
+            })
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error \(error)")
+                    self.error = error
+                    self.showingDialogAlert = true
+                    self.dialogMessage = error.localizedDescription
+                    
+                }
+            }, receiveValue: { [weak self] data in
+                self?.isLoading = false
+                self?.viewGurdList = data.data ?? []
             })
             .store(in: &cancellables)
         

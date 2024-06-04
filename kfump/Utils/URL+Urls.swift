@@ -11,7 +11,7 @@ extension URL{
 #if QA
     static let baseUrl  = "https://kfu-admin.ewnbd.com/api/v1"
 #else
-    static let baseUrl  = "https://kfu-admin.ewnbd.com/api/v1"
+    static let baseUrl  = "https://kfu-dev-admin.ewnbd.com/api/v1"
 #endif
 }
 
@@ -48,10 +48,11 @@ extension URL {
     static let enrolledGroup                       = "\(URL.baseUrl)/group/enrolled/"
     static let createReview                        = "\(URL.baseUrl)/course/rating/"
     static let readLecture                         = "\(URL.baseUrl)/course/lecture-is-read/"
-    static let quiseList                           = "\(URL.baseUrl)/course/trainer-view-quiz-assignment-list/"
+    static let quiseList                           = "\(URL.baseUrl)/course/trainer-details-list-quiz-assignment/?course_lecture="
     static let quiseAns                            = "\(URL.baseUrl)/course/class-quiz-assignment-submit/"
     static let assignmentSubmit                    = "\(URL.baseUrl)/course/class-quiz-assignment-submit/"
     static let courseStatusChange                  = "\(URL.baseUrl)/course/enroll-status-update/"
+    static let viewGirds                           = "\(URL.baseUrl)/course/trainee-view-grade-of-assignment-and-quiz/?course_id="
     
     
     static let ongoingCourseDetails                = "\(URL.baseUrl)/course/class-create/"

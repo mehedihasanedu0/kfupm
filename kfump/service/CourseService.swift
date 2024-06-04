@@ -12,6 +12,7 @@ import Combine
 class CourseService {
     
     @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
+    @AppStorage(Keys.USER_ID.rawValue) var userId: String?
     
     private let networkClient: NetworkClient
     init(networkClient: NetworkClient = NetworkClient.shared) {
@@ -64,8 +65,13 @@ class CourseService {
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }    
     
-    func getQuizeList(_ quiseId: Int) -> AnyPublisher<QuizeResponseModel, Error> {
-        let url = URL(string: "\(URL.quiseList)\(quiseId)/" )
+    func getQuizeList(_ lectureId: Int) -> AnyPublisher<QuizeResponseModel, Error> {
+        let url = URL(string: "\(URL.quiseList)\(lectureId)&user=\(userId!)" )
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
+    }  
+    
+    func viewGirds(_ courseId: Int) -> AnyPublisher<TraineeGradesResponseModel, Error> {
+        let url = URL(string: "\(URL.viewGirds)\(courseId)" )
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }   
     

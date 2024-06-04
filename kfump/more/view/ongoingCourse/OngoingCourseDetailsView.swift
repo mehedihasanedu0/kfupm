@@ -17,6 +17,7 @@ struct OngoingCourseDetailsView: View {
     @State var isNavigateToVideoView = false
     @State var isNavigateToImageView = false
     @State var isNavigateToAssignmentView = false
+    @State var isNavigateToViewGardsView = false
     
     @State private var isShowingConfirmationView = false
     @State private var isShowingSuccessfullView = false
@@ -25,7 +26,7 @@ struct OngoingCourseDetailsView: View {
     var courseTitle = ""
     @State var selectedClassItemUrl = ""
     @State var selectedLectureTitle = ""
-    @State var selectedLectureId = 0
+    @State var selectedLectureId : LectureID = .int(0)
     
     let courseStatuses = ["Withdraw"]
     
@@ -79,39 +80,24 @@ struct OngoingCourseDetailsView: View {
                     .padding(.bottom,30)
                     
                     VStack {
-              
-                        ForEach(ongoingDetailsViewModel.ongoingCourse?.data ?? [], id: \.id) { lecture in
+                        
+                        ForEach(ongoingDetailsViewModel.ongoingCourse?.data ?? []) { lecture in
                             
                             SingleCourseItemView(singleLecture: lecture)
                                 .padding(.bottom,2)
                                 .padding(.top,10)
                                 .onTapGesture {
-                                    if !(lecture.isRead ?? false) {
-                                        ongoingDetailsViewModel.readLecture(lectureId: lecture.id ?? 0)
-                                    }
-                                    
-                                    
-                                    self.selectedClassItemUrl = lecture.file ?? ""
-                                    self.selectedLectureTitle = lecture.title ?? ""
-                                    self.selectedLectureId = lecture.id ?? 0
-                                    
-                                    if (lecture.classTypeName ?? "" == "Quiz") {
-                                        self.isNavigateToQuizeView = true
-                                        return
-                                    }
-                                    
-                                    if (lecture.classTypeName ?? "" == "Assignment" && lecture.fileExtension ?? "" == "pdf" ) {
-                                        self.isNavigateToAssignmentView = true
-                                        return
-                                    }
-
-                                    showLectureItem(fileExtention: lecture.fileExtension ?? "")
+                                    handleTapGesture(for: lecture)
                                 }
+                            if lecture.classTypeName != "Grads of Assignment" {
+                                Divider()
+                                    .padding(.horizontal,25)
+                            }
                             
-                            Divider()
                         }
+                        
                     }
-                    .padding()
+                    .padding(.vertical)
                     .background(.white)
                     
                 }
@@ -119,11 +105,12 @@ struct OngoingCourseDetailsView: View {
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                 .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Course details"))
                 .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
-                .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })                
+                .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoPlayerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(url: selectedClassItemUrl,lectureId: selectedLectureId).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle,selectedLectureId: selectedLectureIntId).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(url: selectedClassItemUrl,lectureId: selectedLectureIntId).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToViewGardsView, destination: { ViewGardsAndAssignmentExamView(courseId: courseId).navigationBarBackButtonHidden(true) })
             }
             
             
@@ -153,7 +140,7 @@ struct OngoingCourseDetailsView: View {
                     }
                 )
                 .transition(.scale)
-            }            
+            }
             
             if isShowingSuccessfullView {
                 
@@ -235,6 +222,40 @@ struct OngoingCourseDetailsView: View {
         .padding(.top)
     }
     
+    private func handleTapGesture(for lecture: Lecture) {
+        
+        if lecture.classTypeName == "Grads of Assignment" {
+            isNavigateToViewGardsView = true
+           return
+        }
+        
+        if !(lecture.isRead ?? false) {
+            if case let .int(id) = lecture.id {
+                ongoingDetailsViewModel.readLecture(lectureId: id)
+            } else if case let .string(id) = lecture.id {
+                // Handle UUID case if necessary
+                print("id: \(id)")
+            }
+        }
+        
+        self.selectedClassItemUrl = lecture.file ?? ""
+        self.selectedLectureTitle = lecture.title ?? ""
+        self.selectedLectureId = lecture.id!
+        
+        if lecture.classTypeName == "Quiz" {
+            isNavigateToQuizeView = true
+            return
+        }
+        
+        if lecture.classTypeName == "Assignment" && lecture.fileExtension == "pdf" {
+            self.isNavigateToAssignmentView = true
+            return
+        }
+        
+        showLectureItem(fileExtention: lecture.fileExtension ?? "")
+    }
+    
+    
     func showLectureItem(fileExtention: String) {
         switch (fileExtention) {
         case "mp4" : isNavigateToVideoView = true
@@ -243,7 +264,7 @@ struct OngoingCourseDetailsView: View {
         default:
             print("Item Extention Not Match")
         }
-    }   
+    }
     
     func courseStatusChangeToWithdraw() {
         let vm = CourseStatusRequestModel(courseId: courseId, status: "DROP")
@@ -251,6 +272,15 @@ struct OngoingCourseDetailsView: View {
         courseDetailsViewModel.courseStatusChange(body: vm) { resilt in
             isShowingSuccessfullView = true
         }
+    }
+}
+
+extension OngoingCourseDetailsView {
+    var selectedLectureIntId: Int? {
+        if case let .int(id) = selectedLectureId {
+            return id
+        }
+        return nil
     }
 }
 

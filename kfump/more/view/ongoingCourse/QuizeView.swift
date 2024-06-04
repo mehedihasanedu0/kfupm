@@ -12,6 +12,7 @@ struct QuizeView: View {
     @StateObject var viewModel = OngoingCourseDetailsViewModel()
     let title: String!
     @State var isButtonPress: Bool = false
+    let selectedLectureId : Int!
     
     var body: some View {
         
@@ -32,7 +33,7 @@ struct QuizeView: View {
             
         }
         .onAppear {
-            viewModel.getQuizeList(quiseId: 1)
+            viewModel.getQuizeList(quiseId: selectedLectureId)
         }
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .navigationBarItems(leading: CustomTitleBarItems(title: title))
