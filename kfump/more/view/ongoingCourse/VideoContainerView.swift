@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VideoPlayerView: View {
+struct VideoContainerView: View {
     @StateObject var pdfNetworkManager = PDFNetworkManager()
     @State private var showActivityViewController = false
     
