@@ -25,8 +25,12 @@ struct OngoingCourseDetailsView: View {
     var courseId = 0
     var courseTitle = ""
     @State var selectedClassItemUrl = ""
+    @State var selectedClassItemDescription = ""
     @State var selectedLectureTitle = ""
     @State var selectedLectureId : LectureID = .int(0)
+    
+    @State var currentPosition :Int = 0
+    @State var nextPosition :Int = 0
     
     let courseStatuses = ["Withdraw"]
     
@@ -81,13 +85,16 @@ struct OngoingCourseDetailsView: View {
                     
                     VStack {
                         
-                        ForEach(ongoingDetailsViewModel.ongoingCourse?.data ?? []) { lecture in
-                            
+//                        ForEach(ongoingDetailsViewModel.ongoingCourse?.data ?? []) { lecture in
+                        ForEach(Array(ongoingDetailsViewModel.ongoingCourse?.data?.enumerated() ?? [].enumerated()), id: \.element) { index, lecture in
+
                             SingleCourseItemView(singleLecture: lecture)
                                 .padding(.bottom,2)
                                 .padding(.top,10)
                                 .onTapGesture {
-                                    handleTapGesture(for: lecture)
+                                    currentPosition = index
+                                    nextPosition = index
+                                    handleTapGesture(at: index)
                                 }
                             if lecture.classTypeName != "Grads of Assignment" {
                                 Divider()
@@ -103,13 +110,13 @@ struct OngoingCourseDetailsView: View {
                 }
                 .redactShimmer(condition: ongoingDetailsViewModel.isLoading)
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-                .navigationBarItems(leading: CustomTitleBarItems(title: "Ongoing Course details"))
+                .navigationBarItems(leading: CustomTitleBarItems(title: courseTitle))
                 .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
-                .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoPlayerView(url: selectedClassItemUrl,title: selectedLectureTitle).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle,selectedLectureId: selectedLectureIntId).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(url: selectedClassItemUrl,lectureId: selectedLectureIntId).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoContainerView(videoURL: URL(string: selectedClassItemUrl),url: selectedClassItemUrl,title: selectedLectureTitle,description: selectedClassItemDescription, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle,selectedLectureId: selectedLectureIntId, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(nextPosition: $nextPosition, url: selectedClassItemUrl,lectureId: selectedLectureIntId).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToViewGardsView, destination: { ViewGardsAndAssignmentExamView(courseId: courseId).navigationBarBackButtonHidden(true) })
             }
             
@@ -165,7 +172,17 @@ struct OngoingCourseDetailsView: View {
             
         }
         .onAppear {
-            ongoingDetailsViewModel.getOngoingCourseDetails(courseId: courseId)
+            
+            if ((ongoingDetailsViewModel.ongoingCourse?.data?.count ?? 0) == 0) {
+                ongoingDetailsViewModel.getOngoingCourseDetails(courseId: courseId)
+            }
+            
+            if currentPosition != nextPosition {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    handleTapGesture(at: nextPosition)
+                }
+            }
+            
         }
         
         .background(hexToColor(hex: "#F9F9F7"))
@@ -222,37 +239,50 @@ struct OngoingCourseDetailsView: View {
         .padding(.top)
     }
     
-    private func handleTapGesture(for lecture: Lecture) {
+    private func handleTapGesture(at index: Int) {
         
-        if lecture.classTypeName == "Grads of Assignment" {
+        print("index => \(index)")
+        
+        print("count => \((ongoingDetailsViewModel.ongoingCourse?.data?.count ?? 0) - 1)")
+
+        
+        if (index >= ((ongoingDetailsViewModel.ongoingCourse?.data?.count ?? 0) - 1)) {
+            return
+        }
+            
+        let lecture = ongoingDetailsViewModel.ongoingCourse?.data?[index]
+        
+        if lecture?.classTypeName == "Grads of Assignment" {
             isNavigateToViewGardsView = true
            return
         }
         
-        if !(lecture.isRead ?? false) {
-            if case let .int(id) = lecture.id {
+        if !(lecture?.isRead ?? false) {
+            if case let .int(id) = lecture?.id {
                 ongoingDetailsViewModel.readLecture(lectureId: id)
-            } else if case let .string(id) = lecture.id {
+            } else if case let .string(id) = lecture?.id {
                 // Handle UUID case if necessary
                 print("id: \(id)")
             }
         }
         
-        self.selectedClassItemUrl = lecture.file ?? ""
-        self.selectedLectureTitle = lecture.title ?? ""
-        self.selectedLectureId = lecture.id!
+        self.selectedClassItemUrl = lecture?.file ?? ""
+        self.selectedLectureTitle = lecture?.title ?? ""
+        self.selectedLectureId = (lecture?.id!)!
+        self.selectedClassItemDescription = lecture?.description ?? ""
         
-        if lecture.classTypeName == "Quiz" {
+        if lecture?.classTypeName == "Quiz" {
             isNavigateToQuizeView = true
             return
         }
         
-        if lecture.classTypeName == "Assignment" && lecture.fileExtension == "pdf" {
+        if lecture?.classTypeName == "Assignment" && lecture?.fileExtension == "pdf" {
             self.isNavigateToAssignmentView = true
             return
         }
         
-        showLectureItem(fileExtention: lecture.fileExtension ?? "")
+        
+        showLectureItem(fileExtention: lecture?.fileExtension ?? "")
     }
     
     

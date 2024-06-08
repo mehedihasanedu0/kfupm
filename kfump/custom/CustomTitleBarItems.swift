@@ -32,6 +32,8 @@ struct CustomTitleBarItems: View {
                     Text(title)
                         .foregroundColor(.black)
                         .font(.custom(FONT_MEDIUM, size: 16))
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
                 }
             }
         }

@@ -73,7 +73,7 @@ struct CourseDetailsView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             
-                            if courseDetailsViewModel.courseData?.enrollmentStatus != "In Cart" && courseDetailsViewModel.courseData?.enrollmentStatus != nil    {
+                            if courseDetailsViewModel.courseData?.enrollmentStatus == "PAID" {
                                 
                                 afterEnrolledView
                                 

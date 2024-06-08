@@ -6,13 +6,21 @@
 //
 
 import SwiftUI
+import AVKit
+import AVFoundation
 
-struct VideoPlayerView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct VideoPlayerView: UIViewControllerRepresentable {
+    var videoURL: URL
+    
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let controller = CustomAVPlayerViewController()
+        let player = AVPlayer(url: videoURL)
+        controller.player = player
+        controller.showsPlaybackControls = true
+        return controller
     }
-}
-
-#Preview {
-    VideoPlayerView()
+    
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+        // Update code if needed
+    }
 }

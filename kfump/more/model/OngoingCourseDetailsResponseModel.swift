@@ -32,7 +32,7 @@ struct OngoingCourseDetailsResponseModel: Codable {
 }
 
 // MARK: - Lecture Model
-struct Lecture: Codable, Identifiable {
+struct Lecture: Codable, Identifiable,Hashable {
     var id: LectureID?
     let title: String?
     let classTypeName: String?

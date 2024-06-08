@@ -20,7 +20,7 @@ struct PDFSubmitView: View {
     @State private var showTost = false
     @Environment(\.presentationMode) var presentationMode
     
-    
+    @Binding var nextPosition : Int
     
     let url: String!
     let lectureId: Int!
@@ -181,6 +181,10 @@ struct PDFSubmitView: View {
                 Image(isRTL ? "ic_next_ar"  : "ic_next")
                     .resizable()
                     .frame(width: 20,height: 20)
+            }
+            .onTapGesture {
+                nextPosition = nextPosition + 1
+                presentationMode.wrappedValue.dismiss()
             }
             .padding(.trailing,25)
         }

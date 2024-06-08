@@ -14,6 +14,10 @@ struct ImageViewerView: View {
     
     let url: String!
     let title: String!
+    
+    @Binding var nextPosition : Int
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         
         ZStack {
@@ -91,6 +95,10 @@ struct ImageViewerView: View {
                 Image(isRTL ? "ic_next_ar"  : "ic_next")
                     .resizable()
                     .frame(width: 20,height: 20)
+            }
+            .onTapGesture {
+                nextPosition = nextPosition + 1
+                presentationMode.wrappedValue.dismiss()
             }
             .padding(.trailing,25)
         }

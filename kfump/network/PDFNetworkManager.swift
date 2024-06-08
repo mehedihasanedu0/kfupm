@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import Photos
 
 
 
@@ -94,6 +95,52 @@ class PDFNetworkManager : ObservableObject {
         }
         task.resume()
     }
+    
+    func downloadAndSaveVideo(from url: URL) {
+        let session = URLSession.shared
+        let downloadTask = session.dataTask(with: url) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print("Error downloading video: \(String(describing: error))")
+                return
+            }
+            
+            // Save the video data to a temporary file
+            let tempDirectory = FileManager.default.temporaryDirectory
+            let tempFileURL = tempDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("mp4")
+            
+            do {
+                try data.write(to: tempFileURL)
+                self.saveVideoToGallery(from: tempFileURL)
+            } catch {
+                print("Error saving video to temporary file: \(error)")
+            }
+        }
+        
+        downloadTask.resume()
+    }
+
+    func saveVideoToGallery(from fileURL: URL) {
+        PHPhotoLibrary.requestAuthorization { status in
+            guard status == .authorized else {
+                print("Permission to access photo library denied")
+                return
+            }
+            
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+            }) { success, error in
+                if success {
+                    print("Video saved to gallery successfully")
+                    // Optionally, delete the temporary file after saving
+                    try? FileManager.default.removeItem(at: fileURL)
+                } else if let error = error {
+                    print("Error saving video to gallery: \(error)")
+                }
+            }
+        }
+    }
+
+    
 }
 
 

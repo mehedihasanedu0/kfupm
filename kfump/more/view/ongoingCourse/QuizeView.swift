@@ -14,6 +14,9 @@ struct QuizeView: View {
     @State var isButtonPress: Bool = false
     let selectedLectureId : Int!
     
+    @Binding var nextPosition : Int
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         
         ZStack {
@@ -76,6 +79,10 @@ struct QuizeView: View {
                 Image(isRTL ? "ic_next_ar"  : "ic_next")
                     .resizable()
                     .frame(width: 20,height: 20)
+            }
+            .onTapGesture {
+                nextPosition = nextPosition + 1
+                presentationMode.wrappedValue.dismiss()
             }
             .padding(.trailing,25)
         }
