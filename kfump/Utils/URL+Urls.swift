@@ -62,6 +62,11 @@ extension URL {
     static let delete_cupon                        = "\(URL.baseUrl)discount-coupon/remove"
     
     
+    // MARK: - Cupon
+    static let userList                            = "\(URL.baseUrl)/user/user-list/"
+    static let roomList                            = "\(URL.baseUrl)/chat-rooms/?limit=100"
+    
+    
     // MARK: - Service
     static let admin_provided_service_list         = "\(URL.baseUrl)service/admin-provided-services"
     static let all_service_list                    = "\(URL.baseUrl)/customer/service/list"

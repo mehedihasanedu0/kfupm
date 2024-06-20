@@ -53,6 +53,7 @@ struct MoreView: View {
             .navigationDestination(isPresented: $isNavigateToAttendanceHistoryView, destination: { AttendanceHistoryView().navigationBarBackButtonHidden(true) })
             .navigationDestination(isPresented: $isNavigateToContactusView, destination: { ContactUsView().navigationBarBackButtonHidden(true) })
             .navigationDestination(isPresented: $isNavigateToReportAnIssueView, destination: { ReportAnIssueView().navigationBarBackButtonHidden(true) })
+            .navigationDestination(isPresented: $isNavigateToMessageView, destination: { EmptyInboxView().navigationBarBackButtonHidden(true) })
         }
         
     }
