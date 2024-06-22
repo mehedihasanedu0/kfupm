@@ -18,7 +18,11 @@ struct NewMessageView: View {
     @State private var filterItemIds: [Int] = []
     @StateObject var chatViewModel = ChatViewModel()
     
+    @State var isNavigateToChat :Bool = false
     
+    @State var userName : String = ""
+    @State var userId : Int = 0
+    @State var message : String = ""
     
     var body: some View {
         
@@ -55,6 +59,11 @@ struct NewMessageView: View {
                     
                     ForEach(Array(filteredUserList.enumerated()), id: \.element.id) { index, user in
                         SingleNewMessageView(singleUser: user)
+                            .onTapGesture {
+                                userName = filteredUserList[index].fullName ?? ""
+                                userId = filteredUserList[index].id
+                                isNavigateToChat = true
+                            }
                         
                         Divider()
                             .background(hexToColor(hex: "#E5E5D9"))
@@ -68,6 +77,7 @@ struct NewMessageView: View {
             chatViewModel.getUserList()
         }
         .padding()
+        .navigationDestination(isPresented: $isNavigateToChat, destination: { MainChatView(remoteUserName: userName, remoteUserId: userId, message: "").navigationBarBackButtonHidden(true) })
         
         
     }

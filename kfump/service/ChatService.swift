@@ -28,10 +28,10 @@ class ChatService {
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     
-    func singlePayment(_ body: SinglePaymentRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: URL.cashPayment)
-        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
-        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    
+    func getMessages(id:String) -> AnyPublisher<ChatMessageListResponseModel, Error> {
+        let url = URL(string: "\(URL.userChat)\(id)/")
+        return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
     }
     
     func groupPayment(_ body: GroupEnrollRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {

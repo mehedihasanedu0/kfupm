@@ -16,8 +16,8 @@ struct ChatRoomListResponse: Codable {
 // MARK: - ChatItem
 struct ChatItem: Codable {
     let id: Int
-    let sender: SenderUser
-    let receiver: SenderUser
+    let sender: SenderUser?
+    let receiver: SenderUser?
     let user1: Int?
     let user2: Int?
     let user1Seen: Bool?
@@ -44,7 +44,7 @@ struct ChatItem: Codable {
 
 // MARK: - User
 struct SenderUser: Codable {
-    let id: Int
+    let id: Int?
     let lastLogin: String?
     let dateJoined: String?
     let username: String?
@@ -65,7 +65,7 @@ struct SenderUser: Codable {
     let isCloseAccount: Bool?
     let isDelete: Bool?
     let image: String?
-    let userType: String?
+    let userType: Int?
     let groups: [String]?
     let userPermissions: [String]?
 

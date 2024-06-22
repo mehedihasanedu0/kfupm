@@ -101,6 +101,8 @@ class AuthenicationViewModel : ObservableObject {
                     self?.userToken = user.access_token ?? ""
                     self?.refreshToken = user.refresh_token ?? ""
                     self?.isLogin = true
+                    self?.userUUID =  user.data?.uuid ?? ""
+                    self?.userId =  user.data?.id ?? 0
                 }
                 completion(user.success ?? false)
             })

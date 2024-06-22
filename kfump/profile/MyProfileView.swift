@@ -54,7 +54,7 @@ struct MyProfileView: View {
                     
                     
                     
-                    CustomTextField(fieldName: "Mehedi",
+                    CustomTextField(fieldName: "John",
                                     value: $profileViewModel.firstName,
                                     emptyErrorMessage: "First name can't be empty",
                                     isButtonPress: isLoginButtonPress)
@@ -62,7 +62,7 @@ struct MyProfileView: View {
                     .padding(.top,40)
                     
                     
-                    CustomTextField(fieldName: "Hasan",
+                    CustomTextField(fieldName: "Doe",
                                     value: $profileViewModel.lastName,
                                     emptyErrorMessage: "Last name can't be empty",
                                     isButtonPress: isLoginButtonPress)

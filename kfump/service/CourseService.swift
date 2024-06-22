@@ -13,6 +13,7 @@ class CourseService {
     
     @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
     @AppStorage(Keys.USER_ID.rawValue) var userId: String?
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
     
     private let networkClient: NetworkClient
     init(networkClient: NetworkClient = NetworkClient.shared) {
@@ -45,8 +46,9 @@ class CourseService {
     
     func courseDetails(courseId: Int) -> AnyPublisher<CourseDetailsResponseModel, Error> {
         let url = URL(string: "\(URL.courseDetails)\(courseId)/")
-        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
-    }  
+        print(isLogin ?? false)
+        return networkClient.getRequest(url: url,headerType: (isLogin ?? false) ? .APIRequestWithToken : .APIRequestWithoutToken)
+    }
     
     func ongoingCourseDetails(courseId: Int) -> AnyPublisher<OngoingCourseDetailsResponseModel, Error> {
         let url = URL(string: "\(URL.ongoingCourseDetails)\(courseId)/")

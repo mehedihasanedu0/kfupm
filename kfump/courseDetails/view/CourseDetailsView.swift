@@ -12,6 +12,7 @@ struct CourseDetailsView: View {
     @State var isEntollTypeSingle: Bool = true
     @State var isViewHidden: Bool = true
     @State var isNavigateToCheckoutView: Bool = false
+    @State var isNavigateToLoginView: Bool = false
     @State var isShowingGroupEnrolledView: Bool = false
     
     
@@ -29,6 +30,7 @@ struct CourseDetailsView: View {
     
     let courseStatuses = ["Drop"]
     @State private var selectedCourseStatus: String = "Pending"
+    @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
     
     var courseId : Int!
     
@@ -76,10 +78,14 @@ struct CourseDetailsView: View {
                             if courseDetailsViewModel.courseData?.enrollmentStatus == "PAID" {
                                 
                                 afterEnrolledView
+                                    
+                                    
                                 
                                 
                             } else {
                                 enrolledButtonView
+                                
+                                  
                             }
                             
                         }
@@ -221,6 +227,7 @@ struct CourseDetailsView: View {
                     .navigationBarItems(leading: isShowingGroupEnrolledView ? nil : CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_DETAILS_KEY, comment: "")))
                     .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7",alpha: 0.7), titleColor: .white)
                     .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView(enrolledData: courseDetailsViewModel.enrolledData).navigationBarBackButtonHidden(true) })
+                    .navigationDestination(isPresented: $isNavigateToLoginView, destination: { LoginView().navigationBarBackButtonHidden(true) })
                     
                 }
                 .background(.clear)
@@ -313,6 +320,12 @@ struct CourseDetailsView: View {
                 title: LocalizationSystem.shared.localizedStringForKey(key: ENROLMENT_AS_A_GROUP_KEY, comment: ""),
                 message: "You can send the invitation at most 5 people at a time. They will get notification through email and need to accept the invitation in order to join.",
                 onConfirm: {
+                    
+                    if !(isLogin ?? false) {
+                        isNavigateToLoginView = true
+                        return
+                    }
+                    
                     // Handle Yes action
                     isShowingGroupEnrolledView = false
                     let vm = EnrolledRequestModel(courseId: courseId, enrolledType: "Group")
@@ -339,6 +352,10 @@ struct CourseDetailsView: View {
             
             Button(action: {
                 
+                if !(isLogin ?? false) {
+                    isNavigateToLoginView = true
+                    return
+                }
                 
             }) {
                 
@@ -382,7 +399,6 @@ struct CourseDetailsView: View {
                 
             }
             
-            
             .frame(width: 156, height: 45)
             .background(hexToColor(hex: "#007D40"))
             .cornerRadius(22)
@@ -400,6 +416,12 @@ struct CourseDetailsView: View {
         VStack {
             HStack {
                 Button(action: {
+                    
+                    if !(isLogin ?? false) {
+                        isNavigateToLoginView = true
+                        return
+                    }
+                    
                     self.isEntollTypeSingle = true
                     let vm = EnrolledRequestModel(courseId: courseId, enrolledType: "Single")
                     courseDetailsViewModel.enrolled(body: vm) { result in

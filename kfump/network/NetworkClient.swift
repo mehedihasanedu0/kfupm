@@ -27,7 +27,7 @@ class NetworkClient {
             request.addValue("password", forHTTPHeaderField: "grant-type")
             
             
-            if accessToken != "" {
+            if isLogin && accessToken != "" {
                 let token = (headerDetails == .APIRequestWithToken) ? "Bearer \(accessToken ?? "")" : "Bearer mehedi"
                 request.setValue(token, forHTTPHeaderField: "Authorization")
             }

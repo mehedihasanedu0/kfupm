@@ -82,11 +82,26 @@ class DateUtils {
             print("Failed to parse date")
             return ""
         }
-        var calendar = Calendar.current
+        let calendar = Calendar.current
         if let newDate = calendar.date(byAdding: .hour, value: 6, to: date) {
             return isoDateFormatter.string(from: newDate)
         } else {
             print("Failed to add 6 hours to the date")
+        }
+        return ""
+    }  
+    
+    static func chatLastSeenDate(_ dateString: String) -> String {
+        
+        let sparateDateString = addPlus6Hour(dateString).components(separatedBy: "T")[0]
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatterGet.date(from: sparateDateString) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM d"
+            return dateFormatter.string(from: date)
+        } else {
+            print("Failed to parse date")
         }
         return ""
     }

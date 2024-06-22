@@ -9,9 +9,9 @@ import Foundation
 
 extension URL{
 #if QA
-    static let baseUrl  = "https://kfu-admin.ewnbd.com/api/v1"
+    static let baseUrl  = "https://kfu-dev-admin.ewnbd.com/api/v1"
 #else
-    static let baseUrl  = "https://kfu-admin.ewnbd.com/api/v1"
+    static let baseUrl  = "https://kfu-dev-admin.ewnbd.com/api/v1"
 #endif
 }
 
@@ -65,6 +65,7 @@ extension URL {
     // MARK: - Cupon
     static let userList                            = "\(URL.baseUrl)/user/user-list/"
     static let roomList                            = "\(URL.baseUrl)/chat-rooms/?limit=100"
+    static let userChat                            = "\(URL.baseUrl)/messages/"
     
     
     // MARK: - Service

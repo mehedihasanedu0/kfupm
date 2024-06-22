@@ -12,6 +12,14 @@ struct EmptyInboxView: View {
     @StateObject var chatViewModel = ChatViewModel()
     
     @State var isNavigateToNewMessageView :Bool = false
+    @State var isNavigateToChat :Bool = false
+    
+    @State var userName : String = ""
+    @State var userId : Int = 0
+    @State var message : String = ""
+    
+    @AppStorage(Keys.USER_UUID_D.rawValue) var userUUID: String?
+    
     
     var body: some View {
         
@@ -23,6 +31,11 @@ struct EmptyInboxView: View {
                     } else {
                         ForEach(Array(chatViewModel.rooList.enumerated()), id: \.element.id) { index, user in
                             SingleInboxView(chatItem: user)
+                                .onTapGesture {
+                                    userName = getFullName(user: chatViewModel.rooList[index])
+                                    userId = getUserId(user: chatViewModel.rooList[index])
+                                    isNavigateToChat = true
+                                }
                             
                             Divider()
                                 .background(hexToColor(hex: "#E5E5D9"))
@@ -40,6 +53,7 @@ struct EmptyInboxView: View {
         .navigationBarItems(leading: CustomTitleBarItems(title: "Inbox"))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
         .navigationDestination(isPresented: $isNavigateToNewMessageView, destination: { NewMessageView().navigationBarBackButtonHidden(true) })
+        .navigationDestination(isPresented: $isNavigateToChat, destination: { MainChatView(remoteUserName: userName, remoteUserId: userId, message: "").navigationBarBackButtonHidden(true) })
         
         
     }
@@ -78,6 +92,22 @@ struct EmptyInboxView: View {
             .frame(height: 56)
             .cornerRadius(10.0)
             .padding(.top,20)
+        }
+    }
+    
+    func getFullName(user: ChatItem) -> String {
+        if userUUID == user.sender?.uuid {
+            return user.receiver?.fullName ?? ""
+        } else {
+            return user.sender?.fullName ?? ""
+        }
+    }   
+    
+    func getUserId(user: ChatItem) -> Int {
+        if userUUID == user.sender?.uuid {
+            return user.receiver?.id ?? 0
+        } else {
+            return user.sender?.id ?? 0
         }
     }
 }

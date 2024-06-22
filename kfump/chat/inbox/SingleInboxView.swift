@@ -37,39 +37,43 @@ struct SingleInboxView: View {
                         
                         Spacer()
                         
-                        Text("March 27")
+                        Text(DateUtils.chatLastSeenDate(chatItem.lastMessageAt ?? ""))
                             .font(.custom(FONT_MEDIUM, size: 16))
                             .foregroundColor(hexToColor(hex: "#7C7C7C"))
                     }
                     .padding(.bottom,2)
+                    .padding(.top,8)
                     
                     
                     Text(chatItem.lastMessage ?? "")
                         .font(.custom(FONT_REGULAR, size: 16))
                         .foregroundColor(hexToColor(hex: "#7C7C7C"))
                         .multilineTextAlignment(.leading)
+                        .lineLimit(nil)
                         .frame(maxWidth: .infinity,alignment: .leading)
+                    
+                    Spacer()
                 }
                 .padding(.leading,3)
             }
             
         }
-        .frame(height: 100)
+        .frame(height: 80)
     }
     
     var getFullName : String {
-        if userUUID == chatItem.sender.uuid {
-            return chatItem.receiver.fullName ?? ""
+        if userUUID == chatItem.sender?.uuid {
+            return chatItem.receiver?.fullName ?? ""
         } else {
-            return chatItem.sender.fullName ?? ""
+            return chatItem.sender?.fullName ?? ""
         }
     }    
     
     var getImage : String {
-        if userUUID == chatItem.sender.uuid {
-            return chatItem.receiver.image ?? ""
+        if userUUID == chatItem.sender?.uuid {
+            return chatItem.receiver?.image ?? ""
         } else {
-            return chatItem.sender.image ?? ""
+            return chatItem.sender?.image ?? ""
         }
     }
 }
