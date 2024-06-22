@@ -10,32 +10,37 @@ import SwiftUI
 struct SingleNotificationView: View {
     
     
+    let singleNotification : NotificationItem!
+    
     var body: some View {
         
         VStack {
             
             HStack {
-                Image("ic_notification_unseen")
+                Image((singleNotification.seen ?? false) ? "ic_notification_seen"  :  "ic_notification_unseen")
                     .resizable()
                     .frame(width: 50,height: 50)
                 
                 VStack {
                     
                     HStack {
-                        Text("Payment Successful")
+                        Text(singleNotification.title ?? "")
                             .font(.custom(FONT_MEDIUM, size: 16))
                             .foregroundColor(.black)
                         
                         Spacer()
                         
-                        Divider()
-                            .frame(width: 10,height: 10)
-                            .background(hexToColor(hex: "#007D40"))
-                            .cornerRadius(5.0)
+                        if !(singleNotification.seen ?? false) {
+                            Divider()
+                                .frame(width: 10,height: 10)
+                                .background(hexToColor(hex: "#007D40"))
+                                .cornerRadius(5.0)
+                        }
+                        
                     }
                     
                     
-                    Text("You have successfully enrolled the course")
+                    Text(singleNotification.text ?? "")
                         .font(.custom(FONT_REGULAR, size: 16))
                         .foregroundColor(hexToColor(hex: "#7C7C7C"))
                         .multilineTextAlignment(.leading)
@@ -50,6 +55,6 @@ struct SingleNotificationView: View {
     }
 }
 
-#Preview {
-    SingleNotificationView()
-}
+//#Preview {
+//    SingleNotificationView()
+//}

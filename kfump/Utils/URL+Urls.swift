@@ -66,6 +66,7 @@ extension URL {
     static let userList                            = "\(URL.baseUrl)/user/user-list/"
     static let roomList                            = "\(URL.baseUrl)/chat-rooms/?limit=100"
     static let userChat                            = "\(URL.baseUrl)/messages/"
+    static let notification                        = "\(URL.baseUrl)/notification/"
     
     
     // MARK: - Service

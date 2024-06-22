@@ -39,11 +39,11 @@ struct MessageCell: View {
         VStack {
             Text(contentMessage)
                 .padding(10)
-                .foregroundColor(isCurrentUser ? Color.white : Color.black)
+                .foregroundColor(Color.black)
                 .padding(.bottom,6)
             
             Text("          ")
-                .foregroundColor(isCurrentUser ? Color.white : Color.black)
+                .foregroundColor(Color.black)
                 .font(.custom("sst-arabic-bold", size: 8))
                 .padding(.bottom, 8)
                 .padding(.horizontal, 8)
@@ -51,14 +51,14 @@ struct MessageCell: View {
         }
         .overlay(
             Text(Utils.chatTimeformatDateString(time) ?? "")
-                .foregroundColor(isCurrentUser ? Color.white : Color.black)
+                .foregroundColor(Color.black)
                 .font(.custom("sst-arabic-bold", size: 8))
                 .padding(.bottom, 8)
                 .padding(.horizontal, 8)
                 .frame(minWidth: 100, maxWidth: .infinity, alignment: isCurrentUser ? .trailing : .leading),
             alignment: isCurrentUser ? .bottomTrailing : .bottomLeading
         )
-        .background(isCurrentUser ? Color.blue : Color(UIColor.systemGray6 ))
+        .background(isCurrentUser ? hexToColor(hex: "#E8F0EA") : hexToColor(hex: "#F2F2F2"))
         .clipShape(
             .rect(
                 topLeadingRadius: 15,

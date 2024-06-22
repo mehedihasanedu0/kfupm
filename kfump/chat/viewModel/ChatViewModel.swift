@@ -24,6 +24,7 @@ class ChatViewModel : ObservableObject {
     private let chatService: ChatService
     
     @Published var userList = [AddUserModel]()
+    @Published var notificationList = [NotificationItem]()
     @Published var rooList = [ChatItem]()
     
     @Published var dialogMessageForInvite = ""
@@ -142,34 +143,34 @@ class ChatViewModel : ObservableObject {
             })
             .store(in: &cancellables)
     }
-    //
-    //
-    //    func getReportedIssue() {
-    //        isLoading = true
-    //        chatService.getReportedIssue()
-    //            .handleEvents(receiveCompletion: { [weak self] value in
-    //                self?.isLoading = false
-    //            })
-    //            .sink(receiveCompletion: { completion in
-    //                switch completion {
-    //                case .finished:
-    //                    break
-    //                case .failure(let error):
-    //                    print("error \(error)")
-    //                    self.error = error
-    //                    self.showingDialogAlert = true
-    //                    self.dialogMessage = error.localizedDescription
-    //
-    //                }
-    //            }, receiveValue: { [weak self] data in
-    //                self?.issueList = data.data ?? []
-    //                self?.isLoading = true
-    //            })
-    //            .store(in: &cancellables)
-    //
-    //
-    //    }
-    //
+    
+    
+        func getNotificationList() {
+            isLoading = true
+            chatService.getNotificationList()
+                .handleEvents(receiveCompletion: { [weak self] value in
+                    self?.isLoading = false
+                })
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        print("error \(error)")
+                        self.error = error
+                        self.showingDialogAlert = true
+                        self.dialogMessage = error.localizedDescription
+    
+                    }
+                }, receiveValue: { [weak self] data in
+                    self?.notificationList = data.items ?? []
+                    self?.isLoading = true
+                })
+                .store(in: &cancellables)
+    
+    
+        }
+    
     //
     //    func getAttendanceHistory() {
     //        isLoading = true

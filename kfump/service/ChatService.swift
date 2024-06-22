@@ -34,10 +34,9 @@ class ChatService {
         return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
     }
     
-    func groupPayment(_ body: GroupEnrollRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
-        let url = URL(string: URL.enrolledGroup)
-        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
-        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    func getNotificationList() -> AnyPublisher<NotificationResponseModel, Error> {
+        let url = URL(string: URL.notification)
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     
     func courseDetails(courseId: Int) -> AnyPublisher<CourseDetailsResponseModel, Error> {
