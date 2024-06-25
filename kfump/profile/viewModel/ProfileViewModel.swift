@@ -91,8 +91,21 @@ class ProfileViewModel : ObservableObject {
             self.emailAddress = data.email ?? ""
             self.phoneNumber = data.phoneNumber ?? ""
             self.govtId = data.govtIdOrIqamaNo ?? ""
-            self.userName = "\(data.firstName ?? "") \(data.lastName ?? "")"
+            if data.firstName == nil {
+                self.userName = data.fullName ?? ""
+                if self.nameComponents.count == 2 {
+                    self.firstName = self.nameComponents[0]
+                    self.lastName = self.nameComponents[1]
+                }
+            } else {
+                self.userName = "\(data.firstName ?? "") \(data.lastName ?? "")"
+            }
+            
         }
+    }
+    
+    var nameComponents: [String] {
+        userName?.split(separator: " ").map(String.init) ?? []
     }
     
     func getUserTypeList(completion: @escaping (Bool) -> Void) {

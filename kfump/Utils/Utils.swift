@@ -286,12 +286,13 @@ class Utils {
     }      
     
     static func chatTimeformatDateString(_ dateString: String) -> String? {
-
+        print("chatTimeformatDateString => \(dateString)")
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ" // ISO 8601 format with timezone
         inputFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POSIX to avoid user's locale issues
+        
         guard let date = inputFormatter.date(from: dateString) else {
-            return "Invalid Date"
+            return chatTimeformatDateString2(dateString)
         }
         
         let outputFormatter = DateFormatter()
@@ -299,6 +300,23 @@ class Utils {
         outputFormatter.locale = Locale(identifier: "en_US") // Set locale to English United States
         return outputFormatter.string(from: date)
 
+    }
+
+    static func chatTimeformatDateString2(_ dateString: String) -> String? {
+        print("chatTimeformatDateString => \(dateString)")
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ" // ISO 8601 format with timezone
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POSIX to avoid user's locale issues
+        
+        guard let date = inputFormatter.date(from: dateString) else {
+            return "Invalid Date"
+        }
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "MMM d, h:mm a"
+        outputFormatter.locale = Locale(identifier: "en_US") // Set locale to English United States
+        return outputFormatter.string(from: date)
+        
     }
     
     static func notificationDateFormat(_ dateString: String)  -> String {

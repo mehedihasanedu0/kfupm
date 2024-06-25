@@ -19,7 +19,7 @@ class ProfileService {
     }
     
     func profileInfo(userUUID: String) -> AnyPublisher<ProfileInfoModel, Error> {
-        let url = URL(string: BASE_URL + "/user/profile/\(userUUID)/")
+        let url = URL(string: "\(URL.userProfile)\(userUUID)/")
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }
     

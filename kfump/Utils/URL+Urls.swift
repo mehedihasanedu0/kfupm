@@ -30,6 +30,7 @@ extension URL {
     
     
     // MARK: Profile
+    static let userProfile                         = "\(URL.baseUrl)/user/profile/"
     static let userType                            = "\(URL.baseUrl)/user/user-type/"
     static let colseAccount                        = "\(URL.baseUrl)/user/close-account/"
     static let paymentHistory                      = "\(URL.baseUrl)/payment/history/"
@@ -97,6 +98,10 @@ extension URL {
     // MARK: - Home
     static let courseList                         = "\(URL.baseUrl)/course/browse-course-list/?page=1&limit=100"
     static let courseListWithStatus               = "\(URL.baseUrl)/course/enroll-courses/?page=1&limit=100"
+    static let courseListBySearchKey              = "\(URL.baseUrl)/course/browse-course-list/?search="
+    static let filterCategory                     = "\(URL.baseUrl)/course/category/"
+    static let availability                       = "\(URL.baseUrl)/course/availability/"
+    static let profile                            = "\(URL.baseUrl)user/profile"
     
     // MARK: - Payment
     static let process_to_payment                  = "\(URL.baseUrl)order/proceed-to-payment"

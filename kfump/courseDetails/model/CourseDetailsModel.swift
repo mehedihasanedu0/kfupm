@@ -132,3 +132,20 @@ struct User: Codable {
         case fullName = "full_name"
     }
 }
+
+
+struct WeakDay: Codable,Identifiable {
+    
+    var id: Int?
+    var name: String?
+
+    static let WeakDayData = [
+        WeakDay(id: 1, name: "Sunday"),
+        WeakDay(id: 2, name: "Monday"),
+        WeakDay(id: 3, name: "Tuesday"),
+        WeakDay(id: 4, name: "Wednesday"),
+        WeakDay(id: 5, name: "Thursday"),
+        WeakDay(id: 6, name: "Friday"),
+        WeakDay(id: 7, name: "Saturday")
+    ]
+}

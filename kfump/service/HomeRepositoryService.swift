@@ -29,23 +29,23 @@ class HomeRepositoryService {
     
     
     func getCoursesBySearchKey(searchKey: String) -> AnyPublisher<CourseListResponseModel, Error> {
-        let url = URL(string: BASE_URL + "/course/browse-course-list/?search=\(searchKey)&page=1&limit=100")
+        let url = URL(string: "\(URL.courseListBySearchKey)\(searchKey)&page=1&limit=100")
         return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
         
     }
     
     func getFilterCategory() -> AnyPublisher<FilterCategoryResponse, Error> {
-        let url = URL(string: BASE_URL + "/course/category/")
+        let url = URL(string: URL.filterCategory)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
     }
     
     func getFilterAvailability() -> AnyPublisher<FilterAvailabilityResponse, Error> {
-        let url = URL(string: BASE_URL + "/course/availability/")
+        let url = URL(string: URL.availability)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithNoHeader)
     }
     
     func getProfileDetails() -> AnyPublisher<CourseListResponseModel, Error> {
-        let url = URL(string: BASE_URL + profileEndPoint)
+        let url = URL(string: URL.profile)
         return networkClient.getRequest(url: url, headerType: .APIRequestWithToken)
     }
     

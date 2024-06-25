@@ -14,31 +14,34 @@ struct ClassRoutineView: View {
     var body: some View {
         
         VStack {
-            ForEach(Array(singleClassRoutine.enumerated()), id: \.1.id) { index, item in
+            ForEach(Array(WeakDay.WeakDayData.enumerated()), id: \.1.id) { index, item in
                 
                 VStack {
                     HStack {
                         
-                        Text(item.day ?? "")
+                        Text(item.name ?? "")
                             .font(.headline)
                             .font(.custom(FONT_REGULAR, size: 12))
                         
                         Spacer()
                         
-                        HStack {
-                            Image("course_calendar")
-                                .resizable()
-                                .frame(width: 12,height: 12)
-                            Text(getDate(item.date ?? ""))
-                                .font(.custom(FONT_LIGHT, size: 12))
-                        }
+//                        HStack {
+//                            Image("course_calendar")
+//                                .resizable()
+//                                .frame(width: 12,height: 12)
+//                            Text(getDate(item.date ?? ""))
+//                                .font(.custom(FONT_LIGHT, size: 12))
+//                        }
                         HStack {
                             Image("course_clock")
                                 .resizable()
                                 .frame(width: 12,height: 12)
-                            Text(getTime(item))
+                            Text(index > (singleClassRoutine.count - 1) ? "No class available" : getTime(singleClassRoutine[index]))
                                 .font(.custom(FONT_LIGHT, size: 12))
                         }
+                        .padding(.trailing,60)
+                        
+                        
                     }
                     
                     .padding(.vertical,15)

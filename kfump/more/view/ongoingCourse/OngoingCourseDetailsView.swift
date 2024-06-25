@@ -270,8 +270,9 @@ struct OngoingCourseDetailsView: View {
         self.selectedLectureTitle = lecture?.title ?? ""
         self.selectedLectureId = (lecture?.id!)!
         self.selectedClassItemDescription = lecture?.description ?? ""
-        
-        if lecture?.classTypeName == "Quiz" {
+         
+     
+        if lecture?.classTypeName == "Quiz" || lecture?.classTypeName == "Survey" {
             isNavigateToQuizeView = true
             return
         }
