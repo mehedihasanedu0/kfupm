@@ -14,7 +14,7 @@ struct CheckoutView: View {
     @State var isPaymentTypeCash = true
     @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
     @State private var showToast = false
-    @State private var isNavigateToEnrolledCourseView = false
+    @State private var isNavigateToHomeView = false
     @State private var paymentMethod = "Cash"
     
     var body: some View {
@@ -47,8 +47,8 @@ struct CheckoutView: View {
                 .padding(.horizontal)
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                 .navigationBarItems(leading: CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: CHECKOUT_KEY, comment: "")))
-                .navigationDestination(isPresented: $isNavigateToEnrolledCourseView, destination: {
-                    EnrolledCoursesView().navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToHomeView, destination: {
+                    Homescreen().navigationBarBackButtonHidden(true) })
             }
             
             if courseDetailsViewModel.isLoading {
@@ -56,7 +56,7 @@ struct CheckoutView: View {
             }
             
             ToastView(isPresented: $showToast, duration: 2.0) {
-                CustomTost(message: courseDetailsViewModel.dialogMessage)
+                CustomTost(message: "Thank you for showing your interest in this course. Please wait till the admin confirm your participation in this course.")
             }
         }
         
@@ -131,7 +131,7 @@ struct CheckoutView: View {
                     showToast.toggle()
                     if result {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            isNavigateToEnrolledCourseView = true
+                            isNavigateToHomeView = true
                         }
                         
                     }

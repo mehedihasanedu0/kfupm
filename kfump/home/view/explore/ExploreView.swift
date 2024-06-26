@@ -54,10 +54,7 @@ struct ExploreView: View {
                                 isCloseButtonVisible = true
                             }
                             .onChange(of: searchValue) { newValue in
-                                if newValue != "" {
-                                    homeviewModel.getCourseListBySearchKey(searchKey: newValue)
-                                }
-                                
+                                homeviewModel.getCourseListBySearchKey(searchKey: newValue)
                             }
                             .onSubmit {
                                 showSearchView = false
@@ -93,7 +90,7 @@ struct ExploreView: View {
                     if !showSearchView {
                         
                         
-                        if homeviewModel.courseListBySearchKey.count != 0 {
+                        if homeviewModel.courseListBySearchKey.count != 0 && searchValue != "" {
                             filterViewLabel
                         } else {
                             browseCourseLabel
@@ -127,10 +124,14 @@ struct ExploreView: View {
                             }.padding(.top,15)
                         }
                         .onAppear() {
+          
                             if homeviewModel.courseListBySearchKey.count == 0 {
                                 homeviewModel.getCourseList()
                             }
                             
+                        }
+                        .onDisappear {
+                            searchValue = ""
                         }
                         .padding(.bottom,10)
                     }
@@ -146,6 +147,7 @@ struct ExploreView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal,20)
             .onAppear {
+
                 if Utils.isJWTTokenExpire() {
                     let vm = RefreshTokenRequestModel(refreshToken: refreshToken)
                     authenicationViewModel.refreshToken(body: vm)
