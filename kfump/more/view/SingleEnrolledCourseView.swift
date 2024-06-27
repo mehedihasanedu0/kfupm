@@ -19,7 +19,7 @@ struct SingleEnrolledCourseView: View {
                 
                 
                 WebImageView(imageUrl: course.coverImage ?? "")
-                    .aspectRatio(18/13, contentMode: .fill)
+//                    .aspectRatio(18/13, contentMode: .fill)
                     .frame(height: 130)
                     .onAppear{
                         print("Single Course \(course)")

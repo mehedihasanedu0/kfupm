@@ -29,8 +29,8 @@ struct EnrolledCoursesView: View {
                                 .padding(.bottom,2)
                                 .redactShimmer(condition: homeviewModel.isLoading)
                                 .onTapGesture {
-                                    courseId = course.id ?? 0
-                                    print("Course tapped: \(course.id)")
+                                    courseId = course.course?.id ?? 0
+                                    print("Course tapped: \(courseId)")
                                     isNavigateToCourseDetailsView = true
                                     
                                 }

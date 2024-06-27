@@ -110,7 +110,14 @@ struct OngoingCourseDetailsView: View {
                 }
                 .redactShimmer(condition: ongoingDetailsViewModel.isLoading)
                 .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-                .navigationBarItems(leading: CustomTitleBarItems(title: courseTitle))
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        CustomTitleBarItems(title: courseTitle)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(maxHeight: .infinity)
+                    }
+                }
+//                .navigationBarItems(leading: CustomTitleBarItems(title: courseTitle))
                 .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
                 .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
@@ -291,7 +298,7 @@ struct OngoingCourseDetailsView: View {
         switch (fileExtention) {
         case "mp4" : isNavigateToVideoView = true
         case "pdf" : isNavigateToPDFView = true
-        case "png" : isNavigateToImageView = true
+        case "png" , "jpg" : isNavigateToImageView = true
         default:
             print("Item Extention Not Match")
         }

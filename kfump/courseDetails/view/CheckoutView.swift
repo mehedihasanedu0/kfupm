@@ -14,6 +14,7 @@ struct CheckoutView: View {
     @State var isPaymentTypeCash = true
     @StateObject var courseDetailsViewModel = CourseDetailsViewModel()
     @State private var showToast = false
+    @State private var isSuccessFullyPayment = false
     @State private var isNavigateToHomeView = false
     @State private var paymentMethod = "Cash"
     
@@ -56,6 +57,10 @@ struct CheckoutView: View {
             }
             
             ToastView(isPresented: $showToast, duration: 2.0) {
+                CustomTost(message: courseDetailsViewModel.dialogMessage)
+            }
+            
+            ToastView(isPresented: $isSuccessFullyPayment, duration: 2.0) {
                 CustomTost(message: "Thank you for showing your interest in this course. Please wait till the admin confirm your participation in this course.")
             }
         }
@@ -126,14 +131,17 @@ struct CheckoutView: View {
                 
                 
                 let vm = SinglePaymentRequestModel(courseId: enrolledData?.course ?? 0, paymentMethod: isPaymentTypeCash ? "Cash" : "Pay tab")
-                
+                print("vm => \(vm)")
                 courseDetailsViewModel.singlePayment(body: vm) { result in
-                    showToast.toggle()
+                    
                     if result {
+                        isSuccessFullyPayment.toggle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             isNavigateToHomeView = true
                         }
                         
+                    } else {
+                        showToast.toggle()
                     }
                     
                 }
