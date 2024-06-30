@@ -14,6 +14,8 @@ struct FilterMenuView: View {
     @State private var filtersCategory = [Category]()
     @State private var filtersAvailability = [Availability]()
     @Binding var filterItemIds: [Int]
+    @Binding var filterItemCateGoryIds: [Int]
+    @Binding var filterItemAvailabilityIds: [Int]
     @State var isSelectItem: Bool = false
     
     var body: some View {
@@ -116,12 +118,15 @@ struct FilterMenuView: View {
                         for filterItem in filtersCategory {
                             if filterItem.isSelect {
                                 filterItemIds.append(filterItem.id)
+                                filterItemCateGoryIds.append(filterItem.id)
+                                
                             }
                         }  
                         
                         for filterItem in filtersAvailability {
                             if filterItem.isSelect {
                                 filterItemIds.append(filterItem.id)
+                                filterItemAvailabilityIds.append(filterItem.id)
                             }
                         }
                         

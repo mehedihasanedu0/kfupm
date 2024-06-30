@@ -129,8 +129,8 @@ struct CheckoutView: View {
             
             Button(action: {
                 
-                
-                let vm = SinglePaymentRequestModel(courseId: enrolledData?.course ?? 0, paymentMethod: isPaymentTypeCash ? "Cash" : "Pay tab")
+                print("")
+                let vm = SinglePaymentRequestModel(courseId: enrolledData?.id ?? 0, paymentMethod: isPaymentTypeCash ? "Cash" : "Pay tab")
                 print("vm => \(vm)")
                 courseDetailsViewModel.singlePayment(body: vm) { result in
                     
@@ -235,6 +235,6 @@ struct CheckoutView: View {
     
 }
 
-#Preview {
-    CheckoutView()
-}
+//#Preview {
+//    CheckoutView()
+//}

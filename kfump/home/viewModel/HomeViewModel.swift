@@ -63,9 +63,9 @@ class HomeViewModel : ObservableObject {
     }    
     
     
-    func getCourseListBySearchKey(searchKey: String) {
+    func getCourseListBySearchKey(searchKey: String,category: [Int] = [],availability : [Int] = []) {
         isLoadingBySearchKey = true
-        homeRepositoryService.getCoursesBySearchKey(searchKey: searchKey)
+        homeRepositoryService.getCoursesBySearchKey(searchKey: searchKey,category: category,availability: availability)
             .handleEvents(receiveCompletion: { [weak self] value in
                 self?.isLoadingBySearchKey = false
             })

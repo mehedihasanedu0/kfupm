@@ -28,8 +28,29 @@ class HomeRepositoryService {
     }
     
     
-    func getCoursesBySearchKey(searchKey: String) -> AnyPublisher<CourseListResponseModel, Error> {
-        let url = URL(string: "\(URL.courseListBySearchKey)\(searchKey)&page=1&limit=100")
+    func getCoursesBySearchKey(searchKey: String,category: [Int] = [],availability : [Int] = []) -> AnyPublisher<CourseListResponseModel, Error> {
+        var urlString = "\(URL.courseListBySearchKey)\(searchKey)"
+        print("1st urlString  \(urlString)")
+        print("category  \(category)")
+        print("availability  \(availability)")
+        
+        if !category.isEmpty {
+            let categoryString = category.map { "\($0)" }.joined(separator: ",")
+            urlString = "\(urlString)&category=\(categoryString)"
+        }
+        print("1st urlString category  \(urlString)")
+        
+        if !availability.isEmpty {
+            let availabilityString = availability.map { "\($0)" }.joined(separator: ",")
+            urlString = "\(urlString)&availability=\(availabilityString)"
+        }
+        print("1st urlString  availability \(urlString)")
+        
+        print("2nd urlString  \(urlString)")
+           urlString = "\(urlString)&page=1&limit=100"
+           print("3rd urlString \(urlString)")
+        
+        var url = URL(string: urlString)
         return networkClient.getRequest(url: url, headerType: isLogin ? .APIRequestWithToken : .APIRequestWithNoHeader)
         
     }

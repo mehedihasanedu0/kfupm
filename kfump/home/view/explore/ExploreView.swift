@@ -17,6 +17,9 @@ struct ExploreView: View {
     
     @State private var filterItemIds: [Int] = []
     
+    @State private var filterItemCateGoryIds : [Int] = []
+    @State private var filterItemAvailabilityIds : [Int] = []
+    
     @State var isNavigateToCourseDetailsView: Bool = false
     
     @State var courseId: Int = 0
@@ -34,6 +37,10 @@ struct ExploreView: View {
     ]
 
     
+    private var combinedState: String {
+        return "\(searchValue)\(filterItemCateGoryIds)\(filterItemAvailabilityIds)"
+    }
+    
     var body: some View {
         
             ZStack(alignment: .top) {
@@ -46,6 +53,7 @@ struct ExploreView: View {
                             SearchView(fieldName: LocalizationSystem.shared.localizedStringForKey(key: SEARCH_COURSES_KEY, comment: ""), value: $searchValue, onCloseTapped: {
                                 print("searchValue =>  \(searchValue)")
                                 searchValue = ""
+                                filterItemIds.removeAll()
                             },isCloseButtonVisible: isCloseButtonVisible)
                             .padding(.top)
                             .onTapGesture {
@@ -53,8 +61,16 @@ struct ExploreView: View {
                                 showSearchView = true
                                 isCloseButtonVisible = true
                             }
-                            .onChange(of: searchValue) { newValue in
-                                homeviewModel.getCourseListBySearchKey(searchKey: newValue)
+                            .onChange(of: searchValue) {  _ in
+                                triggerSearch()
+                            }
+                            .onChange(of: filterItemCateGoryIds) { _ in
+                                print("filterItemCateGoryIds \(filterItemCateGoryIds)")
+                                triggerSearch()
+                            }
+                            .onChange(of: filterItemAvailabilityIds) { _ in
+                                print("filterItemAvailabilityIds \(filterItemAvailabilityIds)")
+                                triggerSearch()
                             }
                             .onSubmit {
                                 showSearchView = false
@@ -132,6 +148,9 @@ struct ExploreView: View {
                         }
                         .onDisappear {
                             searchValue = ""
+                            filterItemCateGoryIds.removeAll()
+                            filterItemAvailabilityIds.removeAll()
+                            
                         }
                         .padding(.bottom,10)
                     }
@@ -157,6 +176,9 @@ struct ExploreView: View {
         
     }
     
+    func triggerSearch() {
+        homeviewModel.getCourseListBySearchKey(searchKey: searchValue,category: filterItemCateGoryIds,availability: filterItemAvailabilityIds)
+    }
     
     var browseCourseLabel: some View {
         HStack {
@@ -183,7 +205,7 @@ struct ExploreView: View {
         })
         .padding(.top, 20)
         .sheet(isPresented: self.$presentSheet) {
-            FilterMenuView(presentSheet: $presentSheet, filterItemIds: $filterItemIds)
+            FilterMenuView(presentSheet: $presentSheet, filterItemIds: $filterItemIds,filterItemCateGoryIds: $filterItemCateGoryIds,filterItemAvailabilityIds: $filterItemAvailabilityIds)
                 .readHeight()
                 .onPreferenceChange(HeightPreferenceKey.self) { height in
                     if let height {
@@ -218,6 +240,6 @@ struct ExploreView: View {
     
 }
 
-#Preview {
-    ExploreView()
-}
+//#Preview {
+//    ExploreView()
+//}

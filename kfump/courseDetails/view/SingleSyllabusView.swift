@@ -15,6 +15,8 @@ struct SingleSyllabusView: View {
         VStack {
             HStack {
                 
+                
+                
                 VStack {
                     VStack {
                         Text("\(singleSyllabus?.week ?? "0")")
@@ -30,7 +32,12 @@ struct SingleSyllabusView: View {
                     }
                     
                     Spacer()
+                    
+                    Text("")
                 }
+                
+                
+                
                 
                 
                 VStack {
@@ -38,7 +45,7 @@ struct SingleSyllabusView: View {
                     Text(singleSyllabus?.syllabusTitle ?? "")
                         .font(.custom(FONT_MEDIUM, size: 15))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        
+                    
                     
                     Text(singleSyllabus?.description ?? "")
                         .font(.custom(FONT_LIGHT, size: 14))
@@ -58,7 +65,7 @@ struct SingleSyllabusView: View {
                         
                         Spacer()
                     }
-                                        
+                    
                     
                     HStack {
                         
@@ -85,6 +92,6 @@ struct SingleSyllabusView: View {
     }
 }
 
-#Preview {
-    SingleSyllabusView(singleSyllabus: nil)
-}
+//#Preview {
+//    SingleSyllabusView(singleSyllabus: nil)
+//}

@@ -157,6 +157,7 @@ struct CourseDetailsView: View {
                                 
                                 ForEach(scyllabusInfo) { item in
                                     SingleSyllabusView(singleSyllabus: item)
+                                        .padding(.bottom,10)
                                     
                                     Divider()
                                 }
@@ -222,7 +223,7 @@ struct CourseDetailsView: View {
                     .background(.white)
                     .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
                     .navigationBarItems(leading: isShowingGroupEnrolledView ? nil : CustomTitleBarItems(title: LocalizationSystem.shared.localizedStringForKey(key: COURSE_DETAILS_KEY, comment: "")))
-                    .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7",alpha: 0.7), titleColor: .white)
+//                    .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7",alpha: 0.7), titleColor: .white)
                     .navigationDestination(isPresented: $isNavigateToCheckoutView, destination: { CheckoutView(enrolledData: courseDetailsViewModel.enrolledData).navigationBarBackButtonHidden(true) })
                     .navigationDestination(isPresented: $isNavigateToLoginView, destination: { LoginView().navigationBarBackButtonHidden(true) })
                     
@@ -230,8 +231,7 @@ struct CourseDetailsView: View {
                 .background(.clear)
                 
             }
-            .background(hexToColor(hex: "#F9F9F7"))
-            
+        
             
             if isShowingGroupEnrolledView {
                 groupEnrolledView
@@ -296,6 +296,7 @@ struct CourseDetailsView: View {
             }
             
         }
+//        .background(hexToColor(hex: "#F9F9F7"))
     }
     
     
@@ -585,6 +586,7 @@ struct CourseDetailsView: View {
             
         }
         .padding(.top,8)
+        .padding(.bottom,10)
         .frame(maxWidth: .infinity)
         .background(hexToColor(hex: "#F9F9F7"))
         .cornerRadius(12)

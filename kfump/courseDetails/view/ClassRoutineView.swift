@@ -68,7 +68,7 @@ struct ClassRoutineView: View {
     func getTime(_ item : ClassRoutineInfo) -> String {
         let startTime = DateUtils.convertTimeString(item.startTime ?? "10:00:00", fromFormat: "HH:mm:ss", toFormat: "HH:mm")
         let endTime = DateUtils.convertTimeString(item.endTime ?? "10:00:00", fromFormat: "HH:mm:ss", toFormat: "HH:mm")
-        return "\(startTime)-\(endTime)"
+        return item.startTime == nil ? "No class available" : "\(startTime)-\(endTime)"
     }
     
 }
