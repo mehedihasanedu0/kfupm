@@ -14,6 +14,7 @@ struct OngoingCourseDetailsView: View {
     
     @State var isNavigateToPDFView = false
     @State var isNavigateToQuizeView = false
+    @State var isNavigateToSurveyView = false
     @State var isNavigateToVideoView = false
     @State var isNavigateToImageView = false
     @State var isNavigateToAssignmentView = false
@@ -32,6 +33,7 @@ struct OngoingCourseDetailsView: View {
     @State var currentPosition :Int = 0
     @State var nextPosition :Int = 0
     @State var selectedSurveyCategory :Int = 0
+    @State var selectedCourse :Int = 0
     
     let courseStatuses = ["Withdraw"]
     
@@ -93,9 +95,11 @@ struct OngoingCourseDetailsView: View {
                                 .padding(.bottom,2)
                                 .padding(.top,10)
                                 .onTapGesture {
+                                    
                                     currentPosition = index
                                     nextPosition = index
                                     selectedSurveyCategory = lecture.surveyCategory ?? 0
+                                    selectedCourse = lecture.course ?? 0
                                     handleTapGesture(at: index)
                                 }
                             if lecture.classTypeName != "Grads of Assignment" {
@@ -124,7 +128,8 @@ struct OngoingCourseDetailsView: View {
                 .navigationDestination(isPresented: $isNavigateToPDFView, destination: { PDFViewerView(url: selectedClassItemUrl,title: selectedLectureTitle, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToImageView, destination: { ImageViewerView(url: selectedClassItemUrl,title: selectedLectureTitle, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToVideoView, destination: { VideoContainerView(videoURL: URL(string: selectedClassItemUrl),url: selectedClassItemUrl,title: selectedLectureTitle,description: selectedClassItemDescription, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
-                .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle,selectedLectureId: selectedSurveyCategory, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
+                .navigationDestination(isPresented: $isNavigateToQuizeView, destination: { QuizeView(title: selectedLectureTitle,selectedLectureId: selectedLectureIntId, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) }) 
+                .navigationDestination(isPresented: $isNavigateToSurveyView, destination: { SurveyView(title: selectedLectureTitle,selectedCourseId: selectedCourse,selectedsurveyCategoryId : selectedSurveyCategory, nextPosition: $nextPosition).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToAssignmentView, destination: { PDFSubmitView(nextPosition: $nextPosition, url: selectedClassItemUrl,lectureId: selectedLectureIntId).navigationBarBackButtonHidden(true) })
                 .navigationDestination(isPresented: $isNavigateToViewGardsView, destination: { ViewGardsAndAssignmentExamView(courseId: courseId).navigationBarBackButtonHidden(true) })
             }
@@ -257,7 +262,7 @@ struct OngoingCourseDetailsView: View {
         
 
         
-        if (index >= ((ongoingDetailsViewModel.ongoingCourse?.data?.count ?? 0) - 1)) {
+        if (index > ((ongoingDetailsViewModel.ongoingCourse?.data?.count ?? 0) - 1)) {
             return
         }
             
@@ -283,8 +288,13 @@ struct OngoingCourseDetailsView: View {
         self.selectedClassItemDescription = lecture?.description ?? ""
          
      
-        if lecture?.classTypeName == "Quiz" || lecture?.classTypeName == "Survey" {
+        if lecture?.classTypeName == "Quiz" {
             isNavigateToQuizeView = true
+            return
+        }     
+        
+        if lecture?.classTypeName == "Survey" {
+            isNavigateToSurveyView = true
             return
         }
         

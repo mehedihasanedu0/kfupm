@@ -2,46 +2,35 @@
 //  QuizeResponseModel.swift
 //  kfump
 //
-//  Created by Mehedi Hasan on 31/5/24.
+//  Created by Mehedi Hasan on 4/7/24.
 //
 
 import Foundation
+
 
 struct QuizeResponseModel: Codable {
     let success: Bool?
     let message: String?
     let timestamp: String?
-    let data: [TraineeSubmission]
-    let totalStudentEnroll: Int?
-    let avgMark: Double?
-    let standardDeviation: Double?
-
-    enum CodingKeys: String, CodingKey {
-        case success, message, timestamp, data
-        case totalStudentEnroll = "total_student_enroll"
-        case avgMark = "avg_mark"
-        case standardDeviation = "standard_deviation"
-    }
+    let data: QuizeResponseData?
 }
 
-struct TraineeSubmission: Codable ,Identifiable {
-    var id: Int?
-    let date: String?
+struct QuizeResponseData: Codable {
+    let id: Int
+    let created_at: String?
+    let updated_at: String?
     let title: String?
-    let studentName: String?
+    let description: String?
+    let file: String?
     let course: Int?
-    let classType: Int?
-    let classTypeName: String?
-    let user: Int?
-    let courseLecture: Int?
+    let class_type: Int?
+    let class_type_name: String?
+    let quiz_info: [QuizInfo]?
+    let is_submit: Bool?
+}
 
-    enum CodingKeys: String, CodingKey {
-        case date, title,id
-        case studentName = "student_name"
-        case course
-        case classType = "class_type"
-        case classTypeName = "class_type_name"
-        case user
-        case courseLecture = "course_lecture"
-    }
+struct QuizInfo: Codable {
+    let id: Int?
+    let question: String?
+    let question_answer: String?
 }

@@ -37,43 +37,52 @@ struct FilterMenuView: View {
                         }
                     
                 }
+                .padding(.top,10)
                 
                 Divider()
                     .padding(.vertical)
                 
                 
-                Text(LocalizationSystem.shared.localizedStringForKey(key: COURSE_CATEGORY_KEY, comment: ""))
-                    .font(.custom(FONT_BOLD, size: 14))
-                    .bold()
-                    .frame(maxWidth: .infinity,alignment: .leading)
-                
 
                 
-                ForEach(Array(filtersCategory.enumerated()), id: \.element.id) { index, filterItem in
-                    SingleFilterItemSelectView(isItemSelect: $filtersCategory[index].isSelect,itemName: filterItem.categoryName, onFilterItemSelect: {
-                        filtersCategory[index].isSelect.toggle()
-                        print("onFilterItemSelect")
-                    })
+                ScrollView {
+                    VStack {
+                        
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: COURSE_CATEGORY_KEY, comment: ""))
+                            .font(.custom(FONT_BOLD, size: 14))
+                            .bold()
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                        
+                        ForEach(Array(filtersCategory.enumerated()), id: \.element.id) { index, filterItem in
+                            SingleFilterItemSelectView(isItemSelect: $filtersCategory[index].isSelect,itemName: filterItem.categoryName, onFilterItemSelect: {
+                                filtersCategory[index].isSelect.toggle()
+                                print("onFilterItemSelect")
+                            })
+                        }
+                        
+                        
+                        Divider()
+                            .padding(.vertical)
+                        
+                        
+                        Text(LocalizationSystem.shared.localizedStringForKey(key: AVAILABILITY_KEY, comment: ""))
+                            .font(.custom(FONT_BOLD, size: 14))
+                            .bold()
+                            .frame(maxWidth: .infinity,alignment: .leading)
+                        
+                        
+                        
+                        ForEach(Array(filtersAvailability.enumerated()), id: \.element.id) { index, filterItem in
+                            SingleFilterItemSelectView(isItemSelect: $filtersAvailability[index].isSelect,itemName: filtersAvailability[index].availabilityType, onFilterItemSelect: {
+                                filtersAvailability[index].isSelect.toggle()
+                                print("onFilterItemSelect")
+                            })
+                        }
+                    }
                 }
-                
-                
-                Divider()
-                    .padding(.vertical)
-                
-                
-                Text(LocalizationSystem.shared.localizedStringForKey(key: AVAILABILITY_KEY, comment: ""))
-                    .font(.custom(FONT_BOLD, size: 14))
-                    .bold()
-                    .frame(maxWidth: .infinity,alignment: .leading)
-                
+
                 
 
-                ForEach(Array(filtersAvailability.enumerated()), id: \.element.id) { index, filterItem in
-                    SingleFilterItemSelectView(isItemSelect: $filtersAvailability[index].isSelect,itemName: filtersAvailability[index].availabilityType, onFilterItemSelect: {
-                        filtersAvailability[index].isSelect.toggle()
-                        print("onFilterItemSelect")
-                    })
-                }
 
                 
                 

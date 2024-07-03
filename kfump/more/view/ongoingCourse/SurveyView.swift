@@ -1,24 +1,24 @@
 //
-//  QuizeView.swift
+//  SurveyView.swift
 //  kfump
 //
-//  Created by Mehedi Hasan on 31/5/24.
+//  Created by Mehedi Hasan on 3/7/24.
 //
 
 import SwiftUI
 
-struct QuizeView: View {
+struct SurveyView: View {
     
     @StateObject var viewModel = OngoingCourseDetailsViewModel()
     let title: String!
     @State var isButtonPress: Bool = false
-    let selectedLectureId : Int!
+    let selectedCourseId : Int!
+    let selectedsurveyCategoryId : Int!
+    
+    @State var surveyInfoList: [SurveySubmitInfo] = []
     
     @Binding var nextPosition : Int
     @Environment(\.presentationMode) var presentationMode
-    
-    @State var quizeInfoList: [QuizQuestionAnswerInfo] = []
-    
     @State private var showToast = false
     
     var body: some View {
@@ -27,17 +27,17 @@ struct QuizeView: View {
             ScrollView {
                 VStack {
                     
-                    if viewModel.quizeList.count == 0 {
+                    if viewModel.surveyList.count == 0 {
                         
                         NoDataFoundView()
                     } else {
                         
-                        ForEach(viewModel.quizeList.indices, id: \.self) { index in
-                            SingleQuizeView(questionTitle: viewModel.quizeList[index].question ?? "", isButtonPress: isButtonPress, ans: $viewModel.answers[index])
+                        ForEach(viewModel.surveyList.indices, id: \.self) { index in
+                            SingleQuizeView(questionTitle: viewModel.surveyList[index].surveyQuestion ?? "", isButtonPress: isButtonPress, ans: $viewModel.surveyAnswers[index])
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 5)
                         }
-                        .padding(.top)
+                        .padding(.top,15)
                         
                         submitButtonView
                             .padding(.top)
@@ -56,7 +56,7 @@ struct QuizeView: View {
             
         }
         .onAppear {
-            viewModel.getQuizeList(lectureId: selectedLectureId)
+            viewModel.getServeyList(courseId: selectedCourseId, surveyCategoryId: selectedsurveyCategoryId)
         }
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
         .navigationBarItems(leading: CustomTitleBarItems(title: title))
@@ -70,20 +70,20 @@ struct QuizeView: View {
             
             Button(action: {
                 isButtonPress = true
-                
-                quizeInfoList.removeAll()
+                surveyInfoList.removeAll()
                 print("viewModel.surveyList.count \(viewModel.surveyList.count)")
                 print("viewModel.surveyAnswers.count \(viewModel.surveyAnswers.count)")
-                if viewModel.quizeList.count == viewModel.answers.count {
-                    for (index, quize) in viewModel.quizeList.enumerated() {
-                        if viewModel.answers[index].isEmpty {
+                if viewModel.surveyList.count == viewModel.surveyAnswers.count {
+                    for (index, survey) in viewModel.surveyList.enumerated() {
+                        if viewModel.surveyAnswers[index].isEmpty {
                             return
                         }
-                        quizeInfoList.append(QuizQuestionAnswerInfo(question_id: quize.id ?? 0, question_answer: viewModel.answers[index]))
+                        surveyInfoList.append(SurveySubmitInfo(survey_id: survey.id ?? 0, survey_answer: viewModel.surveyAnswers[index]))
                     }
+                    print("surveyInfoList \(surveyInfoList)")
                 }
-                let vm = QuizeSubmitRequestModel(lecture_id: selectedLectureId, quiz_question_answer_info: quizeInfoList)
-                viewModel.quizeSubmit(body: vm) { result in
+                let vm = SurveyAnswerSubmitModel(course_id: selectedCourseId, survey_submit_info: surveyInfoList)
+                viewModel.surveySubmit(body: vm) { result in
                     showToast.toggle()
                     if result {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -92,7 +92,6 @@ struct QuizeView: View {
                         
                     }
                 }
-                
             }) {
                 HStack {
                     Text("Submit")

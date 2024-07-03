@@ -8,11 +8,15 @@
 import Foundation
 
 struct QuizeSubmitRequestModel: Codable {
-    var lecture_id: Int
-    var quiz_question_answer_info: [QuizQuestionAnswerInfo]
     
-    struct QuizQuestionAnswerInfo: Codable {
-        var question_id: Int
-        var question_answer: String
-    }
+    let lecture_id: Int
+    let quiz_question_answer_info: [QuizQuestionAnswerInfo]
+    
+
+}
+
+
+struct QuizQuestionAnswerInfo: Codable {
+    let question_id: Int
+    let question_answer: String
 }

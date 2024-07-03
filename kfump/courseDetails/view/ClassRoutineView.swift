@@ -38,8 +38,9 @@ struct ClassRoutineView: View {
                                 .frame(width: 12,height: 12)
                             Text(index > (singleClassRoutine.count - 1) ? "No class available" : getTime(singleClassRoutine[index]))
                                 .font(.custom(FONT_LIGHT, size: 12))
+                            Spacer()
                         }
-                        .padding(.trailing,60)
+                        .frame(width: 170)
                         
                         
                     }

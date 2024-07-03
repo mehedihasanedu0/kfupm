@@ -69,7 +69,7 @@ struct Homescreen: View {
         }
         .onChange(of: selection) {
             print("selection \(selection)")
-            if ((2 == selection && !(isLogin ?? false)) || (3 == selection && !(isLogin ?? false))) {
+            if ((1 == selection && !(isLogin ?? false)) || (2 == selection && !(isLogin ?? false)) || (3 == selection && !(isLogin ?? false))) {
                 isNavigateToLoginView = true
             } else {
                 

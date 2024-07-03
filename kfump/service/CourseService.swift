@@ -68,9 +68,25 @@ class CourseService {
     }    
     
     func getQuizeList(_ lectureId: Int) -> AnyPublisher<QuizeResponseModel, Error> {
-        let url = URL(string: "\(URL.quiseList)\(lectureId)&user=\(userId!)" )
+        let url = URL(string: "\(URL.quiseList)\(lectureId)/" )
+        return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
+    }      
+    
+    func getServeyList(_ courseId: Int,_ surveyCategoryId: Int) -> AnyPublisher<SurveyResponseModel, Error> {
+        let url = URL(string: "\(URL.surveyList)\(courseId)&servey_category_id=\(surveyCategoryId)" )
         return networkClient.getRequest(url: url,headerType: .APIRequestWithToken)
     }  
+    
+    func surveySubmit(_ body: SurveyAnswerSubmitModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: URL.surveySubmit )
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    }    
+    func quizeSubmit(_ body: QuizeSubmitRequestModel) -> AnyPublisher<CommonSuccessResponseModel, Error> {
+        let url = URL(string: URL.quizeSubmit )
+        guard let data = try? JSONEncoder().encode(body) else { fatalError("Error encoding uservm!") }
+        return networkClient.postRequest(url: url,body: data,headerType: .APIRequestWithToken)
+    }
     
     func viewGirds(_ courseId: Int) -> AnyPublisher<TraineeGradesResponseModel, Error> {
         let url = URL(string: "\(URL.viewGirds)\(courseId)" )

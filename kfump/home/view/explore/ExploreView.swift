@@ -206,13 +206,13 @@ struct ExploreView: View {
         .padding(.top, 20)
         .sheet(isPresented: self.$presentSheet) {
             FilterMenuView(presentSheet: $presentSheet, filterItemIds: $filterItemIds,filterItemCateGoryIds: $filterItemCateGoryIds,filterItemAvailabilityIds: $filterItemAvailabilityIds)
-                .readHeight()
-                .onPreferenceChange(HeightPreferenceKey.self) { height in
-                    if let height {
-                        self.detentHeight = height
-                    }
-                }
-                .presentationDetents([.height(self.detentHeight)])
+//                .readHeight()
+//                .onPreferenceChange(HeightPreferenceKey.self) { height in
+//                    if let height {
+//                        self.detentHeight = height
+//                    }
+//                }
+//                .presentationDetents([.height(self.detentHeight)])
         }
     
     }    

@@ -117,12 +117,12 @@ struct GroupEnrolledView: View {
                     }
                     .cornerRadius(25)
                     .padding(.leading,10)
-                    .padding(.top,25)
+                    .padding(.top,15)
                     
                 }
             }
             .padding(.vertical,30)
-            .frame(width: 350,height: 550)
+            .frame(width: 350,height: 490)
             .background(Color.white)
             .cornerRadius(20)
             .shadow(radius: 10)
