@@ -102,6 +102,16 @@ enum LectureID: Codable, Hashable {
         }
     }
     
+    // Computed property to get the raw value
+    var rawValue: String {
+        switch self {
+        case .int(let intValue):
+            return String(intValue)
+        case .string(let stringValue):
+            return stringValue
+        }
+    }
+    
     // Implementing Hashable protocol
     func hash(into hasher: inout Hasher) {
         switch self {

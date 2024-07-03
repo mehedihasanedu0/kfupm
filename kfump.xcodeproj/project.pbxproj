@@ -29,6 +29,7 @@
 		550D964E2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D964D2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift */; };
 		550D96502BDAB89A0042FCA6 /* ResetPasswordRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D964F2BDAB89A0042FCA6 /* ResetPasswordRequestModel.swift */; };
 		550D96522BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D96512BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift */; };
+		551785F42C347C1F00E6011D /* NoDataFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551785F32C347C1F00E6011D /* NoDataFoundView.swift */; };
 		551EC5192C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551EC5182C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift */; };
 		551EC51B2C0CE83500BED1E6 /* PDFSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551EC51A2C0CE83500BED1E6 /* PDFSubmitView.swift */; };
 		552657CC2BC11C7E0094212F /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552657CB2BC11C7E0094212F /* FilterViewModel.swift */; };
@@ -212,6 +213,7 @@
 		55CC251B2C10E8C700355AA8 /* VideoPlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC251A2C10E8C700355AA8 /* VideoPlayerControlsView.swift */; };
 		55CC251D2C10F54D00355AA8 /* CustomAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC251C2C10F54D00355AA8 /* CustomAVPlayerViewController.swift */; };
 		55CC251F2C10FD7300355AA8 /* CustomVideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC251E2C10FD7300355AA8 /* CustomVideoPlayerView.swift */; };
+		55CFD0E52C31107800382613 /* CustomTitleAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFD0E42C31107800382613 /* CustomTitleAddButtonView.swift */; };
 		55D1FA5C2BB6D936004D5F7F /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D1FA5B2BB6D936004D5F7F /* Course.swift */; };
 		55D494FB2C13533100ED8C0E /* TermsAndConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D494FA2C13533100ED8C0E /* TermsAndConditionView.swift */; };
 		55D9D4452BC07E7B0078A808 /* SingleSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D9D4442BC07E7B0078A808 /* SingleSearchItem.swift */; };
@@ -289,6 +291,7 @@
 		550D964D2BDAB8440042FCA6 /* ForgetPasswordRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordRequestModel.swift; sourceTree = "<group>"; };
 		550D964F2BDAB89A0042FCA6 /* ResetPasswordRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordRequestModel.swift; sourceTree = "<group>"; };
 		550D96512BDAC1360042FCA6 /* ForgetPasswordResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordResponseModel.swift; sourceTree = "<group>"; };
+		551785F32C347C1F00E6011D /* NoDataFoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDataFoundView.swift; sourceTree = "<group>"; };
 		551EC5182C0CE2E700BED1E6 /* QuizeSubmitRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizeSubmitRequestModel.swift; sourceTree = "<group>"; };
 		551EC51A2C0CE83500BED1E6 /* PDFSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFSubmitView.swift; sourceTree = "<group>"; };
 		552657CB2BC11C7E0094212F /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
@@ -474,6 +477,7 @@
 		55CC251A2C10E8C700355AA8 /* VideoPlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerControlsView.swift; sourceTree = "<group>"; };
 		55CC251C2C10F54D00355AA8 /* CustomAVPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAVPlayerViewController.swift; sourceTree = "<group>"; };
 		55CC251E2C10FD7300355AA8 /* CustomVideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayerView.swift; sourceTree = "<group>"; };
+		55CFD0E42C31107800382613 /* CustomTitleAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTitleAddButtonView.swift; sourceTree = "<group>"; };
 		55D1FA5B2BB6D936004D5F7F /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		55D494FA2C13533100ED8C0E /* TermsAndConditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionView.swift; sourceTree = "<group>"; };
 		55D9D4442BC07E7B0078A808 /* SingleSearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSearchItem.swift; sourceTree = "<group>"; };
@@ -718,6 +722,8 @@
 				55C1D26A2C03BCC600169050 /* HideKeyboardOnTap.swift */,
 				55941F812C0E5A5F00067544 /* CustomSuccessView.swift */,
 				5552C3E72C2782C6004EA446 /* ClearBackgroundTextEditor.swift */,
+				55CFD0E42C31107800382613 /* CustomTitleAddButtonView.swift */,
+				551785F32C347C1F00E6011D /* NoDataFoundView.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -1556,6 +1562,7 @@
 				55F781C62BD2F359007CEB03 /* CustomTitleBarItems.swift in Sources */,
 				55554EB52BD57F0600EC6889 /* ProfileViewModel.swift in Sources */,
 				550D96502BDAB89A0042FCA6 /* ResetPasswordRequestModel.swift in Sources */,
+				55CFD0E52C31107800382613 /* CustomTitleAddButtonView.swift in Sources */,
 				556175482BDD0B5F004DD996 /* EnrolledCoursesView.swift in Sources */,
 				55F868A52BD9662700A05E8F /* HTTPStatusCodes.swift in Sources */,
 				5576C82D2BB68279007392C8 /* MoreView.swift in Sources */,
@@ -1600,6 +1607,7 @@
 				553E55B32BB48EFB00AFBD7A /* kfumpApp.swift in Sources */,
 				55B8355F2C01ACEA00315EB8 /* OngoingCourseDetailsViewModel.swift in Sources */,
 				5561754C2BDD14DB004DD996 /* OngoingCourseView.swift in Sources */,
+				551785F42C347C1F00E6011D /* NoDataFoundView.swift in Sources */,
 				5585C2522BDD38E400986987 /* IssuesView.swift in Sources */,
 				558B9E3E2BBF1B4300EA5B84 /* SingleFilterItemSelectView.swift in Sources */,
 				55DB16262BBC77F90022BDA7 /* HomeViewModel.swift in Sources */,
@@ -1784,12 +1792,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 27.0;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 28.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1808,7 +1814,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1821,12 +1826,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 27.0;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 28.0;
 				DEVELOPMENT_ASSET_PATHS = "\"kfump/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = J4G4KPW3FH;
+				DEVELOPMENT_TEAM = J4G4KPW3FH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = /Users/mehedihasan/Documents/iOS/kfump/kfump/Kfump_Info.plist;
@@ -1845,7 +1848,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ewn.kfump.trainee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = kfump_distribution;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

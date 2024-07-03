@@ -17,19 +17,25 @@ struct AttendanceHistoryView: View {
             
             VStack {
                 
-                ForEach(moreViewModel.attendanceHistory) { item in
+                if moreViewModel.attendanceHistory.count == 0 {
+                    NoDataFoundView()
+                } else {
+                    ForEach(moreViewModel.attendanceHistory) { item in
+                        
+                        SingleAttendanceHistoryView(singleAttendance: item)
+                        .padding()
+                        .padding(.bottom,10)
+                        .background(hexToColor(hex: "#F9F9F7"))
+                        .cornerRadius(10)
+                        
+                        
+                    }
+                    .padding(.top)
                     
-                    SingleAttendanceHistoryView(singleAttendance: item)
-                    .padding()
-                    .padding(.bottom,10)
-                    .background(hexToColor(hex: "#F9F9F7"))
-                    .cornerRadius(10)
-                    
+                    Spacer()
                     
                 }
-                .padding(.top)
-                
-                Spacer()
+
                 
             }
             .padding(.horizontal)

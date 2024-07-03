@@ -22,15 +22,23 @@ struct QuizeView: View {
         ZStack {
             ScrollView {
                 VStack {
-                    ForEach(viewModel.quizeList.indices, id: \.self) { index in
-                        SingleQuizeView(questionTitle: viewModel.quizeList[index].title ?? "", isButtonPress: isButtonPress, ans: $viewModel.answers[index])
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 5)
-                    }
                     
-                    submitButtonView
-                        .padding(.top)
-                        .padding(.bottom)
+                    if viewModel.quizeList.count == 0 {
+                        
+                        NoDataFoundView()
+                    } else {
+                        
+                        ForEach(viewModel.quizeList.indices, id: \.self) { index in
+                            SingleQuizeView(questionTitle: viewModel.quizeList[index].title ?? "", isButtonPress: isButtonPress, ans: $viewModel.answers[index])
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 5)
+                        }
+                        
+                        submitButtonView
+                            .padding(.top)
+                            .padding(.bottom)
+                    }
+
                 }
             }
             

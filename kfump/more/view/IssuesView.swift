@@ -20,19 +20,26 @@ struct IssuesView: View {
                 
                 VStack {
                     
-                    ForEach(moreViewModel.issueList,id: \.id) { item in
+                    if moreViewModel.issueList.count == 0  {
+                        NoDataFoundView()
                         
-                        SingleIssueView(singleIssue: item)
-                        .padding()
-                        .padding(.bottom,10)
-                        .background(hexToColor(hex: "#F9F9F7"))
-                        .cornerRadius(10)
+                    } else {
+                        ForEach(moreViewModel.issueList,id: \.id) { item in
+                            
+                            SingleIssueView(singleIssue: item)
+                            .padding()
+                            .padding(.bottom,10)
+                            .background(hexToColor(hex: "#F9F9F7"))
+                            .cornerRadius(10)
+                            
+                            
+                        }
+                        .padding(.top)
                         
-                        
+                        Spacer()
                     }
-                    .padding(.top)
                     
-                    Spacer()
+                    
                     
                 }
                 .padding(.horizontal)

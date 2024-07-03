@@ -24,6 +24,11 @@ struct OngoingCourseView: View {
         
         ZStack(alignment: .top) {
             VStack {
+                
+                if homeviewModel.ongoingCourseList.count == 0 && !homeviewModel.isLoading {
+                    NoDataFoundView()
+                }
+                
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(homeviewModel.ongoingCourseList, id: \.id) { course in

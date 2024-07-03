@@ -21,6 +21,11 @@ struct CourseHistoryView: View {
         
         ZStack(alignment: .top) {
             VStack {
+                
+                if homeviewModel.courseHistoryList.count == 0 && !homeviewModel.isLoading {
+                    NoDataFoundView()
+                }
+                
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(homeviewModel.courseHistoryList, id: \.id) { course in

@@ -448,6 +448,12 @@ struct CourseDetailsView: View {
                 
                 
                 Button(action: {
+                    
+                    if !(isLogin ?? false) {
+                        isNavigateToLoginView = true
+                        return
+                    }
+                    
                     self.isEntollTypeSingle = false
                     self.isShowingGroupEnrolledView  = true
                     

@@ -12,18 +12,29 @@ struct NotificationView: View {
     @StateObject var chatViewModel = ChatViewModel()
     var body: some View {
         ZStack {
+            
             ScrollView {
-                VStack {
-                    ForEach(Array(chatViewModel.notificationList.enumerated()), id: \.element.id) { index, user in
-                        SingleNotificationView(singleNotification: user)
-                        
-                        Divider()
-                            .background(hexToColor(hex: "#E5E5D9"))
+                
+                if chatViewModel.notificationList.count == 0  {
+                    NoDataFoundView()
+                    
+                } else {
+                    VStack {
+                        ForEach(Array(chatViewModel.notificationList.enumerated()), id: \.element.id) { index, user in
+                            SingleNotificationView(singleNotification: user)
+                            
+                            Divider()
+                                .background(hexToColor(hex: "#E5E5D9"))
+                        }
+                        .padding(.top)
                     }
-                    .padding(.top)
+                    
                 }
             }
             .scrollIndicators(.never)
+            
+            
+            
         }
         .onAppear {
             chatViewModel.getNotificationList()

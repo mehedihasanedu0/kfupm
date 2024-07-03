@@ -50,7 +50,11 @@ struct EmptyInboxView: View {
         }
         .padding(.horizontal)
         .environment(\.layoutDirection, isRTL ? .rightToLeft : .leftToRight)
-        .navigationBarItems(leading: CustomTitleBarItems(title: "Inbox"))
+        .navigationBarItems(leading: CustomTitleBarItems(title: "Inbox"),trailing: CustomTitleAddButtonView( onAddButtonTapped: {
+            print("Add Button Tap")
+            isNavigateToNewMessageView = true
+
+        }))
         .navigationBarColor(backgroundColor: hexToColor(hex: "#F9F9F7"), titleColor: .white)
         .navigationDestination(isPresented: $isNavigateToNewMessageView, destination: { NewMessageView().navigationBarBackButtonHidden(true) })
         .navigationDestination(isPresented: $isNavigateToChat, destination: { MainChatView(remoteUserName: userName, remoteUserId: userId, message: "").navigationBarBackButtonHidden(true) })
