@@ -24,7 +24,7 @@ struct EnrolledCoursesView: View {
             VStack {
                 
                 if homeviewModel.enrolledCourseList.count == 0 && !homeviewModel.isLoading {
-                    NoDataFoundView()
+                    NoDataFoundView(message: LocalizationSystem.shared.localizedStringForKey(key: ENROLLED_COURSE_EMPTY_MESSAGE_KEY, comment: ""))
                 }
                 
                 ScrollView(.vertical, showsIndicators: false) {

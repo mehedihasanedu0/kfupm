@@ -18,7 +18,7 @@ struct PaymentHistoryView: View {
             VStack {
                 
                 if profileViewModel.paymentHistoryList.count == 0 {
-                    NoDataFoundView()
+                    NoDataFoundView(message: "No data found")
                 } else {
                     ForEach(profileViewModel.paymentHistoryList.filter { $0.totalAmount != nil },id: \.id) { item in
                         

@@ -16,7 +16,7 @@ struct NotificationView: View {
             ScrollView {
                 
                 if chatViewModel.notificationList.count == 0  {
-                    NoDataFoundView()
+                    NoDataFoundView(message: LocalizationSystem.shared.localizedStringForKey(key: NOTIFICATION_EMPTY_MESSAGE_KEY, comment: ""))
                     
                 } else {
                     VStack {

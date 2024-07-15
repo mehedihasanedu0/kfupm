@@ -18,7 +18,7 @@ struct AttendanceHistoryView: View {
             VStack {
                 
                 if moreViewModel.attendanceHistory.count == 0 {
-                    NoDataFoundView()
+                    NoDataFoundView(message: LocalizationSystem.shared.localizedStringForKey(key: ATTENDANCE_HISTORY_EMPTY_MESSAGE_KEY, comment: ""))
                 } else {
                     ForEach(moreViewModel.attendanceHistory) { item in
                         

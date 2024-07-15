@@ -192,6 +192,7 @@ struct OngoingCourseDetailsView: View {
             }
             
             if currentPosition != nextPosition {
+                currentPosition = nextPosition
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     handleTapGesture(at: nextPosition)
                 }

@@ -27,6 +27,10 @@ struct MyCourses: View {
                 
                 myCourseLabel
                 
+                if homeviewModel.ongoingCourseList.count == 0 && !homeviewModel.isLoading {
+                    NoDataFoundView(message: LocalizationSystem.shared.localizedStringForKey(key: MY_COURSE_EMPTY_MESSAGE_KEY, comment: ""))
+                }
+                
                 ScrollView(.vertical, showsIndicators: false) {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(homeviewModel.ongoingCourseList, id: \.id) { course in

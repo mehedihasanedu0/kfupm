@@ -16,6 +16,8 @@ struct Homescreen: View {
     @StateObject var authenicationViewModel = AuthenicationViewModel()
     @AppStorage(Keys.refreshToken.rawValue) var refreshToken: String?
     @AppStorage(Keys.IS_LOGIN_D.rawValue) var isLogin: Bool?
+    @AppStorage(Keys.LANGUAGE.rawValue) var language: String = "en"
+    @State private var changeLanguage = "en"
     
     var body: some View {
         
@@ -37,7 +39,7 @@ struct Homescreen: View {
                     }
                     .tag(1).id(1)
                 
-                ProfileView(selectedTabIndex: $selection).tabItem {
+                ProfileView(selectedTabIndex: $selection,changeLanguage: $changeLanguage).tabItem {
                     selection == 2 ? Image("tab_profile") : Image("tab_profile")
                     Image("chat")
                     Text(LocalizationSystem.shared.localizedStringForKey(key: PROFILE_KEY, comment: "")).font(.custom("SST Arabic Roman", size: 14))
@@ -82,6 +84,9 @@ struct Homescreen: View {
             }
 
             
+        }
+        .onChange(of: changeLanguage) { _ in
+            isRTL = changeLanguage == "en" ?  false : true
         }
         .sheet(isPresented: $isPresentingMoreView, onDismiss: {
             self.selection = self.oldSelectedItem

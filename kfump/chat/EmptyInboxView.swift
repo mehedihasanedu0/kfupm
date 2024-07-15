@@ -64,17 +64,17 @@ struct EmptyInboxView: View {
     
     var emptyInboxView : some View {
         VStack {
-            
-            Text("You don’t have any message!")
+           
+            Text(LocalizationSystem.shared.localizedStringForKey(key: REPORT_AN_ISSUE_EMPTY_MESSAGE_KEY, comment: ""))
                 .font(.custom(FONT_BOLD, size: 16))
                 .padding(.bottom,10)
                 .padding(.top,150)
             
-            Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.")
-                .font(.custom(FONT_REGULAR, size: 16))
-                .foregroundColor(hexToColor(hex: "#7C7C7C"))
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity,alignment: .center)
+//            Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.")
+//                .font(.custom(FONT_REGULAR, size: 16))
+//                .foregroundColor(hexToColor(hex: "#7C7C7C"))
+//                .multilineTextAlignment(.center)
+//                .frame(maxWidth: .infinity,alignment: .center)
             
             Button(action: {
             

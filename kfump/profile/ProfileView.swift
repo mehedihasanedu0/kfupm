@@ -28,6 +28,7 @@ struct ProfileView: View {
     @StateObject var profileViewModel = ProfileViewModel()
     
     @Binding var selectedTabIndex: Int
+    @Binding var changeLanguage: String
     
     
     var body: some View {
@@ -242,6 +243,7 @@ struct ProfileView: View {
                     isEnglishSelected = true
                     if LocalizationSystem.shared.getLanguage() == "ar" {
                         changeLanguage(code: "en")
+                        changeLanguage = "en"
                         isRTL = false
                     }
                 }
@@ -261,6 +263,7 @@ struct ProfileView: View {
                             
                             if LocalizationSystem.shared.getLanguage() == "en" {
                                 changeLanguage(code: "ar")
+                                changeLanguage = "ar"
                                 isRTL = true
                             }
                         }

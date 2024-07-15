@@ -29,7 +29,7 @@ struct QuizeView: View {
                     
                     if viewModel.quizeList.count == 0 {
                         
-                        NoDataFoundView()
+                        NoDataFoundView(message: "No data found")
                     } else {
                         
                         ForEach(viewModel.quizeList.indices, id: \.self) { index in

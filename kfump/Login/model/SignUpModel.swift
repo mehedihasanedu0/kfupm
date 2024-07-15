@@ -13,6 +13,7 @@ struct SignUpModel: Codable {
     let fullName: String?
     let phoneNumber: String?
     let email: String?
+    let govtIdOrIqamaNo: String?
     let password: String?
     let confirmPassword: String?
     let role: String = "TRAINEE"
@@ -21,6 +22,7 @@ struct SignUpModel: Codable {
         case fullName = "full_name"
         case phoneNumber = "phone_number"
         case email = "email"
+        case govtIdOrIqamaNo = "govt_id_or_iqama_no"
         case password = "password"
         case confirmPassword = "confirm_password"
         case role = "role"

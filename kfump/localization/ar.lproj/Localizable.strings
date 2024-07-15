@@ -24,6 +24,7 @@
 "Confirm Password" = "أكد كلمة المرور";
 "Already have an account? " = "لديك حساب معنا؟ تسجيل";
 "Log in" = "الدخول";
+"Eqama *" = "الإقامة";
 
 //OTP Code
 "Enter OTP" = "ادخل الرمز";
@@ -54,6 +55,7 @@
 "Phone number Can't be empty" = "رقم الهاتف لا يمكن أن يكون فارغا";
 "Password can't be empty" = "لا يمكن أن تكون كلمة المرور فارغة";
 "Confirm Password can't be empty" = "تأكيد كلمة المرور لا يمكن أن يكون فارغاً";
+"Eqama Can't be empty" = "لا يمكن أن تكون الإقامة فارغة";
 
 "Current Password can't be empty" = "لا يمكن أن تكون كلمة المرور الحالية فارغة";
 "New Password can't be empty" = "لا يمكن أن تكون كلمة المرور الجديدة فارغة";
@@ -137,3 +139,14 @@
 "Student name" = "اسم الطالب";
 "Present" = "حاضر";
 "Absent" = "غائب";
+
+
+// MARK: Empty message
+"MY_COURSE_EMPTY_MESSAGE_KEY"= "دوراتي - يبدو أنك لم تقم بالتسجيل في أي دورة بعد! استكشف الفهرس للبدء.";
+"ENROLLED_COURSE_EMPTY_MESSAGE_KEY" = "الدورات المسجلة - لم تقم بالتسجيل في أي دورات بعد. تحقق من دوراتنا وسجل اليوم!";
+"ONGOING_COURSE_EMPTY_MESSAGE_KEY" = "الدورات المستمرة - ليس لديك أي دورات تدريبية مستمرة الآن. قم بالتسجيل في الدورة لتبدأ التعلم!";
+"ATTENDANCE_HISTORY_EMPTY_MESSAGE_KEY" = "سجل الحضور - لم يتم العثور على سجلات الحضور. قم بالتسجيل في الدورة لبدء تتبع حضورك.";
+"COURSE_HISTORY_EMPTY_MESSAGE_KEY" = "سجل الدورة - ليس لديك سجل الدورة حالياً. سجل في الدورة لتبدأ رحلتك التعليمية!";
+"MESSAGE_EMPTY_MESSAGE_KEY" = "الرسائل - لا توجد رسائل بعد. قم بالتسجيل في الدورة لبدء تلقي الرسائل!";
+"REPORT_AN_ISSUE_EMPTY_MESSAGE_KEY" = "الإبلاغ عن مشكلة - لم يتم العثور على بلاغات. يرجى الإبلاغ مرة لتتبعها هنا.";
+"NOTIFICATION_EMPTY_MESSAGE_KEY" = "الإشعارات - لا توجد إشعارات حتى الآن. قم بالتسجيل في الدورة لبدء تلقي التحديثات!";

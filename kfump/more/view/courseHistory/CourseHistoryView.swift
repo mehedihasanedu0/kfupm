@@ -23,7 +23,7 @@ struct CourseHistoryView: View {
             VStack {
                 
                 if homeviewModel.courseHistoryList.count == 0 && !homeviewModel.isLoading {
-                    NoDataFoundView()
+                    NoDataFoundView(message: LocalizationSystem.shared.localizedStringForKey(key: COURSE_HISTORY_EMPTY_MESSAGE_KEY, comment: ""))
                 }
                 
                 ScrollView(.vertical, showsIndicators: false) {

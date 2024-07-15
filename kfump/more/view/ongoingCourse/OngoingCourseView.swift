@@ -26,7 +26,7 @@ struct OngoingCourseView: View {
             VStack {
                 
                 if homeviewModel.ongoingCourseList.count == 0 && !homeviewModel.isLoading {
-                    NoDataFoundView()
+                    NoDataFoundView(message: LocalizationSystem.shared.localizedStringForKey(key: ONGOING_COURSE_EMPTY_MESSAGE_KEY, comment: ""))
                 }
                 
                 ScrollView(.vertical, showsIndicators: false) {

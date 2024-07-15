@@ -29,7 +29,7 @@ struct SurveyView: View {
                     
                     if viewModel.surveyList.count == 0 {
                         
-                        NoDataFoundView()
+                        NoDataFoundView(message: "No data found")
                     } else {
                         
                         ForEach(viewModel.surveyList.indices, id: \.self) { index in

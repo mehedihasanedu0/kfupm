@@ -11,6 +11,7 @@ struct RegistrationView: View {
     
     @State var fullName: String = ""
     @State var email: String = ""
+    @State var eqama: String = ""
     @State var phoneNumber: String = ""
     @State var password: String = ""
     @State var confirmPassword: String = ""
@@ -77,6 +78,12 @@ struct RegistrationView: View {
                     .keyboardType(.numberPad)
                     .padding(.top,15)
                     
+                    CustomTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: EQAMA_KEY, comment: ""),
+                                    value: $eqama,
+                                    emptyErrorMessage: LocalizationSystem.shared.localizedStringForKey(key: EQAMA_CANT_BE_EMPTY_KEY, comment: ""),
+                                    isButtonPress: isRegistrationButtonPress)
+                    .padding(.top,15)
+                    
                     
                     CustomSecureTextField(fieldName: LocalizationSystem.shared.localizedStringForKey(key: PASSWORD_KEY, comment: ""),
                                           password: $password,
@@ -96,7 +103,7 @@ struct RegistrationView: View {
                     Button(action: {
                         
                         isRegistrationButtonPress = true
-                        guard !fullName.isEmpty,!phoneNumber.isEmpty, !email.isEmpty, !password.isEmpty, !confirmPassword.isEmpty else {
+                        guard !fullName.isEmpty,!phoneNumber.isEmpty, !email.isEmpty, !eqama.isEmpty, !password.isEmpty, !confirmPassword.isEmpty else {
                             return
                         }
                         
@@ -227,6 +234,7 @@ struct RegistrationView: View {
         let vm = SignUpModel(fullName: fullName,
                              phoneNumber: phoneNumber,
                              email: email,
+                             govtIdOrIqamaNo: eqama,
                              password: password,
                              confirmPassword: confirmPassword)
         

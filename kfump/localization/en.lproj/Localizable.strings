@@ -26,6 +26,7 @@
 "Confirm Password" = "Confirm Password";
 "Already have an account? " = "Already have an account? ";
 "Log in" = "Log in";
+"Eqama *" = "Eqama";
 
 //OTP Code
 "Enter OTP" = "Enter OTP";
@@ -55,6 +56,7 @@
 "Phone number Can't be empty" = "Phone number Can't be empty";
 "Password can't be empty" = "Password can't be empty";
 "Confirm Password can't be empty" = "Confirm Password can't be empty";
+"Eqama Can't be empty" = "Eqama Can't be empty";
 
 
 "Current Password can't be empty" = "Current Password can't be empty";
@@ -141,3 +143,12 @@
 "Absent" = "Absent";
 
 
+// MARK: Empty message
+"MY_COURSE_EMPTY_MESSAGE_KEY"= "Looks like you haven't enrolled in any courses yet! Explore our catalog to get started.";
+"ENROLLED_COURSE_EMPTY_MESSAGE_KEY" = "You haven't enrolled in any courses yet. Check out our courses and enroll today!";
+"ONGOING_COURSE_EMPTY_MESSAGE_KEY" = "You don't have any ongoing courses right now. Enroll in a course to start learning!";
+"ATTENDANCE_HISTORY_EMPTY_MESSAGE_KEY" = "You have no course history yet. Enroll in a course to start your learning journey!";
+"COURSE_HISTORY_EMPTY_MESSAGE_KEY" = "You have no course history yet. Enroll in a course to start your learning journey!";
+"MESSAGE_EMPTY_MESSAGE_KEY" = "No messages yet. Enroll in a course to start receiving messages!";
+"REPORT_AN_ISSUE_EMPTY_MESSAGE_KEY" = "No reports found. Please report one to track them here.";
+"NOTIFICATION_EMPTY_MESSAGE_KEY" = "No notifications yet. Enroll in a course to start receiving updates!";

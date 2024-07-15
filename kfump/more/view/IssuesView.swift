@@ -21,7 +21,7 @@ struct IssuesView: View {
                 VStack {
                     
                     if moreViewModel.issueList.count == 0  {
-                        NoDataFoundView()
+                        NoDataFoundView(message: LocalizationSystem.shared.localizedStringForKey(key: REPORT_AN_ISSUE_EMPTY_MESSAGE_KEY, comment: ""))
                         
                     } else {
                         ForEach(moreViewModel.issueList,id: \.id) { item in

@@ -30,6 +30,7 @@ enum Keys: String, CaseIterable {
     case refreshToken = "Refresh token"
     case USER_NAME = "User Name"
     case USER_PROFILE = "User Profile Image"
+    case LANGUAGE = "Language"
 }
 
 

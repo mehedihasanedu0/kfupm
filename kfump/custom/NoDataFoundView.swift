@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct NoDataFoundView: View {
+    
+    let message: String!
     var body: some View {
         
-        Text("No data found")
+        Text(message)
             .font(.custom(FONT_SEMIBOLD, size: 16))
             .foregroundColor(.gray)
             .padding(.top,400)
@@ -18,5 +20,5 @@ struct NoDataFoundView: View {
 }
 
 #Preview {
-    NoDataFoundView()
+    NoDataFoundView(message: "")
 }
